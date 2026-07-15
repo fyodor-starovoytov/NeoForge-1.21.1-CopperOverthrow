@@ -1,5 +1,6 @@
 package net.star.copperoverthrow;
 
+import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.item.ModItems;
 import org.slf4j.Logger;
 
@@ -55,6 +56,7 @@ public class CopperOverthrow {
 
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
 
 
@@ -77,7 +79,12 @@ public class CopperOverthrow {
         /*Adds to the INGRIDIENTS creative tab*/
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.COPPER_NUGGET);
+
         }
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.accept(ModBlocks.COPPER_SCAFFOLDING);
+        }
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
