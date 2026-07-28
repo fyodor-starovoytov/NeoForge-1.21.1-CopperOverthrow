@@ -1,0 +1,24 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "category" : "misc",
+
+  "key" : {
+    "I": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "minecraft:copper_grate"
+    }
+  },
+
+  "pattern" : [
+    "IGI",
+    "I I",
+    "I I"
+  ],
+
+  "result": {
+    "count": 6,
+    "id": "copperoverthrow:copper_scaffolding"
+  }
+}

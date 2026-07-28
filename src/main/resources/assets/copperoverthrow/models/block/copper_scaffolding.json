@@ -4,7 +4,8 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"2": "copperoverthrow:block/textureforscaffoldingtop",
-		"3": "copperoverthrow:block/textureforlegscopperscaffolding"
+		"3": "copperoverthrow:block/textureforlegscopperscaffolding",
+        "particle": "copperoverthrow:block/textureforscaffoldingtop"
 	},
 	"elements": [
 		{

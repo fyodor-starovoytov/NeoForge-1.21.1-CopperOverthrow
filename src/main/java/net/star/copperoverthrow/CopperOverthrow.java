@@ -1,6 +1,7 @@
 package net.star.copperoverthrow;
 
 import net.star.copperoverthrow.block.ModBlocks;
+import net.star.copperoverthrow.item.ModCreativeModeTabs;
 import net.star.copperoverthrow.item.ModItems;
 import org.slf4j.Logger;
 
@@ -52,13 +53,12 @@ public class CopperOverthrow {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
-
+        //Register creative tabs at the top (Personal preference)
+        ModCreativeModeTabs.register(modEventBus);
 
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-
-
 
 
 
