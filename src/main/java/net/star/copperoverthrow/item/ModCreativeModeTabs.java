@@ -27,6 +27,7 @@ public class ModCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
                         //HERE IS WHERE YOU ADD THE ITEMS
                         output.accept(ModItems.COPPER_NUGGET);
+                        output.accept(ModItems.COPPER_CHISEL);
 
                     })
 

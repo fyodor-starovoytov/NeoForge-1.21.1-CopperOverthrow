@@ -1,0 +1,24 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "category" : "misc",
+
+  "key" : {
+    "I": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "pattern" : [
+    "  I",
+    " I ",
+    "G  "
+  ],
+
+  "result": {
+    "count": 1,
+    "id": "copperoverthrow:copper_chisel"
+  }
+}

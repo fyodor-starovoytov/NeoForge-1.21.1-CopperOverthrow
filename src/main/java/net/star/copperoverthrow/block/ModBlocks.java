@@ -22,12 +22,13 @@ public class ModBlocks {
             DeferredRegister.createBlocks(CopperOverthrow.MOD_ID);
 
 //Blocks:
-public static final DeferredBlock<ScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
+public static final DeferredBlock<Block> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
         //CopperScaffoldingBlock instead of just Block because it's an advanced block
         () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                 .strength(3f)
                 .requiresCorrectToolForDrops()
                 .destroyTime(0.25f)
+                .noCollission()
                 .isValidSpawn(Blocks::never)
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.COPPER)
