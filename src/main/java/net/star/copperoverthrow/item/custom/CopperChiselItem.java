@@ -1,31 +1,33 @@
 package net.star.copperoverthrow.item.custom;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BrushableBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
+import java.util.List;
 import java.util.Map;
 
 public class CopperChiselItem extends Item {
+
+
 
     private static final Map<Block, Block> CHISEL_MAP =
              Map.of(
@@ -114,9 +116,6 @@ public class CopperChiselItem extends Item {
                 if (flag) {
                     BlockPos blockpos = blockhitresult.getBlockPos();
                     BlockState blockstate = level.getBlockState(blockpos);
-                    HumanoidArm humanoidarm = livingEntity.getUsedItemHand() == InteractionHand.MAIN_HAND
-                            ? player.getMainArm()
-                            : player.getMainArm().getOpposite();
 
                     SoundEvent soundevent;
                     if (CHISEL_MAP.containsKey(blockstate.getBlock())) {
@@ -124,19 +123,41 @@ public class CopperChiselItem extends Item {
                     } else {
                         soundevent = SoundEvents.COPPER_BULB_PLACE;
                     }
-
                     level.playSound(player, blockpos, soundevent, SoundSource.BLOCKS);
                     if (!level.isClientSide() && CHISEL_MAP.containsKey(blockstate.getBlock())) {
 
-                        boolean flag1 = level.setBlockAndUpdate(blockpos, CHISEL_MAP.get(blockstate.getBlock()).defaultBlockState());
+                        while (true) {
+                            Block block = getBlock(level, blockstate);
 
-                        if (flag1) {
-                            EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
-                                    ? EquipmentSlot.OFFHAND
-                                    : EquipmentSlot.MAINHAND;
-                            stack.hurtAndBreak(1, livingEntity, equipmentslot);
+                            if (block instanceof StairBlock || block instanceof SlabBlock || block instanceof WallBlock) {
+                                getBlock(level, blockstate);
+                                continue;
+                            }
 
-                            InteractionResult.sidedSuccess(false);
+                            boolean flag1 = level.setBlockAndUpdate(blockpos, block.defaultBlockState());
+
+
+
+
+
+
+                            //CHECK IF THERE IS RECIPE AND AVOID STAIRS OR NON BLOCKS IF THERE ARE THOSE
+
+
+
+
+
+
+                            if (flag1) {
+                                System.out.print(BuiltInRegistries.BLOCK);
+                                EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
+                                        ? EquipmentSlot.OFFHAND
+                                        : EquipmentSlot.MAINHAND;
+                                stack.hurtAndBreak(1, livingEntity, equipmentslot);
+
+                                InteractionResult.sidedSuccess(false);
+                                break;
+                            }
                         }
                     }
                 }
@@ -150,10 +171,28 @@ public class CopperChiselItem extends Item {
         }
     }
 
+    private SingleRecipeInput getSingleRecipeInput(Block block) {
+      return new SingleRecipeInput (new ItemStack (block.asItem()));
+    }
+
     private HitResult calculateHitResult(Player player) {
         return ProjectileUtil.getHitResultOnViewVector(
                 player, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), player.blockInteractionRange()
         );
+    }
+
+    private Block getBlock(Level level, BlockState blockstate){
+
+    List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
+
+    int recipeListLength = recipeList.size();
+
+    return (((BlockItem)(recipeList.get(randomIntGenerator(0, recipeListLength-1)).value().getResultItem(level.registryAccess()).getItem())).getBlock());
+    }
+
+
+    public static int randomIntGenerator(int MIN, int MAX) {
+        return (int) (Math.random() * (MAX - MIN + 1)) + MIN;
     }
 
 
