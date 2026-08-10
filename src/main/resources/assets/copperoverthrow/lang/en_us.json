@@ -5,6 +5,8 @@
   "item.copperoverthrow.copper_nugget": "Copper Nugget",
   "item.copperoverthrow.copper_chisel": "Copper Chisel",
 
-  "block.copperoverthrow.copper_scaffolding": "Copper Scaffolding"
+  "block.copperoverthrow.copper_scaffolding": "Copper Scaffolding",
 
+  "tooltip.copperoverthrow.copper_chisel_item.tooltip": "Texturing was never easier before",
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Press §eShift§r §7for more information§r"
 }

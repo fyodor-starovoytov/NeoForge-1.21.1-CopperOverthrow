@@ -4,7 +4,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"2": "copperoverthrow:item/copper_chisel2",
-		"particle": "copperoverthrow:copper_chisel1"
+		"particle": "copperoverthrow:item/copper_chisel1"
 	},
 	"elements": [
 		{

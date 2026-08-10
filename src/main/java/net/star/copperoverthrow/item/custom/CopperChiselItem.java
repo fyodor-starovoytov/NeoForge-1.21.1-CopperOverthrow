@@ -1,7 +1,9 @@
 package net.star.copperoverthrow.item.custom;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -10,10 +12,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -111,55 +110,47 @@ public class CopperChiselItem extends Item {
                 int i = this.getUseDuration(stack, livingEntity) - remainingUseDuration + 1;
 
                 //Defines which tick the action is performed
-                boolean flag = i % 4 == 0;
+                boolean flag = i % 5 == 0;
 
                 if (flag) {
                     BlockPos blockpos = blockhitresult.getBlockPos();
                     BlockState blockstate = level.getBlockState(blockpos);
 
                     SoundEvent soundevent;
-                    if (CHISEL_MAP.containsKey(blockstate.getBlock())) {
+                    if (doesResultExist(level, blockstate)) {
                         soundevent = SoundEvents.COPPER_BREAK;
                     } else {
                         soundevent = SoundEvents.COPPER_BULB_PLACE;
                     }
                     level.playSound(player, blockpos, soundevent, SoundSource.BLOCKS);
-                    if (!level.isClientSide() && CHISEL_MAP.containsKey(blockstate.getBlock())) {
 
-                        while (true) {
-                            Block block = getBlock(level, blockstate);
+                        if ((!level.isClientSide()) && doesResultExist(level, blockstate)) {
 
-                            if (block instanceof StairBlock || block instanceof SlabBlock || block instanceof WallBlock) {
-                                getBlock(level, blockstate);
-                                continue;
-                            }
+                            while (true) {
+                                Block block = getBlock(level, blockstate);
 
-                            boolean flag1 = level.setBlockAndUpdate(blockpos, block.defaultBlockState());
+                                if (NoAvailableFullBlock(level, blockstate)){
+                                    break;
+                                }
 
+                                if (block instanceof StairBlock || block instanceof SlabBlock || block instanceof WallBlock) {
+                                    getBlock(level, blockstate);
+                                    continue;
+                                }
 
+                                boolean flag1 = level.setBlockAndUpdate(blockpos, block.defaultBlockState());
 
+                                if (flag1) {
+                                    System.out.print(BuiltInRegistries.BLOCK);
+                                    EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
+                                            ? EquipmentSlot.OFFHAND
+                                            : EquipmentSlot.MAINHAND;
+                                    stack.hurtAndBreak(1, livingEntity, equipmentslot);
 
-
-
-                            //CHECK IF THERE IS RECIPE AND AVOID STAIRS OR NON BLOCKS IF THERE ARE THOSE
-
-
-
-
-
-
-                            if (flag1) {
-                                System.out.print(BuiltInRegistries.BLOCK);
-                                EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
-                                        ? EquipmentSlot.OFFHAND
-                                        : EquipmentSlot.MAINHAND;
-                                stack.hurtAndBreak(1, livingEntity, equipmentslot);
-
-                                InteractionResult.sidedSuccess(false);
-                                break;
+                                    break;
+                                }
                             }
                         }
-                    }
                 }
 
                 return;
@@ -190,10 +181,44 @@ public class CopperChiselItem extends Item {
     return (((BlockItem)(recipeList.get(randomIntGenerator(0, recipeListLength-1)).value().getResultItem(level.registryAccess()).getItem())).getBlock());
     }
 
+    private Boolean NoAvailableFullBlock(Level level, BlockState blockstate) {
+
+        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
+
+        int recipeListLength = recipeList.size();
+
+        int fullBlocks = 0;
+
+        for (int i = 0; i < recipeListLength; i++) {
+
+            Block block = ((BlockItem) (recipeList.get(i).value().getResultItem(level.registryAccess()).getItem())).getBlock();
+
+            if (!(block instanceof SlabBlock || block instanceof StairBlock || block instanceof WallBlock)) {
+                fullBlocks++;
+            }
+        }
+        return fullBlocks == 0;
+    }
+
+    private Boolean doesResultExist (Level level, BlockState blockstate){
+        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
+
+        //Returns false or true
+        return !recipeList.isEmpty();
+    }
 
     public static int randomIntGenerator(int MIN, int MAX) {
         return (int) (Math.random() * (MAX - MIN + 1)) + MIN;
     }
 
-
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        if (Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_chisel_item.tooltip"));
+        }
+        else {
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+        }
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
 }

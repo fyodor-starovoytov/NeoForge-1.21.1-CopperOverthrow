@@ -1,12 +1,15 @@
 package net.star.copperoverthrow.block;
 
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ScaffoldingBlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ScaffoldingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -22,18 +25,21 @@ public class ModBlocks {
             DeferredRegister.createBlocks(CopperOverthrow.MOD_ID);
 
 //Blocks:
-public static final DeferredBlock<Block> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
+public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
         //CopperScaffoldingBlock instead of just Block because it's an advanced block
         () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                 .strength(3f)
+                .noCollission()
+                .noOcclusion()
                 .requiresCorrectToolForDrops()
                 .destroyTime(0.25f)
-                .noCollission()
                 .isValidSpawn(Blocks::never)
+                .mapColor(DyeColor.ORANGE)
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.COPPER)
                 .dynamicShape()));
 //ПОФИКСИ БАГ С ТЕНЬЮ И БОЛЕЕ ОРАНГЖВАЕВЙЫЙ!!
+
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {
@@ -43,7 +49,12 @@ public static final DeferredBlock<Block> COPPER_SCAFFOLDING = registerBlock("cop
     } //Connecting an item to the block
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
-        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        if (name.equals("copper_scaffolding")) {
+            ModItems.ITEMS.register(name, () -> new ScaffoldingBlockItem(block.get(), new Item.Properties()));
+        }
+        else {
+            ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        }
     }
 
 

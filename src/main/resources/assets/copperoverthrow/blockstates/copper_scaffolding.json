@@ -1,7 +1,10 @@
 {
   "variants": {
-    "":{
+    "bottom=false": {
       "model": "copperoverthrow:block/copper_scaffolding"
+    },
+    "bottom=true": {
+      "model": "copperoverthrow:block/copper_scaffolding_unstable"
     }
   }
 }
