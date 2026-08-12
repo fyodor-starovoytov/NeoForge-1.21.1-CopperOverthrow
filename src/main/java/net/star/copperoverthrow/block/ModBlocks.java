@@ -26,7 +26,6 @@ public class ModBlocks {
 
 //Blocks:
 public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
-        //CopperScaffoldingBlock instead of just Block because it's an advanced block
         () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                 .strength(3f)
                 .noCollission()
@@ -38,7 +37,6 @@ public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = r
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.COPPER)
                 .dynamicShape()));
-//ПОФИКСИ БАГ С ТЕНЬЮ И БОЛЕЕ ОРАНГЖВАЕВЙЫЙ!!
 
 
 
