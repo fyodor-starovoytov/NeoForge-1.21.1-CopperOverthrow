@@ -6,10 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ScaffoldingBlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ScaffoldingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -24,7 +22,6 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(CopperOverthrow.MOD_ID);
 
-//Blocks:
 public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
         () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                 .strength(3f)
@@ -44,7 +41,7 @@ public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = r
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
         return toReturn;
-    } //Connecting an item to the block
+    }
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
         if (name.equals("copper_scaffolding")) {

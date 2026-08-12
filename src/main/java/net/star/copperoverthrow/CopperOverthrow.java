@@ -56,11 +56,8 @@ public class CopperOverthrow {
         //Register creative tabs at the top (Personal preference)
         ModCreativeModeTabs.register(modEventBus);
 
-
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-
-
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -78,7 +75,7 @@ public class CopperOverthrow {
 
         /*Adds to the INGRIDIENTS creative tab*/
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.COPPER_NUGGET);
+            event.accept(ModItems.COPPER_CHISEL);
 
         }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {

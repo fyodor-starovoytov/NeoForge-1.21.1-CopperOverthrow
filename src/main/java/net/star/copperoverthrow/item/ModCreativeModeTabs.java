@@ -18,20 +18,18 @@ public class ModCreativeModeTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CopperOverthrow.MOD_ID);
 
 
-
     public static final Supplier<CreativeModeTab> COPPEROVERTHROW_ITEMS_TAB = CREATIVE_MODE_TAB.register("copperoverthrow_items_tab",
             () -> CreativeModeTab.builder()
 
                     .icon(() -> new ItemStack(ModItems.COPPER_NUGGET.get()))
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_items"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        //HERE IS WHERE YOU ADD THE ITEMS
-                        output.accept(ModItems.COPPER_NUGGET);
+
+                        //output.accept(ModItems.COPPER_NUGGET);
                         output.accept(ModItems.COPPER_CHISEL);
 
-                    })
+                    }).build());
 
-                    .build());
 
     public static final Supplier<CreativeModeTab> COPPEROVERTHROW_BLOCK_TAB = CREATIVE_MODE_TAB.register("copperoverthrow_blocks_tab",
             () -> CreativeModeTab.builder()
@@ -45,10 +43,7 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.COPPER_SCAFFOLDING);
 
-                    })
-
-                    .build());
-
+                    }).build());
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TAB.register(eventBus);
