@@ -23,15 +23,44 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.COPPER_SCAFFOLDING.get());
+                .add(ModBlocks.COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WEATHERED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
 
-        tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.COPPER_SCAFFOLDING.get());
+        tag(BlockTags.NEEDS_STONE_TOOL)
+                .add(ModBlocks.COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WEATHERED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
 
         tag(BlockTags.CLIMBABLE)
-                .add(ModBlocks.COPPER_SCAFFOLDING.get());
+                .add(ModBlocks.COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WEATHERED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
 
         tag(BlockTags.FALL_DAMAGE_RESETTING)
-                .add(ModBlocks.COPPER_SCAFFOLDING.get());
+                .add(ModBlocks.COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WEATHERED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
+
     }
 }

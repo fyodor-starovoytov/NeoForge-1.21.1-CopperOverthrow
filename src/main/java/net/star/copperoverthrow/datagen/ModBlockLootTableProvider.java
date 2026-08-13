@@ -21,6 +21,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(ModBlocks.COPPER_SCAFFOLDING.get());
+        dropSelf(ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get());
+        dropSelf(ModBlocks.WEATHERED_COPPER_SCAFFOLDING.get());
+        dropSelf(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.get());
+        dropSelf(ModBlocks.WAXED_COPPER_SCAFFOLDING.get());
+        dropSelf(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get());
+        dropSelf(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get());
+        dropSelf(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
+
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.world.item.ScaffoldingBlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
@@ -23,18 +24,124 @@ public class ModBlocks {
             DeferredRegister.createBlocks(CopperOverthrow.MOD_ID);
 
 public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
-        () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
+        () -> new CopperScaffoldingBlock(
+                BlockBehaviour.Properties.of()
                 .strength(3f)
                 .noCollission()
                 .noOcclusion()
                 .requiresCorrectToolForDrops()
-                .destroyTime(0.25f)
+                .destroyTime(0.10f)
                 .isValidSpawn(Blocks::never)
                 .mapColor(DyeColor.ORANGE)
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.COPPER)
-                .dynamicShape()));
+                .dynamicShape()
+                .randomTicks(), WeatheringCopper.WeatherState.UNAFFECTED));
 
+    public static final DeferredBlock<CopperScaffoldingBlock> EXPOSED_COPPER_SCAFFOLDING = registerBlock("exposed_copper_scaffolding",
+            () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noCollission()
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .destroyTime(0.20f)
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)
+                    .dynamicShape()
+                    .randomTicks(), WeatheringCopper.WeatherState.EXPOSED));
+
+    public static final DeferredBlock<CopperScaffoldingBlock> WEATHERED_COPPER_SCAFFOLDING = registerBlock("weathered_copper_scaffolding",
+            () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noCollission()
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .destroyTime(0.40f)
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.GREEN)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)
+                    .dynamicShape()
+                    .speedFactor(0.95f)
+                    .randomTicks(), WeatheringCopper.WeatherState.WEATHERED));
+
+    public static final DeferredBlock<CopperScaffoldingBlock> OXIDIZED_COPPER_SCAFFOLDING = registerBlock("oxidized_copper_scaffolding",
+            () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noCollission()
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .destroyTime(0.60f)
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.GREEN)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)
+                    .dynamicShape()
+                    .speedFactor(0.90f)
+                    .randomTicks(), WeatheringCopper.WeatherState.OXIDIZED));
+
+
+
+    public static final DeferredBlock<CopperScaffoldingBlock> WAXED_COPPER_SCAFFOLDING = registerBlock("waxed_copper_scaffolding",
+            () -> new CopperScaffoldingBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3f)
+                            .noCollission()
+                            .noOcclusion()
+                            .requiresCorrectToolForDrops()
+                            .destroyTime(0.10f)
+                            .isValidSpawn(Blocks::never)
+                            .mapColor(DyeColor.ORANGE)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)
+                            .dynamicShape()
+                            .randomTicks(), WeatheringCopper.WeatherState.UNAFFECTED));
+
+    public static final DeferredBlock<CopperScaffoldingBlock> WAXED_EXPOSED_COPPER_SCAFFOLDING = registerBlock("waxed_exposed_copper_scaffolding",
+            () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noCollission()
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .destroyTime(0.20f)
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)
+                    .dynamicShape()
+                    .randomTicks(), WeatheringCopper.WeatherState.EXPOSED));
+
+    public static final DeferredBlock<CopperScaffoldingBlock> WAXED_WEATHERED_COPPER_SCAFFOLDING = registerBlock("waxed_weathered_copper_scaffolding",
+            () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noCollission()
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .destroyTime(0.40f)
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.GREEN)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)
+                    .dynamicShape()
+                    .speedFactor(0.95f)
+                    .randomTicks(), WeatheringCopper.WeatherState.WEATHERED));
+
+    public static final DeferredBlock<CopperScaffoldingBlock> WAXED_OXIDIZED_COPPER_SCAFFOLDING = registerBlock("waxed_oxidized_copper_scaffolding",
+            () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noCollission()
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .destroyTime(0.60f)
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.GREEN)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)
+                    .dynamicShape()
+                    .speedFactor(0.90f)
+                    .randomTicks(), WeatheringCopper.WeatherState.OXIDIZED));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {
@@ -44,7 +151,7 @@ public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = r
     }
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
-        if (name.equals("copper_scaffolding")) {
+        if (name.equals("copper_scaffolding") || name.equals("exposed_copper_scaffolding") || name.equals("weathered_copper_scaffolding")|| name.equals("oxidized_copper_scaffolding")) {
             ModItems.ITEMS.register(name, () -> new ScaffoldingBlockItem(block.get(), new Item.Properties()));
         }
         else {

@@ -42,6 +42,13 @@ public class ModCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
 
                         output.accept(ModBlocks.COPPER_SCAFFOLDING);
+                        output.accept(ModBlocks.EXPOSED_COPPER_SCAFFOLDING);
+                        output.accept(ModBlocks.WEATHERED_COPPER_SCAFFOLDING);
+                        output.accept(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING);
+                        output.accept(ModBlocks.WAXED_COPPER_SCAFFOLDING);
+                        output.accept(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING);
+                        output.accept(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING);
+                        output.accept(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING);
 
                     }).build());
 

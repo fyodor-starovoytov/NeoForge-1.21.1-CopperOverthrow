@@ -3,10 +3,7 @@ package net.star.copperoverthrow.datagen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MinecartItem;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
@@ -50,8 +47,24 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("A A")
                 //EXTREMELY IMPORTANT TO HAVE '' NOT ""
                 .define('A', Items.COPPER_INGOT)
-                .define('B', Items.COPPER_GRATE)
+                .define('B', Items.COPPER_TRAPDOOR)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WAXED_COPPER_SCAFFOLDING)
+                .requires(ModBlocks.COPPER_SCAFFOLDING)
+                .requires(Items.HONEYCOMB)
+                .unlockedBy("has_copper_scaffolding", has(ModBlocks.COPPER_SCAFFOLDING)).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING)
+                .requires(ModBlocks.EXPOSED_COPPER_SCAFFOLDING)
+                .requires(Items.HONEYCOMB)
+                .unlockedBy("has_copper_scaffolding", has(ModBlocks.COPPER_SCAFFOLDING)).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING)
+                .requires(ModBlocks.WEATHERED_COPPER_SCAFFOLDING)
+                .requires(Items.HONEYCOMB)
+                .unlockedBy("has_copper_scaffolding", has(ModBlocks.COPPER_SCAFFOLDING)).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING)
+                .requires(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING)
+                .requires(Items.HONEYCOMB)
+                .unlockedBy("has_copper_scaffolding", has(ModBlocks.COPPER_SCAFFOLDING)).save(recipeOutput);
     }
 }

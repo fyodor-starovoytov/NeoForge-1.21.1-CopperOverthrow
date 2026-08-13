@@ -6,6 +6,14 @@
   "item.copperoverthrow.copper_chisel": "Copper Chisel",
 
   "block.copperoverthrow.copper_scaffolding": "Copper Scaffolding",
+  "block.copperoverthrow.exposed_copper_scaffolding": "Exposed Copper Scaffolding",
+  "block.copperoverthrow.weathered_copper_scaffolding": "Weathered Copper Scaffolding",
+  "block.copperoverthrow.oxidized_copper_scaffolding": "Oxidized Copper Scaffolding",
+  "block.copperoverthrow.waxed_copper_scaffolding": "Waxed Copper Scaffolding",
+  "block.copperoverthrow.waxed_exposed_copper_scaffolding": "Waxed Exposed Copper Scaffolding",
+  "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Waxed Weathered Copper Scaffolding",
+  "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Waxed Oxidized Copper Scaffolding",
+
 
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "Texturing was never easier before",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Press §eShift§r §7for more information§r"
