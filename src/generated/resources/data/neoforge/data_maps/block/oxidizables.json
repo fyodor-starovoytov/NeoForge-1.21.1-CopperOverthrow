@@ -1,0 +1,13 @@
+{
+  "values": {
+    "copperoverthrow:copper_scaffolding": {
+      "next_oxidation_stage": "copperoverthrow:exposed_copper_scaffolding"
+    },
+    "copperoverthrow:exposed_copper_scaffolding": {
+      "next_oxidation_stage": "copperoverthrow:weathered_copper_scaffolding"
+    },
+    "copperoverthrow:weathered_copper_scaffolding": {
+      "next_oxidation_stage": "copperoverthrow:oxidized_copper_scaffolding"
+    }
+  }
+}
