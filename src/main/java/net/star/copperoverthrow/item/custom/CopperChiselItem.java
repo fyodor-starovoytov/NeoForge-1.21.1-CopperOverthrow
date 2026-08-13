@@ -129,18 +129,51 @@ public class CopperChiselItem extends Item {
                             while (true) {
                                 Block block = getBlock(level, blockstate);
 
-                                if (NoAvailableFullBlock(level, blockstate)){
-                                    break;
+                                if (blockstate.getBlock() instanceof StairBlock){
+                                    if (NoAvailableStairBlock(level, blockstate)){
+                                        break;
+                                    }
+
+                                    if (!(block instanceof StairBlock)) {
+                                        getBlock(level, blockstate);
+                                        continue;
+                                    }
                                 }
 
-                                if (block instanceof StairBlock || block instanceof SlabBlock || block instanceof WallBlock) {
-                                    getBlock(level, blockstate);
-                                    continue;
+                                if (blockstate.getBlock() instanceof WallBlock){
+                                    if (NoAvailableWallBlock(level, blockstate)){
+                                        break;
+                                    }
+
+                                    if (!(block instanceof WallBlock)) {
+                                        getBlock(level, blockstate);
+                                        continue;
+                                    }
                                 }
 
-                                boolean flag1 = level.setBlockAndUpdate(blockpos, block.defaultBlockState());
+                                if (blockstate.getBlock() instanceof SlabBlock){
+                                    if (NoAvailableSlabBlock(level, blockstate)){
+                                        break;
+                                    }
 
-                                if (flag1) {
+                                    if (!(block instanceof SlabBlock)) {
+                                        getBlock(level, blockstate);
+                                        continue;
+                                    }
+                                }
+
+                                if (!(blockstate.getBlock() instanceof SlabBlock || blockstate.getBlock() instanceof WallBlock || blockstate.getBlock() instanceof StairBlock)){
+                                    if (NoAvailableFullBlock(level, blockstate)){
+                                        break;
+                                    }
+
+                                    if (block instanceof StairBlock || block instanceof SlabBlock || block instanceof WallBlock) {
+                                        getBlock(level, blockstate);
+                                        continue;
+                                    }
+                                }
+
+                                if (setBlock(level, blockpos, block, blockstate)) {
                                     System.out.print(BuiltInRegistries.BLOCK);
                                     EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
                                             ? EquipmentSlot.OFFHAND
@@ -152,7 +185,6 @@ public class CopperChiselItem extends Item {
                             }
                         }
                 }
-
                 return;
             }
 
@@ -160,6 +192,11 @@ public class CopperChiselItem extends Item {
         } else {
             livingEntity.releaseUsingItem();
         }
+    }
+
+    private boolean setBlock(Level level, BlockPos blockpos, Block block, BlockState blockstate){
+        level.setBlockAndUpdate(blockpos, block.withPropertiesOf(blockstate));
+        return true;
     }
 
     private SingleRecipeInput getSingleRecipeInput(Block block) {
@@ -199,6 +236,64 @@ public class CopperChiselItem extends Item {
         }
         return fullBlocks == 0;
     }
+
+    private Boolean NoAvailableSlabBlock(Level level, BlockState blockstate) {
+
+        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
+
+        int recipeListLength = recipeList.size();
+
+        int blocks = 0;
+
+        for (int i = 0; i < recipeListLength; i++) {
+
+            Block block = ((BlockItem) (recipeList.get(i).value().getResultItem(level.registryAccess()).getItem())).getBlock();
+
+            if (block instanceof SlabBlock) {
+                blocks++;
+            }
+        }
+        return blocks == 0;
+    }
+
+    private Boolean NoAvailableStairBlock(Level level, BlockState blockstate) {
+
+        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
+
+        int recipeListLength = recipeList.size();
+
+        int blocks = 0;
+
+        for (int i = 0; i < recipeListLength; i++) {
+
+            Block block = ((BlockItem) (recipeList.get(i).value().getResultItem(level.registryAccess()).getItem())).getBlock();
+
+            if (block instanceof StairBlock) {
+                blocks++;
+            }
+        }
+        return blocks == 0;
+    }
+
+    private Boolean NoAvailableWallBlock(Level level, BlockState blockstate) {
+
+        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
+
+        int recipeListLength = recipeList.size();
+
+        int blocks = 0;
+
+        for (int i = 0; i < recipeListLength; i++) {
+
+            Block block = ((BlockItem) (recipeList.get(i).value().getResultItem(level.registryAccess()).getItem())).getBlock();
+
+            if (block instanceof StairBlock) {
+                blocks++;
+            }
+        }
+        return blocks == 0;
+    }
+
 
     private Boolean doesResultExist (Level level, BlockState blockstate){
         List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
