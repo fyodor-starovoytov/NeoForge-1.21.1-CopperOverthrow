@@ -26,18 +26,6 @@ import java.util.Map;
 
 public class CopperChiselItem extends Item {
 
-
-
-    private static final Map<Block, Block> CHISEL_MAP =
-             Map.of(
-                    Blocks.STONE, Blocks.STONE_BRICKS,
-                    Blocks.END_STONE, Blocks.END_STONE_BRICKS,
-                    Blocks.DEEPSLATE, Blocks.DEEPSLATE_BRICKS
-            );
-
-    public static final int ANIMATION_DURATION = 10;
-    private static final int USE_DURATION = 10;
-
     public CopperChiselItem(Properties properties) {
         super(properties);
     }

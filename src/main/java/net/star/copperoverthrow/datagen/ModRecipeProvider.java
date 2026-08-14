@@ -50,6 +50,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.COPPER_TRAPDOOR)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_COOKIE.get(), 1)
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern("AAA")
+                //EXTREMELY IMPORTANT TO HAVE '' NOT ""
+                .define('A', Items.COPPER_INGOT)
+                .define('B', Items.COOKIE)
+                .unlockedBy("has_cookie", has(Items.COOKIE)).save(recipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WAXED_COPPER_SCAFFOLDING)
                 .requires(ModBlocks.COPPER_SCAFFOLDING)
                 .requires(Items.HONEYCOMB)

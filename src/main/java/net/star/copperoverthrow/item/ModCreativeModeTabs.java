@@ -21,12 +21,13 @@ public class ModCreativeModeTabs {
     public static final Supplier<CreativeModeTab> COPPEROVERTHROW_ITEMS_TAB = CREATIVE_MODE_TAB.register("copperoverthrow_items_tab",
             () -> CreativeModeTab.builder()
 
-                    .icon(() -> new ItemStack(ModItems.COPPER_NUGGET.get()))
+                    .icon(() -> new ItemStack(ModItems.COPPER_CHISEL.get()))
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_items"))
                     .displayItems((itemDisplayParameters, output) -> {
 
                         //output.accept(ModItems.COPPER_NUGGET);
                         output.accept(ModItems.COPPER_CHISEL);
+                        output.accept(ModItems.COPPER_COOKIE);
 
                     }).build());
 

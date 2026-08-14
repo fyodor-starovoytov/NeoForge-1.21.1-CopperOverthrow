@@ -4,6 +4,7 @@
 
   "item.copperoverthrow.copper_nugget": "Copper Nugget",
   "item.copperoverthrow.copper_chisel": "Copper Chisel",
+  "item.copperoverthrow.copper_cookie": "Copper Cookie",
 
   "block.copperoverthrow.copper_scaffolding": "Copper Scaffolding",
   "block.copperoverthrow.exposed_copper_scaffolding": "Exposed Copper Scaffolding",
@@ -14,6 +15,7 @@
   "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Waxed Weathered Copper Scaffolding",
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Waxed Oxidized Copper Scaffolding",
 
+  "effect.copperoverthrow.conductivity": "Conductivity",
 
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "Texturing was never easier before",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Press §eShift§r §7for more information§r"

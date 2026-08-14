@@ -4,16 +4,14 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ScaffoldingBlockItem;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.block.custom.ConductBlock;
 import net.star.copperoverthrow.block.custom.CopperScaffoldingBlock;
 import net.star.copperoverthrow.item.ModItems;
 
@@ -142,6 +140,15 @@ public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = r
                     .dynamicShape()
                     .speedFactor(0.90f)
                     .randomTicks(), WeatheringCopper.WeatherState.OXIDIZED));
+
+    public static final DeferredBlock<ConductBlock> CONDUCT_BLOCK = registerBlock("conduct_block",
+            () -> new ConductBlock(BlockBehaviour.Properties.of()
+                    .replaceable()
+                    .noCollission()
+                    .noOcclusion()
+                    .noLootTable()
+                    .noTerrainParticles()
+                    .air()));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {

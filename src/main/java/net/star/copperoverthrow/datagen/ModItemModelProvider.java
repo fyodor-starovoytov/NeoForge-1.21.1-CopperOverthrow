@@ -15,5 +15,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         //Creating item models out of textures without having to create manually a .json file
         basicItem(ModItems.COPPER_NUGGET.get());
+        basicItem(ModItems.COPPER_COOKIE.get());
     }
 }

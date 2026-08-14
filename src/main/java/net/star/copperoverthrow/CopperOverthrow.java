@@ -1,6 +1,7 @@
 package net.star.copperoverthrow;
 
 import net.star.copperoverthrow.block.ModBlocks;
+import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.ModCreativeModeTabs;
 import net.star.copperoverthrow.item.ModItems;
 import org.slf4j.Logger;
@@ -58,6 +59,8 @@ public class CopperOverthrow {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModEffects.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
