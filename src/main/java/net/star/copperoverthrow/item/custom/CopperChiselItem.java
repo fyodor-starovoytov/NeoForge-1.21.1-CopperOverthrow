@@ -26,8 +26,7 @@ import java.util.Map;
 
 public class CopperChiselItem extends Item {
 
-    public CopperChiselItem(Properties properties) {
-        super(properties);
+    public CopperChiselItem(Properties properties) {super(properties);
     }
 
     /* @Override
