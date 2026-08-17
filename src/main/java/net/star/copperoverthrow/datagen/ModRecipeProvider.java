@@ -97,10 +97,3 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_copper_scaffolding", has(ModBlocks.COPPER_SCAFFOLDING)).save(recipeOutput);
     }
 }
-
-/*
-### **Items:**
-
-Added Bee Catcher
-  - Catches up to 3 bees
-  - Makes it easier to create bee farms*/
