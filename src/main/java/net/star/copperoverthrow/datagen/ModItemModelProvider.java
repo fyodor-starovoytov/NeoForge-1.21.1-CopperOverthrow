@@ -16,6 +16,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         //Creating item models out of textures without having to create manually a .json file
         basicItem(ModItems.COPPER_NUGGET.get());
         basicItem(ModItems.COPPER_COOKIE.get());
-        basicItem(ModItems.BEE_CATCHER.get());
+        // handheldItem(ModItems.BEE_CATCHER.get());
     }
 }

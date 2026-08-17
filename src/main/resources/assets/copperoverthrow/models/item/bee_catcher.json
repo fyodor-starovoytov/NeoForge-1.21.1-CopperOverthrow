@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "copperoverthrow:item/bee_catcher"
+  },
+  "overrides": [
+    {
+    "predicate": {
+      "copperoverthrow:1bee": 1
+    },
+      "model": "copperoverthrow:item/bee_catcher_1bee"
+    },
+    {
+      "predicate": {
+        "copperoverthrow:2bees": 1
+      },
+      "model": "copperoverthrow:item/bee_catcher_2bees"
+    },
+    {
+      "predicate": {
+        "copperoverthrow:3bees": 1
+      },
+      "model": "copperoverthrow:item/bee_catcher_3bees"
+    }
+  ]
+}

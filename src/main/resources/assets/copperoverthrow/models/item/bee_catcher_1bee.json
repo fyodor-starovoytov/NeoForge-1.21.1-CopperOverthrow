@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "copperoverthrow:item/bee_catcher_1bee"
+  }
+}
