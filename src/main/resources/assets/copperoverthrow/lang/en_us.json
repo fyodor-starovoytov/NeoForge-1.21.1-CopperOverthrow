@@ -1,10 +1,11 @@
 {
-  "creativetab.copperoverthrow.copperoverthrow_blocks": "Copper overthrow Blocks",
-  "creativetab.copperoverthrow.copperoverthrow_items": "Copper overthrow Items",
+  "creativetab.copperoverthrow.copperoverthrow_blocks": "Copper Overthrow Blocks",
+  "creativetab.copperoverthrow.copperoverthrow_items": "Copper Overthrow Items",
 
   "item.copperoverthrow.copper_nugget": "Copper Nugget",
   "item.copperoverthrow.copper_chisel": "Copper Chisel",
   "item.copperoverthrow.copper_cookie": "Copper Cookie",
+  "item.copperoverthrow.bee_catcher": "Bee Catcher",
 
   "block.copperoverthrow.copper_scaffolding": "Copper Scaffolding",
   "block.copperoverthrow.exposed_copper_scaffolding": "Exposed Copper Scaffolding",
@@ -17,6 +18,6 @@
 
   "effect.copperoverthrow.conductivity": "Conductivity",
 
-  "tooltip.copperoverthrow.copper_chisel_item.tooltip": "Texturing was never easier before",
+  "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§7Texturing was never easier before§r",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Press §eShift§r §7for more information§r"
 }

@@ -1,6 +1,7 @@
 package net.star.copperoverthrow;
 
 import net.star.copperoverthrow.block.ModBlocks;
+import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.ModCreativeModeTabs;
 import net.star.copperoverthrow.item.ModItems;
@@ -59,6 +60,8 @@ public class CopperOverthrow {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModDataComponents.register(modEventBus);
 
         ModEffects.register(modEventBus);
 
