@@ -28,6 +28,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get());
         dropSelf(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get());
         dropSelf(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
+        dropSelf(ModBlocks.LOG_STRIPPER.get());
 
     }
 

@@ -13,6 +13,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.custom.ConductBlock;
 import net.star.copperoverthrow.block.custom.CopperScaffoldingBlock;
+import net.star.copperoverthrow.block.custom.LogStripperBlock;
 import net.star.copperoverthrow.item.ModItems;
 
 import java.util.function.Supplier;
@@ -21,7 +22,18 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(CopperOverthrow.MOD_ID);
 
-public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
+    public static final DeferredBlock<LogStripperBlock> LOG_STRIPPER = registerBlock("log_stripper",
+            () -> new LogStripperBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3f)
+                            .requiresCorrectToolForDrops()
+                            .destroyTime(4.0f)
+                            .isValidSpawn(Blocks::never)
+                            .mapColor(DyeColor.ORANGE)
+                            .sound(SoundType.COPPER)));
+
+
+    public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
         () -> new CopperScaffoldingBlock(
                 BlockBehaviour.Properties.of()
                 .strength(3f)
