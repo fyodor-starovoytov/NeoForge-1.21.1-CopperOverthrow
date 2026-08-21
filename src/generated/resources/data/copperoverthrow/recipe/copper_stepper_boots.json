@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:copper_ingot"
+    },
+    "B": {
+      "item": "minecraft:flint"
+    },
+    "C": {
+      "item": "minecraft:slime_ball"
+    }
+  },
+  "pattern": [
+    "A A",
+    "A A",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "copperoverthrow:copper_stepper_boots"
+  }
+}
