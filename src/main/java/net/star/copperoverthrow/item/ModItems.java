@@ -10,6 +10,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -18,6 +19,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.custom.BeeCatcherItem;
 import net.star.copperoverthrow.item.custom.CopperChiselItem;
+import net.star.copperoverthrow.item.custom.HammerItem;
 import net.star.copperoverthrow.item.equipment.ModArmorMaterials;
 import net.star.copperoverthrow.item.equipment.StepperArmorItem;
 
@@ -48,6 +50,9 @@ public class ModItems {
             () -> new StepperArmorItem(ModArmorMaterials.STEPPER_BOOTS_ARMOR, ArmorItem.Type.BOOTS,
                     new Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
 
+    public static final DeferredItem<HammerItem> COPPER_HAMMER = ITEMS.register("copper_hammer",
+            () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 7f, 4f))));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
