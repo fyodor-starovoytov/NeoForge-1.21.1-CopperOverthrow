@@ -20,6 +20,10 @@
 
   "effect.copperoverthrow.conductivity": "Conductivity",
 
+  "enchantment.copperoverthrow.areal": "Areal",
+  "enchantment.copperoverthrow.tunneling": "Tunneling",
+
+
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§7Texturing was never easier before§r",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Press §eShift§r §7for more information§r"
 }
