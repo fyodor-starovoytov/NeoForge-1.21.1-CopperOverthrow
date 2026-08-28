@@ -52,7 +52,7 @@ public class ModItems {
 
     public static final DeferredItem<HammerItem> COPPER_HAMMER = ITEMS.register("copper_hammer",
             () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
-                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 7f, 4f))));
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 7f, -3.6f))));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

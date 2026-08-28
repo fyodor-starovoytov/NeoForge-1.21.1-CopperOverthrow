@@ -42,7 +42,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.COPPER_COOKIE.get());
 
         trimmedArmorItem(ModItems.COPPER_STEPPER_BOOTS);
-        // handheldItem(ModItems.BEE_CATCHER.get());
+        handheldItem(ModItems.COPPER_HAMMER.get());
     }
 
     // Shoutout to El_Redstoniano for making this and KaupenJoe for publishing

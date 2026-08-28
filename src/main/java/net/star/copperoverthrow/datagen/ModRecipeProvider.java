@@ -88,6 +88,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.SLIME_BALL)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HAMMER.get(), 1)
+                .pattern("B")
+                .pattern("C")
+                .pattern("A")
+                .define('A', Items.COPPER_INGOT)
+                .define('B', Items.COPPER_BLOCK)
+                .define('C', Items.STICK)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WAXED_COPPER_SCAFFOLDING)
                 .requires(ModBlocks.COPPER_SCAFFOLDING)
