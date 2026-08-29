@@ -84,9 +84,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("A A")
                 .pattern("BCB")
                 .define('A', Items.COPPER_INGOT)
-                .define('B', Items.FLINT)
+                .define('B', Items.PISTON)
                 .define('C', Items.SLIME_BALL)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_STEPPER_LEGGINGS.get(), 1)
+                .pattern("BCB")
+                .pattern("A A")
+                .pattern("A A")
+                .define('A', Items.COPPER_INGOT)
+                .define('B', Items.PISTON)
+                .define('C', Items.NAUTILUS_SHELL)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HAMMER.get(), 1)
                 .pattern("B")

@@ -9,6 +9,6 @@ import net.star.copperoverthrow.util.ModTags;
 public class ModToolTiers {
 
     public static final Tier COPPER = new SimpleTier(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL,
-            512, 4f, 3f, 12, () -> Ingredient.of(Items.COPPER_INGOT));
+            727, 4f, 3f, 12, () -> Ingredient.of(Items.COPPER_INGOT));
 
 }

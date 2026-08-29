@@ -19,8 +19,9 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ModArmorMaterials {
-    public static final Holder<ArmorMaterial> STEPPER_BOOTS_ARMOR = register("copper",
+    public static final Holder<ArmorMaterial> STEPPER_ARMOR = register("copper",
             Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
+                attribute.put(ArmorItem.Type.LEGGINGS, 4);
                 attribute.put(ArmorItem.Type.BOOTS, 1);
             }), 12, 0f, 0f, () -> Items.COPPER_INGOT);
 

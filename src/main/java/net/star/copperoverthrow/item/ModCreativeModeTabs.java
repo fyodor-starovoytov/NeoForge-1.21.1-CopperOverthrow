@@ -27,10 +27,12 @@ public class ModCreativeModeTabs {
 
                         //output.accept(ModItems.COPPER_NUGGET);
                         output.accept(ModItems.COPPER_CHISEL);
-                        output.accept(ModItems.COPPER_STEPPER_BOOTS);
-                        output.accept(ModItems.BEE_CATCHER);
-                        output.accept(ModItems.COPPER_COOKIE);
                         output.accept(ModItems.COPPER_HAMMER);
+                        output.accept(ModItems.COPPER_STEPPER_LEGGINGS);
+                        output.accept(ModItems.COPPER_STEPPER_BOOTS);
+                        output.accept(ModItems.COPPER_COOKIE);
+                        output.accept(ModItems.BEE_CATCHER);
+
 
                     }).build());
 

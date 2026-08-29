@@ -9,16 +9,16 @@
       "item": "minecraft:piston"
     },
     "C": {
-      "item": "minecraft:slime_ball"
+      "item": "minecraft:nautilus_shell"
     }
   },
   "pattern": [
+    "BCB",
     "A A",
-    "A A",
-    "BCB"
+    "A A"
   ],
   "result": {
     "count": 1,
-    "id": "copperoverthrow:copper_stepper_boots"
+    "id": "copperoverthrow:copper_stepper_leggings"
   }
 }

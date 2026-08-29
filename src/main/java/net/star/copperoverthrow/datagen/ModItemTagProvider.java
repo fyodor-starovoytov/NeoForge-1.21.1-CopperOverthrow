@@ -28,6 +28,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS);
         tag(ItemTags.FOOT_ARMOR_ENCHANTABLE)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get());
+        tag(ItemTags.LEG_ARMOR_ENCHANTABLE)
+                .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
         tag(ModTags.Items.HAMMER_ENCHANTABLE)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS);
 
@@ -49,7 +51,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.BEE_CATCHER.get());
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)
-                .add(ModItems.COPPER_STEPPER_BOOTS.get());
+                .add(ModItems.COPPER_STEPPER_BOOTS.get())
+                .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
 
 
     }

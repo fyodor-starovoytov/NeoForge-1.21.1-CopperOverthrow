@@ -12,8 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.star.copperoverthrow.CopperOverthrow;
 
-public class StepperArmorItem extends ArmorItem {
-    public StepperArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
+public class StepperBootsArmorItem extends ArmorItem {
+    public StepperBootsArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
         super(material, type, properties);
     }
 
@@ -27,7 +27,7 @@ public class StepperArmorItem extends ArmorItem {
                 Attributes.STEP_HEIGHT,
                 new AttributeModifier(
                         ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_boots_step_height"),
-                        1,
+                        0.5,
                         AttributeModifier.Operation.ADD_VALUE
                 ),
                 EquipmentSlotGroup.FEET
