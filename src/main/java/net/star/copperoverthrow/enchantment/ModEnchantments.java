@@ -27,17 +27,17 @@ public class ModEnchantments {
                         1,
                         Enchantment.constantCost(20),
                         Enchantment.constantCost(65),
-                        10,
+                        6,
                         EquipmentSlotGroup.MAINHAND))
                 .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.MINING_EXCLUSIVE)));
 
         register(context, TUNNELING, Enchantment.enchantment(Enchantment.definition(
                         items.getOrThrow(ModTags.Items.HAMMER_ENCHANTABLE),
                         1,
-                        1,
-                        Enchantment.constantCost(20),
-                        Enchantment.constantCost(65),
-                        10,
+                        2,
+                        Enchantment.dynamicCost(12, 9),
+                        Enchantment.dynamicCost(24, 18),
+                        4,
                         EquipmentSlotGroup.MAINHAND))
                 .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.MINING_EXCLUSIVE)));
     }

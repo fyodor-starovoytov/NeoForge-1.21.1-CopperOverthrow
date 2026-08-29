@@ -2,20 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "minecraft:copper_ingot"
-    },
     "B": {
       "item": "minecraft:copper_block"
     },
     "C": {
-      "item": "minecraft:stick"
+      "item": "minecraft:blaze_rod"
     }
   },
   "pattern": [
     "B",
-    "C",
-    "A"
+    "C"
   ],
   "result": {
     "count": 1,

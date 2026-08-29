@@ -37,7 +37,7 @@ if (Screen.hasShiftDown()){return;}
         if(mainHandItem.getItem() instanceof HammerItem hammer && player instanceof ServerPlayer serverPlayer) {
 
             int area = 1;
-            int deep = 1;
+            int deep = 0;
 
             Holder<Enchantment> arealHolder = event.getLevel().registryAccess()
                     .lookupOrThrow(Registries.ENCHANTMENT)
@@ -51,7 +51,7 @@ if (Screen.hasShiftDown()){return;}
                 area = 2;
             }
             if (mainHandItem.getEnchantmentLevel(tunnelingHolder) != 0){
-                deep = mainHandItem.getEnchantmentLevel(tunnelingHolder) + 1;
+                deep = mainHandItem.getEnchantmentLevel(tunnelingHolder);
             }
 
             BlockPos initialBlockPos = event.getPos();
