@@ -1,20 +1,7 @@
-
 {
   "variants": {
-    "facing=east": {
-      "model": "copperoverthrow:block/log_stripper",
-      "y": 90
-    },
-    "facing=north": {
+    "": {
       "model": "copperoverthrow:block/log_stripper"
-    },
-    "facing=south": {
-      "model": "copperoverthrow:block/log_stripper",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "copperoverthrow:block/log_stripper",
-      "y": 270
     }
   }
 }

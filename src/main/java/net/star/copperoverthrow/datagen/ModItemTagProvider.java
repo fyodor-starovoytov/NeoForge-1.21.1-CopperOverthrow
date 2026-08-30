@@ -23,15 +23,26 @@ public class ModItemTagProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .add(ModItems.COPPER_CHISEL.get())
-                .addTag(ModTags.Items.C_TOOLS_HAMMERS);
+                .addTag(ModTags.Items.C_TOOLS_HAMMERS)
+                .add(ModItems.COPPER_STEPPER_BOOTS.get())
+                .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
+
         tag(ItemTags.MINING_ENCHANTABLE)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS);
+        tag(ModTags.Items.HAMMER_ENCHANTABLE)
+                .addTag(ModTags.Items.C_TOOLS_HAMMERS);
+
         tag(ItemTags.FOOT_ARMOR_ENCHANTABLE)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get());
         tag(ItemTags.LEG_ARMOR_ENCHANTABLE)
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
-        tag(ModTags.Items.HAMMER_ENCHANTABLE)
-                .addTag(ModTags.Items.C_TOOLS_HAMMERS);
+        tag(ItemTags.FOOT_ARMOR)
+                .add(ModItems.COPPER_STEPPER_BOOTS.get());
+        tag(ItemTags.LEG_ARMOR)
+                .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
+        tag(ItemTags.EQUIPPABLE_ENCHANTABLE)
+                .add(ModItems.COPPER_STEPPER_BOOTS.get())
+                .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
 
         tag(Tags.Items.FOODS)
                 .add(ModItems.COPPER_COOKIE.get());

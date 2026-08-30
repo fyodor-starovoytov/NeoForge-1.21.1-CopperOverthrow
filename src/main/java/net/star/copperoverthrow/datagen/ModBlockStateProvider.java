@@ -14,8 +14,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        //Only for easy blocks with texture having the same name as model
-        //blockWithItem(ModBlocks.COPPER_SCAFFOLDING);
+        // blockWithItem(ModBlocks.LOG_STRIPPER);
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {
