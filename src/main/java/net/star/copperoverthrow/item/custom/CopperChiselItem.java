@@ -161,7 +161,6 @@ public class CopperChiselItem extends Item {
                                 }
 
                                 if (setBlock(level, blockpos, block, blockstate)) {
-                                    System.out.print(BuiltInRegistries.BLOCK);
                                     EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
                                             ? EquipmentSlot.OFFHAND
                                             : EquipmentSlot.MAINHAND;
@@ -283,7 +282,8 @@ public class CopperChiselItem extends Item {
 
 
     private Boolean doesResultExist (Level level, BlockState blockstate){
-        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
+        List<RecipeHolder<StonecutterRecipe>> recipeList =
+                (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
 
         //Returns false or true
         return !recipeList.isEmpty();
@@ -296,6 +296,9 @@ public class CopperChiselItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltipComponents.add(Component.empty());
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_chisel_item.tooltip"));
         }
         else {

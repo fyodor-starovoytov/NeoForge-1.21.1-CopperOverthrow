@@ -27,7 +27,12 @@
   "enchantment.copperoverthrow.areal": "Areal",
   "enchantment.copperoverthrow.tunneling": "Tunneling",
 
-
-  "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§7Texturing was never easier before§r",
-  "tooltip.copperoverthrow.press_shift.tooltip": "§7Press §eShift§r §7for more information§r"
+  "tooltip.copperoverthrow.when_placed.tooltip": "§7When placed:§r",
+  "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7When used on a Block:§r",
+  "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7When used on a Bee:§r",
+  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Strip the logs placed on top with an§r §6Axe§r",
+  "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Applies a random§r §6Stonecutter§r §erecipe for the applied block§r",
+  "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Captures a§r §6Bee§r §einside the catcher§r",
+  "tooltip.copperoverthrow.bee_catcher_free_item.tooltip" : "§6 Frees§r §eall stored bees§r",
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Hold §eShift§r §7for more information§r"
 }

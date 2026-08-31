@@ -100,7 +100,13 @@ public class BeeCatcherItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.literal("§7Bees caught: " + getBees(stack).size() + "/3"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltipComponents.add(Component.empty());
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_bee.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.bee_catcher_item.tooltip"));
+            tooltipComponents.add(Component.empty());
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.bee_catcher_free_item.tooltip"));
         }
         else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
