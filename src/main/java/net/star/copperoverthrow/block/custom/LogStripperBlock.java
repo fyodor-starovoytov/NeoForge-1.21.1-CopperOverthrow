@@ -95,7 +95,7 @@ public class LogStripperBlock extends BaseEntityBlock {
 
                 logStripperBlockEntity.setItem(0, getStrippedBlock(logStripperBlockEntity.getItem(0)));
 
-                level.playSound(player, pos, SoundEvents.COPPER_BREAK, SoundSource.BLOCKS, 1, 1f);
+                level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1, 1f);
             }
 
             if (logStripperBlockEntity.isEmpty() && isBlockStrippable(stack)){
