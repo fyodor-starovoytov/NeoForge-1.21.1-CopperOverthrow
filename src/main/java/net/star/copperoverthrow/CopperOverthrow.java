@@ -1,6 +1,7 @@
 package net.star.copperoverthrow;
 
 import net.star.copperoverthrow.block.ModBlocks;
+import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
@@ -47,9 +48,12 @@ public class CopperOverthrow {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        ModBlockEntities.register(modEventBus);
+
         ModDataComponents.register(modEventBus);
 
         ModEffects.register(modEventBus);
+
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

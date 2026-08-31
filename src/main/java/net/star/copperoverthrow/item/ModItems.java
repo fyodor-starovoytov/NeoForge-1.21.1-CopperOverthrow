@@ -23,8 +23,7 @@ public class ModItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CopperOverthrow.MOD_ID);
 
-    public static final DeferredItem<Item> COPPER_NUGGET = ITEMS.register("copper_nugget",
-            () -> new Item(new Properties()));
+    public static final DeferredItem<Item> COPPER_NUGGET = ITEMS.registerSimpleItem("copper_nugget");
 
     public static final DeferredItem<Item> BEE_CATCHER = ITEMS.register("bee_catcher",
             () -> new BeeCatcherItem(

@@ -35,6 +35,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
 
+        tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(ModBlocks.LOG_STRIPPER.get());
+
         tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get())

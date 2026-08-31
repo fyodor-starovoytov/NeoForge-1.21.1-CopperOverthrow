@@ -25,9 +25,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> LOG_STRIPPER = registerBlock("log_stripper",
             () -> new LogStripperBlock(
                     BlockBehaviour.Properties.of()
-                            .strength(3f)
-                            .requiresCorrectToolForDrops()
-                            .destroyTime(4.0f)
+                            .strength(2f)
                             .isValidSpawn(Blocks::never)
                             .mapColor(DyeColor.ORANGE)
                             .sound(SoundType.COPPER)));
