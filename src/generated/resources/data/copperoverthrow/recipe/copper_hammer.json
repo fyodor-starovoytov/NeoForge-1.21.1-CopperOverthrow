@@ -6,7 +6,7 @@
       "item": "minecraft:copper_block"
     },
     "C": {
-      "item": "minecraft:blaze_rod"
+      "tag": "c:rods/blaze"
     }
   },
   "pattern": [

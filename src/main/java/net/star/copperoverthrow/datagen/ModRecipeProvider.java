@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MinecartItem;
@@ -29,7 +31,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("B  ")
                 //EXTREMELY IMPORTANT TO HAVE '' NOT ""
                 .define('B', Items.STICK)
-                .define('A', Items.COPPER_INGOT)
+                .define('A', Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CHISEL.get())
@@ -37,7 +39,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" A ")
                 .pattern("  B")
                 .define('B', Items.STICK)
-                .define('A', Items.COPPER_INGOT)
+                .define('A', Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
                 .save(recipeOutput, "copperoverthrow:copper_chisel_alt");
 
@@ -67,15 +69,24 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("ABA")
                 .pattern("A A")
                 .pattern("A A")
-                .define('A', Items.COPPER_INGOT)
+                .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', Items.COPPER_TRAPDOOR)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)
+                .pattern("BCB")
+                .pattern("ADA")
+                .define('A', Items.COPPER_BLOCK)
+                .define('D', Tags.Items.INGOTS_COPPER)
+                .define('B', Tags.Items.STONES)
+                .define('C', ItemTags.PLANKS)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_COOKIE.get(), 1)
                 .pattern("AAA")
                 .pattern("ABA")
                 .pattern("AAA")
-                .define('A', Items.COPPER_INGOT)
+                .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', Items.COOKIE)
                 .unlockedBy("has_cookie", has(Items.COOKIE)).save(recipeOutput);
 
@@ -83,26 +94,25 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("A A")
                 .pattern("A A")
                 .pattern("BCB")
-                .define('A', Items.COPPER_INGOT)
+                .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', Items.PISTON)
-                .define('C', Items.SLIME_BALL)
+                .define('C', Tags.Items.SLIME_BALLS)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_STEPPER_LEGGINGS.get(), 1)
                 .pattern("BCB")
                 .pattern("A A")
                 .pattern("A A")
-                .define('A', Items.COPPER_INGOT)
+                .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', Items.PISTON)
                 .define('C', Items.NAUTILUS_SHELL)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
-
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HAMMER.get(), 1)
                 .pattern("B")
                 .pattern("C")
                 .define('B', Items.COPPER_BLOCK)
-                .define('C', Items.BLAZE_ROD)
+                .define('C', Tags.Items.RODS_BLAZE)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WAXED_COPPER_SCAFFOLDING)

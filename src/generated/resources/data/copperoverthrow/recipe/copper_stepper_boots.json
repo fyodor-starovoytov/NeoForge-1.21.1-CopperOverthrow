@@ -3,13 +3,13 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "minecraft:copper_ingot"
+      "tag": "c:ingots/copper"
     },
     "B": {
       "item": "minecraft:piston"
     },
     "C": {
-      "item": "minecraft:slime_ball"
+      "tag": "c:slime_balls"
     }
   },
   "pattern": [

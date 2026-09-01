@@ -3,22 +3,24 @@
   "category": "misc",
   "key": {
     "A": {
-      "tag": "c:ingots/copper"
+      "item": "minecraft:copper_block"
     },
     "B": {
-      "item": "minecraft:piston"
+      "tag": "c:stones"
     },
     "C": {
-      "item": "minecraft:nautilus_shell"
+      "tag": "minecraft:planks"
+    },
+    "D": {
+      "tag": "c:ingots/copper"
     }
   },
   "pattern": [
     "BCB",
-    "A A",
-    "A A"
+    "ADA"
   ],
   "result": {
     "count": 1,
-    "id": "copperoverthrow:copper_stepper_leggings"
+    "id": "copperoverthrow:log_stripper"
   }
 }

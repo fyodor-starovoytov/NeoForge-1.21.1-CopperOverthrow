@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "minecraft:copper_ingot"
+      "tag": "c:ingots/copper"
     },
     "B": {
       "item": "minecraft:stick"
