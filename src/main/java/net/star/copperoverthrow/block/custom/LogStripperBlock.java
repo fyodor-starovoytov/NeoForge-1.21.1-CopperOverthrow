@@ -98,18 +98,22 @@ public class LogStripperBlock extends BaseEntityBlock {
                 level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1, 1f);
             }
 
-            if (logStripperBlockEntity.isEmpty() && isBlockStrippable(stack)){
+            else if (logStripperBlockEntity.isEmpty() && isBlockStrippable(stack)){
                 logStripperBlockEntity.setItem(0, stack);
                 stack.shrink(stack.getCount());
                 level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1, 2f);
             }
-            else if (stack.isEmpty()){
+            else if (stack.isEmpty() || !isBlockStrippable(stack)){
                 ItemStack stackInside = logStripperBlockEntity.getItem(0);
-                player.setItemInHand(InteractionHand.MAIN_HAND, stackInside);
+                if (player.getMainHandItem().isEmpty()) {
+                    player.setItemInHand(InteractionHand.MAIN_HAND, stackInside);
+                }
+                else player.addItem(stackInside);
+
                 logStripperBlockEntity.clearContent();
                 level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1, 1f);
 
-            } if (logStripperBlockEntity.getItem(0).getItem().equals(stack.getItem())){
+            }else if (logStripperBlockEntity.getItem(0).getItem().equals(stack.getItem())){
                 int deductible = 64 - logStripperBlockEntity.getItem(0).getCount();
                 logStripperBlockEntity.setItem(0, stack);
                 stack.shrink(deductible);
