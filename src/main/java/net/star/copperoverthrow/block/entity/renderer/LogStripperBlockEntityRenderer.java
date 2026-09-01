@@ -15,11 +15,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LogStripperBlockEntityRenderer implements BlockEntityRenderer<LogStripperBlockEntity> {
     public LogStripperBlockEntityRenderer(BlockEntityRendererProvider.Context context){
 
     }
 
+    private static final float INITIAL_RENDER_X = 0.5F;
+    private static final float INITIAL_RENDER_Y = 0.75F;
+    private static final float INITIAL_RENDER_Z = 0.5F;
+    
     @Override
     public void render(LogStripperBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
 
@@ -28,7 +35,7 @@ public class LogStripperBlockEntityRenderer implements BlockEntityRenderer<LogSt
 
         if (blockEntity.getItem(0).getCount() <= 16) {
             poseStack.pushPose();
-            poseStack.translate(0.5, 0.75, 0.5);
+            poseStack.translate(INITIAL_RENDER_X, INITIAL_RENDER_Y, INITIAL_RENDER_Z);
             poseStack.scale(1f, 1f, 1f);
 
         itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, getLightLevel(blockEntity.getLevel(),
@@ -38,7 +45,7 @@ public class LogStripperBlockEntityRenderer implements BlockEntityRenderer<LogSt
         }
         if (blockEntity.getItem(0).getCount() <= 32 && 16 < blockEntity.getItem(0).getCount()) {
             poseStack.pushPose();
-            poseStack.translate(0.5, 0.75, 0.5);
+            poseStack.translate(INITIAL_RENDER_X, INITIAL_RENDER_Y, INITIAL_RENDER_Z);
             poseStack.scale(1f, 1f, 1f);
 
             itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, getLightLevel(blockEntity.getLevel(),
@@ -57,7 +64,7 @@ public class LogStripperBlockEntityRenderer implements BlockEntityRenderer<LogSt
         }
         if (blockEntity.getItem(0).getCount() <= 48 && 32 < blockEntity.getItem(0).getCount()) {
             poseStack.pushPose();
-            poseStack.translate(0.5, 0.75, 0.5);
+            poseStack.translate(INITIAL_RENDER_X, INITIAL_RENDER_Y, INITIAL_RENDER_Z);
             poseStack.scale(1f, 1f, 1f);
 
             itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, getLightLevel(blockEntity.getLevel(),
@@ -85,7 +92,7 @@ public class LogStripperBlockEntityRenderer implements BlockEntityRenderer<LogSt
         }
         if (48 < blockEntity.getItem(0).getCount()) {
             poseStack.pushPose();
-            poseStack.translate(0.5, 0.75, 0.5);
+            poseStack.translate(INITIAL_RENDER_X, INITIAL_RENDER_Y, INITIAL_RENDER_Z);
             poseStack.scale(1f, 1f, 1f);
 
             itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, getLightLevel(blockEntity.getLevel(),
@@ -136,5 +143,10 @@ public class LogStripperBlockEntityRenderer implements BlockEntityRenderer<LogSt
         int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
         int skyLight = level.getBrightness(LightLayer.SKY, pos);
         return LightTexture.pack(blockLight, skyLight);
+    }
+
+    public static float randomPositionGenerator(int MIN, int MAX) {
+        int intGenerator = (int) (Math.random() * (MAX - MIN + 1)) + MIN;
+        return (float) intGenerator /100;
     }
 }

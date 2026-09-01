@@ -65,7 +65,22 @@ public class LogStripperBlockEntity extends BlockEntity implements Container {
     @Override
     public void setItem(int slot, ItemStack stack) {
         setChanged();
-        inventory.set(slot, stack.copyWithCount(stack.getCount()));
+
+        if (getItem(0).getItem().equals(stack.getItem())){
+            int itemCount = getItem(0).getCount();
+            if (itemCount >= 64){
+                return;
+            }
+            if (itemCount + stack.getCount() >= 64){
+                inventory.set(slot, stack.copyWithCount(64));
+            }
+            else {
+                inventory.set(slot, stack.copyWithCount(stack.getCount()
+                        + getItem(0).getCount()));
+            }
+        }
+        else {inventory.set(slot, stack.copyWithCount(stack.getCount()));}
+
     }
 
     @Override

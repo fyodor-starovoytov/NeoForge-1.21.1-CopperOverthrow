@@ -103,14 +103,18 @@ public class LogStripperBlock extends BaseEntityBlock {
                 stack.shrink(stack.getCount());
                 level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1, 2f);
             }
-
             else if (stack.isEmpty()){
                 ItemStack stackInside = logStripperBlockEntity.getItem(0);
                 player.setItemInHand(InteractionHand.MAIN_HAND, stackInside);
                 logStripperBlockEntity.clearContent();
                 level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1, 1f);
-            }
 
+            } if (logStripperBlockEntity.getItem(0).getItem().equals(stack.getItem())){
+                int deductible = 64 - logStripperBlockEntity.getItem(0).getCount();
+                logStripperBlockEntity.setItem(0, stack);
+                stack.shrink(deductible);
+                level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1, 2f);
+            }
         }
         return ItemInteractionResult.SUCCESS;
     }
