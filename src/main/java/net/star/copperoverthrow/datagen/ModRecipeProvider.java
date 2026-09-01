@@ -75,9 +75,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)
                 .pattern("BCB")
-                .pattern("ADA")
+                .pattern("AAA")
                 .define('A', Items.COPPER_BLOCK)
-                .define('D', Tags.Items.INGOTS_COPPER)
                 .define('B', Tags.Items.STONES)
                 .define('C', ItemTags.PLANKS)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);

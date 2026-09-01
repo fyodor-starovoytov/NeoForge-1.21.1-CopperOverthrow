@@ -10,14 +10,11 @@
     },
     "C": {
       "tag": "minecraft:planks"
-    },
-    "D": {
-      "tag": "c:ingots/copper"
     }
   },
   "pattern": [
     "BCB",
-    "ADA"
+    "AAA"
   ],
   "result": {
     "count": 1,
