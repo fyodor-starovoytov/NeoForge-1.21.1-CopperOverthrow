@@ -19,6 +19,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
 import net.star.copperoverthrow.item.custom.HammerItem;
 
+import javax.swing.event.TreeExpansionEvent;
 import java.util.HashSet;
 import java.util.Set;
 

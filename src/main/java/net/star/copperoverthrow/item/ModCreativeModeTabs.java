@@ -47,6 +47,7 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_blocks"))
                     .displayItems((itemDisplayParameters, output) -> {
 
+                        output.accept(ModBlocks.COPPER_BEEOSPHERE);
                         output.accept(ModBlocks.LOG_STRIPPER);
                         output.accept(ModBlocks.COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.EXPOSED_COPPER_SCAFFOLDING);

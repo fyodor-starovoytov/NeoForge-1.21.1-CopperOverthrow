@@ -30,6 +30,15 @@ public class ModBlocks {
                             .mapColor(DyeColor.ORANGE)
                             .sound(SoundType.COPPER)));
 
+    public static final DeferredBlock<Block> COPPER_BEEOSPHERE = registerBlock("copper_beeosphere",
+            () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .strength(2f)
+                            .isValidSpawn(Blocks::never)
+                            .mapColor(DyeColor.ORANGE)
+                            .sound(SoundType.COPPER)));
+
+
 
     public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
         () -> new CopperScaffoldingBlock(
