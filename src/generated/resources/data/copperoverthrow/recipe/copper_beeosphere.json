@@ -3,22 +3,25 @@
   "category": "misc",
   "key": {
     "A": {
-      "tag": "c:ingots/copper"
+      "item": "minecraft:copper_block"
     },
     "B": {
-      "item": "minecraft:piston"
+      "item": "minecraft:beehive"
     },
     "C": {
       "tag": "c:dusts/redstone"
+    },
+    "D": {
+      "tag": "c:glass_blocks/colorless"
     }
   },
   "pattern": [
-    "BCB",
-    "A A",
-    "A A"
+    "CAC",
+    "DBD",
+    "CAC"
   ],
   "result": {
     "count": 1,
-    "id": "copperoverthrow:copper_stepper_leggings"
+    "id": "copperoverthrow:copper_beeosphere"
   }
 }

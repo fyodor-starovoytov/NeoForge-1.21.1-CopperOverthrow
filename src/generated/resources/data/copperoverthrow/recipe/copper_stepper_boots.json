@@ -6,10 +6,10 @@
       "tag": "c:ingots/copper"
     },
     "B": {
-      "item": "minecraft:piston"
+      "item": "minecraft:sticky_piston"
     },
     "C": {
-      "tag": "c:slime_balls"
+      "tag": "c:dusts/redstone"
     }
   },
   "pattern": [

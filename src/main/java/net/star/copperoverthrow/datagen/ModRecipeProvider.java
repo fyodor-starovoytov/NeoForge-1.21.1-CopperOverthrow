@@ -81,6 +81,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', ItemTags.PLANKS)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_BEEOSPHERE.get(), 1)
+                .pattern("CAC")
+                .pattern("DBD")
+                .pattern("CAC")
+                .define('A', Items.COPPER_BLOCK)
+                .define('B', Items.BEEHIVE)
+                .define('C', Tags.Items.DUSTS_REDSTONE)
+                .define('D', Tags.Items.GLASS_BLOCKS_COLORLESS)
+                .unlockedBy("has_honeycomb", has(Items.HONEYCOMB)).save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_COOKIE.get(), 1)
                 .pattern("AAA")
                 .pattern("ABA")
@@ -94,8 +105,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("A A")
                 .pattern("BCB")
                 .define('A', Tags.Items.INGOTS_COPPER)
-                .define('B', Items.PISTON)
-                .define('C', Tags.Items.SLIME_BALLS)
+                .define('B', Items.STICKY_PISTON)
+                .define('C', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_STEPPER_LEGGINGS.get(), 1)
@@ -104,7 +115,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("A A")
                 .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', Items.PISTON)
-                .define('C', Items.NAUTILUS_SHELL)
+                .define('C', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HAMMER.get(), 1)
