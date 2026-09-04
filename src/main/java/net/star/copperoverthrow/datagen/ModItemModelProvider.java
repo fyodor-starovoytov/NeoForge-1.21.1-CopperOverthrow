@@ -44,9 +44,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         trimmedArmorItem(ModItems.COPPER_STEPPER_BOOTS);
         trimmedArmorItem(ModItems.COPPER_STEPPER_LEGGINGS);
         handheldItem(ModItems.COPPER_HAMMER.get());
+        handheldItem(ModItems.COPPER_TROWEL.get());
     }
 
-    // Shoutout to El_Redstoniano for making this and KaupenJoe for publishing
+    // Shoutout to El_Redstoniano for making this
     private void trimmedArmorItem(DeferredItem<ArmorItem> itemDeferredItem) {
         final String MOD_ID = CopperOverthrow.MOD_ID; // Change this to your mod id
 
