@@ -63,7 +63,6 @@ public class CopperChiselItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
 
         Level level = context.getLevel();
-
         Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
 
 

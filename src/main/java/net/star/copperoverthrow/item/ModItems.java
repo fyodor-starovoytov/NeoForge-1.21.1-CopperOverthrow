@@ -14,6 +14,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.custom.BeeCatcherItem;
 import net.star.copperoverthrow.item.custom.CopperChiselItem;
+import net.star.copperoverthrow.item.custom.CopperTrowelItem;
 import net.star.copperoverthrow.item.custom.HammerItem;
 import net.star.copperoverthrow.item.equipment.ModArmorMaterials;
 import net.star.copperoverthrow.item.equipment.StepperBootsArmorItem;
@@ -31,6 +32,9 @@ public class ModItems {
 
     public static final DeferredItem<Item> COPPER_CHISEL = ITEMS.register("copper_chisel",
             () -> new CopperChiselItem(new Properties().durability(256).stacksTo(1)));
+
+    public static final DeferredItem<Item> COPPER_TROWEL = ITEMS.register("copper_trowel",
+            () -> new CopperTrowelItem(new Properties().durability(256).stacksTo(1)));
 
     public static final DeferredItem<Item> COPPER_COOKIE = ITEMS.register("copper_cookie",
             () -> new Item(new Properties().food(new FoodProperties.Builder()
