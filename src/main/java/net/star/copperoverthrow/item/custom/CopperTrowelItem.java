@@ -16,6 +16,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -85,21 +86,23 @@ public class CopperTrowelItem extends Item {
                                  , context.getPlayer(),
                                  tool -> context.getPlayer().onEquippedItemBroken(tool, EquipmentSlot.MAINHAND));
 
-                         item.shrink(1);
+                         item.consume(1, player);
 
                          level.playSound(null, context.getClickedPos(), SoundEvents.COPPER_HIT, SoundSource.BLOCKS);
+
+                         return InteractionResult.SUCCESS;
                      }}
              }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     private static boolean anyHotbarBlocks(UseOnContext context){
         for (int i = 0; i < 9; i++) {
-           if (context.getPlayer().getSlot(i).get().getItem() instanceof BlockItem) {
-               return true;
-           }
+            if (context.getPlayer().getSlot(i).get().getItem() instanceof BlockItem) {
+                return true;
+            }
         }
-    return false;
+        return false;
     }
 
     private static ItemStack getRandomItem(UseOnContext context){
@@ -132,7 +135,10 @@ public class CopperTrowelItem extends Item {
 
     public static boolean isBlockEmpty(Level level, BlockPos pos){
         BlockState state = level.getBlockState(pos);
-        return state.getBlock() instanceof AirBlock || state.getBlock() instanceof TallGrassBlock  || state.getBlock() instanceof DoublePlantBlock;
+
+        boolean isReplaceable = state.canBeReplaced();
+
+        return isReplaceable;
     }
 
 }
