@@ -12,6 +12,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.custom.ConductBlock;
+import net.star.copperoverthrow.block.custom.CopperBeeosphereBlock;
 import net.star.copperoverthrow.block.custom.CopperScaffoldingBlock;
 import net.star.copperoverthrow.block.custom.LogStripperBlock;
 import net.star.copperoverthrow.item.ModItems;
@@ -31,9 +32,10 @@ public class ModBlocks {
                             .sound(SoundType.COPPER)));
 
     public static final DeferredBlock<Block> COPPER_BEEOSPHERE = registerBlock("copper_beeosphere",
-            () -> new Block(
+            () -> new CopperBeeosphereBlock(
                     BlockBehaviour.Properties.of()
                             .strength(2f)
+                            .noOcclusion()
                             .isValidSpawn(Blocks::never)
                             .mapColor(DyeColor.ORANGE)
                             .sound(SoundType.COPPER)));

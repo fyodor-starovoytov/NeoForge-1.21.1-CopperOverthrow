@@ -15,6 +15,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.star.copperoverthrow.block.custom.CopperBeeosphereBlock;
+import net.star.copperoverthrow.block.entity.custom.CopperBeeosphereBlockEntity;
 import net.star.copperoverthrow.component.ModDataComponents;
 
 import java.util.ArrayList;
@@ -66,6 +68,10 @@ public class BeeCatcherItem extends Item {
         List<CustomData> bees = getBees(stack);
         List<CustomData> remaining = new ArrayList<>(bees);
 
+        if (level.getBlockState(context.getClickedPos()).getBlock() instanceof CopperBeeosphereBlock){
+            return InteractionResult.SUCCESS;
+        }
+
         if (!(bees.isEmpty()) && !level.isClientSide) {
 
             while (!remaining.isEmpty()) {
@@ -79,7 +85,9 @@ public class BeeCatcherItem extends Item {
                     true,
                     false
             );
+
             if (bee != null) {
+
                 BlockPos spawnPos = context.getClickedPos().relative(context.getClickedFace());
                 bee.moveTo(
                         spawnPos.getX() + Math.random(),
@@ -114,12 +122,15 @@ public class BeeCatcherItem extends Item {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
-    private List<CustomData> getBees(ItemStack stack) {
+    public List<CustomData> getBees(ItemStack stack) {
         return stack.getOrDefault(ModDataComponents.CAUGHT_BEES, List.of());
     }
 
-    private boolean hasFreeSlot(ItemStack stack) {
+    public boolean hasFreeSlot(ItemStack stack) {
         return getBees(stack).size() < 3;
     }
 
+    public boolean hasNoBees(ItemStack stack) {
+        return getBees(stack).isEmpty();
+    }
 }
