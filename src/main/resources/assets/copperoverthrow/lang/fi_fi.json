@@ -1,0 +1,37 @@
+{
+  "creativetab.copperoverthrow.copperoverthrow_blocks": "Copper Overthrow -kuutiot",
+  "creativetab.copperoverthrow.copperoverthrow_items": "Copper Overthrow -esineet",
+
+  "item.copperoverthrow.copper_nugget": "Kuparihippu",
+  "item.copperoverthrow.copper_chisel": "Kuparitaltta",
+  "item.copperoverthrow.copper_trowel": "Kuparikauha",
+  "item.copperoverthrow.copper_cookie": "Kuparikeksi",
+  "item.copperoverthrow.bee_catcher": "Mehiläissieppari",
+  "item.copperoverthrow.copper_hammer": "Kuparivasara",
+  "item.copperoverthrow.copper_stepper_boots": "Askelmansaappaat",
+  "item.copperoverthrow.copper_stepper_leggings": "Askelmahousut",
+
+  "block.copperoverthrow.copper_scaffolding": "Kuparirakennusteline",
+  "block.copperoverthrow.exposed_copper_scaffolding": "Altistunut kuparirakennusteline",
+  "block.copperoverthrow.weathered_copper_scaffolding": "Kulunut kuparirakennusteline",
+  "block.copperoverthrow.oxidized_copper_scaffolding": "Hapettunut kuparirakennusteline",
+  "block.copperoverthrow.waxed_copper_scaffolding": "Vahattu kuparirakennusteline",
+  "block.copperoverthrow.waxed_exposed_copper_scaffolding": "Vahattu altistunut kuparirakennusteline",
+  "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Vahattu kulunut kuparirakennusteline",
+  "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Vahattu hapettunut kuparirakennusteline",
+  "block.copperoverthrow.log_stripper": "Tukkien kuorinta-asema",
+
+  "effect.copperoverthrow.conductivity": "Johtavuus",
+
+  "enchantment.copperoverthrow.areal": "Alueellinen",
+  "enchantment.copperoverthrow.tunneling": "Tunnelointi",
+
+  "tooltip.copperoverthrow.when_placed.tooltip": "§7Asetettaessa:§r",
+  "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7Käytettäessä kuutioon:§r",
+  "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7Käytettäessä mehiläiseen:§r",
+  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Kuorii päälle asetettuja tukkeja§r §6Kirveellä§r",
+  "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Käyttää satunnaista§r §6Kivenhakkaajan§r §ereseptiä valitulle kuutiolle§r",
+  "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Kaappaa§r §6Mehiläisen§r §esiepparin sisään§r",
+  "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Vapauttaa§r §ekaikki säilötyt mehiläiset§r",
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Pidä §eShift§r §7painettuna saadaksesi lisätietoja§r"
+}

@@ -1,0 +1,37 @@
+{
+  "creativetab.copperoverthrow.copperoverthrow_blocks": "Bloques de Copper Overthrow",
+  "creativetab.copperoverthrow.copperoverthrow_items": "Objetos de Copper Overthrow",
+
+  "item.copperoverthrow.copper_nugget": "Pepita de cobre",
+  "item.copperoverthrow.copper_chisel": "Cincel de cobre",
+  "item.copperoverthrow.copper_trowel": "Palustre de cobre",
+  "item.copperoverthrow.copper_cookie": "Galleta de cobre",
+  "item.copperoverthrow.bee_catcher": "Atrapabejas",
+  "item.copperoverthrow.copper_hammer": "Martillo de cobre",
+  "item.copperoverthrow.copper_stepper_boots": "Botas de escalón",
+  "item.copperoverthrow.copper_stepper_leggings": "Grebas de escalón",
+
+  "block.copperoverthrow.copper_scaffolding": "Andamio de cobre",
+  "block.copperoverthrow.exposed_copper_scaffolding": "Andamio de cobre expuesto",
+  "block.copperoverthrow.weathered_copper_scaffolding": "Andamio de cobre desgastado",
+  "block.copperoverthrow.oxidized_copper_scaffolding": "Andamio de cobre oxidado",
+  "block.copperoverthrow.waxed_copper_scaffolding": "Andamio de cobre encerado",
+  "block.copperoverthrow.waxed_exposed_copper_scaffolding": "Andamio de cobre expuesto encerado",
+  "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Andamio de cobre desgastado encerado",
+  "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Andamio de cobre oxidado encerado",
+  "block.copperoverthrow.log_stripper": "Estación de descortezado",
+
+  "effect.copperoverthrow.conductivity": "Conductividad",
+
+  "enchantment.copperoverthrow.areal": "Área",
+  "enchantment.copperoverthrow.tunneling": "Tunelización",
+
+  "tooltip.copperoverthrow.when_placed.tooltip": "§7Al colocar:§r",
+  "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7Al usar en un bloque:§r",
+  "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7Al usar en una abeja:§r",
+  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Descorteza los troncos colocados encima con un§r §6Hacha§r",
+  "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Aplica una receta aleatoria del§r §6Cortapiedras§r §eal bloque seleccionado§r",
+  "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Captura una§r §6Abeja§r §edentro del atrapador§r",
+  "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Libera§r §etodas las abejas atrapadas§r",
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Mantén §eShift§r §7para más información§r"
+}

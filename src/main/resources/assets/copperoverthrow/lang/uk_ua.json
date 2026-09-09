@@ -1,0 +1,37 @@
+{
+  "creativetab.copperoverthrow.copperoverthrow_blocks": "Блоки Copper Overthrow",
+  "creativetab.copperoverthrow.copperoverthrow_items": "Предмети Copper Overthrow",
+
+  "item.copperoverthrow.copper_nugget": "Мідний самородок",
+  "item.copperoverthrow.copper_chisel": "Мідне долото",
+  "item.copperoverthrow.copper_trowel": "Мідна кельма",
+  "item.copperoverthrow.copper_cookie": "Мідне печиво",
+  "item.copperoverthrow.bee_catcher": "Ловець бджіл",
+  "item.copperoverthrow.copper_hammer": "Мідний молот",
+  "item.copperoverthrow.copper_stepper_boots": "Чоботи кроку",
+  "item.copperoverthrow.copper_stepper_leggings": "Поноші кроку",
+
+  "block.copperoverthrow.copper_scaffolding": "Мідне риштовання",
+  "block.copperoverthrow.exposed_copper_scaffolding": "Пошкоджене мідне риштовання",
+  "block.copperoverthrow.weathered_copper_scaffolding": "Покрите патиною мідне риштовання",
+  "block.copperoverthrow.oxidized_copper_scaffolding": "Окиснене мідне риштовання",
+  "block.copperoverthrow.waxed_copper_scaffolding": "Вощене мідне риштовання",
+  "block.copperoverthrow.waxed_exposed_copper_scaffolding": "Вощене пошкоджене мідне риштовання",
+  "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Вощене покрите патиною мідне риштовання",
+  "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Вощене окиснене мідне риштовання",
+  "block.copperoverthrow.log_stripper": "Станція обтесування колод",
+
+  "effect.copperoverthrow.conductivity": "Провідність",
+
+  "enchantment.copperoverthrow.areal": "Площинність",
+  "enchantment.copperoverthrow.tunneling": "Тунелювання",
+
+  "tooltip.copperoverthrow.when_placed.tooltip": "§7При розміщенні:§r",
+  "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7При використанні на блоці:§r",
+  "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7При використанні на бджолі:§r",
+  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Знімає кору з колод зверху за допомогою§r §6Сокири§r",
+  "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Застосовує випадковий рецепт§r §6Каменяра§r §eдо обраного блоку§r",
+  "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Ловить§r §6Бджолу§r §eвсередину ловця§r",
+  "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Звільняє§r §eусіх збережених бджіл§r",
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Затисніть §eShift§r §7для детальнішої інформації§r"
+}
