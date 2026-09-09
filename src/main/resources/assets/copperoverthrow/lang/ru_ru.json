@@ -1,0 +1,38 @@
+{
+  "creativetab.copperoverthrow.copperoverthrow_blocks": "Copper Overthrow Блоки",
+  "creativetab.copperoverthrow.copperoverthrow_items": "Copper Overthrow Предметы",
+
+  "item.copperoverthrow.copper_nugget": "Кусочек меди",
+  "item.copperoverthrow.copper_chisel": "Медная стамеска",
+  "item.copperoverthrow.copper_cookie": "Медная печенька",
+  "item.copperoverthrow.bee_catcher": "Сачок для пчёл",
+  "item.copperoverthrow.copper_hammer": "Медный молот",
+  "item.copperoverthrow.copper_stepper_boots": "Шаговые сапоги",
+  "item.copperoverthrow.copper_stepper_leggings": "Шаговые поножи",
+
+
+  "block.copperoverthrow.copper_scaffolding": "Медные подмостки",
+  "block.copperoverthrow.exposed_copper_scaffolding": "Потемневшие медные подмостки",
+  "block.copperoverthrow.weathered_copper_scaffolding": "Состаренные медные подмостки",
+  "block.copperoverthrow.oxidized_copper_scaffolding": "Окисленные медные подмостки",
+  "block.copperoverthrow.waxed_copper_scaffolding": "Вощёные медный подмостки",
+  "block.copperoverthrow.waxed_exposed_copper_scaffolding": "Вощёные потемневшие медные подмостки",
+  "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Вощёные состаренные медные подмостки",
+  "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Вощёные окисленные медные подмостки",
+  "block.copperoverthrow.log_stripper": "Станция для работы по дереву",
+
+
+  "effect.copperoverthrow.conductivity": "Проводимость",
+
+  "enchantment.copperoverthrow.areal": "Областной",
+  "enchantment.copperoverthrow.tunneling": "Туннелирование",
+
+  "tooltip.copperoverthrow.when_placed.tooltip": "§7При размещении:§r",
+  "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7При использовании на блоке:§r",
+  "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7При использовании на пчеле:§r",
+  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Обтесай бревна, лежащие сверху, при помощью§r §6Топора§r",
+  "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Применяет случайный рецепт§r §6камнереза§r §eна выбранном блоке§r",
+  "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Захватывает a§r §6пчелу§r §eвнутрь сачка§r",
+  "tooltip.copperoverthrow.bee_catcher_free_item.tooltip" : "§6 Освобождает§r §eвсе захваченные пчёлы§r",
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Зажать §eShift§r §7для дополнительной информации§r"
+}
