@@ -27,6 +27,8 @@ public class ModTags {
         // public static final TagKey<Item> BEE_CATCHER_TOOL = createTag(CopperOverthrow.MOD_ID, "bee_catcher");
         public static final TagKey<Item> C_TOOLS_CATCHERS = createTag("c", "tools/catchers");
 
+        public static final TagKey<Item> C_TOOLS_BUILDERS = createTag("c", "tools/builders");
+
         public static final TagKey<Item> HAMMER_ENCHANTABLE = createTag("c", "hammer/enchantable");
 
 

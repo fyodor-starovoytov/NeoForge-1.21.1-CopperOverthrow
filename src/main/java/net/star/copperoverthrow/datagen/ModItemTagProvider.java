@@ -22,7 +22,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(ItemTags.DURABILITY_ENCHANTABLE)
-                .add(ModItems.COPPER_CHISEL.get())
+                .addTag(ModTags.Items.C_TOOLS_BUILDERS)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get())
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
@@ -52,7 +52,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(Tags.Items.TOOLS)
                 .addTag(ModTags.Items.C_TOOLS_CATCHERS)
-                .addTag(ModTags.Items.C_TOOLS_HAMMERS);
+                .addTag(ModTags.Items.C_TOOLS_HAMMERS)
+                .addTag(ModTags.Items.C_TOOLS_BUILDERS);
 
         tag(ItemTags.BREAKS_DECORATED_POTS)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS);
@@ -60,6 +61,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.COPPER_HAMMER.get());
         tag(ModTags.Items.C_TOOLS_CATCHERS)
                 .add(ModItems.BEE_CATCHER.get());
+        tag(ModTags.Items.C_TOOLS_BUILDERS)
+                .add(ModItems.COPPER_TROWEL.get())
+                .add(ModItems.COPPER_CHISEL.get());
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get())

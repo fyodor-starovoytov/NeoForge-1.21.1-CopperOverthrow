@@ -43,6 +43,22 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
                 .save(recipeOutput, "copperoverthrow:copper_chisel_alt");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TROWEL.get())
+                .pattern("AB ")
+                .pattern("AAB")
+                //EXTREMELY IMPORTANT TO HAVE '' NOT ""
+                .define('B', Items.STICK)
+                .define('A', Tags.Items.INGOTS_COPPER)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TROWEL.get())
+                .pattern(" BA")
+                .pattern("BAA")
+                .define('B', Items.STICK)
+                .define('A', Tags.Items.INGOTS_COPPER)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT))
+                .save(recipeOutput, "copperoverthrow:copper_trowel_alt");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BEE_CATCHER.get())
                 .pattern("  C")
                 .pattern(" BA")

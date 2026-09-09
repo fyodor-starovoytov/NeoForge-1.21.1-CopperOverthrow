@@ -1,6 +1,7 @@
 {
   "values": [
     "#c:tools/catchers",
-    "#c:tools/hammers"
+    "#c:tools/hammers",
+    "#c:tools/builders"
   ]
 }

@@ -27,6 +27,7 @@ public class ModCreativeModeTabs {
 
                         //output.accept(ModItems.COPPER_NUGGET);
                         output.accept(ModItems.COPPER_CHISEL);
+                        output.accept(ModItems.COPPER_TROWEL);
                         output.accept(ModItems.COPPER_HAMMER);
                         output.accept(ModItems.COPPER_STEPPER_LEGGINGS);
                         output.accept(ModItems.COPPER_STEPPER_BOOTS);
