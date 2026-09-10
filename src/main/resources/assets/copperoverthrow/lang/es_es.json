@@ -33,5 +33,6 @@
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Aplica una receta aleatoria del§r §6Cortapiedras§r §eal bloque seleccionado§r",
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Captura una§r §6Abeja§r §edentro del atrapador§r",
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Libera§r §etodas las abejas atrapadas§r",
-  "tooltip.copperoverthrow.press_shift.tooltip": "§7Mantén §eShift§r §7para más información§r"
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Mantén §eShift§r §7para más información§r",
+  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Coloca un bloque aleatorio de la§r §6barra rápida§r"
 }

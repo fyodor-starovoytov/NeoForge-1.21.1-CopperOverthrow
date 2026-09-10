@@ -33,5 +33,6 @@
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Käyttää satunnaista§r §6Kivenhakkaajan§r §ereseptiä valitulle kuutiolle§r",
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Kaappaa§r §6Mehiläisen§r §esiepparin sisään§r",
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Vapauttaa§r §ekaikki säilötyt mehiläiset§r",
-  "tooltip.copperoverthrow.press_shift.tooltip": "§7Pidä §eShift§r §7painettuna saadaksesi lisätietoja§r"
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Pidä §eShift§r §7painettuna saadaksesi lisätietoja§r",
+  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Asettaa satunnaisen kuution§r §6pikapalkista§r"
 }

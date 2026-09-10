@@ -11,10 +11,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
-import net.star.copperoverthrow.block.custom.ConductBlock;
-import net.star.copperoverthrow.block.custom.CopperBeeosphereBlock;
-import net.star.copperoverthrow.block.custom.CopperScaffoldingBlock;
-import net.star.copperoverthrow.block.custom.LogStripperBlock;
+import net.star.copperoverthrow.block.custom.*;
 import net.star.copperoverthrow.item.ModItems;
 
 import java.util.function.Supplier;
@@ -39,8 +36,6 @@ public class ModBlocks {
                             .isValidSpawn(Blocks::never)
                             .mapColor(DyeColor.ORANGE)
                             .sound(SoundType.COPPER)));
-
-
 
     public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
         () -> new CopperScaffoldingBlock(
@@ -170,6 +165,42 @@ public class ModBlocks {
                     .noLootTable()
                     .noTerrainParticles()
                     .air()));
+
+    public static final DeferredBlock<Block> RAIN_DRUM = registerBlock("medium_rain_drum",
+            () -> new RainDrumBlock(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER),
+                    3f, 1f
+            ));
+
+    public static final DeferredBlock<Block> LARGE_RAIN_DRUM = registerBlock("large_rain_drum",
+            () -> new RainDrumBlock(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER),
+                    1f, 1.8f
+            ));
+
+    public static final DeferredBlock<Block> TINY_RAIN_DRUM = registerBlock("tiny_rain_drum",
+            () -> new RainDrumBlock(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER),
+                    8f, 1f
+            ));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {

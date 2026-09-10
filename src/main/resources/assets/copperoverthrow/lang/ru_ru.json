@@ -35,5 +35,6 @@
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Применяет случайный рецепт§r §6камнереза§r §eна выбранном блоке§r",
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Захватывает a§r §6пчелу§r §eвнутрь сачка§r",
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip" : "§6 Освобождает§r §eвсе захваченные пчёлы§r",
-  "tooltip.copperoverthrow.press_shift.tooltip": "§7Зажать §eShift§r §7для дополнительной информации§r"
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Зажать §eShift§r §7для дополнительной информации§r",
+  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Размещает случайный блок из§r §6панели быстрого доступа§r"
 }

@@ -1,7 +1,9 @@
 package net.star.copperoverthrow.item.custom;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -21,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 
+import java.util.List;
 import java.util.Objects;
 
 public class CopperTrowelItem extends Item {
@@ -139,6 +142,20 @@ public class CopperTrowelItem extends Item {
         boolean isReplaceable = state.canBeReplaced();
 
         return isReplaceable;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        if (Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltipComponents.add(Component.empty());
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.trowel_item.tooltip"));
+        }
+        else {
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+        }
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
 }

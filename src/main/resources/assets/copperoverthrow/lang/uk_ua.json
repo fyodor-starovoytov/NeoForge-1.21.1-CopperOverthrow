@@ -33,5 +33,6 @@
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Застосовує випадковий рецепт§r §6Каменяра§r §eдо обраного блоку§r",
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Ловить§r §6Бджолу§r §eвсередину ловця§r",
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Звільняє§r §eусіх збережених бджіл§r",
-  "tooltip.copperoverthrow.press_shift.tooltip": "§7Затисніть §eShift§r §7для детальнішої інформації§r"
+  "tooltip.copperoverthrow.press_shift.tooltip": "§7Затисніть §eShift§r §7для детальнішої інформації§r",
+  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Розміщує випадковий блок із§r §6панелі швидкого доступу§r"
 }
