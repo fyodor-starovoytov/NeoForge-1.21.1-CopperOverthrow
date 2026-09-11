@@ -1,3 +1,20 @@
 {
-  "parent": "copperoverthrow:block/high_note_rain_drum_upper"
+  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+
+  "base": {
+    "parent": "copperoverthrow:item/high_note_rain_drum_3d"
+  },
+
+  "perspectives": {
+    "gui": {
+      "parent": "copperoverthrow:item/high_note_rain_drum_2d"
+    },
+    "ground": {
+      "parent": "copperoverthrow:item/high_note_rain_drum_2d"
+    },
+    "fixed": {
+      "parent": "copperoverthrow:item/high_note_rain_drum_2d"
+    }
+  }
 }

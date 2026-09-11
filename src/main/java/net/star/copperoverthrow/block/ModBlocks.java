@@ -175,10 +175,10 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
-                    2.35f, 1f, 4, 12
+                    2.35f, 1f, 5, 11
             ));
 
-    public static final DeferredBlock<Block> LARGE_RAIN_DRUM = registerBlock("large_rain_drum",
+    public static final DeferredBlock<Block> LARGE_RAIN_DRUM = registerBlock("low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
@@ -187,7 +187,7 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
-                    1f, 1.8f, 2, 14
+                    1f, 1.8f, 4, 12
             ));
 
     public static final DeferredBlock<Block> TINY_RAIN_DRUM = registerBlock("high_note_rain_drum",
