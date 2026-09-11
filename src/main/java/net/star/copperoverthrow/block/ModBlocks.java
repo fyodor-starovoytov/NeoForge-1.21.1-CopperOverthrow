@@ -166,8 +166,8 @@ public class ModBlocks {
                     .noTerrainParticles()
                     .air()));
 
-    public static final DeferredBlock<Block> RAIN_DRUM = registerBlock("medium_rain_drum",
-            () -> new RainDrumBlock(BlockBehaviour.Properties.of()
+    public static final DeferredBlock<Block> RAIN_DRUM = registerBlock("medium_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
@@ -175,11 +175,11 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
-                    3f, 1f
+                    2.35f, 1f, 4, 12
             ));
 
     public static final DeferredBlock<Block> LARGE_RAIN_DRUM = registerBlock("large_rain_drum",
-            () -> new RainDrumBlock(BlockBehaviour.Properties.of()
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
@@ -187,11 +187,11 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
-                    1f, 1.8f
+                    1f, 1.8f, 2, 14
             ));
 
-    public static final DeferredBlock<Block> TINY_RAIN_DRUM = registerBlock("tiny_rain_drum",
-            () -> new RainDrumBlock(BlockBehaviour.Properties.of()
+    public static final DeferredBlock<Block> TINY_RAIN_DRUM = registerBlock("high_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
@@ -199,7 +199,7 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
-                    8f, 1f
+                    8f, 1f, 6, 10
             ));
 
 

@@ -14,7 +14,8 @@ public class ModSounds {
         public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
                 DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, CopperOverthrow.MOD_ID);
 
-        public static final Supplier<SoundEvent> RAIN_DRUM_B1 = registerSoundEvent("raindrumb1");
+        public static final Supplier<SoundEvent> RAIN_DRUM_RAINING = registerSoundEvent("raindrumb1");
+        public static final Supplier<SoundEvent> RAIN_DRUM_PLAYING = registerSoundEvent("rain_drum_playing");
 
         private static Supplier<SoundEvent> registerSoundEvent(String name) {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, name);
@@ -24,4 +25,6 @@ public class ModSounds {
         public static void register(IEventBus eventBus) {
             SOUND_EVENTS.register(eventBus);
         }
+
+
 }

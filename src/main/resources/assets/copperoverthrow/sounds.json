@@ -3,8 +3,6 @@
     "subtitle": "sounds.copperoverthrow.raindrum_play",
     "sounds": [
       "copperoverthrow:raindrumb1",
-      "copperoverthrow:raindrumb1c3mono",
-      "copperoverthrow:raindrumb2mono",
       "copperoverthrow:raindrumc2a2",
       "copperoverthrow:raindrumc3",
       "copperoverthrow:raindrumc3g2b2",
@@ -15,6 +13,18 @@
       "copperoverthrow:raindrumg2f2",
       "copperoverthrow:raindrumttttuntt",
       "copperoverthrow:raindrumtuntuntuuunttun"
+    ]
+  },
+  "rain_drum_playing": {
+    "subtitle": "sounds.copperoverthrow.raindrum_play",
+    "sounds": [
+
+      "copperoverthrow:raindrumcc",
+      "copperoverthrow:raindrumf2",
+      "copperoverthrow:raindrumg2",
+      "copperoverthrow:raindrumb1",
+      "copperoverthrow:raindrumc3"
+
     ]
   }
 }

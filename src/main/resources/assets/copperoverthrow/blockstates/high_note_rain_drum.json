@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "part=bottom": {
+      "model": "copperoverthrow:block/high_note_rain_drum_bottom"
+    },
+    "part=middle": {
+      "model": "copperoverthrow:block/high_note_rain_drum"
+    },
+    "part=top": {
+      "model": "copperoverthrow:block/high_note_rain_drum_upper"
+    }
+  }
+}
