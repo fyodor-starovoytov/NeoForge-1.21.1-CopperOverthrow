@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,125 +24,77 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class CopperTrowelItem extends Item {
 
-    public CopperTrowelItem(Properties properties) {super(properties);
+    public CopperTrowelItem(Properties properties) {
+        super(properties);
     }
 
-     @Override
+    @Override
     public InteractionResult useOn(UseOnContext context) {
-
-
-
         Level level = context.getLevel();
         Player player = context.getPlayer();
-        BlockPos pos = context.getClickedPos();
 
-             if (!level.isClientSide && player != null){
-                 if (anyHotbarBlocks(context)) {
+        if (player == null) {
+            return InteractionResult.PASS;
+        }
 
-                     Direction direction = getBlockSide(player).getDirection();
+        List<ItemStack> validBlocks = getHotbarBlockItems(player);
+        if (validBlocks.isEmpty()) {
+            return InteractionResult.PASS;
+        }
 
-                     if (!(level.getBlockState(pos).getBlock() instanceof TallGrassBlock)) {
+        ItemStack placableStack = validBlocks.get(level.random.nextInt(validBlocks.size()));
+        BlockItem blockItem = (BlockItem) placableStack.getItem();
 
-                         if (direction.equals(Direction.DOWN)) {
-                             pos = pos.below();
-                         }
+        BlockHitResult hitResult = new BlockHitResult(
+                context.getClickLocation(),
+                context.getClickedFace(),
+                context.getClickedPos(),
+                context.isInside()
+        );
 
-                         if (direction.equals(Direction.UP)) {
-                             pos = pos.above();
-                         }
+        BlockPlaceContext placeContext = new BlockPlaceContext(
+                level,
+                player,
+                context.getHand(),
+                placableStack,
+                hitResult
+        );
 
-                         if (direction.equals(Direction.NORTH)) {
-                             pos = pos.north();
-                         }
+        if (!placeContext.canPlace()) {
+            return InteractionResult.FAIL;}
 
-                         if (direction.equals(Direction.SOUTH)) {
-                             pos = pos.south();
-                         }
+        if (!level.isClientSide) {
+            InteractionResult result = blockItem.place(placeContext);
 
-                         if (direction.equals(Direction.EAST)) {
-                             pos = pos.east();
-                         }
+            if (result.consumesAction()) {
+                if (level instanceof ServerLevel serverLevel) {
+                    EquipmentSlot slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+                    context.getItemInHand().hurtAndBreak(1, serverLevel, player, tool -> player.onEquippedItemBroken(tool, slot));
+                }
+                return InteractionResult.SUCCESS;
+            }
+        } else {
+            return InteractionResult.SUCCESS;
+        }
 
-                         if (direction.equals(Direction.WEST)) {
-                             pos = pos.west();
-                         }
-                     }
-
-                     boolean hasLivingEntity = !level.getEntitiesOfClass(
-                             LivingEntity.class,
-                             new AABB(pos)).isEmpty();
-
-                     ItemStack item = getRandomItem(context);
-
-                     if (isBlockEmpty(level, pos) && !hasLivingEntity){
-
-                         Block block = ((BlockItem) item.getItem()).getBlock();
-                         BlockState stateForPlacement = block.getStateForPlacement(new BlockPlaceContext(level, player, player.getUsedItemHand(), item, getBlockSide(player)));
-
-                         level.setBlockAndUpdate(pos, Objects.requireNonNullElseGet(stateForPlacement, block::defaultBlockState));
-
-                         context.getItemInHand().hurtAndBreak(1, ((ServerLevel) level)
-                                 , context.getPlayer(),
-                                 tool -> context.getPlayer().onEquippedItemBroken(tool, EquipmentSlot.MAINHAND));
-
-                         item.consume(1, player);
-
-                         level.playSound(null, context.getClickedPos(), SoundEvents.COPPER_HIT, SoundSource.BLOCKS);
-
-                         return InteractionResult.SUCCESS;
-                     }}
-             }
         return InteractionResult.PASS;
     }
 
-    private static boolean anyHotbarBlocks(UseOnContext context){
+    private static List<ItemStack> getHotbarBlockItems(Player player) {
+        List<ItemStack> list = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
-            if (context.getPlayer().getSlot(i).get().getItem() instanceof BlockItem) {
-                return true;
+            ItemStack stack = player.getInventory().getItem(i);
+            if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
+                list.add(stack);
             }
         }
-        return false;
-    }
-
-    private static ItemStack getRandomItem(UseOnContext context){
-        while (true) {
-            ItemStack item = context.getPlayer().getSlot(randomIntGenerator(0, 8)).get();
-
-            if (isItemBlockItem(item.getItem())) {
-                return item;
-            }
-        }
-    }
-
-    private static boolean isItemBlockItem(Item item){
-
-        return item instanceof BlockItem;
-
-    }
-
-    private static BlockHitResult getBlockSide(Player player) {
-        BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
-                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(6f))),
-                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-
-        return traceResult;
-    }
-
-    public static int randomIntGenerator(int MIN, int MAX) {
-        return (int) (Math.random() * (MAX - MIN + 1)) + MIN;
-    }
-
-    public static boolean isBlockEmpty(Level level, BlockPos pos){
-        BlockState state = level.getBlockState(pos);
-
-        boolean isReplaceable = state.canBeReplaced();
-
-        return isReplaceable;
+        return list;
     }
 
     @Override
@@ -151,11 +104,9 @@ public class CopperTrowelItem extends Item {
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.trowel_item.tooltip"));
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
-
 }
