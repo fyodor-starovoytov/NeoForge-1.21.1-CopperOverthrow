@@ -2,14 +2,17 @@ package net.star.copperoverthrow.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
@@ -22,28 +25,31 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.sound.ModSounds;
 
-public class RainDrumBlockTall extends ThreeBlockTallDecoration {
+public class RainDrumBlockTall extends MultiBlockTallDecoration {
     private final float PITCH;
     private final float VOLUME;
     private final double X1_Z1;
     private final double X2_Z2;
+    private final int BLOCK_HEIGHT;
     private final VoxelShape SHAPE;
+    private final boolean SPAWN_PARTICLES_AT_FULLMOON = true;
+    private final boolean SPAWN_NOTE_PARTICLES_WHEN_PLAYING = true;
     private final float SOUND_PROBABILITY = 0.1f;
+    private final float PARTICLE_PROBABILITY = 0.6f;
     private final float THUNDER_SOUND_PROBABILITY_ADDITION = 0.05f;
     private final float THUNDER_VOLUME_ADDITION = 0.5f;
     private final int MAX_DRIPSTONE_HEIGHT_CHECK = 11;
 
 
-    public RainDrumBlockTall(Properties properties, float pitch, float volume, double x1_z1, double x2_z2) {
-        super(properties);
+    public RainDrumBlockTall(Properties properties, float pitch, float volume, double x1_z1, double x2_z2, int blockHeight) {
+        super(properties, blockHeight);
         this.PITCH = pitch;
         this.VOLUME = volume;
+        this.BLOCK_HEIGHT = blockHeight;
         this.X1_Z1 = x1_z1;
         this.X2_Z2 = x2_z2;
         this.SHAPE = Block.box(X1_Z1, 0, X1_Z1, X2_Z2, 16, X2_Z2);
     }
-
-
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -70,6 +76,24 @@ public class RainDrumBlockTall extends ThreeBlockTallDecoration {
                                 finalPitch,
                                 false
                         );
+                if (random.nextFloat() < PARTICLE_PROBABILITY) {
+                    ParticleUtils.spawnParticleInBlock(
+                            level, pos.above(), 1, ParticleTypes.NOTE
+                    );
+                }
+            }
+        }
+
+        long dayTime = level.getDayTime() % 24000L;
+        boolean isNightTime = dayTime >= 13000L && dayTime <= 23000L;
+
+        boolean isFullMoon = level.getMoonPhase() == 0;
+        boolean isClearSky = !level.isRaining() && level.canSeeSky(pos.above());
+
+        if (SPAWN_PARTICLES_AT_FULLMOON && isFullMoon && isNightTime && isClearSky) {
+            if (random.nextFloat() < PARTICLE_PROBABILITY) {
+                int particleCount = random.nextInt(3) + 1;
+                ParticleUtils.spawnParticleInBlock(level, pos.above(), particleCount, ParticleTypes.ELECTRIC_SPARK);
             }
         }
 
@@ -149,6 +173,31 @@ public class RainDrumBlockTall extends ThreeBlockTallDecoration {
     }
 
     @Override
+    protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+        if (!level.isClientSide) {
+            BlockPos pos = hit.getBlockPos();
+            if (projectile.mayInteract(level, pos)
+                    && projectile.mayBreak(level)
+                    && projectile.getDeltaMovement().length() > 0.6) {
+
+                float finalVolume = 0.5f * (float) projectile.getDeltaMovement().length();
+                level.playSound(null,
+                        pos,
+                        ModSounds.RAIN_DRUM_PLAYING.get(),
+                        SoundSource.RECORDS,
+                        finalVolume,
+                        PITCH
+                );
+            }
+        }
+        if (level.isClientSide) {
+            ParticleUtils.spawnParticleInBlock(
+                    level, hit.getBlockPos().above(), 1, ParticleTypes.NOTE
+            );
+        }
+    }
+
+    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 
         if (!level.isClientSide){
@@ -159,6 +208,11 @@ public class RainDrumBlockTall extends ThreeBlockTallDecoration {
                     VOLUME,
                     PITCH
             );
+        }
+        if (level.isClientSide){
+        ParticleUtils.spawnParticleInBlock(
+                level, pos.above(), 1, ParticleTypes.NOTE
+        );
         }
         return InteractionResult.SUCCESS;
     }
