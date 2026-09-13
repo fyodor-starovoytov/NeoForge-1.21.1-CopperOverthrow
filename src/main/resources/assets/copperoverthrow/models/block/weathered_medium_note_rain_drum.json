@@ -4,7 +4,7 @@
     "render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "copperoverthrow:block/drum_disc",
+		"0": "copperoverthrow:block/weathered_drum_disc",
 		"1": "copperoverthrow:block/weathered_medium_note_rain_drum_base",
 		"particle": "copperoverthrow:block/logstripperbase2"
 	},

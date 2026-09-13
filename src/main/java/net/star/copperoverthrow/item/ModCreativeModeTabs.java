@@ -54,6 +54,9 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WEATHERED_RAIN_DRUM);
                         output.accept(ModBlocks.OXIDIZED_RAIN_DRUM);
                         output.accept(ModBlocks.LARGE_RAIN_DRUM);
+                        output.accept(ModBlocks.EXPOSED_LARGE_RAIN_DRUM);
+                        output.accept(ModBlocks.WEATHERED_LARGE_RAIN_DRUM);
+                        output.accept(ModBlocks.OXIDIZED_LARGE_RAIN_DRUM);
                         output.accept(ModBlocks.TINY_RAIN_DRUM);
                         output.accept(ModBlocks.COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.EXPOSED_COPPER_SCAFFOLDING);

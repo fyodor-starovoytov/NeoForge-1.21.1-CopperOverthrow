@@ -225,6 +225,42 @@ public class ModBlocks {
                     1f, 1.8f, 3, 13, 2
             ));
 
+    public static final DeferredBlock<Block> EXPOSED_LARGE_RAIN_DRUM = registerBlock("exposed_low_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE       )
+                    .sound(SoundType.COPPER),
+                    1f, 1.8f, 3, 13, 2
+            ));
+
+    public static final DeferredBlock<Block> WEATHERED_LARGE_RAIN_DRUM = registerBlock("weathered_low_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE       )
+                    .sound(SoundType.COPPER),
+                    1f, 1.8f, 3, 13, 2
+            ));
+
+    public static final DeferredBlock<Block> OXIDIZED_LARGE_RAIN_DRUM = registerBlock("oxidized_low_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE       )
+                    .sound(SoundType.COPPER),
+                    1f, 1.8f, 3, 13, 2
+            ));
+
     public static final DeferredBlock<Block> TINY_RAIN_DRUM = registerBlock("high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
