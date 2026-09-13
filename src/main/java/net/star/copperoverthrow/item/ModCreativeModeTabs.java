@@ -49,6 +49,12 @@ public class ModCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
 
                         output.accept(ModBlocks.LOG_STRIPPER);
+                        output.accept(ModBlocks.RAIN_DRUM);
+                        output.accept(ModBlocks.EXPOSED_RAIN_DRUM);
+                        output.accept(ModBlocks.WEATHERED_RAIN_DRUM);
+                        output.accept(ModBlocks.OXIDIZED_RAIN_DRUM);
+                        output.accept(ModBlocks.LARGE_RAIN_DRUM);
+                        output.accept(ModBlocks.TINY_RAIN_DRUM);
                         output.accept(ModBlocks.COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.EXPOSED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.WEATHERED_COPPER_SCAFFOLDING);

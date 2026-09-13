@@ -173,6 +173,41 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE       )
+                    .sound(SoundType.COPPER),
+                    1.6f, 1f, 5, 11,3
+            ));
+    public static final DeferredBlock<Block> EXPOSED_RAIN_DRUM = registerBlock("exposed_medium_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    1.6f, 1f, 5, 11,3
+            ));
+
+    public static final DeferredBlock<Block> WEATHERED_RAIN_DRUM = registerBlock("weathered_medium_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.GREEN)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    1.6f, 1f, 5, 11,3
+            ));
+
+    public static final DeferredBlock<Block> OXIDIZED_RAIN_DRUM = registerBlock("oxidized_medium_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     1.6f, 1f, 5, 11,3
@@ -185,7 +220,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
                     1f, 1.8f, 3, 13, 2
             ));
@@ -197,7 +232,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
                     9f, 1.2f, 6, 10, 3
             ));

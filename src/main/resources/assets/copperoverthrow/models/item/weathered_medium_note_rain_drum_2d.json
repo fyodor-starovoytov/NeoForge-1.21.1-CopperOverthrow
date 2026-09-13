@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "copperoverthrow:item/weathered_medium_note_rain_drum_item"
+  }
+}

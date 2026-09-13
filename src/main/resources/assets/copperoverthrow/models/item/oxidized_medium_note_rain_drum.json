@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+
+  "base": {
+    "parent": "copperoverthrow:item/oxidized_medium_note_rain_drum_3d"
+  },
+
+  "perspectives": {
+    "gui": {
+      "parent": "copperoverthrow:item/oxidized_medium_note_rain_drum_2d"
+    },
+    "ground": {
+      "parent": "copperoverthrow:item/oxidized_medium_note_rain_drum_2d"
+    },
+    "fixed": {
+      "parent": "copperoverthrow:item/oxidized_medium_note_rain_drum_2d"
+    }
+  }
+}
