@@ -273,6 +273,42 @@ public class ModBlocks {
                     9f, 1.2f, 6, 10, 3
             ));
 
+    public static final DeferredBlock<Block> EXPOSED_TINY_RAIN_DRUM = registerBlock("exposed_high_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE       )
+                    .sound(SoundType.COPPER),
+                    9f, 1.2f, 6, 10, 3
+            ));
+
+    public static final DeferredBlock<Block> WEATHERED_TINY_RAIN_DRUM = registerBlock("weathered_high_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE       )
+                    .sound(SoundType.COPPER),
+                    9f, 1.2f, 6, 10, 3
+            ));
+
+    public static final DeferredBlock<Block> OXIDIZED_TINY_RAIN_DRUM = registerBlock("oxidized_high_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE       )
+                    .sound(SoundType.COPPER),
+                    9f, 1.2f, 6, 10, 3
+            ));
+
 
     private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
