@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:note_block"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    }
+  },
+  "pattern": [
+    "CBC",
+    "AAA"
+  ],
+  "result": {
+    "count": 2,
+    "id": "copperoverthrow:low_note_rain_drum"
+  }
+}

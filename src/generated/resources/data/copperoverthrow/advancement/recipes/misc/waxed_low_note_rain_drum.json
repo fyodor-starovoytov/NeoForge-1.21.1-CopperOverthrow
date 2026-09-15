@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_large_rain_drum": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:low_note_rain_drum"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "copperoverthrow:waxed_low_note_rain_drum"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_large_rain_drum"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "copperoverthrow:waxed_low_note_rain_drum"
+    ]
+  }
+}
