@@ -121,6 +121,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.COPPER_TRAPDOOR)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_CHAIN.get(), 6)
+                .pattern("ABA")
+                .pattern("A A")
+                .pattern("A A")
+                .define('A', Tags.Items.INGOTS_COPPER)
+                .define('B', Items.COPPER_TRAPDOOR)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)
                 .pattern("BCB")
                 .pattern("AAA")
@@ -185,6 +193,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_EXPOSED_LARGE_RAIN_DRUM.get(), "exposed_large_rain_drum");
         addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM.get(), "weathered_large_rain_drum");
         addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get(), "oxidized_large_rain_drum");
+
+        addWaxingRecipe(recipeOutput, ModBlocks.COPPER_CHAIN.get(), ModBlocks.WAXED_COPPER_CHAIN.get(), "copper_chain");
+        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_COPPER_CHAIN.get(), ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get(), "exposed_copper_chain");
+        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_COPPER_CHAIN.get(), ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get(), "weathered_copper_chain");
+        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_COPPER_CHAIN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get(), "oxidized_copper_chain");
     }
 
     protected void addWaxingRecipe(RecipeOutput recipeOutput, ItemLike unwaxed, ItemLike waxed, String unwaxedName) {

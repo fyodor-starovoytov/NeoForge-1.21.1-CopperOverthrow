@@ -1,7 +1,13 @@
 {
   "values": {
+    "copperoverthrow:copper_chain": {
+      "waxed": "copperoverthrow:waxed_copper_chain"
+    },
     "copperoverthrow:copper_scaffolding": {
       "waxed": "copperoverthrow:waxed_copper_scaffolding"
+    },
+    "copperoverthrow:exposed_copper_chain": {
+      "waxed": "copperoverthrow:waxed_exposed_copper_chain"
     },
     "copperoverthrow:exposed_copper_scaffolding": {
       "waxed": "copperoverthrow:waxed_exposed_copper_scaffolding"
@@ -24,6 +30,9 @@
     "copperoverthrow:medium_note_rain_drum": {
       "waxed": "copperoverthrow:waxed_medium_note_rain_drum"
     },
+    "copperoverthrow:oxidized_copper_chain": {
+      "waxed": "copperoverthrow:waxed_oxidized_copper_chain"
+    },
     "copperoverthrow:oxidized_copper_scaffolding": {
       "waxed": "copperoverthrow:waxed_oxidized_copper_scaffolding"
     },
@@ -35,6 +44,9 @@
     },
     "copperoverthrow:oxidized_medium_note_rain_drum": {
       "waxed": "copperoverthrow:waxed_oxidized_medium_note_rain_drum"
+    },
+    "copperoverthrow:weathered_copper_chain": {
+      "waxed": "copperoverthrow:waxed_weathered_copper_chain"
     },
     "copperoverthrow:weathered_copper_scaffolding": {
       "waxed": "copperoverthrow:waxed_weathered_copper_scaffolding"

@@ -36,6 +36,15 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get())
 
+                .add(ModBlocks.COPPER_CHAIN.get())
+                .add(ModBlocks.WEATHERED_COPPER_CHAIN.get())
+                .add(ModBlocks.EXPOSED_COPPER_CHAIN.get())
+                .add(ModBlocks.OXIDIZED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get())
+
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .add(ModBlocks.LOG_STRIPPER.get());
 
@@ -48,6 +57,15 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get())
+
+                .add(ModBlocks.COPPER_CHAIN.get())
+                .add(ModBlocks.WEATHERED_COPPER_CHAIN.get())
+                .add(ModBlocks.EXPOSED_COPPER_CHAIN.get())
+                .add(ModBlocks.OXIDIZED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get())
 
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .add(ModBlocks.LOG_STRIPPER.get());
@@ -118,5 +136,16 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_EXPOSED_LARGE_RAIN_DRUM.get())
                 .add(ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM.get())
                 .add(ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get());
+
+        tag(Tags.Blocks.CHAINS)
+                .add(ModBlocks.COPPER_CHAIN.get())
+                .add(ModBlocks.WEATHERED_COPPER_CHAIN.get())
+                .add(ModBlocks.EXPOSED_COPPER_CHAIN.get())
+                .add(ModBlocks.OXIDIZED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get());
     }
+
 }

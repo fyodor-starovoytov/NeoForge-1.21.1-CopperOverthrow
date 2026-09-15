@@ -38,69 +38,77 @@ public class ModBlocks {
                             .sound(SoundType.COPPER)));
 
     public static final DeferredBlock<Block> COPPER_CHAIN = registerBlock("copper_chain",
-            () -> new ChainBlock(
+            () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
                             .isValidSpawn(Blocks::never)
-                            .sound(SoundType.CHAIN)));
+                            .sound(SoundType.CHAIN),
+                    WeatheringCopper.WeatherState.UNAFFECTED));
     public static final DeferredBlock<Block> EXPOSED_COPPER_CHAIN = registerBlock("exposed_copper_chain",
-            () -> new ChainBlock(
+            () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
                             .isValidSpawn(Blocks::never)
-                            .sound(SoundType.CHAIN)));
+                            .sound(SoundType.CHAIN),
+                    WeatheringCopper.WeatherState.EXPOSED));
     public static final DeferredBlock<Block> WEATHERED_COPPER_CHAIN = registerBlock("weathered_copper_chain",
-            () -> new ChainBlock(
+            () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
                             .isValidSpawn(Blocks::never)
-                            .sound(SoundType.CHAIN)));
+                            .sound(SoundType.CHAIN),
+                    WeatheringCopper.WeatherState.WEATHERED));
     public static final DeferredBlock<Block> OXIDIZED_COPPER_CHAIN = registerBlock("oxidized_copper_chain",
-            () -> new ChainBlock(
+            () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
                             .isValidSpawn(Blocks::never)
-                            .sound(SoundType.CHAIN)));
+                            .sound(SoundType.CHAIN),
+                    WeatheringCopper.WeatherState.OXIDIZED));
     public static final DeferredBlock<Block> WAXED_COPPER_CHAIN = registerBlock("waxed_copper_chain",
-            () -> new ChainBlock(
+            () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
                             .isValidSpawn(Blocks::never)
-                            .sound(SoundType.CHAIN)));
+                            .sound(SoundType.CHAIN),
+                    WeatheringCopper.WeatherState.UNAFFECTED));
     public static final DeferredBlock<Block> WAXED_EXPOSED_COPPER_CHAIN = registerBlock("waxed_exposed_copper_chain",
-            () -> new ChainBlock(
+            () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
                             .isValidSpawn(Blocks::never)
-                            .sound(SoundType.CHAIN)));
+                            .sound(SoundType.CHAIN),
+                    WeatheringCopper.WeatherState.EXPOSED));
     public static final DeferredBlock<Block> WAXED_WEATHERED_COPPER_CHAIN = registerBlock("waxed_weathered_copper_chain",
-            () -> new ChainBlock(
+            () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
                             .isValidSpawn(Blocks::never)
-                            .sound(SoundType.CHAIN)));
+                            .sound(SoundType.CHAIN),
+                    WeatheringCopper.WeatherState.WEATHERED));
     public static final DeferredBlock<Block> WAXED_OXIDIZED_COPPER_CHAIN = registerBlock("waxed_oxidized_copper_chain",
-            () -> new ChainBlock(
+            () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
                             .isValidSpawn(Blocks::never)
-                            .sound(SoundType.CHAIN)));
+                            .sound(SoundType.CHAIN),
+                    WeatheringCopper.WeatherState.OXIDIZED));
 
     public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
         () -> new CopperScaffoldingBlock(

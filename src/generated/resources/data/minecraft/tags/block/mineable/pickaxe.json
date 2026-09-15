@@ -8,6 +8,14 @@
     "copperoverthrow:waxed_exposed_copper_scaffolding",
     "copperoverthrow:waxed_weathered_copper_scaffolding",
     "copperoverthrow:waxed_oxidized_copper_scaffolding",
+    "copperoverthrow:copper_chain",
+    "copperoverthrow:weathered_copper_chain",
+    "copperoverthrow:exposed_copper_chain",
+    "copperoverthrow:oxidized_copper_chain",
+    "copperoverthrow:waxed_copper_chain",
+    "copperoverthrow:waxed_weathered_copper_chain",
+    "copperoverthrow:waxed_exposed_copper_chain",
+    "copperoverthrow:waxed_oxidized_copper_chain",
     "#c:musical_blocks/rain_drums",
     "copperoverthrow:log_stripper"
   ]

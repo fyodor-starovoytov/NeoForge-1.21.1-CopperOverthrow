@@ -79,10 +79,10 @@
   "tooltip.copperoverthrow.medium_pitch.tooltip": "§7Pitch:§r §aMedium§r",
   "tooltip.copperoverthrow.low_pitch.tooltip": "§7Pitch:§r §6Low§r",
 
-  "tooltip.copperoverthrow.clean_sounding.tooltip": "§eClean resonant chiming§r",
-  "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§eShort resonant chiming§r",
-  "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§eShort resonant tap§r",
-  "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§eDull tap§r",
+  "tooltip.copperoverthrow.clean_sounding.tooltip": "§e Clean resonant chiming§r",
+  "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Short resonant chiming§r",
+  "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Short resonant tap§r",
+  "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Dull tap§r",
 
 
 
