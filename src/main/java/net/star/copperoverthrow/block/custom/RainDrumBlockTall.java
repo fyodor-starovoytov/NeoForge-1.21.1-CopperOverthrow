@@ -1,8 +1,11 @@
 package net.star.copperoverthrow.block.custom;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ParticleUtils;
@@ -11,11 +14,15 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -25,7 +32,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.sound.ModSounds;
 
-public class RainDrumBlockTall extends MultiBlockTallDecoration {
+import java.util.List;
+
+public class RainDrumBlockTall extends MultiBlockTallDecoration implements WeatheringCopper {
     private final float PITCH;
     private final float VOLUME;
     private final double X1_Z1;
@@ -39,16 +48,22 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration {
     private final float THUNDER_SOUND_PROBABILITY_ADDITION = 0.05f;
     private final float THUNDER_VOLUME_ADDITION = 0.5f;
     private final int MAX_DRIPSTONE_HEIGHT_CHECK = 11;
+    private final WeatheringCopper.WeatherState weatherState;
+    private final String TOOLTIP;
+    private final String TOOLTIP_SOUNDING;
 
 
-    public RainDrumBlockTall(Properties properties, float pitch, float volume, double x1_z1, double x2_z2, int blockHeight) {
+    public RainDrumBlockTall(Properties properties,  WeatherState weatherState, float pitch, float volume, double x1_z1, double x2_z2, int blockHeight, String tooltip_pitch, String tooltip_sounding) {
         super(properties, blockHeight);
+        this.weatherState = weatherState;
         this.PITCH = pitch;
         this.VOLUME = volume;
         this.BLOCK_HEIGHT = blockHeight;
         this.X1_Z1 = x1_z1;
         this.X2_Z2 = x2_z2;
         this.SHAPE = Block.box(X1_Z1, 0, X1_Z1, X2_Z2, 16, X2_Z2);
+        this.TOOLTIP = tooltip_pitch;
+        this.TOOLTIP_SOUNDING = tooltip_sounding;
     }
 
     @Override
@@ -248,5 +263,31 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration {
                     PITCH
             );
         }
+    }
+
+    @Override
+    public WeatheringCopper.WeatherState getAge() {
+        return this.weatherState;
+    }
+
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        this.changeOverTime(state, level, pos, random);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        if (Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable(TOOLTIP));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltipComponents.add(Component.empty());
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
+            tooltipComponents.add(Component.translatable(TOOLTIP_SOUNDING));
+        }
+        else {
+            tooltipComponents.add(Component.translatable(TOOLTIP));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+        }
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

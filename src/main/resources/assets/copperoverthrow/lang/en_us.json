@@ -22,11 +22,47 @@
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Waxed Oxidized Copper Scaffolding",
   "block.copperoverthrow.log_stripper": "Log Stripping Station",
 
+  "block.copperoverthrow.medium_note_rain_drum": "Copper Rain Drum",
+  "block.copperoverthrow.exposed_medium_note_rain_drum": "Exposed Copper Rain Drum",
+  "block.copperoverthrow.weathered_medium_note_rain_drum": "Weathered Copper Rain Drum",
+  "block.copperoverthrow.oxidized_medium_note_rain_drum": "Oxidized Copper Rain Drum",
+
+  "block.copperoverthrow.waxed_medium_note_rain_drum": "Waxed Copper Rain Drum",
+  "block.copperoverthrow.waxed_exposed_medium_note_rain_drum": "Waxed Exposed Copper Rain Drum",
+  "block.copperoverthrow.waxed_weathered_medium_note_rain_drum": "Waxed Weathered Copper Rain Drum",
+  "block.copperoverthrow.waxed_oxidized_medium_note_rain_drum": "Waxed Oxidized Copper Rain Drum",
+
+  "block.copperoverthrow.low_note_rain_drum": "Copper Rain Drum",
+  "block.copperoverthrow.exposed_low_note_rain_drum": "Exposed Copper Rain Drum",
+  "block.copperoverthrow.weathered_low_note_rain_drum": "Weathered Copper Rain Drum",
+  "block.copperoverthrow.oxidized_low_note_rain_drum": "Oxidized Copper Rain Drum",
+
+  "block.copperoverthrow.waxed_low_note_rain_drum": "Waxed Copper Rain Drum",
+  "block.copperoverthrow.waxed_exposed_low_note_rain_drum": "Waxed Exposed Copper Rain Drum",
+  "block.copperoverthrow.waxed_weathered_low_note_rain_drum": "Waxed Weathered Copper Rain Drum",
+  "block.copperoverthrow.waxed_oxidized_low_note_rain_drum": "Waxed Oxidized Copper Rain Drum",
+
+  "block.copperoverthrow.high_note_rain_drum": "Copper Rain Drum",
+  "block.copperoverthrow.exposed_high_note_rain_drum": "Exposed Copper Rain Drum",
+  "block.copperoverthrow.weathered_high_note_rain_drum": "Weathered Copper Rain Drum",
+  "block.copperoverthrow.oxidized_high_note_rain_drum": "Oxidized Copper Rain Drum",
+
+  "block.copperoverthrow.waxed_high_note_rain_drum": "Waxed Copper Rain Drum",
+  "block.copperoverthrow.waxed_exposed_high_note_rain_drum": "Waxed Exposed Copper Rain Drum",
+  "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Waxed Weathered Copper Rain Drum",
+  "block.copperoverthrow.waxed_oxidized_high_note_rain_drum": "Waxed Oxidized Copper Rain Drum",
+
+
+
 
   "effect.copperoverthrow.conductivity": "Conductivity",
 
+
+
   "enchantment.copperoverthrow.areal": "Areal",
   "enchantment.copperoverthrow.tunneling": "Tunneling",
+
+
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7When placed:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7When used on a Block:§r",
@@ -37,6 +73,18 @@
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip" : "§6 Frees§r §eall stored bees§r",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Hold §eShift§r §7for more information§r",
   "tooltip.copperoverthrow.trowel_item.tooltip": "§e Places random block from the§r §6Hotbar§r",
+
+  "tooltip.copperoverthrow.sounding.tooltip": "§7Sounding:§r",
+  "tooltip.copperoverthrow.high_pitch.tooltip": "§7Pitch:§r §bHigh§r",
+  "tooltip.copperoverthrow.medium_pitch.tooltip": "§7Pitch:§r §aMedium§r",
+  "tooltip.copperoverthrow.low_pitch.tooltip": "§7Pitch:§r §6Low§r",
+
+  "tooltip.copperoverthrow.clean_sounding.tooltip": "§eClean resonant chiming§r",
+  "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§eShort resonant chiming§r",
+  "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§eShort resonant tap§r",
+  "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§eDull tap§r",
+
+
 
   "sounds.copperoverthrow.raindrum_play": "Rain Drum Plays"
 }

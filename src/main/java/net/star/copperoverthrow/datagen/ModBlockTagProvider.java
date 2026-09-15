@@ -5,6 +5,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -33,9 +34,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
-                .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get())
 
-        tag(BlockTags.MINEABLE_WITH_AXE)
+                .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .add(ModBlocks.LOG_STRIPPER.get());
 
         tag(BlockTags.NEEDS_STONE_TOOL)
@@ -46,7 +47,10 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
-                .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get())
+
+                .addTag(ModTags.Blocks.RAIN_DRUMS)
+                .add(ModBlocks.LOG_STRIPPER.get());
 
         tag(BlockTags.CLIMBABLE)
                 .add(ModBlocks.COPPER_SCAFFOLDING.get())
@@ -83,6 +87,36 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL)
                 .addTag(BlockTags.INCORRECT_FOR_STONE_TOOL)
                 .remove(ModTags.Blocks.NEEDS_COPPER_TOOL);
-        //NO
+
+        tag(ModTags.Blocks.MUSICAL_BLOCKS)
+                .add(Blocks.NOTE_BLOCK)
+                .add(Blocks.JUKEBOX)
+                .addTag(ModTags.Blocks.RAIN_DRUMS);
+
+        tag(ModTags.Blocks.RAIN_DRUMS)
+                .add(ModBlocks.RAIN_DRUM.get())
+                .add(ModBlocks.EXPOSED_RAIN_DRUM.get())
+                .add(ModBlocks.WEATHERED_RAIN_DRUM.get())
+                .add(ModBlocks.OXIDIZED_RAIN_DRUM.get())
+                .add(ModBlocks.TINY_RAIN_DRUM.get())
+                .add(ModBlocks.EXPOSED_TINY_RAIN_DRUM.get())
+                .add(ModBlocks.WEATHERED_TINY_RAIN_DRUM.get())
+                .add(ModBlocks.OXIDIZED_TINY_RAIN_DRUM.get())
+                .add(ModBlocks.LARGE_RAIN_DRUM.get())
+                .add(ModBlocks.EXPOSED_LARGE_RAIN_DRUM.get())
+                .add(ModBlocks.WEATHERED_LARGE_RAIN_DRUM.get())
+                .add(ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_EXPOSED_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_WEATHERED_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_OXIDIZED_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_TINY_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_EXPOSED_TINY_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_WEATHERED_TINY_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_OXIDIZED_TINY_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_LARGE_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_EXPOSED_LARGE_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM.get())
+                .add(ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get());
     }
 }

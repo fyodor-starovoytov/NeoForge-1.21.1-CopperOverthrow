@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_copper_scaffolding": {
+    "has_oxidized_copper_scaffolding": {
       "conditions": {
         "items": [
           {
-            "items": "copperoverthrow:copper_scaffolding"
+            "items": "copperoverthrow:oxidized_copper_scaffolding"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_copper_scaffolding"
+      "has_oxidized_copper_scaffolding"
     ]
   ],
   "rewards": {

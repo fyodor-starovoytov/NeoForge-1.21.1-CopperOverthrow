@@ -13,6 +13,7 @@ import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.item.ModItems;
 
 import java.util.LinkedHashMap;

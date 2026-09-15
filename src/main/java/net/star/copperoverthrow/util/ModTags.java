@@ -12,21 +12,21 @@ import net.star.copperoverthrow.CopperOverthrow;
 public class ModTags {
 
      public static class Blocks{
-        public static final TagKey<Block> NEEDS_COPPER_TOOL = createTag("needs_copper_tool");
-        public static final TagKey<Block> INCORRECT_FOR_COPPER_TOOL = createTag("incorrect_for_copper_tool");
-        public static final TagKey<Block> MINEABLE_WITH_HAMMER = createTag("mineable_with_hammer");
+        public static final TagKey<Block> NEEDS_COPPER_TOOL = createTag(CopperOverthrow.MOD_ID ,"needs_copper_tool");
+        public static final TagKey<Block> INCORRECT_FOR_COPPER_TOOL = createTag(CopperOverthrow.MOD_ID ,"incorrect_for_copper_tool");
+        public static final TagKey<Block> MINEABLE_WITH_HAMMER = createTag(CopperOverthrow.MOD_ID ,"mineable_with_hammer");
 
+        public static final TagKey<Block> RAIN_DRUMS = createTag("c", "musical_blocks/rain_drums");
+        public static final TagKey<Block> MUSICAL_BLOCKS = createTag("c", "musical_blocks");
 
-        private static TagKey<Block> createTag(String name){
-            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, name));
+         private static TagKey<Block> createTag(String namespace, String path){
+            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(namespace, path));
         }
     }
 
     public static class Items{
         public static final TagKey<Item> C_TOOLS_HAMMERS = createTag("c", "tools/hammers");
-        // public static final TagKey<Item> BEE_CATCHER_TOOL = createTag(CopperOverthrow.MOD_ID, "bee_catcher");
         public static final TagKey<Item> C_TOOLS_CATCHERS = createTag("c", "tools/catchers");
-
         public static final TagKey<Item> C_TOOLS_BUILDERS = createTag("c", "tools/builders");
 
         public static final TagKey<Item> HAMMER_ENCHANTABLE = createTag("c", "hammer/enchantable");

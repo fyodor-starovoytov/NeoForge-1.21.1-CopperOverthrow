@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -15,12 +16,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.neoforged.neoforge.common.ItemAbility;
+
 import javax.annotation.Nullable;
 
 public class MultiBlockTallDecoration extends Block {
     public static final EnumProperty<TripleBlockPart> PART = EnumProperty.create("part", TripleBlockPart.class);
 
-    // 2 or 3 depending on block type
+    // 2 or 3 depending on block height
     private final int blockHeight;
 
     public MultiBlockTallDecoration(Properties properties, int blockHeight) {
@@ -64,7 +67,6 @@ public class MultiBlockTallDecoration extends Block {
             level.setBlock(pos.above(2), state.setValue(PART, TripleBlockPart.TOP), 3);
         }
     }
-
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         TripleBlockPart part = state.getValue(PART);
@@ -72,15 +74,15 @@ public class MultiBlockTallDecoration extends Block {
         if (this.blockHeight == 2) {
             if (part == TripleBlockPart.TOP) {
                 BlockState bottom = level.getBlockState(pos.below());
-                return bottom.is(this) && bottom.getValue(PART) == TripleBlockPart.BOTTOM;
+                return isSameStructure(bottom) && bottom.getValue(PART) == TripleBlockPart.BOTTOM;
             }
         } else {
             if (part == TripleBlockPart.MIDDLE) {
                 BlockState bottom = level.getBlockState(pos.below());
-                return bottom.is(this) && bottom.getValue(PART) == TripleBlockPart.BOTTOM;
+                return isSameStructure(bottom) && bottom.getValue(PART) == TripleBlockPart.BOTTOM;
             } else if (part == TripleBlockPart.TOP) {
                 BlockState middle = level.getBlockState(pos.below());
-                return middle.is(this) && middle.getValue(PART) == TripleBlockPart.MIDDLE;
+                return isSameStructure(middle) && middle.getValue(PART) == TripleBlockPart.MIDDLE;
             }
         }
         return super.canSurvive(state, level, pos);
@@ -93,28 +95,28 @@ public class MultiBlockTallDecoration extends Block {
         if (direction.getAxis() == Direction.Axis.Y) {
             if (this.blockHeight == 2) {
                 if (part == TripleBlockPart.BOTTOM && direction == Direction.UP) {
-                    if (!neighborState.is(this) || neighborState.getValue(PART) != TripleBlockPart.TOP) {
+                    if (!isSameStructure(neighborState) || neighborState.getValue(PART) != TripleBlockPart.TOP) {
                         return Blocks.AIR.defaultBlockState();
                     }
                 } else if (part == TripleBlockPart.TOP && direction == Direction.DOWN) {
-                    if (!neighborState.is(this) || neighborState.getValue(PART) != TripleBlockPart.BOTTOM) {
+                    if (!isSameStructure(neighborState) || neighborState.getValue(PART) != TripleBlockPart.BOTTOM) {
                         return Blocks.AIR.defaultBlockState();
                     }
                 }
             } else {
                 if (part == TripleBlockPart.BOTTOM && direction == Direction.UP) {
-                    if (!neighborState.is(this) || neighborState.getValue(PART) != TripleBlockPart.MIDDLE) {
+                    if (!isSameStructure(neighborState) || neighborState.getValue(PART) != TripleBlockPart.MIDDLE) {
                         return Blocks.AIR.defaultBlockState();
                     }
                 } else if (part == TripleBlockPart.MIDDLE) {
-                    if (direction == Direction.DOWN && (!neighborState.is(this) || neighborState.getValue(PART) != TripleBlockPart.BOTTOM)) {
+                    if (direction == Direction.DOWN && (!isSameStructure(neighborState) || neighborState.getValue(PART) != TripleBlockPart.BOTTOM)) {
                         return Blocks.AIR.defaultBlockState();
                     }
-                    if (direction == Direction.UP && (!neighborState.is(this) || neighborState.getValue(PART) != TripleBlockPart.TOP)) {
+                    if (direction == Direction.UP && (!isSameStructure(neighborState) || neighborState.getValue(PART) != TripleBlockPart.TOP)) {
                         return Blocks.AIR.defaultBlockState();
                     }
                 } else if (part == TripleBlockPart.TOP && direction == Direction.DOWN) {
-                    if (!neighborState.is(this) || neighborState.getValue(PART) != TripleBlockPart.MIDDLE) {
+                    if (!isSameStructure(neighborState) || neighborState.getValue(PART) != TripleBlockPart.MIDDLE) {
                         return Blocks.AIR.defaultBlockState();
                     }
                 }
@@ -124,9 +126,43 @@ public class MultiBlockTallDecoration extends Block {
     }
 
     @Override
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
+        BlockState modifiedState = super.getToolModifiedState(state, context, itemAbility, simulate);
+
+        if (modifiedState != null) {
+            modifiedState = modifiedState.setValue(PART, state.getValue(PART));
+
+            if (!simulate) {
+                Level level = context.getLevel();
+                BlockPos clickedPos = context.getClickedPos();
+                TripleBlockPart currentPart = state.getValue(PART);
+
+                BlockPos bottomPos = clickedPos;
+                if (currentPart == TripleBlockPart.MIDDLE) {
+                    bottomPos = clickedPos.below(1);
+                } else if (currentPart == TripleBlockPart.TOP) {
+                    bottomPos = clickedPos.below(this.blockHeight - 1);
+                }
+
+                for (int i = 0; i < this.blockHeight; i++) {
+                    BlockPos targetPos = bottomPos.above(i);
+                    if (!targetPos.equals(clickedPos)) {
+                        BlockState targetState = level.getBlockState(targetPos);
+                        BlockState newSegmentState = modifiedState.getBlock().defaultBlockState()
+                                .setValue(PART, targetState.getValue(PART));
+                        level.setBlock(targetPos, newSegmentState, 3);
+                    }
+                }
+            }
+        }
+
+        return modifiedState;
+    }
+
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide && player.isCreative()) {
             TripleBlockPart part = state.getValue(PART);
+
             if (part == TripleBlockPart.TOP) {
                 preventCreativeDrop(level, pos.below(1), player);
                 if (this.blockHeight == 3) {
@@ -134,6 +170,12 @@ public class MultiBlockTallDecoration extends Block {
                 }
             } else if (part == TripleBlockPart.MIDDLE && this.blockHeight == 3) {
                 preventCreativeDrop(level, pos.below(1), player);
+                preventCreativeDrop(level, pos.above(1), player);
+            } else if (part == TripleBlockPart.BOTTOM) {
+                preventCreativeDrop(level, pos.above(1), player);
+                if (this.blockHeight == 3) {
+                    preventCreativeDrop(level, pos.above(2), player);
+                }
             }
         }
         return super.playerWillDestroy(level, pos, state, player);
@@ -143,6 +185,7 @@ public class MultiBlockTallDecoration extends Block {
         BlockState state = level.getBlockState(pos);
         if (state.is(this)) {
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), 35);
+            level.levelEvent(player, 2001, pos, Block.getId(state));
         }
     }
 
@@ -161,5 +204,9 @@ public class MultiBlockTallDecoration extends Block {
         public String getSerializedName() {
             return this.name;
         }
+    }
+
+    private boolean isSameStructure(BlockState state) {
+        return state.getBlock() instanceof MultiBlockTallDecoration;
     }
 }

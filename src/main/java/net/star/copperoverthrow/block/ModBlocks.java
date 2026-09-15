@@ -37,6 +37,71 @@ public class ModBlocks {
                             .mapColor(DyeColor.ORANGE)
                             .sound(SoundType.COPPER)));
 
+    public static final DeferredBlock<Block> COPPER_CHAIN = registerBlock("copper_chain",
+            () -> new ChainBlock(
+                    BlockBehaviour.Properties.of()
+                            .forceSolidOn()
+                            .strength(2f)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .sound(SoundType.CHAIN)));
+    public static final DeferredBlock<Block> EXPOSED_COPPER_CHAIN = registerBlock("exposed_copper_chain",
+            () -> new ChainBlock(
+                    BlockBehaviour.Properties.of()
+                            .forceSolidOn()
+                            .strength(2f)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .sound(SoundType.CHAIN)));
+    public static final DeferredBlock<Block> WEATHERED_COPPER_CHAIN = registerBlock("weathered_copper_chain",
+            () -> new ChainBlock(
+                    BlockBehaviour.Properties.of()
+                            .forceSolidOn()
+                            .strength(2f)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .sound(SoundType.CHAIN)));
+    public static final DeferredBlock<Block> OXIDIZED_COPPER_CHAIN = registerBlock("oxidized_copper_chain",
+            () -> new ChainBlock(
+                    BlockBehaviour.Properties.of()
+                            .forceSolidOn()
+                            .strength(2f)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .sound(SoundType.CHAIN)));
+    public static final DeferredBlock<Block> WAXED_COPPER_CHAIN = registerBlock("waxed_copper_chain",
+            () -> new ChainBlock(
+                    BlockBehaviour.Properties.of()
+                            .forceSolidOn()
+                            .strength(2f)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .sound(SoundType.CHAIN)));
+    public static final DeferredBlock<Block> WAXED_EXPOSED_COPPER_CHAIN = registerBlock("waxed_exposed_copper_chain",
+            () -> new ChainBlock(
+                    BlockBehaviour.Properties.of()
+                            .forceSolidOn()
+                            .strength(2f)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .sound(SoundType.CHAIN)));
+    public static final DeferredBlock<Block> WAXED_WEATHERED_COPPER_CHAIN = registerBlock("waxed_weathered_copper_chain",
+            () -> new ChainBlock(
+                    BlockBehaviour.Properties.of()
+                            .forceSolidOn()
+                            .strength(2f)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .sound(SoundType.CHAIN)));
+    public static final DeferredBlock<Block> WAXED_OXIDIZED_COPPER_CHAIN = registerBlock("waxed_oxidized_copper_chain",
+            () -> new ChainBlock(
+                    BlockBehaviour.Properties.of()
+                            .forceSolidOn()
+                            .strength(2f)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .sound(SoundType.CHAIN)));
+
     public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
         () -> new CopperScaffoldingBlock(
                 BlockBehaviour.Properties.of()
@@ -51,7 +116,6 @@ public class ModBlocks {
                 .sound(SoundType.COPPER)
                 .dynamicShape()
                 .randomTicks(), WeatheringCopper.WeatherState.UNAFFECTED));
-
     public static final DeferredBlock<CopperScaffoldingBlock> EXPOSED_COPPER_SCAFFOLDING = registerBlock("exposed_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -65,7 +129,6 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)
                     .dynamicShape()
                     .randomTicks(), WeatheringCopper.WeatherState.EXPOSED));
-
     public static final DeferredBlock<CopperScaffoldingBlock> WEATHERED_COPPER_SCAFFOLDING = registerBlock("weathered_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -80,7 +143,6 @@ public class ModBlocks {
                     .dynamicShape()
                     .speedFactor(0.95f)
                     .randomTicks(), WeatheringCopper.WeatherState.WEATHERED));
-
     public static final DeferredBlock<CopperScaffoldingBlock> OXIDIZED_COPPER_SCAFFOLDING = registerBlock("oxidized_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -96,8 +158,6 @@ public class ModBlocks {
                     .speedFactor(0.90f)
                     .randomTicks(), WeatheringCopper.WeatherState.OXIDIZED));
 
-
-
     public static final DeferredBlock<CopperScaffoldingBlock> WAXED_COPPER_SCAFFOLDING = registerBlock("waxed_copper_scaffolding",
             () -> new CopperScaffoldingBlock(
                     BlockBehaviour.Properties.of()
@@ -112,7 +172,6 @@ public class ModBlocks {
                             .sound(SoundType.COPPER)
                             .dynamicShape()
                             .randomTicks(), WeatheringCopper.WeatherState.UNAFFECTED));
-
     public static final DeferredBlock<CopperScaffoldingBlock> WAXED_EXPOSED_COPPER_SCAFFOLDING = registerBlock("waxed_exposed_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -126,7 +185,6 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)
                     .dynamicShape()
                     .randomTicks(), WeatheringCopper.WeatherState.EXPOSED));
-
     public static final DeferredBlock<CopperScaffoldingBlock> WAXED_WEATHERED_COPPER_SCAFFOLDING = registerBlock("waxed_weathered_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -141,7 +199,6 @@ public class ModBlocks {
                     .dynamicShape()
                     .speedFactor(0.95f)
                     .randomTicks(), WeatheringCopper.WeatherState.WEATHERED));
-
     public static final DeferredBlock<CopperScaffoldingBlock> WAXED_OXIDIZED_COPPER_SCAFFOLDING = registerBlock("waxed_oxidized_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -175,7 +232,10 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
-                    1.6f, 1f, 5, 11,3
+                    WeatheringCopper.WeatherState.UNAFFECTED,
+                    1.6f, 1f, 5, 11,3,
+                    "tooltip.copperoverthrow.medium_pitch.tooltip",
+                    "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
     public static final DeferredBlock<Block> EXPOSED_RAIN_DRUM = registerBlock("exposed_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
@@ -186,9 +246,11 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
-                    1.6f, 1f, 5, 11,3
+                    WeatheringCopper.WeatherState.EXPOSED,
+                    1.6f, 1f, 5, 11,3,
+                    "tooltip.copperoverthrow.medium_pitch.tooltip",
+                    "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
-
     public static final DeferredBlock<Block> WEATHERED_RAIN_DRUM = registerBlock("weathered_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -198,9 +260,11 @@ public class ModBlocks {
                     .mapColor(DyeColor.GREEN)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
-                    1.6f, 1f, 5, 11,3
+                    WeatheringCopper.WeatherState.WEATHERED,
+                    1.6f, 1f, 5, 11,3,
+                    "tooltip.copperoverthrow.medium_pitch.tooltip",
+                    "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
-
     public static final DeferredBlock<Block> OXIDIZED_RAIN_DRUM = registerBlock("oxidized_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -210,7 +274,66 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
-                    1.6f, 1f, 5, 11,3
+                    WeatheringCopper.WeatherState.OXIDIZED,
+                    1.6f, 1f, 5, 11,3,
+                    "tooltip.copperoverthrow.medium_pitch.tooltip",
+                    "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_RAIN_DRUM = registerBlock("waxed_medium_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE       )
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.UNAFFECTED,
+                    1.6f, 1f, 5, 11,3,
+                    "tooltip.copperoverthrow.medium_pitch.tooltip",
+                    "tooltip.copperoverthrow.clean_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_EXPOSED_RAIN_DRUM = registerBlock("waxed_exposed_medium_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.EXPOSED,
+                    1.6f, 1f, 5, 11,3,
+                    "tooltip.copperoverthrow.medium_pitch.tooltip",
+                    "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_WEATHERED_RAIN_DRUM = registerBlock("waxed_weathered_medium_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.GREEN)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.WEATHERED,
+                    1.6f, 1f, 5, 11,3,
+                    "tooltip.copperoverthrow.medium_pitch.tooltip",
+                    "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_OXIDIZED_RAIN_DRUM = registerBlock("waxed_oxidized_medium_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.OXIDIZED,
+                    1.6f, 1f, 5, 11,3,
+                    "tooltip.copperoverthrow.medium_pitch.tooltip",
+                    "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
 
     public static final DeferredBlock<Block> LARGE_RAIN_DRUM = registerBlock("low_note_rain_drum",
@@ -222,9 +345,11 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
-                    1f, 1.8f, 3, 13, 2
+                    WeatheringCopper.WeatherState.UNAFFECTED,
+                    1f, 1.8f, 3, 13, 2,
+                    "tooltip.copperoverthrow.low_pitch.tooltip",
+                    "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
-
     public static final DeferredBlock<Block> EXPOSED_LARGE_RAIN_DRUM = registerBlock("exposed_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -232,11 +357,13 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
-                    1f, 1.8f, 3, 13, 2
+                    WeatheringCopper.WeatherState.EXPOSED,
+                    1f, 1.8f, 3, 13, 2,
+                    "tooltip.copperoverthrow.low_pitch.tooltip",
+                    "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
-
     public static final DeferredBlock<Block> WEATHERED_LARGE_RAIN_DRUM = registerBlock("weathered_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -244,12 +371,28 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
-                    1f, 1.8f, 3, 13, 2
+                    WeatheringCopper.WeatherState.WEATHERED,
+                    1f, 1.8f, 3, 13, 2,
+                    "tooltip.copperoverthrow.low_pitch.tooltip",
+                    "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
-
     public static final DeferredBlock<Block> OXIDIZED_LARGE_RAIN_DRUM = registerBlock("oxidized_low_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.OXIDIZED,
+                    1f, 1.8f, 3, 13, 2,
+                    "tooltip.copperoverthrow.low_pitch.tooltip",
+                    "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_LARGE_RAIN_DRUM = registerBlock("waxed_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
@@ -258,7 +401,52 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
-                    1f, 1.8f, 3, 13, 2
+                    WeatheringCopper.WeatherState.UNAFFECTED,
+                    1f, 1.8f, 3, 13, 2,
+                    "tooltip.copperoverthrow.low_pitch.tooltip",
+                    "tooltip.copperoverthrow.clean_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_EXPOSED_LARGE_RAIN_DRUM = registerBlock("waxed_exposed_low_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.EXPOSED,
+                    1f, 1.8f, 3, 13, 2,
+                    "tooltip.copperoverthrow.low_pitch.tooltip",
+                    "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_WEATHERED_LARGE_RAIN_DRUM = registerBlock("waxed_weathered_low_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.WEATHERED,
+                    1f, 1.8f, 3, 13, 2,
+                    "tooltip.copperoverthrow.low_pitch.tooltip",
+                    "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_OXIDIZED_LARGE_RAIN_DRUM = registerBlock("waxed_oxidized_low_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.OXIDIZED,
+                    1f, 1.8f, 3, 13, 2,
+                    "tooltip.copperoverthrow.low_pitch.tooltip",
+                    "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
 
     public static final DeferredBlock<Block> TINY_RAIN_DRUM = registerBlock("high_note_rain_drum",
@@ -270,9 +458,11 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
-                    9f, 1.2f, 6, 10, 3
+                    WeatheringCopper.WeatherState.UNAFFECTED,
+                    9f, 1.2f, 6, 10, 3,
+                    "tooltip.copperoverthrow.high_pitch.tooltip",
+                    "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
-
     public static final DeferredBlock<Block> EXPOSED_TINY_RAIN_DRUM = registerBlock("exposed_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -280,11 +470,13 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
-                    9f, 1.2f, 6, 10, 3
+                    WeatheringCopper.WeatherState.EXPOSED,
+                    9f, 1.2f, 6, 10, 3,
+                    "tooltip.copperoverthrow.high_pitch.tooltip",
+                    "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
-
     public static final DeferredBlock<Block> WEATHERED_TINY_RAIN_DRUM = registerBlock("weathered_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -292,12 +484,28 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
-                    9f, 1.2f, 6, 10, 3
+                    WeatheringCopper.WeatherState.WEATHERED,
+                    9f, 1.2f, 6, 10, 3,
+                    "tooltip.copperoverthrow.high_pitch.tooltip",
+                    "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
-
     public static final DeferredBlock<Block> OXIDIZED_TINY_RAIN_DRUM = registerBlock("oxidized_high_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.OXIDIZED,
+                    9f, 1.2f, 6, 10, 3,
+                    "tooltip.copperoverthrow.high_pitch.tooltip",
+                    "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_TINY_RAIN_DRUM = registerBlock("waxed_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
@@ -306,8 +514,57 @@ public class ModBlocks {
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
-                    9f, 1.2f, 6, 10, 3
+                    WeatheringCopper.WeatherState.UNAFFECTED,
+                    9f, 1.2f, 6, 10, 3,
+                    "tooltip.copperoverthrow.high_pitch.tooltip",
+                    "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
+    public static final DeferredBlock<Block> WAXED_EXPOSED_TINY_RAIN_DRUM = registerBlock("waxed_exposed_high_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.EXPOSED,
+                    9f, 1.2f, 6, 10, 3,
+                    "tooltip.copperoverthrow.high_pitch.tooltip",
+                    "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_WEATHERED_TINY_RAIN_DRUM = registerBlock("waxed_weathered_high_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.WEATHERED,
+                    9f, 1.2f, 6, 10, 3,
+                    "tooltip.copperoverthrow.high_pitch.tooltip",
+                    "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
+            ));
+    public static final DeferredBlock<Block> WAXED_OXIDIZED_TINY_RAIN_DRUM = registerBlock("waxed_oxidized_high_note_rain_drum",
+            () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
+                    .strength(3f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .mapColor(DyeColor.ORANGE)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.OXIDIZED,
+                    9f, 1.2f, 6, 10, 3,
+                    "tooltip.copperoverthrow.high_pitch.tooltip",
+                    "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
+            ));
+
+
+
+
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {

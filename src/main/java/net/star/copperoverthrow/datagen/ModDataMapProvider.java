@@ -23,12 +23,41 @@ public class ModDataMapProvider extends DataMapProvider {
         this.builder(NeoForgeDataMaps.OXIDIZABLES)
                 .add(ModBlocks.COPPER_SCAFFOLDING.getId(), new Oxidizable(ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get()), false)
                 .add(ModBlocks.EXPOSED_COPPER_SCAFFOLDING.getId(), new Oxidizable(ModBlocks.WEATHERED_COPPER_SCAFFOLDING.get()), false)
-                .add(ModBlocks.WEATHERED_COPPER_SCAFFOLDING.getId(), new Oxidizable(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.get()), false);
+                .add(ModBlocks.WEATHERED_COPPER_SCAFFOLDING.getId(), new Oxidizable(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.get()), false)
+
+                .add(ModBlocks.RAIN_DRUM.getId(), new Oxidizable(ModBlocks.EXPOSED_RAIN_DRUM.get()), false)
+                .add(ModBlocks.EXPOSED_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.WEATHERED_RAIN_DRUM.get()), false)
+                .add(ModBlocks.WEATHERED_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.OXIDIZED_RAIN_DRUM.get()), false)
+
+                .add(ModBlocks.TINY_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.EXPOSED_TINY_RAIN_DRUM.get()), false)
+                .add(ModBlocks.EXPOSED_TINY_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.WEATHERED_TINY_RAIN_DRUM.get()), false)
+                .add(ModBlocks.WEATHERED_TINY_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.OXIDIZED_TINY_RAIN_DRUM.get()), false)
+
+                .add(ModBlocks.LARGE_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.EXPOSED_LARGE_RAIN_DRUM.get()), false)
+                .add(ModBlocks.EXPOSED_LARGE_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.WEATHERED_LARGE_RAIN_DRUM.get()), false)
+                .add(ModBlocks.WEATHERED_LARGE_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.get()), false);
+
+
 
         this.builder(NeoForgeDataMaps.WAXABLES)
                 .add(ModBlocks.COPPER_SCAFFOLDING.getId(), new Waxable(ModBlocks.WAXED_COPPER_SCAFFOLDING.get()), false)
                 .add(ModBlocks.EXPOSED_COPPER_SCAFFOLDING.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get()), false)
                 .add(ModBlocks.WEATHERED_COPPER_SCAFFOLDING.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get()), false)
-                .add(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get()), false);
+                .add(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get()), false)
+
+                .add(ModBlocks.RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_RAIN_DRUM.get()), false)
+                .add(ModBlocks.EXPOSED_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_RAIN_DRUM.get()), false)
+                .add(ModBlocks.WEATHERED_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_RAIN_DRUM.get()), false)
+                .add(ModBlocks.OXIDIZED_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_RAIN_DRUM.get()), false)
+
+                .add(ModBlocks.TINY_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_TINY_RAIN_DRUM.get()), false)
+                .add(ModBlocks.EXPOSED_TINY_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_TINY_RAIN_DRUM.get()), false)
+                .add(ModBlocks.WEATHERED_TINY_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_TINY_RAIN_DRUM.get()), false)
+                .add(ModBlocks.OXIDIZED_TINY_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_TINY_RAIN_DRUM.get()), false)
+
+                .add(ModBlocks.LARGE_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_LARGE_RAIN_DRUM.get()), false)
+                .add(ModBlocks.EXPOSED_LARGE_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_LARGE_RAIN_DRUM.get()), false)
+                .add(ModBlocks.WEATHERED_LARGE_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM.get()), false)
+                .add(ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get()), false);
     }
 }

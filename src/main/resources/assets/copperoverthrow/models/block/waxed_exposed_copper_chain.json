@@ -1,0 +1,33 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+    "render_type": "minecraft:cutout",
+	"textures": {
+		"1": "copperoverthrow:block/exposed_copper_chain",
+         "particle": "copperoverthrow:block/exposed_copper_chain"
+	},
+	"elements": [
+		{
+			"from": [8, 0, 6.5],
+			"to": [8, 16, 9.5],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 3, 16], "texture": "#1"},
+				"west": {"uv": [3, 0, 0, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [6.5, 0, 8],
+			"to": [9.5, 16, 8],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [3, 0, 6, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 16], "texture": "#1"},
+				"south": {"uv": [3, 0, 6, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 16], "texture": "#1"}
+			}
+		}
+	]
+}
