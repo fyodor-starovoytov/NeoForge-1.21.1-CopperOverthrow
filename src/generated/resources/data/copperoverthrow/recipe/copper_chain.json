@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/copper"
+    },
+    "B": {
+      "item": "minecraft:copper_trapdoor"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "A A",
+    "A A"
+  ],
+  "result": {
+    "count": 6,
+    "id": "copperoverthrow:copper_chain"
+  }
+}
