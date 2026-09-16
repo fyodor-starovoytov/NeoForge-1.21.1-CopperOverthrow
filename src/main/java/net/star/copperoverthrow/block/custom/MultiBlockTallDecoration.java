@@ -1,11 +1,17 @@
 package net.star.copperoverthrow.block.custom;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -16,7 +22,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import net.neoforged.neoforge.registries.datamaps.builtin.Waxable;
 
 import javax.annotation.Nullable;
 
@@ -129,34 +139,37 @@ public class MultiBlockTallDecoration extends Block {
     public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
         BlockState modifiedState = super.getToolModifiedState(state, context, itemAbility, simulate);
 
-        if (modifiedState != null) {
-            modifiedState = modifiedState.setValue(PART, state.getValue(PART));
-
-            if (!simulate) {
-                Level level = context.getLevel();
-                BlockPos clickedPos = context.getClickedPos();
-                TripleBlockPart currentPart = state.getValue(PART);
-
-                BlockPos bottomPos = clickedPos;
-                if (currentPart == TripleBlockPart.MIDDLE) {
-                    bottomPos = clickedPos.below(1);
-                } else if (currentPart == TripleBlockPart.TOP) {
-                    bottomPos = clickedPos.below(this.blockHeight - 1);
-                }
-
-                for (int i = 0; i < this.blockHeight; i++) {
-                    BlockPos targetPos = bottomPos.above(i);
-                    if (!targetPos.equals(clickedPos)) {
-                        BlockState targetState = level.getBlockState(targetPos);
-                        BlockState newSegmentState = modifiedState.getBlock().defaultBlockState()
-                                .setValue(PART, targetState.getValue(PART));
-                        level.setBlock(targetPos, newSegmentState, 3);
-                    }
-                }
-            }
+        if (modifiedState != null && !simulate) {
+            Level level = context.getLevel();
+            BlockPos clickedPos = context.getClickedPos();
+            propagateBlockChange(level, clickedPos, state, modifiedState.getBlock());
         }
 
         return modifiedState;
+    }
+
+    // Helper to update all connected segments
+    public void propagateBlockChange(Level level, BlockPos clickedPos, BlockState currentState, Block targetBlock) {
+        TripleBlockPart currentPart = currentState.getValue(PART);
+
+        BlockPos bottomPos = clickedPos;
+        if (currentPart == TripleBlockPart.MIDDLE) {
+            bottomPos = clickedPos.below(1);
+        } else if (currentPart == TripleBlockPart.TOP) {
+            bottomPos = clickedPos.below(this.blockHeight - 1);
+        }
+
+        for (int i = 0; i < this.blockHeight; i++) {
+            BlockPos targetPos = bottomPos.above(i);
+            if (!targetPos.equals(clickedPos)) {
+                BlockState existingState = level.getBlockState(targetPos);
+                if (existingState.getBlock() instanceof MultiBlockTallDecoration) {
+                    BlockState newSegmentState = targetBlock.defaultBlockState()
+                            .setValue(PART, existingState.getValue(PART));
+                    level.setBlock(targetPos, newSegmentState, 3);
+                }
+            }
+        }
     }
 
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {

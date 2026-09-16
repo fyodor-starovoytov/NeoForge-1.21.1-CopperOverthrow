@@ -116,8 +116,6 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     private void checkAndPlayDripstoneSound(Level level, BlockPos pos, RandomSource random) {
-
-
         for (int i = 1; i <= MAX_DRIPSTONE_HEIGHT_CHECK; i++) {
             BlockPos checkPos = pos.above(i);
             BlockState checkState = level.getBlockState(checkPos);
@@ -211,6 +209,8 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
             );
         }
     }
+
+
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {

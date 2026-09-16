@@ -1,23 +1,31 @@
 package net.star.copperoverthrow.event;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import net.neoforged.neoforge.registries.datamaps.builtin.Waxable;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
 import net.star.copperoverthrow.item.custom.CopperTrowelItem;
 import net.star.copperoverthrow.item.custom.HammerItem;
@@ -32,7 +40,6 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onHammerUsage(BlockEvent.BreakEvent event) {
-
 if (Screen.hasShiftDown()){return;}
 
         Player player = event.getPlayer();
@@ -80,37 +87,46 @@ if (Screen.hasShiftDown()){return;}
         return event.getLevel().getBlockState(pos).is(Tags.Blocks.ORES);
 
     }
-/*
+
     @SubscribeEvent
-    public static void onTrowelUsage(BlockEvent.EntityPlaceEvent event) {
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+            Level level = event.getLevel();
+            BlockPos pos = event.getPos();
+            BlockState state = level.getBlockState(pos);
 
-        Entity entity = event.getEntity();
+            if (state.getBlock() instanceof MultiBlockTallDecoration drum) {
+                ItemStack stack = event.getItemStack();
 
-        if (entity instanceof Player player) {
+                if (stack.is(Items.HONEYCOMB)) {
+                    Waxable waxable = state.getBlockHolder().getData(NeoForgeDataMaps.WAXABLES);
 
-            ItemStack mainHandItem = player.getMainHandItem();
+                    if (waxable != null) {
+                        Player player = event.getEntity();
 
-            if(mainHandItem.getItem() instanceof CopperTrowelItem hammer && player instanceof ServerPlayer serverPlayer) {
+                        if (!level.isClientSide) {
+                            Block waxedBlock = waxable.waxed();
 
-                BlockPos initialBlockPos = event.getPos();
-                BlockState state = CopperTrowelItem.getRandomBlock()
-                if(HARVESTED_BLOCKS.contains(initialBlockPos)) {
-                    return;
-                }
+                            if (player instanceof ServerPlayer serverPlayer) {
+                                CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
+                            }
 
-                for(BlockPos pos : HammerItem.getBlocksToBeDestroyed(area, deep, initialBlockPos, serverPlayer)) {
+                            if (!player.isCreative()) {
+                                stack.shrink(1);
+                            }
 
-                    if(pos == initialBlockPos || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos)) || hasOreTag(event, pos)) {
-                        continue;
+                            // Update clicked segment and propagate to connected segments
+                            level.setBlock(pos, waxedBlock.defaultBlockState().setValue(MultiBlockTallDecoration.PART, state.getValue(MultiBlockTallDecoration.PART)), 3);
+                            drum.propagateBlockChange(level, pos, state, waxedBlock);
+
+                            level.levelEvent(null, 3003, pos, 0);
+                        }
+
+                        player.swing(event.getHand());
+
+                        event.setCanceled(true);
+                        event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide).result());
                     }
-
-                    HARVESTED_BLOCKS.add(pos);
-                    serverPlayer.gameMode.destroyBlock(pos);
-                    HARVESTED_BLOCKS.remove(pos);
                 }
             }
-        }
     }
-
- */
 }
