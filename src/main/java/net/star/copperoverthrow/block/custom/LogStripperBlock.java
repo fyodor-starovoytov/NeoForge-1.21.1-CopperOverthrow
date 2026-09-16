@@ -22,15 +22,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import net.neoforged.neoforge.registries.datamaps.builtin.Strippable;
+import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Stack;
 
 public class LogStripperBlock extends BaseEntityBlock {
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
@@ -90,8 +88,8 @@ public class LogStripperBlock extends BaseEntityBlock {
             }
 
             if (isBlockStrippable(logStripperBlockEntity.getItem(0)) && !axeStack.isEmpty()){
-                int toDamage = logStripperBlockEntity.getItem(0).getCount() / 2;
-                axeStack.hurtAndBreak(Math.max(toDamage, 1), player, (slot));
+                int toDamage = (int) (logStripperBlockEntity.getItem(0).getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
+                axeStack.hurtAndBreak(toDamage, player, (slot));
 
                 logStripperBlockEntity.setItem(0, getStrippedBlock(logStripperBlockEntity.getItem(0)));
 

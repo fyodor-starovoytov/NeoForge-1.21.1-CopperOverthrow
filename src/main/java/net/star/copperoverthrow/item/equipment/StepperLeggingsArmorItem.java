@@ -11,6 +11,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.ServerConfig;
 
 public class StepperLeggingsArmorItem extends ArmorItem {
     public StepperLeggingsArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
@@ -27,7 +28,7 @@ public class StepperLeggingsArmorItem extends ArmorItem {
                         Attributes.MOVEMENT_SPEED,
                         new AttributeModifier(
                                 ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_leggings_movement_speed"),
-                                0.02,
+                                ServerConfig.STEPPER_LEGGINGS_SPEED_BOOST.get(),
                                 AttributeModifier.Operation.ADD_VALUE
                         ),
                         EquipmentSlotGroup.LEGS
@@ -36,7 +37,7 @@ public class StepperLeggingsArmorItem extends ArmorItem {
                         Attributes.WATER_MOVEMENT_EFFICIENCY,
                         new AttributeModifier(
                                 ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_leggings_water_efficiency"),
-                                0.5,
+                                ServerConfig.STEPPER_LEGGINGS_WATER_MOBILITY.get(),
                                 AttributeModifier.Operation.ADD_VALUE
                         ),
                         EquipmentSlotGroup.LEGS

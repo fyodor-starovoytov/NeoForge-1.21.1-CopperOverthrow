@@ -11,6 +11,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.ServerConfig;
 
 public class StepperBootsArmorItem extends ArmorItem {
     public StepperBootsArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
@@ -27,7 +28,7 @@ public class StepperBootsArmorItem extends ArmorItem {
                 Attributes.STEP_HEIGHT,
                 new AttributeModifier(
                         ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_boots_step_height"),
-                        0.5,
+                        ServerConfig.STEPPER_BOOTS_STEP_HEIGHT.get(),
                         AttributeModifier.Operation.ADD_VALUE
                 ),
                 EquipmentSlotGroup.FEET
@@ -36,7 +37,7 @@ public class StepperBootsArmorItem extends ArmorItem {
                 Attributes.SAFE_FALL_DISTANCE,
                 new AttributeModifier(
                         ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_boots_fall_distance"),
-                        3.0,
+                        ServerConfig.STEPPER_BOOTS_SAFE_FALL_DISTANCE.get(),
                         AttributeModifier.Operation.ADD_VALUE
                 ),
                 EquipmentSlotGroup.FEET

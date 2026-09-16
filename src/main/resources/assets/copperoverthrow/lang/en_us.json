@@ -95,10 +95,15 @@
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Dull tap§r",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notes When Playing",
-  "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Whether feature Rain Drums emit particles when playing a note.\n§7Default: True§r",
-
+  "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Whether Rain Drums emit particles when playing a note.\n§7Default: True§r",
   "copperoverthrow.config.rain_drum_enable_sparks": "Sparks During Full Moon",
-  "copperoverthrow.config.rain_drum_enable_sparks.tooltip": "Whether feature Rain Drums sparkle during full moon.\n§7Default: True§r",
+  "copperoverthrow.config.rain_drum_enable_sparks.tooltip": "Whether Rain Drums sparkle during full moon.\n§7Default: True§r",
+  "copperoverthrow.config.log_stripper_tool_damage": "Log Stripping Station Tool Damage",
+  "copperoverthrow.config.stepper_boots_step_height": "Stepper Boots' Step Height",
+  "copperoverthrow.config.stepper_boots_safe_fall_distance": "Stepper Boots' Safe Fall Distance",
+  "copperoverthrow.config.stepper_leggings_water": "Stepper Leggings' Speed Boost",
+  "copperoverthrow.config.stepper_leggings_speed": "Stepper Leggings' Water Mobility Efficiency",
+
 
   "sounds.copperoverthrow.raindrum_play": "Rain Drum Plays"
 }
