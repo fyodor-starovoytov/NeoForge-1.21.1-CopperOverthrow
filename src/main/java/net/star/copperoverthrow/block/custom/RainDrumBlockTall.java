@@ -273,6 +273,11 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
             tooltipComponents.add(Component.translatable(TOOLTIP_SOUNDING));
+            tooltipComponents.add(Component.empty());
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_placed.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.rain_drum_block.tooltip"));
+
+
         }
         else {
             tooltipComponents.add(Component.translatable(TOOLTIP));

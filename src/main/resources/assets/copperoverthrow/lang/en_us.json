@@ -82,6 +82,7 @@
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip" : "§6 Frees§r §eall stored bees§r",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Hold §eShift§r §7for more information§r",
   "tooltip.copperoverthrow.trowel_item.tooltip": "§e Places random block from the§r §6Hotbar§r",
+  "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Will play random notes when§r §6Raining§r",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Sounding:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Pitch:§r §bHigh§r",
