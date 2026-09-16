@@ -25,4 +25,9 @@ public class CopperChainBlock extends ChainBlock implements WeatheringCopper {
     public WeatherState getAge() {
         return this.weatherState;
     }
+
+    @Override
+    protected boolean isRandomlyTicking(BlockState state) {
+        return WeatheringCopper.getNext(state.getBlock()).isPresent();
+    }
 }

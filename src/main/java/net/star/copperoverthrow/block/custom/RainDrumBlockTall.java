@@ -53,7 +53,10 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     private final String TOOLTIP_SOUNDING;
 
 
-    public RainDrumBlockTall(Properties properties,  WeatherState weatherState, float pitch, float volume, double x1_z1, double x2_z2, int blockHeight, String tooltip_pitch, String tooltip_sounding) {
+    public RainDrumBlockTall(Properties properties,  WeatherState weatherState,
+                             float pitch, float volume,
+                             double x1_z1, double x2_z2, int blockHeight,
+                             String tooltip_pitch, String tooltip_sounding) {
         super(properties, blockHeight);
         this.weatherState = weatherState;
         this.PITCH = pitch;
@@ -84,13 +87,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
 
             if (random.nextFloat() < finalSoundProbality) {
                 float finalPitch = Math.min(10 , Math.max (0.85f , random.nextFloat() * randomFloat() + PITCH));
-                        level.playLocalSound(pos,
-                                ModSounds.RAIN_DRUM_RAINING.get(),
-                                SoundSource.RECORDS,
-                                finalVolume,
-                                finalPitch,
-                                false
-                        );
+                  soundToBePlayed(level, pos, finalVolume, finalPitch);
                 if (random.nextFloat() < PARTICLE_PROBABILITY) {
                     ParticleUtils.spawnParticleInBlock(
                             level, pos.above(), 1, ParticleTypes.NOTE
@@ -276,6 +273,50 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
+    protected boolean isRandomlyTicking(BlockState state) {
+        return WeatheringCopper.getNext(state.getBlock()).isPresent();
+    }
+
+    private void soundToBePlayed(Level level, BlockPos pos, float finalVolume, float finalPitch){
+        if (this.weatherState.equals(WeatherState.UNAFFECTED)){
+            level.playLocalSound(pos,
+                    ModSounds.RAIN_DRUM_RAINING.get(),
+                    SoundSource.RECORDS,
+                    finalVolume,
+                    finalPitch,
+                    false
+            );
+        }
+        if (this.weatherState.equals(WeatherState.EXPOSED)){
+            level.playLocalSound(pos,
+                    ModSounds.EXPOSED_RAIN_DRUM_RAINING.get(),
+                    SoundSource.RECORDS,
+                    finalVolume,
+                    finalPitch,
+                    false
+            );
+        }
+        if (this.weatherState.equals(WeatherState.WEATHERED)){
+            level.playLocalSound(pos,
+                    ModSounds.WEATHERED_RAIN_DRUM_RAINING.get(),
+                    SoundSource.RECORDS,
+                    finalVolume,
+                    finalPitch,
+                    false
+            );
+        }
+        if (this.weatherState.equals(WeatherState.OXIDIZED)){
+            level.playLocalSound(pos,
+                    ModSounds.OXIDIZED_RAIN_DRUM_RAINING.get(),
+                    SoundSource.RECORDS,
+                    finalVolume,
+                    finalPitch,
+                    false
+            );
+        }
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable(TOOLTIP));
@@ -290,4 +331,5 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
+
 }
