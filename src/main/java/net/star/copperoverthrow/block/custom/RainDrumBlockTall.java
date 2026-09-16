@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ParticleUtils;
@@ -13,7 +14,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -87,8 +87,8 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
 
             if (random.nextFloat() < finalSoundProbality) {
                 float finalPitch = Math.min(10 , Math.max (0.85f , random.nextFloat() * randomFloat() + PITCH));
-                  soundToBePlayed(level, pos, finalVolume, finalPitch);
-                if (random.nextFloat() < PARTICLE_PROBABILITY) {
+                  soundToBePlayedRaining(level, pos, finalVolume, finalPitch);
+                if (random.nextFloat() < PARTICLE_PROBABILITY && SPAWN_NOTE_PARTICLES_WHEN_PLAYING) {
                     ParticleUtils.spawnParticleInBlock(
                             level, pos.above(), 1, ParticleTypes.NOTE
                     );
@@ -126,15 +126,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
                     if (fluid != Fluids.EMPTY) {
                         if (random.nextFloat() < 0.05f) {
                             float finalPitch = Math.min(2.0f, Math.max(0.85f, PITCH + (random.nextFloat() - 0.5f) * 0.2f));
-                            level.playLocalSound(
-                                    pos,
-                                    ModSounds.RAIN_DRUM_PLAYING.get(),
-                                    SoundSource.RECORDS,
-                                    VOLUME,
-                                    finalPitch,
-                                    false
-                            );
-
+                            soundToBePlayedPlaying(level, pos, VOLUME, finalPitch);
                             if (isLava) {
                                 level.playLocalSound(
                                         pos,
@@ -191,37 +183,23 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
                     && projectile.getDeltaMovement().length() > 0.6) {
 
                 float finalVolume = 0.5f * (float) projectile.getDeltaMovement().length();
-                level.playSound(null,
-                        pos,
-                        ModSounds.RAIN_DRUM_PLAYING.get(),
-                        SoundSource.RECORDS,
-                        finalVolume,
-                        PITCH
-                );
+                soundToBePlayedPlaying(level, pos, finalVolume, PITCH);
             }
         }
-        if (level.isClientSide) {
+        if (level.isClientSide && SPAWN_NOTE_PARTICLES_WHEN_PLAYING) {
             ParticleUtils.spawnParticleInBlock(
                     level, hit.getBlockPos().above(), 1, ParticleTypes.NOTE
             );
         }
     }
 
-
-
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 
         if (!level.isClientSide){
-            level.playSound( null,
-                    pos,
-                    ModSounds.RAIN_DRUM_PLAYING.get(),
-                    SoundSource.RECORDS,
-                    VOLUME,
-                    PITCH
-            );
+            soundToBePlayedPlaying(level, pos, VOLUME, PITCH);
         }
-        if (level.isClientSide){
+        if (level.isClientSide && SPAWN_NOTE_PARTICLES_WHEN_PLAYING){
         ParticleUtils.spawnParticleInBlock(
                 level, pos.above(), 1, ParticleTypes.NOTE
         );
@@ -239,26 +217,14 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!level.isClientSide){
-            level.playSound( null,
-                    pos,
-                    ModSounds.RAIN_DRUM_PLAYING.get(),
-                    SoundSource.RECORDS,
-                    VOLUME,
-                    PITCH
-            );
+            soundToBePlayedPlaying(level, pos, VOLUME, PITCH);
         }
     }
 
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if (!level.isClientSide){
-            level.playSound( null,
-                    pos,
-                    ModSounds.RAIN_DRUM_PLAYING.get(),
-                    SoundSource.RECORDS,
-                    VOLUME,
-                    PITCH
-            );
+            soundToBePlayedPlaying(level, pos, VOLUME, PITCH);
         }
     }
 
@@ -277,43 +243,26 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
         return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
-    private void soundToBePlayed(Level level, BlockPos pos, float finalVolume, float finalPitch){
-        if (this.weatherState.equals(WeatherState.UNAFFECTED)){
-            level.playLocalSound(pos,
-                    ModSounds.RAIN_DRUM_RAINING.get(),
-                    SoundSource.RECORDS,
-                    finalVolume,
-                    finalPitch,
-                    false
-            );
-        }
-        if (this.weatherState.equals(WeatherState.EXPOSED)){
-            level.playLocalSound(pos,
-                    ModSounds.EXPOSED_RAIN_DRUM_RAINING.get(),
-                    SoundSource.RECORDS,
-                    finalVolume,
-                    finalPitch,
-                    false
-            );
-        }
-        if (this.weatherState.equals(WeatherState.WEATHERED)){
-            level.playLocalSound(pos,
-                    ModSounds.WEATHERED_RAIN_DRUM_RAINING.get(),
-                    SoundSource.RECORDS,
-                    finalVolume,
-                    finalPitch,
-                    false
-            );
-        }
-        if (this.weatherState.equals(WeatherState.OXIDIZED)){
-            level.playLocalSound(pos,
-                    ModSounds.OXIDIZED_RAIN_DRUM_RAINING.get(),
-                    SoundSource.RECORDS,
-                    finalVolume,
-                    finalPitch,
-                    false
-            );
-        }
+    private void soundToBePlayedRaining(Level level, BlockPos pos, float finalVolume, float finalPitch) {
+        SoundEvent sound = switch (this.weatherState) {
+            case UNAFFECTED -> ModSounds.RAIN_DRUM_RAINING.get();
+            case EXPOSED -> ModSounds.EXPOSED_RAIN_DRUM_RAINING.get();
+            case WEATHERED -> ModSounds.WEATHERED_RAIN_DRUM_RAINING.get();
+            case OXIDIZED -> ModSounds.OXIDIZED_RAIN_DRUM_RAINING.get();
+        };
+
+        level.playLocalSound(pos, sound, SoundSource.RECORDS, finalVolume, finalPitch, false);
+    }
+
+    private void soundToBePlayedPlaying(Level level, BlockPos pos, float finalVolume, float finalPitch) {
+        SoundEvent sound = switch (this.weatherState) {
+            case UNAFFECTED -> ModSounds.RAIN_DRUM_PLAYING.get();
+            case EXPOSED -> ModSounds.EXPOSED_RAIN_DRUM_PLAYING.get();
+            case WEATHERED -> ModSounds.WEATHERED_RAIN_DRUM_PLAYING.get();
+            case OXIDIZED -> ModSounds.OXIDIZED_RAIN_DRUM_PLAYING.get();
+        };
+
+        level.playSound(null, pos, sound, SoundSource.RECORDS, finalVolume, finalPitch);
     }
 
     @Override
