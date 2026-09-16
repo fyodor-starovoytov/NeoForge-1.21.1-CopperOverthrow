@@ -30,6 +30,7 @@ import net.minecraft.world.level.material.LavaFluid;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.star.copperoverthrow.ClientConfig;
 import net.star.copperoverthrow.sound.ModSounds;
 
 import java.util.List;
@@ -42,7 +43,6 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     private final int BLOCK_HEIGHT;
     private final VoxelShape SHAPE;
     private final boolean SPAWN_PARTICLES_AT_FULLMOON = true;
-    private final boolean SPAWN_NOTE_PARTICLES_WHEN_PLAYING = true;
     private final float SOUND_PROBABILITY = 0.1f;
     private final float PARTICLE_PROBABILITY = 0.6f;
     private final float THUNDER_SOUND_PROBABILITY_ADDITION = 0.05f;
@@ -88,7 +88,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
             if (random.nextFloat() < finalSoundProbality) {
                 float finalPitch = Math.min(10 , Math.max (0.85f , random.nextFloat() * randomFloat() + PITCH));
                   soundToBePlayedRaining(level, pos, finalVolume, finalPitch);
-                if (random.nextFloat() < PARTICLE_PROBABILITY && SPAWN_NOTE_PARTICLES_WHEN_PLAYING) {
+                if (random.nextFloat() < PARTICLE_PROBABILITY && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()) {
                     ParticleUtils.spawnParticleInBlock(
                             level, pos.above(), 1, ParticleTypes.NOTE
                     );
@@ -102,10 +102,10 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
         boolean isFullMoon = level.getMoonPhase() == 0;
         boolean isClearSky = !level.isRaining() && level.canSeeSky(pos.above());
 
-        if (SPAWN_PARTICLES_AT_FULLMOON && isFullMoon && isNightTime && isClearSky) {
+        if (SPAWN_PARTICLES_AT_FULLMOON && isFullMoon && isNightTime && isClearSky && ClientConfig.RAIN_DRUMS_SPARK_PARTICLES.get()) {
             if (random.nextFloat() < PARTICLE_PROBABILITY) {
                 int particleCount = random.nextInt(3) + 1;
-                ParticleUtils.spawnParticleInBlock(level, pos.above(), particleCount, ParticleTypes.ELECTRIC_SPARK);
+                ParticleUtils.spawnParticleInBlock(level, pos, particleCount, ParticleTypes.ELECTRIC_SPARK);
             }
         }
 
@@ -186,7 +186,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
                 soundToBePlayedPlaying(level, pos, finalVolume, PITCH);
             }
         }
-        if (level.isClientSide && SPAWN_NOTE_PARTICLES_WHEN_PLAYING) {
+        if (level.isClientSide && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()) {
             ParticleUtils.spawnParticleInBlock(
                     level, hit.getBlockPos().above(), 1, ParticleTypes.NOTE
             );
@@ -199,7 +199,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
         if (!level.isClientSide){
             soundToBePlayedPlaying(level, pos, VOLUME, PITCH);
         }
-        if (level.isClientSide && SPAWN_NOTE_PARTICLES_WHEN_PLAYING){
+        if (level.isClientSide && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()){
         ParticleUtils.spawnParticleInBlock(
                 level, pos.above(), 1, ParticleTypes.NOTE
         );

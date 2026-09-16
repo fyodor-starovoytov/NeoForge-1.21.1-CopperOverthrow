@@ -121,12 +121,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.COPPER_TRAPDOOR)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_CHAIN.get(), 6)
-                .pattern("ABA")
-                .pattern("A A")
-                .pattern("A A")
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_CHAIN.get(), 3)
+                .pattern("A")
+                .pattern("A")
+                .pattern("A")
                 .define('A', Tags.Items.INGOTS_COPPER)
-                .define('B', Items.COPPER_TRAPDOOR)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)

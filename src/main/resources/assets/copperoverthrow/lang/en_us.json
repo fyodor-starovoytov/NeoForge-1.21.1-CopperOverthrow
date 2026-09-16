@@ -52,6 +52,15 @@
   "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Waxed Weathered Copper Rain Drum",
   "block.copperoverthrow.waxed_oxidized_high_note_rain_drum": "Waxed Oxidized Copper Rain Drum",
 
+  "block.copperoverthrow.copper_chain": "Copper Chain",
+  "block.copperoverthrow.exposed_copper_chain": "Exposed Copper Chain",
+  "block.copperoverthrow.weathered_copper_chain": "Weathered Copper Chain",
+  "block.copperoverthrow.oxidized_copper_chain": "Oxidized Copper Chain",
+  "block.copperoverthrow.waxed_copper_chain": "Waxed Copper Chain",
+  "block.copperoverthrow.waxed_exposed_copper_chain": "Waxed Exposed Copper Chain",
+  "block.copperoverthrow.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
+  "block.copperoverthrow.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain",
+
 
 
 
@@ -84,7 +93,11 @@
   "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Short resonant tap§r",
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Dull tap§r",
 
+  "copperoverthrow.config.rain_drum_enable_notes": "Notes When Playing",
+  "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Whether feature Rain Drums emit particles when playing a note.\n§7Default: True§r",
 
+  "copperoverthrow.config.rain_drum_enable_sparks": "Sparks During Full Moon",
+  "copperoverthrow.config.rain_drum_enable_sparks.tooltip": "Whether feature Rain Drums sparkle during full moon.\n§7Default: True§r",
 
   "sounds.copperoverthrow.raindrum_play": "Rain Drum Plays"
 }

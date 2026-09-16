@@ -73,17 +73,16 @@
       "copperoverthrow:exposed_rain_drum_sound_1",
       "copperoverthrow:exposed_rain_drum_sound_2",
       "copperoverthrow:exposed_rain_drum_sound_4",
-      "copperoverthrow:exposed_rain_drum_sound_7",
+      "copperoverthrow:exposed_rain_drum_sound_6",
       "copperoverthrow:exposed_rain_drum_sound_8"
     ]
   },
   "weathered_rain_drum_playing": {
     "subtitle": "sounds.copperoverthrow.raindrum_play",
     "sounds": [
-      "copperoverthrow:weathered_rain_drum_sound_1",
       "copperoverthrow:weathered_rain_drum_sound_2",
-      "copperoverthrow:weathered_rain_drum_sound_3",
       "copperoverthrow:weathered_rain_drum_sound_4",
+      "copperoverthrow:weathered_rain_drum_sound_5",
       "copperoverthrow:weathered_rain_drum_sound_7",
       "copperoverthrow:weathered_rain_drum_sound_8"
     ]
@@ -91,10 +90,10 @@
   "oxidized_rain_drum_playing": {
     "subtitle": "sounds.copperoverthrow.raindrum_play",
     "sounds": [
-      "oxidized_rain_drum_sound_3",
-      "oxidized_rain_drum_sound_4",
-      "oxidized_rain_drum_sound_7",
-      "oxidized_rain_drum_sound_8"
+      "copperoverthrow:oxidized_rain_drum_sound_3",
+      "copperoverthrow:oxidized_rain_drum_sound_7",
+      "copperoverthrow:oxidized_rain_drum_sound_8",
+      "copperoverthrow:oxidized_rain_drum_sound_10"
     ]
   }
 }

@@ -4,7 +4,6 @@ import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.effect.ModEffects;
-import net.star.copperoverthrow.enchantment.ModEnchantments;
 import net.star.copperoverthrow.item.ModCreativeModeTabs;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.sound.ModSounds;
@@ -56,22 +55,19 @@ public class CopperOverthrow {
 
         ModEffects.register(modEventBus);
 
-
-        // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
     }
+
 
     private void commonSetup(FMLCommonSetupEvent event) {
 
     }
 
-    // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
-        /*Adds to the INGRIDIENTS creative tab*/
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.COPPER_CHISEL);
 
@@ -81,8 +77,6 @@ public class CopperOverthrow {
         }
 
     }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
