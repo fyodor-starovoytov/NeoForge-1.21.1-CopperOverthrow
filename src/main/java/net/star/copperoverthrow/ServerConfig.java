@@ -29,5 +29,10 @@ public class ServerConfig {
                 .comment("Stepper Leggings' added Water Mobility Efficiency (0.5 equals 50% of water resistance penalty mitigated")
                 .translation("copperoverthrow.config.stepper_leggings_water")
                 .defineInRange("stepperLeggingsWaterMobility", 0.5, 0.0, 1.0);
+
+        public static final ModConfigSpec.DoubleValue TAMTAM_BASIC_VOLUME_RADIUS = BUILDER
+                .comment("Tam-Tam's Volume radius (16 blocks * x volume")
+                .translation("copperoverthrow.config.tam_tam_volume")
+                .defineInRange("tamtamVolumeRadius", 8.0, 0.0, 32.0);
         public static final ModConfigSpec SPEC = BUILDER.build();
 }
