@@ -570,6 +570,13 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
 
+    public static final DeferredBlock<Block> TAMTAM = registerBlock("tamtam",
+            () -> new TamTamBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .mapColor(DyeColor.ORANGE)
+                    .sound(SoundType.COPPER)));
 
 
 

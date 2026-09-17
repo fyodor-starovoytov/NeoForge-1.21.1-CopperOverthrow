@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -71,6 +72,7 @@ public class CopperTrowelItem extends Item {
 
         if (!level.isClientSide) {
             InteractionResult result = blockItem.place(placeContext);
+            level.playSound(null, context.getClickedPos(), SoundEvents.COPPER_HIT, SoundSource.PLAYERS);
 
             if (result.consumesAction()) {
                 if (level instanceof ServerLevel serverLevel) {

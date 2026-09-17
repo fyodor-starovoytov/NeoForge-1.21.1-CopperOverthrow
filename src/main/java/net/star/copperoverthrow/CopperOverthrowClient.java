@@ -9,16 +9,16 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.renderer.LogStripperBlockEntityRenderer;
+import net.star.copperoverthrow.client.TamTamModel;
+import net.star.copperoverthrow.client.renderer.TamTamRenderer;
 import net.star.copperoverthrow.util.ModItemProperties;
 
-// This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = CopperOverthrow.MOD_ID, dist = Dist.CLIENT)
-// You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-@EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = CopperOverthrow.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class CopperOverthrowClient {
+
     public CopperOverthrowClient(ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
@@ -29,8 +29,13 @@ public class CopperOverthrowClient {
     }
 
     @SubscribeEvent
-    public static void registerBER(EntityRenderersEvent.RegisterRenderers event){
+    public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.SWINGING_BE.get(), TamTamRenderer::new);
     }
 
+    @SubscribeEvent
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(TamTamModel.LAYER_LOCATION, TamTamModel::createBodyLayer);
+    }
 }

@@ -1,7 +1,6 @@
 package net.star.copperoverthrow.block.entity;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -9,6 +8,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.custom.CopperBeeosphereBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
+import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
 
 import java.util.function.Supplier;
 
@@ -26,9 +26,13 @@ public class ModBlockEntities {
                             CopperBeeosphereBlockEntity::new, ModBlocks.COPPER_BEEOSPHERE.get())
                     .build(null));
 
+    public static final Supplier<BlockEntityType<TamTamBlockEntity>> SWINGING_BE =
+            BLOCK_ENTITIES.register("tamtam_be", ()-> BlockEntityType.Builder.of(
+                            TamTamBlockEntity::new, ModBlocks.TAMTAM.get())
+                    .build(null));
+
 
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }
-
 }

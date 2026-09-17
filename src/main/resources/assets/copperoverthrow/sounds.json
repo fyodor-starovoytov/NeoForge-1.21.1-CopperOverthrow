@@ -95,5 +95,24 @@
       "copperoverthrow:oxidized_rain_drum_sound_8",
       "copperoverthrow:oxidized_rain_drum_sound_10"
     ]
+  },
+  "tamtam_playing": {
+    "subtitle": "sounds.copperoverthrow.tamtam_play",
+    "sounds": [
+      "copperoverthrow:tamtamlongsound1"
+    ]
+  },
+  "tamtam_playing_rare": {
+    "subtitle": "sounds.copperoverthrow.tamtam_play",
+    "sounds": [
+      "copperoverthrow:tamtamrarelongsound1"
+    ]
+  },
+  "tamtam_playing_moon": {
+    "subtitle": "sounds.copperoverthrow.tamtam_play",
+    "sounds": [
+      "copperoverthrow:tamtamraremoonsound1"
+    ]
   }
+
 }

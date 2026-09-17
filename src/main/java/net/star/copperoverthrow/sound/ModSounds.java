@@ -24,6 +24,10 @@ public class ModSounds {
         public static final Supplier<SoundEvent> WEATHERED_RAIN_DRUM_PLAYING = registerSoundEvent("weathered_rain_drum_playing");
         public static final Supplier<SoundEvent> OXIDIZED_RAIN_DRUM_PLAYING = registerSoundEvent("oxidized_rain_drum_playing");
 
+        public static final Supplier<SoundEvent> TAM_TAM_PLAYING = registerSoundEvent("tamtam_playing");
+        public static final Supplier<SoundEvent> TAM_TAM_PLAYING_RARE = registerSoundEvent("tamtam_playing_rare");
+        public static final Supplier<SoundEvent> TAM_TAM_PLAYING_MOON = registerSoundEvent("tamtam_playing_moon");
+
         private static Supplier<SoundEvent> registerSoundEvent(String name) {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, name);
             return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
