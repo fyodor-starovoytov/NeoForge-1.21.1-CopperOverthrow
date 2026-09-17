@@ -103,7 +103,8 @@
   "copperoverthrow.config.stepper_boots_safe_fall_distance": "Stepper Boots' Safe Fall Distance",
   "copperoverthrow.config.stepper_leggings_water": "Stepper Leggings' Speed Boost",
   "copperoverthrow.config.stepper_leggings_speed": "Stepper Leggings' Water Mobility Efficiency",
+  "copperoverthrow.config.tam_tam_volume": "Tam-Tam's Volume Radius",
 
-
+  "sounds.copperoverthrow.tamtam_play": "Tam-Tam Plays",
   "sounds.copperoverthrow.raindrum_play": "Rain Drum Plays"
 }

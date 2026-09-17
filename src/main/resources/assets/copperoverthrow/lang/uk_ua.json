@@ -21,6 +21,45 @@
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Вощене окиснене мідне риштовання",
   "block.copperoverthrow.log_stripper": "Станція обтесування колод",
 
+  "block.copperoverthrow.medium_note_rain_drum": "Мідний барабан дощу",
+  "block.copperoverthrow.exposed_medium_note_rain_drum": "Пошкоджений мідний барабан дощу",
+  "block.copperoverthrow.weathered_medium_note_rain_drum": "Покритий патиною мідний барабан дощу",
+  "block.copperoverthrow.oxidized_medium_note_rain_drum": "Окиснений мідний барабан дощу",
+
+  "block.copperoverthrow.waxed_medium_note_rain_drum": "Вощений мідний барабан дощу",
+  "block.copperoverthrow.waxed_exposed_medium_note_rain_drum": "Вощений пошкоджений мідний барабан дощу",
+  "block.copperoverthrow.waxed_weathered_medium_note_rain_drum": "Вощений покритий патиною мідний барабан дощу",
+  "block.copperoverthrow.waxed_oxidized_medium_note_rain_drum": "Вощений окиснений мідний барабан дощу",
+
+  "block.copperoverthrow.low_note_rain_drum": "Мідний барабан дощу",
+  "block.copperoverthrow.exposed_low_note_rain_drum": "Пошкоджений мідний барабан дощу",
+  "block.copperoverthrow.weathered_low_note_rain_drum": "Покритий патиною мідний барабан дощу",
+  "block.copperoverthrow.oxidized_low_note_rain_drum": "Окиснений мідний барабан дощу",
+
+  "block.copperoverthrow.waxed_low_note_rain_drum": "Вощений мідний барабан дощу",
+  "block.copperoverthrow.waxed_exposed_low_note_rain_drum": "Вощений пошкоджений мідний барабан дощу",
+  "block.copperoverthrow.waxed_weathered_low_note_rain_drum": "Вощений покритий патиною мідний барабан дощу",
+  "block.copperoverthrow.waxed_oxidized_low_note_rain_drum": "Вощений окиснений мідний барабан дощу",
+
+  "block.copperoverthrow.high_note_rain_drum": "Мідний барабан дощу",
+  "block.copperoverthrow.exposed_high_note_rain_drum": "Пошкоджений мідний барабан дощу",
+  "block.copperoverthrow.weathered_high_note_rain_drum": "Покритий патиною мідний барабан дощу",
+  "block.copperoverthrow.oxidized_high_note_rain_drum": "Окиснений мідний барабан дощу",
+
+  "block.copperoverthrow.waxed_high_note_rain_drum": "Вощений мідний барабан дощу",
+  "block.copperoverthrow.waxed_exposed_high_note_rain_drum": "Вощений пошкоджений мідний барабан дощу",
+  "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Вощений покритий патиною мідний барабан дощу",
+  "block.copperoverthrow.waxed_oxidized_high_note_rain_drum": "Вощений окиснений мідний барабан дощу",
+
+  "block.copperoverthrow.copper_chain": "Мідний ланцюг",
+  "block.copperoverthrow.exposed_copper_chain": "Пошкоджений мідний ланцюг",
+  "block.copperoverthrow.weathered_copper_chain": "Покритий патиною мідний ланцюг",
+  "block.copperoverthrow.oxidized_copper_chain": "Окиснений мідний ланцюг",
+  "block.copperoverthrow.waxed_copper_chain": "Вощений мідний ланцюг",
+  "block.copperoverthrow.waxed_exposed_copper_chain": "Вощений пошкоджений мідний ланцюг",
+  "block.copperoverthrow.waxed_weathered_copper_chain": "Вощений покритий патиною мідний ланцюг",
+  "block.copperoverthrow.waxed_oxidized_copper_chain": "Вощений окиснений мідний ланцюг",
+
   "effect.copperoverthrow.conductivity": "Провідність",
 
   "enchantment.copperoverthrow.areal": "Площинність",
@@ -34,5 +73,30 @@
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Ловить§r §6Бджолу§r §eвсередину ловця§r",
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Звільняє§r §eусіх збережених бджіл§r",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Затисніть §eShift§r §7для детальнішої інформації§r",
-  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Розміщує випадковий блок із§r §6панелі швидкого доступу§r"
+  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Розміщує випадковий блок із§r §6Панелі швидкого доступу§r",
+  "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Грає випадкові ноти під час§r §6Дощу§r",
+
+  "tooltip.copperoverthrow.sounding.tooltip": "§7Звучання:§r",
+  "tooltip.copperoverthrow.high_pitch.tooltip": "§7Висота тону:§r §bВисока§r",
+  "tooltip.copperoverthrow.medium_pitch.tooltip": "§7Висота тону:§r §aСередня§r",
+  "tooltip.copperoverthrow.low_pitch.tooltip": "§7Висота тону:§r §6Низька§r",
+
+  "tooltip.copperoverthrow.clean_sounding.tooltip": "§e Чисте резонансне передзвонювання§r",
+  "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Коротке резонансне передзвонювання§r",
+  "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Короткий резонансний стук§r",
+  "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Глухий стук§r",
+
+  "copperoverthrow.config.rain_drum_enable_notes": "Ноти під час гри",
+  "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Чи випромінюють барабани дощу частинки під час програвання ноти.\n§7За замовчуванням: ІСТИНА§r",
+  "copperoverthrow.config.rain_drum_enable_sparks": "Іскри під час повного місяця",
+  "copperoverthrow.config.rain_drum_enable_sparks.tooltip": "Чи іскряться барабани дощу під час повного місяця.\n§7За замовчуванням: ІСТИНА§r",
+  "copperoverthrow.config.log_stripper_tool_damage": "Пошкодження інструменту на станції обтесування колод",
+  "copperoverthrow.config.stepper_boots_step_height": "Висота кроку чобіт кроку",
+  "copperoverthrow.config.stepper_boots_safe_fall_distance": "Безпечна відстань падіння чобіт кроку",
+  "copperoverthrow.config.stepper_leggings_water": "Підвищення швидкості поношів кроку",
+  "copperoverthrow.config.stepper_leggings_speed": "Ефективність пересування у воді поношів кроку",
+  "copperoverthrow.config.tam_tam_volume": "Радіус гучності там-тама",
+
+  "sounds.copperoverthrow.tamtam_play": "Там-там грає",
+  "sounds.copperoverthrow.raindrum_play": "Барабан дощу грає"
 }

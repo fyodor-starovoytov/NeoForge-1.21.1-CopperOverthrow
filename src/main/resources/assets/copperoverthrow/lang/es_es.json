@@ -21,6 +21,45 @@
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Andamio de cobre oxidado encerado",
   "block.copperoverthrow.log_stripper": "Estación de descortezado",
 
+  "block.copperoverthrow.medium_note_rain_drum": "Tambor de lluvia de cobre",
+  "block.copperoverthrow.exposed_medium_note_rain_drum": "Tambor de lluvia de cobre expuesto",
+  "block.copperoverthrow.weathered_medium_note_rain_drum": "Tambor de lluvia de cobre desgastado",
+  "block.copperoverthrow.oxidized_medium_note_rain_drum": "Tambor de lluvia de cobre oxidado",
+
+  "block.copperoverthrow.waxed_medium_note_rain_drum": "Tambor de lluvia de cobre encerado",
+  "block.copperoverthrow.waxed_exposed_medium_note_rain_drum": "Tambor de lluvia de cobre expuesto encerado",
+  "block.copperoverthrow.waxed_weathered_medium_note_rain_drum": "Tambor de lluvia de cobre desgastado encerado",
+  "block.copperoverthrow.waxed_oxidized_medium_note_rain_drum": "Tambor de lluvia de cobre oxidado encerado",
+
+  "block.copperoverthrow.low_note_rain_drum": "Tambor de lluvia de cobre",
+  "block.copperoverthrow.exposed_low_note_rain_drum": "Tambor de lluvia de cobre expuesto",
+  "block.copperoverthrow.weathered_low_note_rain_drum": "Tambor de lluvia de cobre desgastado",
+  "block.copperoverthrow.oxidized_low_note_rain_drum": "Tambor de lluvia de cobre oxidado",
+
+  "block.copperoverthrow.waxed_low_note_rain_drum": "Tambor de lluvia de cobre encerado",
+  "block.copperoverthrow.waxed_exposed_low_note_rain_drum": "Tambor de lluvia de cobre expuesto encerado",
+  "block.copperoverthrow.waxed_weathered_low_note_rain_drum": "Tambor de lluvia de cobre desgastado encerado",
+  "block.copperoverthrow.waxed_oxidized_low_note_rain_drum": "Tambor de lluvia de cobre oxidado encerado",
+
+  "block.copperoverthrow.high_note_rain_drum": "Tambor de lluvia de cobre",
+  "block.copperoverthrow.exposed_high_note_rain_drum": "Tambor de lluvia de cobre expuesto",
+  "block.copperoverthrow.weathered_high_note_rain_drum": "Tambor de lluvia de cobre desgastado",
+  "block.copperoverthrow.oxidized_high_note_rain_drum": "Tambor de lluvia de cobre oxidado",
+
+  "block.copperoverthrow.waxed_high_note_rain_drum": "Tambor de lluvia de cobre encerado",
+  "block.copperoverthrow.waxed_exposed_high_note_rain_drum": "Tambor de lluvia de cobre expuesto encerado",
+  "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Tambor de lluvia de cobre desgastado encerado",
+  "block.copperoverthrow.waxed_oxidized_high_note_rain_drum": "Tambor de lluvia de cobre oxidado encerado",
+
+  "block.copperoverthrow.copper_chain": "Cadena de cobre",
+  "block.copperoverthrow.exposed_copper_chain": "Cadena de cobre expuesta",
+  "block.copperoverthrow.weathered_copper_chain": "Cadena de cobre desgastada",
+  "block.copperoverthrow.oxidized_copper_chain": "Cadena de cobre oxidada",
+  "block.copperoverthrow.waxed_copper_chain": "Cadena de cobre encerada",
+  "block.copperoverthrow.waxed_exposed_copper_chain": "Cadena de cobre expuesta encerada",
+  "block.copperoverthrow.waxed_weathered_copper_chain": "Cadena de cobre desgastada encerada",
+  "block.copperoverthrow.waxed_oxidized_copper_chain": "Cadena de cobre oxidada encerada",
+
   "effect.copperoverthrow.conductivity": "Conductividad",
 
   "enchantment.copperoverthrow.areal": "Área",
@@ -34,5 +73,30 @@
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Captura una§r §6Abeja§r §edentro del atrapador§r",
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Libera§r §etodas las abejas atrapadas§r",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Mantén §eShift§r §7para más información§r",
-  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Coloca un bloque aleatorio de la§r §6barra rápida§r"
+  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Coloca un bloque aleatorio de la§r §6Barra rápida§r",
+  "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Reproducirá notas aleatorias cuando§r §6Llueva§r",
+
+  "tooltip.copperoverthrow.sounding.tooltip": "§7Resonancia:§r",
+  "tooltip.copperoverthrow.high_pitch.tooltip": "§7Tono:§r §bAgudo§r",
+  "tooltip.copperoverthrow.medium_pitch.tooltip": "§7Tono:§r §aMedio§r",
+  "tooltip.copperoverthrow.low_pitch.tooltip": "§7Tono:§r §6Grave§r",
+
+  "tooltip.copperoverthrow.clean_sounding.tooltip": "§e Repique resonante limpio§r",
+  "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Repique resonante corto§r",
+  "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Toque resonante corto§r",
+  "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Toque sordo§r",
+
+  "copperoverthrow.config.rain_drum_enable_notes": "Notas al tocar",
+  "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Determina si los tambores de lluvia emiten partículas al tocar una nota.\n§7Por defecto: Verdadero§r",
+  "copperoverthrow.config.rain_drum_enable_sparks": "Chispas durante luna llena",
+  "copperoverthrow.config.rain_drum_enable_sparks.tooltip": "Determina si los tambores de lluvia echan chispas durante la luna llena.\n§7Por defecto: Verdadero§r",
+  "copperoverthrow.config.log_stripper_tool_damage": "Daño de herramienta en la estación de descortezado",
+  "copperoverthrow.config.stepper_boots_step_height": "Altura de paso de las botas de escalón",
+  "copperoverthrow.config.stepper_boots_safe_fall_distance": "Distancia de caída segura de las botas de escalón",
+  "copperoverthrow.config.stepper_leggings_water": "Aumento de velocidad de las grebas de escalón",
+  "copperoverthrow.config.stepper_leggings_speed": "Eficiencia de movilidad acuática de las grebas de escalón",
+  "copperoverthrow.config.tam_tam_volume": "Radio de volumen del tam-tam",
+
+  "sounds.copperoverthrow.tamtam_play": "Tam-tam suena",
+  "sounds.copperoverthrow.raindrum_play": "Tambor de lluvia suena"
 }

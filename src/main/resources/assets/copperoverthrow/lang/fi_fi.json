@@ -21,6 +21,45 @@
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Vahattu hapettunut kuparirakennusteline",
   "block.copperoverthrow.log_stripper": "Tukkien kuorinta-asema",
 
+  "block.copperoverthrow.medium_note_rain_drum": "Kuparisaderumpu",
+  "block.copperoverthrow.exposed_medium_note_rain_drum": "Altistunut kuparisaderumpu",
+  "block.copperoverthrow.weathered_medium_note_rain_drum": "Kulunut kuparisaderumpu",
+  "block.copperoverthrow.oxidized_medium_note_rain_drum": "Hapettunut kuparisaderumpu",
+
+  "block.copperoverthrow.waxed_medium_note_rain_drum": "Vahattu kuparisaderumpu",
+  "block.copperoverthrow.waxed_exposed_medium_note_rain_drum": "Vahattu altistunut kuparisaderumpu",
+  "block.copperoverthrow.waxed_weathered_medium_note_rain_drum": "Vahattu kulunut kuparisaderumpu",
+  "block.copperoverthrow.waxed_oxidized_medium_note_rain_drum": "Vahattu hapettunut kuparisaderumpu",
+
+  "block.copperoverthrow.low_note_rain_drum": "Kuparisaderumpu",
+  "block.copperoverthrow.exposed_low_note_rain_drum": "Altistunut kuparisaderumpu",
+  "block.copperoverthrow.weathered_low_note_rain_drum": "Kulunut kuparisaderumpu",
+  "block.copperoverthrow.oxidized_low_note_rain_drum": "Hapettunut kuparisaderumpu",
+
+  "block.copperoverthrow.waxed_low_note_rain_drum": "Vahattu kuparisaderumpu",
+  "block.copperoverthrow.waxed_exposed_low_note_rain_drum": "Vahattu altistunut kuparisaderumpu",
+  "block.copperoverthrow.waxed_weathered_low_note_rain_drum": "Vahattu kulunut kuparisaderumpu",
+  "block.copperoverthrow.waxed_oxidized_low_note_rain_drum": "Vahattu hapettunut kuparisaderumpu",
+
+  "block.copperoverthrow.high_note_rain_drum": "Kuparisaderumpu",
+  "block.copperoverthrow.exposed_high_note_rain_drum": "Altistunut kuparisaderumpu",
+  "block.copperoverthrow.weathered_high_note_rain_drum": "Kulunut kuparisaderumpu",
+  "block.copperoverthrow.oxidized_high_note_rain_drum": "Hapettunut kuparisaderumpu",
+
+  "block.copperoverthrow.waxed_high_note_rain_drum": "Vahattu kuparisaderumpu",
+  "block.copperoverthrow.waxed_exposed_high_note_rain_drum": "Vahattu altistunut kuparisaderumpu",
+  "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Vahattu kulunut kuparisaderumpu",
+  "block.copperoverthrow.waxed_oxidized_high_note_rain_drum": "Vahattu hapettunut kuparisaderumpu",
+
+  "block.copperoverthrow.copper_chain": "Kupariketju",
+  "block.copperoverthrow.exposed_copper_chain": "Altistunut kupariketju",
+  "block.copperoverthrow.weathered_copper_chain": "Kulunut kupariketju",
+  "block.copperoverthrow.oxidized_copper_chain": "Hapettunut kupariketju",
+  "block.copperoverthrow.waxed_copper_chain": "Vahattu kupariketju",
+  "block.copperoverthrow.waxed_exposed_copper_chain": "Vahattu altistunut kupariketju",
+  "block.copperoverthrow.waxed_weathered_copper_chain": "Vahattu kulunut kupariketju",
+  "block.copperoverthrow.waxed_oxidized_copper_chain": "Vahattu hapettunut kupariketju",
+
   "effect.copperoverthrow.conductivity": "Johtavuus",
 
   "enchantment.copperoverthrow.areal": "Alueellinen",
@@ -34,5 +73,30 @@
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Kaappaa§r §6Mehiläisen§r §esiepparin sisään§r",
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Vapauttaa§r §ekaikki säilötyt mehiläiset§r",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Pidä §eShift§r §7painettuna saadaksesi lisätietoja§r",
-  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Asettaa satunnaisen kuution§r §6pikapalkista§r"
+  "tooltip.copperoverthrow.trowel_item.tooltip": "§e Asettaa satunnaisen kuution§r §6Pikapalkista§r",
+  "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Soittaa satunnaisia säveliä kun§r §6Sataa§r",
+
+  "tooltip.copperoverthrow.sounding.tooltip": "§7Kaiku:§r",
+  "tooltip.copperoverthrow.high_pitch.tooltip": "§7Sävelkorkeus:§r §bKorkea§r",
+  "tooltip.copperoverthrow.medium_pitch.tooltip": "§7Sävelkorkeus:§r §aKeski§r",
+  "tooltip.copperoverthrow.low_pitch.tooltip": "§7Sävelkorkeus:§r §6Matala§r",
+
+  "tooltip.copperoverthrow.clean_sounding.tooltip": "§e Puhdas resonoiva helinä§r",
+  "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Lyhyt resonoiva helinä§r",
+  "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Lyhyt resonoiva napautus§r",
+  "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Matala napautus§r",
+
+  "copperoverthrow.config.rain_drum_enable_notes": "Nuotit soittaessa",
+  "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Päästävätkö saderummut hiukkasia nuottia soitettaessa.\n§7Oletus: Tosi§r",
+  "copperoverthrow.config.rain_drum_enable_sparks": "Kipinät täysikuun aikana",
+  "copperoverthrow.config.rain_drum_enable_sparks.tooltip": "Kipinöivätkö saderummut täysikuun aikana.\n§7Oletus: Tosi§r",
+  "copperoverthrow.config.log_stripper_tool_damage": "Tukkien kuorinta-aseman työkaluvaurio",
+  "copperoverthrow.config.stepper_boots_step_height": "Askelmansaappaiden askelkorkeus",
+  "copperoverthrow.config.stepper_boots_safe_fall_distance": "Askelmansaappaiden turvallinen putoamismatka",
+  "copperoverthrow.config.stepper_leggings_water": "Askelmahousujen nopeuslisä",
+  "copperoverthrow.config.stepper_leggings_speed": "Askelmahousujen vesiliikkuvuustehokkuus",
+  "copperoverthrow.config.tam_tam_volume": "Tam-tamin äänenvoimakkuussäde",
+
+  "sounds.copperoverthrow.tamtam_play": "Tam-tam soi",
+  "sounds.copperoverthrow.raindrum_play": "Saderumpu soi"
 }
