@@ -2,6 +2,7 @@ package net.star.copperoverthrow.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.star.copperoverthrow.CopperOverthrow;
@@ -25,9 +27,7 @@ public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
     private final ModelPart tamtamBody;
 
     public TamTamRenderer(BlockEntityRendererProvider.Context context) {
-        // Bake the root model layer
         this.root = context.bakeLayer(TamTamModel.LAYER_LOCATION);
-        // Grab the child parts
         this.tamtamBody = this.root.getChild("root").getChild("tamtam_body");
     }
 
@@ -35,9 +35,24 @@ public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
     public void render(TamTamBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         poseStack.pushPose();
 
-        // 1. Center the model in the block space (0.5, 1.5, 0.5) and flip inverted Blockbench Y/Z axes
-        poseStack.translate(1.0D, 1.5D, 0.5D);
-        poseStack.scale(1.0F, -1.0F, -1.0F);
+        if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.EAST) {
+            poseStack.translate(0.5D, 0.6875D, 1.0D);
+            poseStack.scale(1.0F, -1.0F, -1.0F);
+            poseStack.mulPose(Axis.YP.rotationDegrees(90));
+        }
+        if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.WEST) {
+            poseStack.translate(0.5D, 0.6875D, 0.0D);
+            poseStack.scale(1.0F, -1.0F, -1.0F);
+            poseStack.mulPose(Axis.YP.rotationDegrees(90));
+        }
+        if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.NORTH) {
+            poseStack.translate(1.0D, 0.6875D, 0.5D);
+            poseStack.scale(1.0F, -1.0F, -1.0F);
+        }
+        if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.SOUTH) {
+            poseStack.translate(0.0D, 0.6875D, 0.5D);
+            poseStack.scale(1.0F, -1.0F, -1.0F);
+        }
 
         if (blockEntity.swinging) {
             float time = (float) blockEntity.ticks + partialTick;
@@ -50,11 +65,11 @@ public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
                 this.tamtamBody.xRot = swingAngle;
                 this.tamtamBody.zRot = 0.0F;
             } else if (blockEntity.clickDirection == Direction.EAST) {
-                this.tamtamBody.zRot = -swingAngle;
-                this.tamtamBody.xRot = 0.0F;
+                this.tamtamBody.zRot = 0.0F;
+                this.tamtamBody.xRot = -swingAngle;
             } else if (blockEntity.clickDirection == Direction.WEST) {
-                this.tamtamBody.zRot = swingAngle;
-                this.tamtamBody.xRot = 0.0F;
+                this.tamtamBody.zRot = 0.0F;
+                this.tamtamBody.xRot = swingAngle;
             }
         } else {
             this.tamtamBody.xRot = 0.0F;

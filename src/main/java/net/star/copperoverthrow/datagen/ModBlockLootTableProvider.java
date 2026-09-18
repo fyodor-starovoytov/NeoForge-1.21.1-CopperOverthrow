@@ -73,6 +73,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.LOG_STRIPPER.get());
         dropSelf(ModBlocks.COPPER_BEEOSPHERE.get());
 
+        dropSelf(ModBlocks.TAMTAM.get());
+
     }
 
     @Override
