@@ -2,6 +2,7 @@
   "values": [
     "minecraft:note_block",
     "minecraft:jukebox",
+    "#c:musical_blocks/plates",
     "#c:musical_blocks/rain_drums"
   ]
 }

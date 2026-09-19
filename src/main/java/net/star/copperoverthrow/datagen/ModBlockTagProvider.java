@@ -45,6 +45,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get())
 
+                .addTag(ModTags.Blocks.PLATES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .add(ModBlocks.LOG_STRIPPER.get());
 
@@ -67,6 +68,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get())
 
+                .addTag(ModTags.Blocks.PLATES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .add(ModBlocks.LOG_STRIPPER.get());
 
@@ -109,7 +111,11 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.MUSICAL_BLOCKS)
                 .add(Blocks.NOTE_BLOCK)
                 .add(Blocks.JUKEBOX)
+                .addTag(ModTags.Blocks.PLATES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS);
+
+        tag(ModTags.Blocks.PLATES)
+                .add(ModBlocks.TAMTAM.get());
 
         tag(ModTags.Blocks.RAIN_DRUMS)
                 .add(ModBlocks.RAIN_DRUM.get())

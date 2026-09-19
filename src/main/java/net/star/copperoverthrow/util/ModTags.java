@@ -17,6 +17,7 @@ public class ModTags {
         public static final TagKey<Block> MINEABLE_WITH_HAMMER = createTag(CopperOverthrow.MOD_ID ,"mineable_with_hammer");
 
         public static final TagKey<Block> RAIN_DRUMS = createTag("c", "musical_blocks/rain_drums");
+        public static final TagKey<Block> PLATES = createTag("c", "musical_blocks/plates");
         public static final TagKey<Block> MUSICAL_BLOCKS = createTag("c", "musical_blocks");
 
          private static TagKey<Block> createTag(String namespace, String path){
