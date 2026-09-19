@@ -172,34 +172,42 @@ public class MultiBlockTallDecoration extends Block {
         }
     }
 
+    @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide && player.isCreative()) {
             TripleBlockPart part = state.getValue(PART);
 
-            if (part == TripleBlockPart.TOP) {
-                preventCreativeDrop(level, pos.below(1), player);
-                if (this.blockHeight == 3) {
-                    preventCreativeDrop(level, pos.below(2), player);
-                }
-            } else if (part == TripleBlockPart.MIDDLE && this.blockHeight == 3) {
-                preventCreativeDrop(level, pos.below(1), player);
-                preventCreativeDrop(level, pos.above(1), player);
-            } else if (part == TripleBlockPart.BOTTOM) {
-                preventCreativeDrop(level, pos.above(1), player);
-                if (this.blockHeight == 3) {
-                    preventCreativeDrop(level, pos.above(2), player);
+            BlockPos bottomPos = switch (part) {
+                case BOTTOM -> pos;
+                case MIDDLE -> pos.below(1);
+                case TOP -> pos.below(this.blockHeight - 1);
+            };
+
+            for (int i = 0; i < this.blockHeight; i++) {
+                BlockPos targetPos = bottomPos.above(i);
+                BlockState targetState = level.getBlockState(targetPos);
+
+                if (isSameStructure(targetState)) {
+                    level.setBlock(targetPos, Blocks.AIR.defaultBlockState(), 35);
+                    level.levelEvent(player, 2001, targetPos, Block.getId(targetState));
                 }
             }
         }
         return super.playerWillDestroy(level, pos, state, player);
     }
 
-    private void preventCreativeDrop(Level level, BlockPos pos, Player player) {
-        BlockState state = level.getBlockState(pos);
-        if (state.is(this)) {
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 35);
-            level.levelEvent(player, 2001, pos, Block.getId(state));
+    @Override
+    public java.util.List<ItemStack> getDrops(BlockState state, net.minecraft.world.level.storage.loot.LootParams.Builder builder) {
+        net.minecraft.world.entity.Entity entity = builder.getOptionalParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY);
+        if (entity instanceof Player player && player.isCreative()) {
+            return java.util.Collections.emptyList();
         }
+
+        if (state.getValue(PART) != TripleBlockPart.BOTTOM) {
+            return java.util.Collections.emptyList();
+        }
+
+        return super.getDrops(state, builder);
     }
 
     public enum TripleBlockPart implements StringRepresentable {

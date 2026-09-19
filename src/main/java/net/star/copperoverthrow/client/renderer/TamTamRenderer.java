@@ -12,9 +12,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.block.custom.TamTamBlock;
 import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
 import net.star.copperoverthrow.client.TamTamModel;
 
@@ -33,53 +35,57 @@ public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
 
     @Override
     public void render(TamTamBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        poseStack.pushPose();
+        Boolean isUpper = blockEntity.getBlockState().getValue(TamTamBlock.PART) == TamTamBlock.WideThinDoubleBlock.MAIN_TOP;
 
-        if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.EAST) {
-            poseStack.translate(0.5D, 0.6875D, 1.0D);
-            poseStack.scale(1.0F, -1.0F, -1.0F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(90));
-        }
-        if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.WEST) {
-            poseStack.translate(0.5D, 0.6875D, 0.0D);
-            poseStack.scale(1.0F, -1.0F, -1.0F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(90));
-        }
-        if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.NORTH) {
-            poseStack.translate(1.0D, 0.6875D, 0.5D);
-            poseStack.scale(1.0F, -1.0F, -1.0F);
-        }
-        if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.SOUTH) {
-            poseStack.translate(0.0D, 0.6875D, 0.5D);
-            poseStack.scale(1.0F, -1.0F, -1.0F);
-        }
+        if (isUpper) {
+            poseStack.pushPose();
 
-        if (blockEntity.swinging) {
-            float time = (float) blockEntity.ticks + partialTick;
-            float swingAngle = (3 * Mth.sin(time / (1.5f * (float) Math.PI))) / (7 + time / 4.0F);
-
-            if (blockEntity.clickDirection == Direction.NORTH) {
-                this.tamtamBody.xRot = -swingAngle;
-                this.tamtamBody.zRot = 0.0F;
-            } else if (blockEntity.clickDirection == Direction.SOUTH) {
-                this.tamtamBody.xRot = swingAngle;
-                this.tamtamBody.zRot = 0.0F;
-            } else if (blockEntity.clickDirection == Direction.EAST) {
-                this.tamtamBody.zRot = 0.0F;
-                this.tamtamBody.xRot = -swingAngle;
-            } else if (blockEntity.clickDirection == Direction.WEST) {
-                this.tamtamBody.zRot = 0.0F;
-                this.tamtamBody.xRot = swingAngle;
+            if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.EAST) {
+                poseStack.translate(0.5D, 0.6875D, 1.0D);
+                poseStack.scale(1.0F, -1.0F, -1.0F);
+                poseStack.mulPose(Axis.YP.rotationDegrees(90));
             }
-        } else {
-            this.tamtamBody.xRot = 0.0F;
-            this.tamtamBody.zRot = 0.0F;
+            if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.WEST) {
+                poseStack.translate(0.5D, 0.6875D, 0.0D);
+                poseStack.scale(1.0F, -1.0F, -1.0F);
+                poseStack.mulPose(Axis.YP.rotationDegrees(90));
+            }
+            if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.NORTH) {
+                poseStack.translate(1.0D, 0.6875D, 0.5D);
+                poseStack.scale(1.0F, -1.0F, -1.0F);
+            }
+            if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.SOUTH) {
+                poseStack.translate(0.0D, 0.6875D, 0.5D);
+                poseStack.scale(1.0F, -1.0F, -1.0F);
+            }
+
+            if (blockEntity.swinging) {
+                float time = (float) blockEntity.ticks + partialTick;
+                float swingAngle = (3 * Mth.sin(time / (1.5f * (float) Math.PI))) / (7 + time / 4.0F);
+
+                if (blockEntity.clickDirection == Direction.NORTH) {
+                    this.tamtamBody.xRot = -swingAngle;
+                    this.tamtamBody.zRot = 0.0F;
+                } else if (blockEntity.clickDirection == Direction.SOUTH) {
+                    this.tamtamBody.xRot = swingAngle;
+                    this.tamtamBody.zRot = 0.0F;
+                } else if (blockEntity.clickDirection == Direction.EAST) {
+                    this.tamtamBody.zRot = 0.0F;
+                    this.tamtamBody.xRot = -swingAngle;
+                } else if (blockEntity.clickDirection == Direction.WEST) {
+                    this.tamtamBody.zRot = 0.0F;
+                    this.tamtamBody.xRot = swingAngle;
+                }
+            } else {
+                this.tamtamBody.xRot = 0.0F;
+                this.tamtamBody.zRot = 0.0F;
+            }
+
+            // Render root (which renders tamtamBody as a child with all correct parent offsets applied)
+            VertexConsumer consumer = bufferSource.getBuffer(RenderType.entitySolid(TEXTURE));
+            this.root.render(poseStack, consumer, packedLight, packedOverlay, -1);
+
+            poseStack.popPose();
         }
-
-        // 3. Render root (which renders tamtamBody as a child with all correct parent offsets applied)
-        VertexConsumer consumer = bufferSource.getBuffer(RenderType.entitySolid(TEXTURE));
-        this.root.render(poseStack, consumer, packedLight, packedOverlay, -1);
-
-        poseStack.popPose();
     }
 }
