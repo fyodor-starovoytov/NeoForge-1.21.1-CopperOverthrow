@@ -174,13 +174,17 @@ public class TamTamBlock extends BaseEntityBlock implements Instruments {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         Direction direction = hitResult.getDirection();
+        Direction facing = state.getValue(FACING);
+        Direction sideDir = facing.getClockWise();
+        Direction counterSideDir = facing.getCounterClockWise();
         WideThinDoubleBlock part = state.getValue(PART);
-        BlockPos targetPos = (part == WideThinDoubleBlock.BOTTOM) ? pos.above() : pos;
-        if (level.getBlockState(targetPos).getValue(PART) == WideThinDoubleBlock.BOTTOM){
-            targetPos.relative(direction.getCounterClockWise());
-        }
-
-        if (!level.isClientSide && level.getBlockEntity(targetPos) instanceof TamTamBlockEntity blockEntity && !blockEntity.swinging && isProperHit(state, direction)) {
+        BlockPos mainTopPos = switch (part) {
+            case MAIN_TOP -> pos;
+            case TOP_CLOCKWISE -> pos.relative(counterSideDir);
+            case BOTTOM -> pos.above();
+            case BOTTOM_CLOCKWISE -> pos.relative(counterSideDir).above();
+        };
+        if (!level.isClientSide && level.getBlockEntity(mainTopPos) instanceof TamTamBlockEntity blockEntity && !blockEntity.swinging && isProperHit(state, direction)) {
             blockEntity.startSwing(hitResult.getDirection());
             playSound(level, pos, ServerConfig.TAMTAM_BASIC_VOLUME_RADIUS.get().floatValue());
             return InteractionResult.SUCCESS;

@@ -28,7 +28,11 @@ public class ModBlockEntities {
 
     public static final Supplier<BlockEntityType<TamTamBlockEntity>> SWINGING_BE =
             BLOCK_ENTITIES.register("tamtam_be", ()-> BlockEntityType.Builder.of(
-                            TamTamBlockEntity::new, ModBlocks.TAMTAM.get())
+                            TamTamBlockEntity::new,
+                            ModBlocks.TAMTAM.get(),
+                            ModBlocks.EXPOSED_TAMTAM.get(),
+                            ModBlocks.WEATHERED_TAMTAM.get(),
+                            ModBlocks.OXIDIZED_TAMTAM.get())
                     .build(null));
 
 
