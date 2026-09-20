@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "copperoverthrow:block/waxed_oxidized_tamtam",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "copperoverthrow:block/waxed_oxidized_tamtam"
+    },
+    "facing=south": {
+      "model": "copperoverthrow:block/waxed_oxidized_tamtam",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "copperoverthrow:block/waxed_oxidized_tamtam",
+      "y": 270
+    }
+  }
+}

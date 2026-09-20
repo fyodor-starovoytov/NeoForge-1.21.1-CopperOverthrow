@@ -575,30 +575,65 @@ public class ModBlocks {
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .mapColor(DyeColor.ORANGE)
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER)));
-public static final DeferredBlock<Block> WEATHERED_TAMTAM = registerBlock("weathered_tamtam",
+    public static final DeferredBlock<Block> WEATHERED_TAMTAM = registerBlock("weathered_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .mapColor(DyeColor.ORANGE)
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER)));
-public static final DeferredBlock<Block> OXIDIZED_TAMTAM = registerBlock("oxidized_tamtam",
+    public static final DeferredBlock<Block> OXIDIZED_TAMTAM = registerBlock("oxidized_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .mapColor(DyeColor.ORANGE)
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER)));
-public static final DeferredBlock<Block> TAMTAM = registerBlock("tamtam",
+    public static final DeferredBlock<Block> TAMTAM = registerBlock("tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .mapColor(DyeColor.ORANGE)
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER)));
-
+    public static final DeferredBlock<Block> WAXED_TAMTAM = registerBlock("waxed_tamtam",
+            () -> new TamTamBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER)));
+    public static final DeferredBlock<Block> WAXED_EXPOSED_TAMTAM = registerBlock("waxed_exposed_tamtam",
+            () -> new TamTamBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER)));
+    public static final DeferredBlock<Block> WAXED_WEATHERED_TAMTAM = registerBlock("waxed_weathered_tamtam",
+            () -> new TamTamBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER)));
+    public static final DeferredBlock<Block> WAXED_OXIDIZED_TAMTAM = registerBlock("waxed_oxidized_tamtam",
+            () -> new TamTamBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.IGNORE)
+                    .sound(SoundType.COPPER)));
 
 
 

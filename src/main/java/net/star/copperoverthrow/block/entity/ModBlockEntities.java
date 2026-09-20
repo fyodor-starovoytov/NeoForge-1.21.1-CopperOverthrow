@@ -32,7 +32,11 @@ public class ModBlockEntities {
                             ModBlocks.TAMTAM.get(),
                             ModBlocks.EXPOSED_TAMTAM.get(),
                             ModBlocks.WEATHERED_TAMTAM.get(),
-                            ModBlocks.OXIDIZED_TAMTAM.get())
+                            ModBlocks.OXIDIZED_TAMTAM.get(),
+                            ModBlocks.WAXED_TAMTAM.get(),
+                            ModBlocks.WAXED_EXPOSED_TAMTAM.get(),
+                            ModBlocks.WAXED_WEATHERED_TAMTAM.get(),
+                            ModBlocks.WAXED_OXIDIZED_TAMTAM.get())
                     .build(null));
 
 
