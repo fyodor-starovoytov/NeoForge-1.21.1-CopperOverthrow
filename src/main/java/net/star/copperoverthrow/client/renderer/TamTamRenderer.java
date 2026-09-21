@@ -23,7 +23,7 @@ import net.star.copperoverthrow.client.TamTamModel;
 @OnlyIn(Dist.CLIENT)
 public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
     public static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/tamtam_body.png");
+            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/tamtambodytexture.png");
 
     private final ModelPart root;
     private final ModelPart tamtamBody;
@@ -41,21 +41,21 @@ public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
             poseStack.pushPose();
 
             if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.EAST) {
-                poseStack.translate(0.5D, 0.6875D, 1.0D);
+                poseStack.translate(0.5D, 0.5D, 1.0D);
                 poseStack.scale(1.0F, -1.0F, -1.0F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90));
             }
             if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.WEST) {
-                poseStack.translate(0.5D, 0.6875D, 0.0D);
+                poseStack.translate(0.5D, 0.5D, 0.0D);
                 poseStack.scale(1.0F, -1.0F, -1.0F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90));
             }
             if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.NORTH) {
-                poseStack.translate(1.0D, 0.6875D, 0.5D);
+                poseStack.translate(1.0D, 0.5D, 0.5D);
                 poseStack.scale(1.0F, -1.0F, -1.0F);
             }
             if (blockEntity.getBlockState().getValue(HorizontalDirectionalBlock.FACING) == Direction.SOUTH) {
-                poseStack.translate(0.0D, 0.6875D, 0.5D);
+                poseStack.translate(0.0D, 0.5D, 0.5D);
                 poseStack.scale(1.0F, -1.0F, -1.0F);
             }
 
