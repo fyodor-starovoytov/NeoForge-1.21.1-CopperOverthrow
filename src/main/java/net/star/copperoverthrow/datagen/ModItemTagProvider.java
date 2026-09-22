@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModTags;
 import org.jetbrains.annotations.Nullable;
