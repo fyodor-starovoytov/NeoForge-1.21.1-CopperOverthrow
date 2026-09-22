@@ -5,7 +5,7 @@
   "textures": {
     "0": "copperoverthrow:block/exposed_drum_disc",
     "1": "copperoverthrow:block/exposed_copper_base_drum_high",
-    "particle": "copperoverthrow:block/logstripperbase2"
+    "particle": "copperoverthrow:block/exposed_scaffolding_copper_texture"
   },
 	"elements": [
 		{

@@ -82,7 +82,7 @@ public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
             }
 
             // Render root (which renders tamtamBody as a child with all correct parent offsets applied)
-            VertexConsumer consumer = bufferSource.getBuffer(RenderType.entitySolid(TEXTURE));
+            VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
             this.root.render(poseStack, consumer, packedLight, packedOverlay, -1);
 
             poseStack.popPose();

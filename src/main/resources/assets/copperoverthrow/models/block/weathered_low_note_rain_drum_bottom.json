@@ -5,7 +5,7 @@
 	"textures": {
 		"0": "copperoverthrow:block/weathered_low_note_rain_drum_bottom",
 		"1": "copperoverthrow:block/low_note_rain_drum_bottom_leg",
-		"particle": "copperoverthrow:block/logstripperbase2"
+		"particle": "copperoverthrow:block/weathered_scaffolding_copper_texture"
 	},
 	"elements": [
 		{

@@ -7,7 +7,7 @@
 		"0": "copperoverthrow:block/medium_note_rain_drum_bottom_base",
 		"1": "copperoverthrow:block/weathered_medium_note_rain_drum_base",
 		"4": "copperoverthrow:block/weathered_drum_disc",
-		"particle": "copperoverthrow:block/logstripperbase2"
+		"particle": "copperoverthrow:block/weathered_scaffolding_copper_texture"
 	},
 	"elements": [
 		{
