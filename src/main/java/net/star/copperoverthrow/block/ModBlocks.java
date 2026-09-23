@@ -635,6 +635,48 @@ public class ModBlocks {
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER)));
 
+    public static final DeferredBlock<Block> COPPER_LANTERN = registerBlock("copper_lantern",
+            () -> new LanternBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .lightLevel(p_187433_ -> 13)
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)));
+    public static final DeferredBlock<Block> EXPOSED_COPPER_LANTERN = registerBlock("exposed_copper_lantern",
+            () -> new LanternBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .lightLevel(p_187433_ -> 12)
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)));
+    public static final DeferredBlock<Block> WEATHERED_COPPER_LANTERN = registerBlock("weathered_copper_lantern",
+            () -> new LanternBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .lightLevel(p_187433_ -> 11)
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)));
+    public static final DeferredBlock<Block> OXIDIZED_COPPER_LANTERN = registerBlock("oxidized_copper_lantern",
+            () -> new LanternBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .lightLevel(p_187433_ -> 10)
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)));
+
+
 
 
 

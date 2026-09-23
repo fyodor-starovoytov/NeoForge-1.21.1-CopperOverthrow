@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "copperoverthrow:block/copper_scaffolding"
+    },
+    "hanging=true": {
+      "model": "copperoverthrow:block/copper_lantern_hanging"
+    }
+  }
+}

@@ -56,6 +56,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.TAMTAM);
                         output.accept(ModBlocks.COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.COPPER_CHAIN);
+                        output.accept(ModBlocks.COPPER_LANTERN);
 
                         output.accept(ModBlocks.EXPOSED_TINY_RAIN_DRUM);
                         output.accept(ModBlocks.EXPOSED_RAIN_DRUM);
@@ -63,6 +64,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.EXPOSED_TAMTAM);
                         output.accept(ModBlocks.EXPOSED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.EXPOSED_COPPER_CHAIN);
+                        output.accept(ModBlocks.EXPOSED_COPPER_LANTERN);
 
                         output.accept(ModBlocks.WEATHERED_TINY_RAIN_DRUM);
                         output.accept(ModBlocks.WEATHERED_RAIN_DRUM);
@@ -70,6 +72,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WEATHERED_TAMTAM);
                         output.accept(ModBlocks.WEATHERED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.WEATHERED_COPPER_CHAIN);
+                        output.accept(ModBlocks.WEATHERED_COPPER_LANTERN);
 
                         output.accept(ModBlocks.OXIDIZED_TINY_RAIN_DRUM);
                         output.accept(ModBlocks.OXIDIZED_RAIN_DRUM);
@@ -77,6 +80,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.OXIDIZED_TAMTAM);
                         output.accept(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.OXIDIZED_COPPER_CHAIN);
+                        output.accept(ModBlocks.OXIDIZED_COPPER_LANTERN);
 
                         output.accept(ModBlocks.WAXED_TINY_RAIN_DRUM);
                         output.accept(ModBlocks.WAXED_RAIN_DRUM);
