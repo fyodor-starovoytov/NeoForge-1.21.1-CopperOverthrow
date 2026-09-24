@@ -193,10 +193,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM.get(), "weathered_large_rain_drum");
         addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get(), "oxidized_large_rain_drum");
 
+        addWaxingRecipe(recipeOutput, ModBlocks.TAMTAM.get(), ModBlocks.WAXED_TAMTAM.get(), "tamtam");
+        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_TAMTAM.get(), ModBlocks.WAXED_EXPOSED_TAMTAM.get(), "exposed_tamtam");
+        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_TAMTAM.get(), ModBlocks.WAXED_WEATHERED_TAMTAM.get(), "weathered_tamtam");
+        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_TAMTAM.get(), ModBlocks.WAXED_OXIDIZED_TAMTAM.get(), "oxidized_tamtam");
+
         addWaxingRecipe(recipeOutput, ModBlocks.COPPER_CHAIN.get(), ModBlocks.WAXED_COPPER_CHAIN.get(), "copper_chain");
         addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_COPPER_CHAIN.get(), ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get(), "exposed_copper_chain");
         addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_COPPER_CHAIN.get(), ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get(), "weathered_copper_chain");
         addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_COPPER_CHAIN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get(), "oxidized_copper_chain");
+
+        addWaxingRecipe(recipeOutput, ModBlocks.COPPER_LANTERN.get(), ModBlocks.WAXED_COPPER_LANTERN.get(), "copper_lantern");
+        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_COPPER_LANTERN.get(), ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get(), "exposed_copper_lantern");
+        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_COPPER_LANTERN.get(), ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get(), "weathered_copper_lantern");
+        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_COPPER_LANTERN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get(), "oxidized_copper_lantern");
     }
 
     protected void addWaxingRecipe(RecipeOutput recipeOutput, ItemLike unwaxed, ItemLike waxed, String unwaxedName) {

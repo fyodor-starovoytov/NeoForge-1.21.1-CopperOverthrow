@@ -3,11 +3,17 @@
     "copperoverthrow:copper_chain": {
       "next_oxidation_stage": "copperoverthrow:exposed_copper_chain"
     },
+    "copperoverthrow:copper_lantern": {
+      "next_oxidation_stage": "copperoverthrow:exposed_copper_lantern"
+    },
     "copperoverthrow:copper_scaffolding": {
       "next_oxidation_stage": "copperoverthrow:exposed_copper_scaffolding"
     },
     "copperoverthrow:exposed_copper_chain": {
       "next_oxidation_stage": "copperoverthrow:weathered_copper_chain"
+    },
+    "copperoverthrow:exposed_copper_lantern": {
+      "next_oxidation_stage": "copperoverthrow:weathered_copper_lantern"
     },
     "copperoverthrow:exposed_copper_scaffolding": {
       "next_oxidation_stage": "copperoverthrow:weathered_copper_scaffolding"
@@ -32,6 +38,9 @@
     },
     "copperoverthrow:weathered_copper_chain": {
       "next_oxidation_stage": "copperoverthrow:oxidized_copper_chain"
+    },
+    "copperoverthrow:weathered_copper_lantern": {
+      "next_oxidation_stage": "copperoverthrow:oxidized_copper_lantern"
     },
     "copperoverthrow:weathered_copper_scaffolding": {
       "next_oxidation_stage": "copperoverthrow:oxidized_copper_scaffolding"

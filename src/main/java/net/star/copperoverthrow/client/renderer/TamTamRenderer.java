@@ -35,7 +35,7 @@ public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
 
     @Override
     public void render(TamTamBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        Boolean isUpper = blockEntity.getBlockState().getValue(TamTamBlock.PART) == TamTamBlock.WideThinDoubleBlock.MAIN_TOP;
+        boolean isUpper = blockEntity.getBlockState().getValue(TamTamBlock.PART) == TamTamBlock.WideThinDoubleBlock.MAIN_TOP;
 
         if (isUpper) {
             poseStack.pushPose();

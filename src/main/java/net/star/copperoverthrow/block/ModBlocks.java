@@ -636,7 +636,7 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)));
 
     public static final DeferredBlock<Block> COPPER_LANTERN = registerBlock("copper_lantern",
-            () -> new LanternBlock(BlockBehaviour.Properties.of()
+            () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
@@ -644,9 +644,10 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.DESTROY)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.UNAFFECTED));
     public static final DeferredBlock<Block> EXPOSED_COPPER_LANTERN = registerBlock("exposed_copper_lantern",
-            () -> new LanternBlock(BlockBehaviour.Properties.of()
+            () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
@@ -654,19 +655,10 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.DESTROY)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.EXPOSED));
     public static final DeferredBlock<Block> WEATHERED_COPPER_LANTERN = registerBlock("weathered_copper_lantern",
-            () -> new LanternBlock(BlockBehaviour.Properties.of()
-                    .strength(2f)
-                    .noOcclusion()
-                    .forceSolidOn()
-                    .lightLevel(p_187433_ -> 11)
-                    .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
-                    .pushReaction(PushReaction.DESTROY)
-                    .sound(SoundType.COPPER)));
-    public static final DeferredBlock<Block> OXIDIZED_COPPER_LANTERN = registerBlock("oxidized_copper_lantern",
-            () -> new LanternBlock(BlockBehaviour.Properties.of()
+            () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
@@ -674,8 +666,64 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.DESTROY)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.WEATHERED));
+    public static final DeferredBlock<Block> OXIDIZED_COPPER_LANTERN = registerBlock("oxidized_copper_lantern",
+            () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .lightLevel(p_187433_ -> 9)
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.OXIDIZED));
 
+    public static final DeferredBlock<Block> WAXED_COPPER_LANTERN = registerBlock("waxed_copper_lantern",
+            () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .lightLevel(p_187433_ -> 13)
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.UNAFFECTED));
+    public static final DeferredBlock<Block> WAXED_EXPOSED_COPPER_LANTERN = registerBlock("waxed_exposed_copper_lantern",
+            () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .lightLevel(p_187433_ -> 12)
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.EXPOSED));
+    public static final DeferredBlock<Block> WAXED_WEATHERED_COPPER_LANTERN = registerBlock("waxed_weathered_copper_lantern",
+            () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .lightLevel(p_187433_ -> 10)
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.WEATHERED));
+    public static final DeferredBlock<Block> WAXED_OXIDIZED_COPPER_LANTERN = registerBlock("waxed_oxidized_copper_lantern",
+            () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .lightLevel(p_187433_ -> 9)
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.OXIDIZED));
 
 
 

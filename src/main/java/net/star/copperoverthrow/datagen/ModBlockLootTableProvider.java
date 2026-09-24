@@ -65,15 +65,34 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.EXPOSED_COPPER_CHAIN.get());
         dropSelf(ModBlocks.WEATHERED_COPPER_CHAIN.get());
         dropSelf(ModBlocks.OXIDIZED_COPPER_CHAIN.get());
+
         dropSelf(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get());
         dropSelf(ModBlocks.WAXED_COPPER_CHAIN.get());
         dropSelf(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get());
         dropSelf(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get());
 
+        dropSelf(ModBlocks.COPPER_LANTERN.get());
+        dropSelf(ModBlocks.EXPOSED_COPPER_LANTERN.get());
+        dropSelf(ModBlocks.WEATHERED_COPPER_LANTERN.get());
+        dropSelf(ModBlocks.OXIDIZED_COPPER_LANTERN.get());
+
+        dropSelf(ModBlocks.WAXED_COPPER_LANTERN.get());
+        dropSelf(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get());
+        dropSelf(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get());
+        dropSelf(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get());
+
         dropSelf(ModBlocks.LOG_STRIPPER.get());
         dropSelf(ModBlocks.COPPER_BEEOSPHERE.get());
 
         dropSelf(ModBlocks.TAMTAM.get());
+        dropSelf(ModBlocks.EXPOSED_TAMTAM.get());
+        dropSelf(ModBlocks.WEATHERED_TAMTAM.get());
+        dropSelf(ModBlocks.OXIDIZED_TAMTAM.get());
+
+        dropSelf(ModBlocks.WAXED_TAMTAM.get());
+        dropSelf(ModBlocks.WAXED_EXPOSED_TAMTAM.get());
+        dropSelf(ModBlocks.WAXED_WEATHERED_TAMTAM.get());
+        dropSelf(ModBlocks.WAXED_OXIDIZED_TAMTAM.get());
 
     }
 

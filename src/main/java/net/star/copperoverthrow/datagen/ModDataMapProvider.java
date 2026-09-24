@@ -39,7 +39,13 @@ public class ModDataMapProvider extends DataMapProvider {
 
                 .add(ModBlocks.COPPER_CHAIN.getId(), new Oxidizable(ModBlocks.EXPOSED_COPPER_CHAIN.get()), false)
                 .add(ModBlocks.EXPOSED_COPPER_CHAIN.getId(), new Oxidizable(ModBlocks.WEATHERED_COPPER_CHAIN.get()), false)
-                .add(ModBlocks.WEATHERED_COPPER_CHAIN.getId(), new Oxidizable(ModBlocks.OXIDIZED_COPPER_CHAIN.get()), false);
+                .add(ModBlocks.WEATHERED_COPPER_CHAIN.getId(), new Oxidizable(ModBlocks.OXIDIZED_COPPER_CHAIN.get()), false)
+
+                .add(ModBlocks.COPPER_LANTERN.getId(), new Oxidizable(ModBlocks.EXPOSED_COPPER_LANTERN.get()), false)
+                .add(ModBlocks.EXPOSED_COPPER_LANTERN.getId(), new Oxidizable(ModBlocks.WEATHERED_COPPER_LANTERN.get()), false)
+                .add(ModBlocks.WEATHERED_COPPER_LANTERN.getId(), new Oxidizable(ModBlocks.OXIDIZED_COPPER_LANTERN.get()), false)
+
+        ;
 
 
 
@@ -67,6 +73,13 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModBlocks.COPPER_CHAIN.getId(), new Waxable(ModBlocks.WAXED_COPPER_CHAIN.get()), false)
                 .add(ModBlocks.EXPOSED_COPPER_CHAIN.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get()), false)
                 .add(ModBlocks.WEATHERED_COPPER_CHAIN.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get()), false)
-                .add(ModBlocks.OXIDIZED_COPPER_CHAIN.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get()), false);
+                .add(ModBlocks.OXIDIZED_COPPER_CHAIN.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get()), false)
+
+                .add(ModBlocks.COPPER_LANTERN.getId(), new Waxable(ModBlocks.WAXED_COPPER_LANTERN.get()), false)
+                .add(ModBlocks.EXPOSED_COPPER_LANTERN.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get()), false)
+                .add(ModBlocks.WEATHERED_COPPER_LANTERN.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get()), false)
+                .add(ModBlocks.OXIDIZED_COPPER_LANTERN.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get()), false)
+
+        ;
     }
 }

@@ -152,6 +152,16 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get())
                 .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get());
+
+        tag(Tags.Blocks.CHAINS)
+                .add(ModBlocks.COPPER_CHAIN.get())
+                .add(ModBlocks.WEATHERED_COPPER_CHAIN.get())
+                .add(ModBlocks.EXPOSED_COPPER_CHAIN.get())
+                .add(ModBlocks.OXIDIZED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get());
     }
 
 }
