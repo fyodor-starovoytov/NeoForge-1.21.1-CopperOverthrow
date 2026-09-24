@@ -47,6 +47,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
                 .addTag(ModTags.Blocks.PLATES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
+                .addTag(ModTags.Blocks.COPPER_LANTERNS)
                 .add(ModBlocks.LOG_STRIPPER.get());
 
         tag(BlockTags.NEEDS_STONE_TOOL)
@@ -70,6 +71,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
                 .addTag(ModTags.Blocks.PLATES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
+                .addTag(ModTags.Blocks.COPPER_LANTERNS)
                 .add(ModBlocks.LOG_STRIPPER.get());
 
         tag(BlockTags.CLIMBABLE)
@@ -92,6 +94,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
 
+
+
         tag(ModTags.Blocks.NEEDS_COPPER_TOOL)
                 .addTag(BlockTags.NEEDS_STONE_TOOL)
                 .addTag(BlockTags.STONE_BRICKS)
@@ -103,10 +107,11 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE);
 
-
         tag(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL)
                 .addTag(BlockTags.INCORRECT_FOR_STONE_TOOL)
                 .remove(ModTags.Blocks.NEEDS_COPPER_TOOL);
+
+
 
         tag(ModTags.Blocks.MUSICAL_BLOCKS)
                 .add(Blocks.NOTE_BLOCK)
@@ -114,8 +119,18 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.PLATES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS);
 
+        tag(ModTags.Blocks.LIGHTS)
+                .addTag(ModTags.Blocks.COPPER_LANTERNS);
+
         tag(ModTags.Blocks.PLATES)
-                .add(ModBlocks.TAMTAM.get());
+                .add(ModBlocks.TAMTAM.get())
+                .add(ModBlocks.EXPOSED_TAMTAM.get())
+                .add(ModBlocks.WEATHERED_TAMTAM.get())
+                .add(ModBlocks.OXIDIZED_TAMTAM.get())
+                .add(ModBlocks.WAXED_OXIDIZED_TAMTAM.get())
+                .add(ModBlocks.WAXED_WEATHERED_TAMTAM.get())
+                .add(ModBlocks.WAXED_TAMTAM.get())
+                .add(ModBlocks.WAXED_EXPOSED_TAMTAM.get());
 
         tag(ModTags.Blocks.RAIN_DRUMS)
                 .add(ModBlocks.RAIN_DRUM.get())
@@ -153,15 +168,15 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get());
 
-        tag(Tags.Blocks.CHAINS)
-                .add(ModBlocks.COPPER_CHAIN.get())
-                .add(ModBlocks.WEATHERED_COPPER_CHAIN.get())
-                .add(ModBlocks.EXPOSED_COPPER_CHAIN.get())
-                .add(ModBlocks.OXIDIZED_COPPER_CHAIN.get())
-                .add(ModBlocks.WAXED_COPPER_CHAIN.get())
-                .add(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get())
-                .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
-                .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get());
+        tag(ModTags.Blocks.COPPER_LANTERNS)
+                .add(ModBlocks.COPPER_LANTERN.get())
+                .add(ModBlocks.EXPOSED_COPPER_LANTERN.get())
+                .add(ModBlocks.WEATHERED_COPPER_LANTERN.get())
+                .add(ModBlocks.OXIDIZED_COPPER_LANTERN.get())
+                .add(ModBlocks.WAXED_COPPER_LANTERN.get())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get());
     }
 
 }

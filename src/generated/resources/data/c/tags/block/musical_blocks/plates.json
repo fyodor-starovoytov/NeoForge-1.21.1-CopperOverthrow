@@ -1,5 +1,12 @@
 {
   "values": [
-    "copperoverthrow:tamtam"
+    "copperoverthrow:tamtam",
+    "copperoverthrow:exposed_tamtam",
+    "copperoverthrow:weathered_tamtam",
+    "copperoverthrow:oxidized_tamtam",
+    "copperoverthrow:waxed_oxidized_tamtam",
+    "copperoverthrow:waxed_weathered_tamtam",
+    "copperoverthrow:waxed_tamtam",
+    "copperoverthrow:waxed_exposed_tamtam"
   ]
 }

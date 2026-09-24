@@ -19,6 +19,8 @@ public class ModTags {
         public static final TagKey<Block> RAIN_DRUMS = createTag("c", "musical_blocks/rain_drums");
         public static final TagKey<Block> PLATES = createTag("c", "musical_blocks/plates");
         public static final TagKey<Block> MUSICAL_BLOCKS = createTag("c", "musical_blocks");
+         public static final TagKey<Block> COPPER_LANTERNS = createTag("c", "lights/copper_lanterns");
+         public static final TagKey<Block> LIGHTS = createTag("c", "lights");
 
          private static TagKey<Block> createTag(String namespace, String path){
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(namespace, path));
