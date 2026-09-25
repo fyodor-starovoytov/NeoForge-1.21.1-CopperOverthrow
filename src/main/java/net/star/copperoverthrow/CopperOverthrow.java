@@ -69,11 +69,11 @@ public class CopperOverthrow {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.COPPER_CHISEL);
+            event.accept(ModItems.COPPER_HAMMER);
 
         }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
-            event.accept(ModBlocks.COPPER_SCAFFOLDING);
+            event.accept(ModBlocks.TAMTAM);
         }
 
     }
