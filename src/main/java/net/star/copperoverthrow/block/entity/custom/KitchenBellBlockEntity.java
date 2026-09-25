@@ -17,6 +17,8 @@ public class KitchenBellBlockEntity extends BlockEntity {
     }
 
     public void startSwing(Direction direction) {
+        if (this.swinging) return;
+
         this.clickDirection = direction;
         this.ticks = 0;
         this.swinging = true;
@@ -29,8 +31,10 @@ public class KitchenBellBlockEntity extends BlockEntity {
     @Override
     public boolean triggerEvent(int id, int type) {
         if (id == 1) {
-            this.ticks = 0;
-            this.swinging = true;
+            if (!this.swinging) {
+                this.ticks = 0;
+                this.swinging = true;
+            }
             return true;
         }
         return super.triggerEvent(id, type);
@@ -39,11 +43,11 @@ public class KitchenBellBlockEntity extends BlockEntity {
     public static void tick(Level level, BlockPos pos, BlockState state, KitchenBellBlockEntity blockEntity) {
         if (blockEntity.swinging) {
             blockEntity.ticks++;
-        }
 
-        if (blockEntity.ticks >= 20) { //Duration in Ticks
-            blockEntity.swinging = false;
-            blockEntity.ticks = 0;
+            if (blockEntity.ticks >= 20) { // Duration in ticks (1 second)
+                blockEntity.swinging = false;
+                blockEntity.ticks = 0;
+            }
         }
     }
 }

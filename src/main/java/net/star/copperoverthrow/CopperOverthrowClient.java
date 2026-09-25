@@ -11,7 +11,9 @@ import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.renderer.LogStripperBlockEntityRenderer;
+import net.star.copperoverthrow.client.KitchenBellModel;
 import net.star.copperoverthrow.client.TamTamModel;
+import net.star.copperoverthrow.client.renderer.KitchenBellRenderer;
 import net.star.copperoverthrow.client.renderer.TamTamRenderer;
 import net.star.copperoverthrow.util.ModItemProperties;
 
@@ -32,10 +34,12 @@ public class CopperOverthrowClient {
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SWINGING_BE.get(), TamTamRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellRenderer::new);
     }
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(TamTamModel.LAYER_LOCATION, TamTamModel::createBodyLayer);
+        event.registerLayerDefinition(KitchenBellModel.LAYER_LOCATION, KitchenBellModel::createBodyLayer);
     }
 }

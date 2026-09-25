@@ -18,10 +18,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -33,6 +33,10 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.star.copperoverthrow.block.entity.ModBlockEntities;
+import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
+import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
+import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
 
 import javax.annotation.Nullable;
 import java.util.function.BiConsumer;
@@ -72,11 +76,15 @@ public class KitchenBellBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (state.getValue(POWERED)) {
+            level.setBlockAndUpdate(pos.above(), Blocks.DIAMOND_BLOCK.defaultBlockState());
             return InteractionResult.CONSUME;
-        } else {
-            this.press(state, level, pos, player);
-            return InteractionResult.sidedSuccess(level.isClientSide);
         }
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof KitchenBellBlockEntity blockEntity && player.getMainHandItem().isEmpty()) {
+            blockEntity.startSwing(hitResult.getDirection());
+            this.press(state, level, pos, player);
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -93,6 +101,11 @@ public class KitchenBellBlock extends BaseEntityBlock {
         this.updateNeighbours(state, level, pos);
         level.scheduleTick(pos, this, this.ticksToStayPressed);
         level.gameEvent(player, GameEvent.BLOCK_ACTIVATE, pos);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return createTickerHelper(blockEntityType, ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellBlockEntity::tick);
     }
 
     @Override
@@ -162,6 +175,12 @@ public class KitchenBellBlock extends BaseEntityBlock {
 
     @Override
     public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null;
+        return new KitchenBellBlockEntity(pos, state);
     }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
+
 }
