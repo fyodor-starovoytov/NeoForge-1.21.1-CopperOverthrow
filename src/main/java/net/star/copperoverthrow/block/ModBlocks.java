@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ScaffoldingBlockItem;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -733,7 +734,18 @@ public class ModBlocks {
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.OXIDIZED));
 
-
+    public static final DeferredBlock<Block> KITCHEN_BELL = registerBlock("kitchen_bell",
+            () -> new KitchenBellBlock(
+                    BlockSetType.COPPER,
+                    60,
+                    BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .noOcclusion()
+                    .forceSolidOn()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.COPPER)));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {
