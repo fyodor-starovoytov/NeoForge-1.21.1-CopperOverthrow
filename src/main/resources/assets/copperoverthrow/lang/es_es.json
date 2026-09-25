@@ -25,7 +25,6 @@
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Tambor de lluvia de cobre expuesto",
   "block.copperoverthrow.weathered_medium_note_rain_drum": "Tambor de lluvia de cobre desgastado",
   "block.copperoverthrow.oxidized_medium_note_rain_drum": "Tambor de lluvia de cobre oxidado",
-
   "block.copperoverthrow.waxed_medium_note_rain_drum": "Tambor de lluvia de cobre encerado",
   "block.copperoverthrow.waxed_exposed_medium_note_rain_drum": "Tambor de lluvia de cobre expuesto encerado",
   "block.copperoverthrow.waxed_weathered_medium_note_rain_drum": "Tambor de lluvia de cobre desgastado encerado",
@@ -35,7 +34,6 @@
   "block.copperoverthrow.exposed_low_note_rain_drum": "Tambor de lluvia de cobre expuesto",
   "block.copperoverthrow.weathered_low_note_rain_drum": "Tambor de lluvia de cobre desgastado",
   "block.copperoverthrow.oxidized_low_note_rain_drum": "Tambor de lluvia de cobre oxidado",
-
   "block.copperoverthrow.waxed_low_note_rain_drum": "Tambor de lluvia de cobre encerado",
   "block.copperoverthrow.waxed_exposed_low_note_rain_drum": "Tambor de lluvia de cobre expuesto encerado",
   "block.copperoverthrow.waxed_weathered_low_note_rain_drum": "Tambor de lluvia de cobre desgastado encerado",
@@ -45,7 +43,6 @@
   "block.copperoverthrow.exposed_high_note_rain_drum": "Tambor de lluvia de cobre expuesto",
   "block.copperoverthrow.weathered_high_note_rain_drum": "Tambor de lluvia de cobre desgastado",
   "block.copperoverthrow.oxidized_high_note_rain_drum": "Tambor de lluvia de cobre oxidado",
-
   "block.copperoverthrow.waxed_high_note_rain_drum": "Tambor de lluvia de cobre encerado",
   "block.copperoverthrow.waxed_exposed_high_note_rain_drum": "Tambor de lluvia de cobre expuesto encerado",
   "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Tambor de lluvia de cobre desgastado encerado",
@@ -59,6 +56,24 @@
   "block.copperoverthrow.waxed_exposed_copper_chain": "Cadena de cobre expuesta encerada",
   "block.copperoverthrow.waxed_weathered_copper_chain": "Cadena de cobre desgastada encerada",
   "block.copperoverthrow.waxed_oxidized_copper_chain": "Cadena de cobre oxidada encerada",
+
+  "block.copperoverthrow.copper_lantern": "Farol de cobre",
+  "block.copperoverthrow.exposed_copper_lantern": "Farol de cobre expuesto",
+  "block.copperoverthrow.weathered_copper_lantern": "Farol de cobre desgastado",
+  "block.copperoverthrow.oxidized_copper_lantern": "Farol de cobre oxidado",
+  "block.copperoverthrow.waxed_copper_lantern": "Farol de cobre encerado",
+  "block.copperoverthrow.waxed_exposed_copper_lantern": "Farol de cobre expuesto encerado",
+  "block.copperoverthrow.waxed_weathered_copper_lantern": "Farol de cobre desgastado encerado",
+  "block.copperoverthrow.waxed_oxidized_copper_lantern": "Farol de cobre oxidado encerado",
+
+  "block.copperoverthrow.tamtam": "Tam-tam",
+  "block.copperoverthrow.exposed_tamtam": "Tam-tam expuesto",
+  "block.copperoverthrow.weathered_tamtam": "Tam-tam desgastado",
+  "block.copperoverthrow.oxidized_tamtam": "Tam-tam oxidado",
+  "block.copperoverthrow.waxed_tamtam": "Tam-tam encerado",
+  "block.copperoverthrow.waxed_exposed_tamtam": "Tam-tam expuesto encerado",
+  "block.copperoverthrow.waxed_weathered_tamtam": "Tam-tam desgastado encerado",
+  "block.copperoverthrow.waxed_oxidized_tamtam": "Tam-tam oxidado encerado",
 
   "effect.copperoverthrow.conductivity": "Conductividad",
 
@@ -85,6 +100,7 @@
   "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Repique resonante corto§r",
   "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Toque resonante corto§r",
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Toque sordo§r",
+  "tooltip.copperoverthrow.long_crash_sounding.tooltip": "§e Gran estruendo que se puede oír desde lejos§r",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notas al tocar",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Determina si los tambores de lluvia emiten partículas al tocar una nota.\n§7Por defecto: Verdadero§r",

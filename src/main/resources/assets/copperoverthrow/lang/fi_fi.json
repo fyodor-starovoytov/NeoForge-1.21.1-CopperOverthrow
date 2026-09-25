@@ -25,7 +25,6 @@
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Altistunut kuparisaderumpu",
   "block.copperoverthrow.weathered_medium_note_rain_drum": "Kulunut kuparisaderumpu",
   "block.copperoverthrow.oxidized_medium_note_rain_drum": "Hapettunut kuparisaderumpu",
-
   "block.copperoverthrow.waxed_medium_note_rain_drum": "Vahattu kuparisaderumpu",
   "block.copperoverthrow.waxed_exposed_medium_note_rain_drum": "Vahattu altistunut kuparisaderumpu",
   "block.copperoverthrow.waxed_weathered_medium_note_rain_drum": "Vahattu kulunut kuparisaderumpu",
@@ -35,7 +34,6 @@
   "block.copperoverthrow.exposed_low_note_rain_drum": "Altistunut kuparisaderumpu",
   "block.copperoverthrow.weathered_low_note_rain_drum": "Kulunut kuparisaderumpu",
   "block.copperoverthrow.oxidized_low_note_rain_drum": "Hapettunut kuparisaderumpu",
-
   "block.copperoverthrow.waxed_low_note_rain_drum": "Vahattu kuparisaderumpu",
   "block.copperoverthrow.waxed_exposed_low_note_rain_drum": "Vahattu altistunut kuparisaderumpu",
   "block.copperoverthrow.waxed_weathered_low_note_rain_drum": "Vahattu kulunut kuparisaderumpu",
@@ -45,7 +43,6 @@
   "block.copperoverthrow.exposed_high_note_rain_drum": "Altistunut kuparisaderumpu",
   "block.copperoverthrow.weathered_high_note_rain_drum": "Kulunut kuparisaderumpu",
   "block.copperoverthrow.oxidized_high_note_rain_drum": "Hapettunut kuparisaderumpu",
-
   "block.copperoverthrow.waxed_high_note_rain_drum": "Vahattu kuparisaderumpu",
   "block.copperoverthrow.waxed_exposed_high_note_rain_drum": "Vahattu altistunut kuparisaderumpu",
   "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Vahattu kulunut kuparisaderumpu",
@@ -59,6 +56,24 @@
   "block.copperoverthrow.waxed_exposed_copper_chain": "Vahattu altistunut kupariketju",
   "block.copperoverthrow.waxed_weathered_copper_chain": "Vahattu kulunut kupariketju",
   "block.copperoverthrow.waxed_oxidized_copper_chain": "Vahattu hapettunut kupariketju",
+
+  "block.copperoverthrow.copper_lantern": "Kuparilyhty",
+  "block.copperoverthrow.exposed_copper_lantern": "Altistunut kuparilyhty",
+  "block.copperoverthrow.weathered_copper_lantern": "Kulunut kuparilyhty",
+  "block.copperoverthrow.oxidized_copper_lantern": "Hapettunut kuparilyhty",
+  "block.copperoverthrow.waxed_copper_lantern": "Vahattu kuparilyhty",
+  "block.copperoverthrow.waxed_exposed_copper_lantern": "Vahattu altistunut kuparilyhty",
+  "block.copperoverthrow.waxed_weathered_copper_lantern": "Vahattu kulunut kuparilyhty",
+  "block.copperoverthrow.waxed_oxidized_copper_lantern": "Vahattu hapettunut kuparilyhty",
+
+  "block.copperoverthrow.tamtam": "Tam-tam",
+  "block.copperoverthrow.exposed_tamtam": "Altistunut tam-tam",
+  "block.copperoverthrow.weathered_tamtam": "Kulunut tam-tam",
+  "block.copperoverthrow.oxidized_tamtam": "Hapettunut tam-tam",
+  "block.copperoverthrow.waxed_tamtam": "Vahattu tam-tam",
+  "block.copperoverthrow.waxed_exposed_tamtam": "Vahattu altistunut tam-tam",
+  "block.copperoverthrow.waxed_weathered_tamtam": "Vahattu kulunut tam-tam",
+  "block.copperoverthrow.waxed_oxidized_tamtam": "Vahattu hapettunut tam-tam",
 
   "effect.copperoverthrow.conductivity": "Johtavuus",
 
@@ -85,6 +100,7 @@
   "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Lyhyt resonoiva helinä§r",
   "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Lyhyt resonoiva napautus§r",
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Matala napautus§r",
+  "tooltip.copperoverthrow.long_crash_sounding.tooltip": "§e Kova kumu, joka kuuluu kauas§r",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Nuotit soittaessa",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Päästävätkö saderummut hiukkasia nuottia soitettaessa.\n§7Oletus: Tosi§r",

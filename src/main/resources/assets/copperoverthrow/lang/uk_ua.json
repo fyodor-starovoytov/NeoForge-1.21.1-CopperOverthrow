@@ -25,7 +25,6 @@
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Пошкоджений мідний барабан дощу",
   "block.copperoverthrow.weathered_medium_note_rain_drum": "Покритий патиною мідний барабан дощу",
   "block.copperoverthrow.oxidized_medium_note_rain_drum": "Окиснений мідний барабан дощу",
-
   "block.copperoverthrow.waxed_medium_note_rain_drum": "Вощений мідний барабан дощу",
   "block.copperoverthrow.waxed_exposed_medium_note_rain_drum": "Вощений пошкоджений мідний барабан дощу",
   "block.copperoverthrow.waxed_weathered_medium_note_rain_drum": "Вощений покритий патиною мідний барабан дощу",
@@ -35,7 +34,6 @@
   "block.copperoverthrow.exposed_low_note_rain_drum": "Пошкоджений мідний барабан дощу",
   "block.copperoverthrow.weathered_low_note_rain_drum": "Покритий патиною мідний барабан дощу",
   "block.copperoverthrow.oxidized_low_note_rain_drum": "Окиснений мідний барабан дощу",
-
   "block.copperoverthrow.waxed_low_note_rain_drum": "Вощений мідний барабан дощу",
   "block.copperoverthrow.waxed_exposed_low_note_rain_drum": "Вощений пошкоджений мідний барабан дощу",
   "block.copperoverthrow.waxed_weathered_low_note_rain_drum": "Вощений покритий патиною мідний барабан дощу",
@@ -45,7 +43,6 @@
   "block.copperoverthrow.exposed_high_note_rain_drum": "Пошкоджений мідний барабан дощу",
   "block.copperoverthrow.weathered_high_note_rain_drum": "Покритий патиною мідний барабан дощу",
   "block.copperoverthrow.oxidized_high_note_rain_drum": "Окиснений мідний барабан дощу",
-
   "block.copperoverthrow.waxed_high_note_rain_drum": "Вощений мідний барабан дощу",
   "block.copperoverthrow.waxed_exposed_high_note_rain_drum": "Вощений пошкоджений мідний барабан дощу",
   "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Вощений покритий патиною мідний барабан дощу",
@@ -59,6 +56,24 @@
   "block.copperoverthrow.waxed_exposed_copper_chain": "Вощений пошкоджений мідний ланцюг",
   "block.copperoverthrow.waxed_weathered_copper_chain": "Вощений покритий патиною мідний ланцюг",
   "block.copperoverthrow.waxed_oxidized_copper_chain": "Вощений окиснений мідний ланцюг",
+
+  "block.copperoverthrow.copper_lantern": "Мідний ліхтар",
+  "block.copperoverthrow.exposed_copper_lantern": "Пошкоджений мідний ліхтар",
+  "block.copperoverthrow.weathered_copper_lantern": "Покритий патиною мідний ліхтар",
+  "block.copperoverthrow.oxidized_copper_lantern": "Окиснений мідний ліхтар",
+  "block.copperoverthrow.waxed_copper_lantern": "Вощений мідний ліхтар",
+  "block.copperoverthrow.waxed_exposed_copper_lantern": "Вощений пошкоджений мідний ліхтар",
+  "block.copperoverthrow.waxed_weathered_copper_lantern": "Вощений покритий патиною мідний ліхтар",
+  "block.copperoverthrow.waxed_oxidized_copper_lantern": "Вощений окиснений мідний ліхтар",
+
+  "block.copperoverthrow.tamtam": "Там-там",
+  "block.copperoverthrow.exposed_tamtam": "Пошкоджений там-там",
+  "block.copperoverthrow.weathered_tamtam": "Покритий патиною там-там",
+  "block.copperoverthrow.oxidized_tamtam": "Окиснений там-там",
+  "block.copperoverthrow.waxed_tamtam": "Вощений там-там",
+  "block.copperoverthrow.waxed_exposed_tamtam": "Вощений пошкоджений там-там",
+  "block.copperoverthrow.waxed_weathered_tamtam": "Вощений покритий патиною там-там",
+  "block.copperoverthrow.waxed_oxidized_tamtam": "Вощений окиснений там-там",
 
   "effect.copperoverthrow.conductivity": "Провідність",
 
@@ -85,6 +100,7 @@
   "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Коротке резонансне передзвонювання§r",
   "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Короткий резонансний стук§r",
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Глухий стук§r",
+  "tooltip.copperoverthrow.long_crash_sounding.tooltip": "§e Гучний грім, який чути здалеку§r",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Ноти під час гри",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Чи випромінюють барабани дощу частинки під час програвання ноти.\n§7За замовчуванням: ІСТИНА§r",

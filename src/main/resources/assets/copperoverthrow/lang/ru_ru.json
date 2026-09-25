@@ -25,7 +25,6 @@
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Потемневший медный барабан дождя",
   "block.copperoverthrow.weathered_medium_note_rain_drum": "Состаренный медный барабан дождя",
   "block.copperoverthrow.oxidized_medium_note_rain_drum": "Окисленный медный барабан дождя",
-
   "block.copperoverthrow.waxed_medium_note_rain_drum": "Вощёный медный барабан дождя",
   "block.copperoverthrow.waxed_exposed_medium_note_rain_drum": "Вощёный потемневший медный барабан дождя",
   "block.copperoverthrow.waxed_weathered_medium_note_rain_drum": "Вощёный состаренный медный барабан дождя",
@@ -35,7 +34,6 @@
   "block.copperoverthrow.exposed_low_note_rain_drum": "Потемневший медный барабан дождя",
   "block.copperoverthrow.weathered_low_note_rain_drum": "Состаренный медный барабан дождя",
   "block.copperoverthrow.oxidized_low_note_rain_drum": "Окисленный медный барабан дождя",
-
   "block.copperoverthrow.waxed_low_note_rain_drum": "Вощёный медный барабан дождя",
   "block.copperoverthrow.waxed_exposed_low_note_rain_drum": "Вощёный потемневший медный барабан дождя",
   "block.copperoverthrow.waxed_weathered_low_note_rain_drum": "Вощёный состаренный медный барабан дождя",
@@ -45,7 +43,6 @@
   "block.copperoverthrow.exposed_high_note_rain_drum": "Потемневший медный барабан дождя",
   "block.copperoverthrow.weathered_high_note_rain_drum": "Состаренный медный барабан дождя",
   "block.copperoverthrow.oxidized_high_note_rain_drum": "Окисленный медный барабан дождя",
-
   "block.copperoverthrow.waxed_high_note_rain_drum": "Вощёный медный барабан дождя",
   "block.copperoverthrow.waxed_exposed_high_note_rain_drum": "Вощёный потемневший медный барабан дождя",
   "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Вощёный состаренный медный барабан дождя",
@@ -59,6 +56,24 @@
   "block.copperoverthrow.waxed_exposed_copper_chain": "Вощёная потемневшая медная цепь",
   "block.copperoverthrow.waxed_weathered_copper_chain": "Вощёная состаренная медная цепь",
   "block.copperoverthrow.waxed_oxidized_copper_chain": "Вощёная окисленная медная цепь",
+
+  "block.copperoverthrow.copper_lantern": "Медный фонарь",
+  "block.copperoverthrow.exposed_copper_lantern": "Потемневший медный фонарь",
+  "block.copperoverthrow.weathered_copper_lantern": "Состаренный медный фонарь",
+  "block.copperoverthrow.oxidized_copper_lantern": "Окисленный медный фонарь",
+  "block.copperoverthrow.waxed_copper_lantern": "Вощёный медный фонарь",
+  "block.copperoverthrow.waxed_exposed_copper_lantern": "Вощёный потемневший медный фонарь",
+  "block.copperoverthrow.waxed_weathered_copper_lantern": "Вощёный состаренный медный фонарь",
+  "block.copperoverthrow.waxed_oxidized_copper_lantern": "Вощёный окисленный медный фонарь",
+
+  "block.copperoverthrow.tamtam": "Там-там",
+  "block.copperoverthrow.exposed_tamtam": "Потемневший там-там",
+  "block.copperoverthrow.weathered_tamtam": "Состаренный там-там",
+  "block.copperoverthrow.oxidized_tamtam": "Окисленный там-там",
+  "block.copperoverthrow.waxed_tamtam": "Вощёный там-там",
+  "block.copperoverthrow.waxed_exposed_tamtam": "Вощёный потемневший там-там",
+  "block.copperoverthrow.waxed_weathered_tamtam": "Вощёный состаренный там-там",
+  "block.copperoverthrow.waxed_oxidized_tamtam": "Вощёный окисленный там-там",
 
   "effect.copperoverthrow.conductivity": "Проводимость",
 
@@ -85,6 +100,7 @@
   "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Короткий резонирующий звон§r",
   "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Короткий резонирующий стук§r",
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Глухой стук§r",
+  "tooltip.copperoverthrow.long_crash_sounding.tooltip": "§e Громкий грохот, который слышен издалека§r",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Ноты при игре",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Излучают ли барабаны дождя частицы при воспроизведении нот.\n§7По умолчанию: Истина§r",
