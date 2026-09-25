@@ -3,19 +3,19 @@
   "category": "misc",
   "key": {
     "A": {
-      "tag": "c:ingots/copper"
+      "item": "copperoverthrow:copper_chain"
     },
     "B": {
-      "tag": "c:nuggets/copper"
+      "item": "minecraft:copper_block"
     }
   },
   "pattern": [
-    "B",
-    "A",
-    "B"
+    "AA",
+    "BB",
+    "BB"
   ],
   "result": {
     "count": 1,
-    "id": "copperoverthrow:copper_chain"
+    "id": "copperoverthrow:tamtam"
   }
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_honeycomb": {
+    "has_copper": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:honeycomb"
+            "items": "minecraft:copper_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "copperoverthrow:copper_beeosphere"
+        "recipe": "copperoverthrow:tamtam"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_honeycomb"
+      "has_copper"
     ]
   ],
   "rewards": {
     "recipes": [
-      "copperoverthrow:copper_beeosphere"
+      "copperoverthrow:tamtam"
     ]
   }
 }

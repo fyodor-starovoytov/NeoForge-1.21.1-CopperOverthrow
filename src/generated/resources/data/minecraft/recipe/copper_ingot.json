@@ -3,19 +3,16 @@
   "category": "misc",
   "key": {
     "A": {
-      "tag": "c:ingots/copper"
-    },
-    "B": {
-      "tag": "c:nuggets/copper"
+      "item": "copperoverthrow:copper_nugget"
     }
   },
   "pattern": [
-    "B",
-    "A",
-    "B"
+    "AAA",
+    "AAA",
+    "AAA"
   ],
   "result": {
     "count": 1,
-    "id": "copperoverthrow:copper_chain"
+    "id": "minecraft:copper_ingot"
   }
 }

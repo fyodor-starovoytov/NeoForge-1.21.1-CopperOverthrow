@@ -25,7 +25,7 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_items"))
                     .displayItems((itemDisplayParameters, output) -> {
 
-                        //output.accept(ModItems.COPPER_NUGGET);
+                        output.accept(ModItems.COPPER_NUGGET);
                         output.accept(ModItems.COPPER_CHISEL);
                         output.accept(ModItems.COPPER_TROWEL);
                         output.accept(ModItems.COPPER_HAMMER);

@@ -22,6 +22,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+
+        tag(Tags.Items.NUGGETS)
+                .add(ModItems.COPPER_NUGGET.get());
+
+        tag(ModTags.Items.C_COPPER_NUGGETS)
+                .add(ModItems.COPPER_NUGGET.get());
+
         tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .addTag(ModTags.Items.C_TOOLS_BUILDERS)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS)

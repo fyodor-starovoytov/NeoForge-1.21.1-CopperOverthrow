@@ -15,6 +15,7 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.item.ModItems;
+import net.star.copperoverthrow.util.ModTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +26,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.COPPER_INGOT, 1)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.COPPER_NUGGET.get())
+                .unlockedBy("has_copper_nugget", has(ModItems.COPPER_NUGGET.get())).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CHISEL.get())
                 .pattern("  A")
@@ -121,11 +129,28 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.COPPER_TRAPDOOR)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_CHAIN.get(), 3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_CHAIN.get(), 1)
+                .pattern("B")
                 .pattern("A")
-                .pattern("A")
-                .pattern("A")
+                .pattern("B")
                 .define('A', Tags.Items.INGOTS_COPPER)
+                .define('B', ModTags.Items.C_COPPER_NUGGETS)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.TAMTAM.get(), 1)
+                .pattern("AA")
+                .pattern("BB")
+                .pattern("BB")
+                .define('A', ModBlocks.COPPER_CHAIN.get())
+                .define('B', Items.COPPER_BLOCK)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_LANTERN.get(), 1)
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern("AAA")
+                .define('A', ModTags.Items.C_COPPER_NUGGETS)
+                .define('B', Items.TORCH)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)
@@ -136,7 +161,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', ItemTags.PLANKS)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
-
+/*
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_BEEOSPHERE.get(), 1)
                 .pattern("CAC")
                 .pattern("DBD")
@@ -146,7 +171,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Tags.Items.DUSTS_REDSTONE)
                 .define('D', Tags.Items.GLASS_BLOCKS_COLORLESS)
                 .unlockedBy("has_honeycomb", has(Items.HONEYCOMB)).save(recipeOutput);
-
+*/
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_COOKIE.get(), 1)
                 .pattern("AAA")
                 .pattern("ABA")
@@ -172,6 +197,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.PISTON)
                 .define('C', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.COPPER_NUGGET.get(), 9)
+                        .requires(Tags.Items.INGOTS_COPPER)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
 
         addWaxingRecipe(recipeOutput, ModBlocks.COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_COPPER_SCAFFOLDING.get(), "copper_scaffolding");
         addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get(), "exposed_copper_scaffolding");
