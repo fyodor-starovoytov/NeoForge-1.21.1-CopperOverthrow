@@ -1,6 +1,5 @@
 package net.star.copperoverthrow;
 
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -17,7 +16,7 @@ import net.star.copperoverthrow.client.renderer.TamTamRenderer;
 import net.star.copperoverthrow.util.ModItemProperties;
 
 @Mod(value = CopperOverthrow.MOD_ID, dist = Dist.CLIENT)
-@EventBusSubscriber(modid = CopperOverthrow.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
 public class CopperOverthrowClient {
 
     public CopperOverthrowClient(ModContainer container) {
