@@ -6,7 +6,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
+import net.star.copperoverthrow.block.custom.KitchenBellBlock;
 import net.star.copperoverthrow.block.entity.custom.CopperBeeosphereBlockEntity;
+import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
 
@@ -39,6 +41,11 @@ public class ModBlockEntities {
                             ModBlocks.WAXED_OXIDIZED_TAMTAM.get())
                     .build(null));
 
+    public static final Supplier<BlockEntityType<KitchenBellBlockEntity>> KITCHEN_BELL_BE =
+            BLOCK_ENTITIES.register("kitchen_bell_be", ()-> BlockEntityType.Builder.of(
+                            KitchenBellBlockEntity::new,
+                            ModBlocks.KITCHEN_BELL.get())
+                    .build(null));
 
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);

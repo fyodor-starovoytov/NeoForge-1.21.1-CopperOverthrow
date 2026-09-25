@@ -1,5 +1,6 @@
 package net.star.copperoverthrow.block.custom;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -44,11 +45,11 @@ public class KitchenBellBlock extends BaseEntityBlock {
 
     public static final MapCodec<KitchenBellBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
                 instance.group(
-                        propertiesCodec(),
-
+                        Codec.INT.fieldOf("ticks_to_stay_pressed").forGetter(block -> block.ticksToStayPressed),
+                        propertiesCodec()
                         //WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(TamTamBlock::getAge)
-                ).apply(instance, KitchenBellBlock::new)
-        );
+                ).apply(instance, (ticks, props) -> new KitchenBellBlock(BlockSetType.COPPER, ticks, props))
+    );
 
     public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, BlockBehaviour.Properties properties) {
         super(properties.sound(type.soundType()));
