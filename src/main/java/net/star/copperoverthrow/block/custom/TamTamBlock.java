@@ -1,16 +1,19 @@
 package net.star.copperoverthrow.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Instruments;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -25,9 +28,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.ItemAbility;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
@@ -37,28 +42,38 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class TamTamBlock extends BaseEntityBlock implements Instruments {
-    public static final MapCodec<TamTamBlock> CODEC = simpleCodec(TamTamBlock::new);
+public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
+
+    public static final MapCodec<TamTamBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(
+                    propertiesCodec(),
+                    WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(TamTamBlock::getAge)
+            ).apply(instance, TamTamBlock::new)
+    );
+
     private static final VoxelShape SHAPE_NORTH_SOUTH = Block.box(0.0, 1.0, 7, 16.0, 16.0, 9);
     private static final VoxelShape SHAPE_EAST_WEST = Block.box(7.0, 1.0, 0, 9.0, 16.0, 16);
     private static final int BLOCK_HEIGHT = 2;
     private static final Property<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<WideThinDoubleBlock> PART = EnumProperty.create("part", WideThinDoubleBlock.class);
+    private final WeatheringCopper.WeatherState weatherState;
 
-    public TamTamBlock(Properties properties) {
+    public TamTamBlock(Properties properties, WeatherState weatherState) {
 
         super(properties);
+        this.weatherState = weatherState;
         this.registerDefaultState(
                 this.stateDefinition.any().setValue(FACING, Direction.NORTH)
         );
     }
+
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         Direction facing = context.getHorizontalDirection();
 
-        int requiredUpAirBlocks = this.BLOCK_HEIGHT - 1;
+        int requiredUpAirBlocks = BLOCK_HEIGHT - 1;
 
         if (pos.getY() + requiredUpAirBlocks > level.getMaxBuildHeight()) {
             return null;
@@ -171,6 +186,74 @@ public class TamTamBlock extends BaseEntityBlock implements Instruments {
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
+
+    @Override
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
+        BlockState modifiedState = super.getToolModifiedState(state, context, itemAbility, simulate);
+
+        if (modifiedState != null && !simulate) {
+            Level level = context.getLevel();
+            BlockPos clickedPos = context.getClickedPos();
+            propagateBlockChange(level, clickedPos, state, modifiedState.getBlock());
+        }
+
+        return modifiedState;
+    }
+
+    public void propagateBlockChange(Level level, BlockPos clickedPos, BlockState currentState, Block targetBlock) {
+        WideThinDoubleBlock currentPart = currentState.getValue(PART);
+        Direction facing = currentState.getValue(FACING);
+        Direction sideDir = facing.getClockWise();
+        Direction counterSideDir = facing.getCounterClockWise();
+
+        BlockPos mainTopPos = switch (currentPart) {
+            case MAIN_TOP -> clickedPos;
+            case TOP_CLOCKWISE -> clickedPos.relative(counterSideDir);
+            case BOTTOM -> clickedPos.above();
+            case BOTTOM_CLOCKWISE -> clickedPos.relative(counterSideDir).above();
+        };
+
+        BlockPos[] targetPositions = new BlockPos[]{
+                mainTopPos,
+                mainTopPos.relative(sideDir),
+                mainTopPos.below(),
+                mainTopPos.relative(sideDir).below()
+        };
+
+        WideThinDoubleBlock[] targetParts = new WideThinDoubleBlock[]{
+                WideThinDoubleBlock.MAIN_TOP,
+                WideThinDoubleBlock.TOP_CLOCKWISE,
+                WideThinDoubleBlock.BOTTOM,
+                WideThinDoubleBlock.BOTTOM_CLOCKWISE
+        };
+
+        for (int i = 0; i < targetPositions.length; i++) {
+            BlockPos targetPos = targetPositions[i];
+            BlockState existingState = level.getBlockState(targetPos);
+            if (existingState.getBlock() instanceof TamTamBlock) {
+                BlockState newSegmentState = targetBlock.defaultBlockState()
+                        .setValue(FACING, facing)
+                        .setValue(PART, targetParts[i]);
+                level.setBlock(targetPos, newSegmentState, 3);
+            }
+        }
+    }
+
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        this.changeOverTime(state, level, pos, random);
+    }
+
+    @Override
+    public WeatheringCopper.WeatherState getAge() {
+        return this.weatherState;
+    }
+
+    @Override
+    protected boolean isRandomlyTicking(BlockState state) {
+        return WeatheringCopper.getNext(state.getBlock()).isPresent();
+    }
+
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         Direction direction = hitResult.getDirection();
@@ -184,7 +267,7 @@ public class TamTamBlock extends BaseEntityBlock implements Instruments {
             case BOTTOM -> pos.above();
             case BOTTOM_CLOCKWISE -> pos.relative(counterSideDir).above();
         };
-        if (!level.isClientSide && level.getBlockEntity(mainTopPos) instanceof TamTamBlockEntity blockEntity && !blockEntity.swinging && isProperHit(state, direction)) {
+        if (!level.isClientSide && level.getBlockEntity(mainTopPos) instanceof TamTamBlockEntity blockEntity && !blockEntity.swinging && isProperHit(state, direction) && player.getMainHandItem().isEmpty()) {
             blockEntity.startSwing(hitResult.getDirection());
             playSound(level, pos, ServerConfig.TAMTAM_BASIC_VOLUME_RADIUS.get().floatValue());
             return InteractionResult.SUCCESS;
@@ -206,15 +289,10 @@ public class TamTamBlock extends BaseEntityBlock implements Instruments {
                 playSound(level, pos, finalVolume);
             }
         }
-    }
-
-    @Override
+    }@Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        net.minecraft.world.entity.Entity entity = builder.getOptionalParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY);
-        if (entity instanceof Player player && player.isCreative()) {
-            return Collections.emptyList();
-        }
-
+        // Only return the item loot if MAIN_TOP is broken directly.
+        // If a secondary part is broken, playerWillDestroy handles spawning the drop at the player's break position.
         if (state.getValue(PART) != WideThinDoubleBlock.MAIN_TOP) {
             return Collections.emptyList();
         }
@@ -252,7 +330,21 @@ public class TamTamBlock extends BaseEntityBlock implements Instruments {
                     }
                 }
             } else {
-                // In Survival mode, break sibling parts safely
+                if (!pos.equals(mainTopPos)) {
+                    BlockState mainState = level.getBlockState(mainTopPos);
+                    if (mainState.is(this)) {
+                        LootParams.Builder builder = new LootParams.Builder((ServerLevel) level)
+                                .withParameter(LootContextParams.ORIGIN, pos.getCenter())
+                                .withParameter(LootContextParams.TOOL, player.getMainHandItem())
+                                .withOptionalParameter(LootContextParams.THIS_ENTITY, player);
+
+                        List<ItemStack> drops = mainState.getDrops(builder);
+                        for (ItemStack drop : drops) {
+                            Block.popResource(level, pos, drop);
+                        }
+                    }
+                }
+
                 for (BlockPos partPos : allParts) {
                     if (!partPos.equals(pos)) {
                         BlockState targetState = level.getBlockState(partPos);
@@ -265,7 +357,6 @@ public class TamTamBlock extends BaseEntityBlock implements Instruments {
         }
         return super.playerWillDestroy(level, pos, state, player);
     }
-
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
@@ -340,5 +431,7 @@ public class TamTamBlock extends BaseEntityBlock implements Instruments {
             return this.name;
         }
     }
+
+
 
 }

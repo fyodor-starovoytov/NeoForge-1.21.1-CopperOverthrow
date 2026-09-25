@@ -27,6 +27,9 @@
     "copperoverthrow:exposed_medium_note_rain_drum": {
       "next_oxidation_stage": "copperoverthrow:weathered_medium_note_rain_drum"
     },
+    "copperoverthrow:exposed_tamtam": {
+      "next_oxidation_stage": "copperoverthrow:weathered_tamtam"
+    },
     "copperoverthrow:high_note_rain_drum": {
       "next_oxidation_stage": "copperoverthrow:exposed_high_note_rain_drum"
     },
@@ -35,6 +38,9 @@
     },
     "copperoverthrow:medium_note_rain_drum": {
       "next_oxidation_stage": "copperoverthrow:exposed_medium_note_rain_drum"
+    },
+    "copperoverthrow:tamtam": {
+      "next_oxidation_stage": "copperoverthrow:exposed_tamtam"
     },
     "copperoverthrow:weathered_copper_chain": {
       "next_oxidation_stage": "copperoverthrow:oxidized_copper_chain"
@@ -53,6 +59,9 @@
     },
     "copperoverthrow:weathered_medium_note_rain_drum": {
       "next_oxidation_stage": "copperoverthrow:oxidized_medium_note_rain_drum"
+    },
+    "copperoverthrow:weathered_tamtam": {
+      "next_oxidation_stage": "copperoverthrow:oxidized_tamtam"
     }
   }
 }

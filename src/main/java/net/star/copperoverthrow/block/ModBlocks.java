@@ -577,7 +577,8 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.IGNORE)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.EXPOSED));
     public static final DeferredBlock<Block> WEATHERED_TAMTAM = registerBlock("weathered_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
@@ -585,7 +586,8 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.IGNORE)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.WEATHERED));
     public static final DeferredBlock<Block> OXIDIZED_TAMTAM = registerBlock("oxidized_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
@@ -593,7 +595,8 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.IGNORE)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.OXIDIZED));
     public static final DeferredBlock<Block> TAMTAM = registerBlock("tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
@@ -601,7 +604,8 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.IGNORE)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.UNAFFECTED));
     public static final DeferredBlock<Block> WAXED_TAMTAM = registerBlock("waxed_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
@@ -609,7 +613,8 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.IGNORE)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.UNAFFECTED));
     public static final DeferredBlock<Block> WAXED_EXPOSED_TAMTAM = registerBlock("waxed_exposed_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
@@ -617,7 +622,8 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.IGNORE)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.EXPOSED));
     public static final DeferredBlock<Block> WAXED_WEATHERED_TAMTAM = registerBlock("waxed_weathered_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
@@ -625,7 +631,8 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.IGNORE)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.WEATHERED));
     public static final DeferredBlock<Block> WAXED_OXIDIZED_TAMTAM = registerBlock("waxed_oxidized_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
@@ -633,7 +640,8 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .pushReaction(PushReaction.IGNORE)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER),
+                    WeatheringCopper.WeatherState.OXIDIZED));
 
     public static final DeferredBlock<Block> COPPER_LANTERN = registerBlock("copper_lantern",
             () -> new CopperLanternBlock(BlockBehaviour.Properties.of()

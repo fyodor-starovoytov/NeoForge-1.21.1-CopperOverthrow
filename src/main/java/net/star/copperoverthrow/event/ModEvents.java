@@ -26,6 +26,7 @@ import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import net.neoforged.neoforge.registries.datamaps.builtin.Waxable;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
+import net.star.copperoverthrow.block.custom.TamTamBlock;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
 import net.star.copperoverthrow.item.custom.CopperTrowelItem;
 import net.star.copperoverthrow.item.custom.HammerItem;
@@ -114,7 +115,6 @@ if (Screen.hasShiftDown()){return;}
                                 stack.shrink(1);
                             }
 
-                            // Update clicked segment and propagate to connected segments
                             level.setBlock(pos, waxedBlock.defaultBlockState().setValue(MultiBlockTallDecoration.PART, state.getValue(MultiBlockTallDecoration.PART)), 3);
                             drum.propagateBlockChange(level, pos, state, waxedBlock);
 
@@ -128,5 +128,39 @@ if (Screen.hasShiftDown()){return;}
                     }
                 }
             }
+
+        if (state.getBlock() instanceof TamTamBlock plate) {
+            ItemStack stack = event.getItemStack();
+
+            if (stack.is(Items.HONEYCOMB)) {
+                Waxable waxable = state.getBlockHolder().getData(NeoForgeDataMaps.WAXABLES);
+
+                if (waxable != null) {
+                    Player player = event.getEntity();
+
+                    if (!level.isClientSide) {
+                        Block waxedBlock = waxable.waxed();
+
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
+                        }
+
+                        if (!player.isCreative()) {
+                            stack.shrink(1);
+                        }
+
+                        level.setBlock(pos, waxedBlock.defaultBlockState().setValue(TamTamBlock.PART, state.getValue(TamTamBlock.PART)), 3);
+                        plate.propagateBlockChange(level, pos, state, waxedBlock);
+
+                        level.levelEvent(null, 3003, pos, 0);
+                    }
+
+                    player.swing(event.getHand());
+
+                    event.setCanceled(true);
+                    event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide).result());
+                }
+            }
+        }
     }
 }

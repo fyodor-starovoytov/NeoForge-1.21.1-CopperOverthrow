@@ -54,6 +54,15 @@
     "copperoverthrow:oxidized_medium_note_rain_drum": {
       "waxed": "copperoverthrow:waxed_oxidized_medium_note_rain_drum"
     },
+    "copperoverthrow:oxidized_tamtam": {
+      "waxed": "copperoverthrow:waxed_oxidized_tamtam"
+    },
+    "copperoverthrow:tamtam": {
+      "waxed": "copperoverthrow:waxed_tamtam"
+    },
+    "copperoverthrow:waxed_exposed_tamtam": {
+      "waxed": "copperoverthrow:waxed_exposed_tamtam"
+    },
     "copperoverthrow:weathered_copper_chain": {
       "waxed": "copperoverthrow:waxed_weathered_copper_chain"
     },
@@ -71,6 +80,9 @@
     },
     "copperoverthrow:weathered_medium_note_rain_drum": {
       "waxed": "copperoverthrow:waxed_weathered_medium_note_rain_drum"
+    },
+    "copperoverthrow:weathered_tamtam": {
+      "waxed": "copperoverthrow:waxed_weathered_tamtam"
     }
   }
 }

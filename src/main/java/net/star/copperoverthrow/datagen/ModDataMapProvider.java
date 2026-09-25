@@ -37,6 +37,10 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModBlocks.EXPOSED_LARGE_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.WEATHERED_LARGE_RAIN_DRUM.get()), false)
                 .add(ModBlocks.WEATHERED_LARGE_RAIN_DRUM.getId(), new Oxidizable(ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.get()), false)
 
+                .add(ModBlocks.TAMTAM.getId(), new Oxidizable(ModBlocks.EXPOSED_TAMTAM.get()), false)
+                .add(ModBlocks.EXPOSED_TAMTAM.getId(), new Oxidizable(ModBlocks.WEATHERED_TAMTAM.get()), false)
+                .add(ModBlocks.WEATHERED_TAMTAM.getId(), new Oxidizable(ModBlocks.OXIDIZED_TAMTAM.get()), false)
+
                 .add(ModBlocks.COPPER_CHAIN.getId(), new Oxidizable(ModBlocks.EXPOSED_COPPER_CHAIN.get()), false)
                 .add(ModBlocks.EXPOSED_COPPER_CHAIN.getId(), new Oxidizable(ModBlocks.WEATHERED_COPPER_CHAIN.get()), false)
                 .add(ModBlocks.WEATHERED_COPPER_CHAIN.getId(), new Oxidizable(ModBlocks.OXIDIZED_COPPER_CHAIN.get()), false)
@@ -69,6 +73,11 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModBlocks.EXPOSED_LARGE_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_LARGE_RAIN_DRUM.get()), false)
                 .add(ModBlocks.WEATHERED_LARGE_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM.get()), false)
                 .add(ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get()), false)
+
+                .add(ModBlocks.TAMTAM.getId(), new Waxable(ModBlocks.WAXED_TAMTAM.get()), false)
+                .add(ModBlocks.WAXED_EXPOSED_TAMTAM.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_TAMTAM.get()), false)
+                .add(ModBlocks.WEATHERED_TAMTAM.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_TAMTAM.get()), false)
+                .add(ModBlocks.OXIDIZED_TAMTAM.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_TAMTAM.get()), false)
 
                 .add(ModBlocks.COPPER_CHAIN.getId(), new Waxable(ModBlocks.WAXED_COPPER_CHAIN.get()), false)
                 .add(ModBlocks.EXPOSED_COPPER_CHAIN.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get()), false)
