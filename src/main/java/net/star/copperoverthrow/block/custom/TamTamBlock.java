@@ -256,7 +256,6 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         Direction direction = hitResult.getDirection();
         Direction facing = state.getValue(FACING);
-        Direction sideDir = facing.getClockWise();
         Direction counterSideDir = facing.getCounterClockWise();
         WideThinDoubleBlock part = state.getValue(PART);
         BlockPos mainTopPos = switch (part) {
