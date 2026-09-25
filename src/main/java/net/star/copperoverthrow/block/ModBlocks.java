@@ -737,7 +737,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> KITCHEN_BELL = registerBlock("kitchen_bell",
             () -> new KitchenBellBlock(
                     BlockSetType.COPPER,
-                    60,
+                    10,
                     BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()

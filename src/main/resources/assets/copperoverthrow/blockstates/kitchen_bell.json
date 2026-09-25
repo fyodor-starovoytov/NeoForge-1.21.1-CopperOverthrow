@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "powered=false": {
       "model": "copperoverthrow:block/kitchen_bell"
+    },
+    "powered=true": {
+      "model": "copperoverthrow:block/kitchen_bell_pressed"
     }
   }
 }
