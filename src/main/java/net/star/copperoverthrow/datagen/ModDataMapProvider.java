@@ -75,7 +75,7 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get()), false)
 
                 .add(ModBlocks.TAMTAM.getId(), new Waxable(ModBlocks.WAXED_TAMTAM.get()), false)
-                .add(ModBlocks.WAXED_EXPOSED_TAMTAM.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_TAMTAM.get()), false)
+                .add(ModBlocks.EXPOSED_TAMTAM.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_TAMTAM.get()), false)
                 .add(ModBlocks.WEATHERED_TAMTAM.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_TAMTAM.get()), false)
                 .add(ModBlocks.OXIDIZED_TAMTAM.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_TAMTAM.get()), false)
 
