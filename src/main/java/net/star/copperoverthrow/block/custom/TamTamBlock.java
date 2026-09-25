@@ -172,11 +172,6 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         }
 
         if (!(direction.getAxis() == facing.getAxis()) && !(direction.getAxis() == Direction.Axis.Y)) {
-            if (part == WideThinDoubleBlock.BOTTOM_CLOCKWISE) {
-                if (!isSameStructure(level.getBlockState(pos.relative(counterSideDir))) || level.getBlockState(pos.relative(counterSideDir)).getValue(PART) != WideThinDoubleBlock.BOTTOM) {
-                    return Blocks.AIR.defaultBlockState();
-                }
-            }
             if (part == WideThinDoubleBlock.MAIN_TOP) {
                 if (!isSameStructure(level.getBlockState(pos.relative(sideDir))) || level.getBlockState(pos.relative(sideDir)).getValue(PART) != WideThinDoubleBlock.TOP_CLOCKWISE) {
                     return Blocks.AIR.defaultBlockState();
