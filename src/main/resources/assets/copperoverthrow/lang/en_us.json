@@ -26,7 +26,6 @@
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Exposed Copper Rain Drum",
   "block.copperoverthrow.weathered_medium_note_rain_drum": "Weathered Copper Rain Drum",
   "block.copperoverthrow.oxidized_medium_note_rain_drum": "Oxidized Copper Rain Drum",
-
   "block.copperoverthrow.waxed_medium_note_rain_drum": "Waxed Copper Rain Drum",
   "block.copperoverthrow.waxed_exposed_medium_note_rain_drum": "Waxed Exposed Copper Rain Drum",
   "block.copperoverthrow.waxed_weathered_medium_note_rain_drum": "Waxed Weathered Copper Rain Drum",
@@ -36,7 +35,6 @@
   "block.copperoverthrow.exposed_low_note_rain_drum": "Exposed Copper Rain Drum",
   "block.copperoverthrow.weathered_low_note_rain_drum": "Weathered Copper Rain Drum",
   "block.copperoverthrow.oxidized_low_note_rain_drum": "Oxidized Copper Rain Drum",
-
   "block.copperoverthrow.waxed_low_note_rain_drum": "Waxed Copper Rain Drum",
   "block.copperoverthrow.waxed_exposed_low_note_rain_drum": "Waxed Exposed Copper Rain Drum",
   "block.copperoverthrow.waxed_weathered_low_note_rain_drum": "Waxed Weathered Copper Rain Drum",
@@ -46,7 +44,6 @@
   "block.copperoverthrow.exposed_high_note_rain_drum": "Exposed Copper Rain Drum",
   "block.copperoverthrow.weathered_high_note_rain_drum": "Weathered Copper Rain Drum",
   "block.copperoverthrow.oxidized_high_note_rain_drum": "Oxidized Copper Rain Drum",
-
   "block.copperoverthrow.waxed_high_note_rain_drum": "Waxed Copper Rain Drum",
   "block.copperoverthrow.waxed_exposed_high_note_rain_drum": "Waxed Exposed Copper Rain Drum",
   "block.copperoverthrow.waxed_weathered_high_note_rain_drum": "Waxed Weathered Copper Rain Drum",
@@ -60,6 +57,24 @@
   "block.copperoverthrow.waxed_exposed_copper_chain": "Waxed Exposed Copper Chain",
   "block.copperoverthrow.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
   "block.copperoverthrow.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain",
+
+  "block.copperoverthrow.copper_lantern": "Copper Lantern",
+  "block.copperoverthrow.exposed_copper_lantern": "Exposed Copper Lantern",
+  "block.copperoverthrow.weathered_copper_lantern": "Weathered Copper Lantern",
+  "block.copperoverthrow.oxidized_copper_lantern": "Oxidized Copper Lantern",
+  "block.copperoverthrow.waxed_copper_lantern": "Waxed Copper Lantern",
+  "block.copperoverthrow.waxed_exposed_copper_lantern": "Waxed Exposed Copper Lantern",
+  "block.copperoverthrow.waxed_weathered_copper_lantern": "Waxed Weathered Copper Lantern",
+  "block.copperoverthrow.waxed_oxidized_copper_lantern": "Waxed Oxidized Copper Lantern",
+
+  "block.copperoverthrow.tamtam": "Tam-Tam",
+  "block.copperoverthrow.exposed_tamtam": "Exposed Tam-Tam",
+  "block.copperoverthrow.weathered_tamtam": "Weathered Tam-Tam",
+  "block.copperoverthrow.oxidized_tamtam": "Oxidized Tam-Tam",
+  "block.copperoverthrow.waxed_tamtam": "Waxed Tam-Tam",
+  "block.copperoverthrow.waxed_exposed_tamtam": "Waxed Exposed Tam-Tam",
+  "block.copperoverthrow.waxed_weathered_tamtam": "Waxed Weathered Tam-Tam",
+  "block.copperoverthrow.waxed_oxidized_tamtam": "Waxed Oxidized Tam-Tam",
 
 
 
@@ -93,6 +108,7 @@
   "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Short resonant chiming§r",
   "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Short resonant tap§r",
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Dull tap§r",
+  "tooltip.copperoverthrow.long_crash_sounding.tooltip": "§e Loud crash that can be heard from afar§r",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notes When Playing",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Whether Rain Drums emit particles when playing a note.\n§7Default: True§r",
