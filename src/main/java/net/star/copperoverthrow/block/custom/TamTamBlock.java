@@ -153,7 +153,6 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         WideThinDoubleBlock part = state.getValue(PART);
         Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
-        Direction counterSideDir = facing.getCounterClockWise();
         Direction sideDir = facing.getClockWise();
 
         if (direction.getAxis() == Direction.Axis.Y) {
