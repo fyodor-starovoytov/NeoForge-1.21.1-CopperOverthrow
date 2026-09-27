@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
@@ -41,16 +42,21 @@ public class KitchenBellRenderer implements BlockEntityRenderer<KitchenBellBlock
 
         if (blockEntity.swinging) {
             float time = (float) blockEntity.ticks + partialTick;
-            float swingAngleX = Mth.sin(time) / (4.0F + time);
-            float swingAngleZ = Mth.sin((float) (time + Math.PI)) / (4.0F + time);
+
+            BlockPos pos = blockEntity.getBlockPos();
+            float xSign = ((pos.getX() ^ pos.getZ()) % 2 == 0) ? 1.0F : -1.0F;
+            float zSign = ((pos.getY() ^ pos.getZ()) % 2 == 0) ? 1.0F : -1.0F;
+
+            float swingAngleX = (Mth.sin(time) / (4.0F + time)) * xSign;
+            float swingAngleZ = (Mth.sin((float) (time + (Math.PI / 2))) / (4.0F + time)) * zSign;
 
             this.root.xRot = swingAngleX;
             this.root.zRot = swingAngleZ;
-
         } else {
             this.root.xRot = 0.0F;
             this.root.zRot = 0.0F;
         }
+
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE));
         this.root.render(poseStack, consumer, packedLight, packedOverlay, -1);
