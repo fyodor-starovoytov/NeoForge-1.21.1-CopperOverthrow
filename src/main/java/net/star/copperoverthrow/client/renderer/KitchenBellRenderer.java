@@ -37,8 +37,8 @@ public class KitchenBellRenderer implements BlockEntityRenderer<KitchenBellBlock
     public void render(KitchenBellBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         poseStack.pushPose();
 
-        poseStack.translate(0.5D, 0.01D, 0.5D);
-        poseStack.scale(1.0F, -1.0F, -1.0F);
+        poseStack.translate(0.5D, 0.115D, 0.5D);
+        poseStack.scale(0.8125F, -1.0F, -0.8125F);
 
         if (blockEntity.swinging) {
             float time = (float) blockEntity.ticks + partialTick;
