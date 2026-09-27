@@ -41,16 +41,15 @@ public class KitchenBellRenderer implements BlockEntityRenderer<KitchenBellBlock
 
         if (blockEntity.swinging) {
             float time = (float) blockEntity.ticks + partialTick;
-            float swingAngle = (Mth.sin(time / (1.5f * (float) Math.PI))) / (3 + time / 2.0F);
-            float rotateAngle = time/3;
+            float swingAngleX = Mth.sin(time) / (4.0F + time);
+            float swingAngleZ = Mth.sin((float) (time + Math.PI)) / (4.0F + time);
 
-            this.root.xRot = -swingAngle;
-            this.root.zRot = swingAngle;
-            this.root.yRot = rotateAngle;
+            this.root.xRot = swingAngleX;
+            this.root.zRot = swingAngleZ;
+
         } else {
             this.root.xRot = 0.0F;
             this.root.zRot = 0.0F;
-            this.root.yRot = 0.0F;
         }
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE));

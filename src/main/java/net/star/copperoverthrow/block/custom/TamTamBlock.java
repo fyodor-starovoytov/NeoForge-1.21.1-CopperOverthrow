@@ -362,12 +362,12 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
 
     private void playSound(Level level, BlockPos pos, float volume){
         if (Math.random()<0.05 && level.getMoonPhase() == 0){
-            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.BLOCKS, volume, 1F);
+            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, volume, 1F);
         } else if (Math.random()<0.07) {
-            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_RARE.get(), SoundSource.BLOCKS, volume, 1F);
+            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_RARE.get(), SoundSource.RECORDS, volume, 1F);
         }
         else {
-            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING.get(), SoundSource.BLOCKS, volume, 1F);
+            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING.get(), SoundSource.RECORDS, volume, 1F);
         }
     }
 
