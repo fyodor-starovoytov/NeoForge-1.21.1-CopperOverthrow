@@ -41,7 +41,7 @@ public class ServerConfig {
         public static final ModConfigSpec.DoubleValue TAMTAM_FULL_MOON_VOLUME_CHANCE = BUILDER
                 .comment("Tam-Tam's Volume radius (16 blocks * x volume")
                 .translation("copperoverthrow.config.tam_tam_full_moon_chance")
-                .defineInRange("tamtamMoonVolumeChance", 0.05, 0.0, 1.0);
+                .defineInRange("tamtamMoonVolumeChance", 0.02, 0.0, 1.0);
 
         public static final ModConfigSpec SPEC = BUILDER.build();
 }

@@ -131,6 +131,21 @@
     "sounds": [
       "copperoverthrow:tamtamraremoonsound1"
     ]
+  },
+  "kitchen_bell_press": {
+    "subtitle": "sounds.copperoverthrow.kitchen_bell_play",
+    "sounds": [
+      "copperoverthrow:kitchen_bell_low_high",
+      "copperoverthrow:kitchen_bell_med_med",
+      "copperoverthrow:kitchen_bell_med_res"
+    ]
+  },
+  "exposed_kitchen_bell_press": {
+    "subtitle": "sounds.copperoverthrow.kitchen_bell_play",
+    "sounds": [
+      "copperoverthrow:exposed_kitchen_bell_low_high",
+      "copperoverthrow:exposed_kitchen_bell_med_med"
+    ]
   }
 
 }

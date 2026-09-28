@@ -34,10 +34,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
+import net.star.copperoverthrow.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.function.BiConsumer;
@@ -82,6 +84,12 @@ public class KitchenBellBlock extends BaseEntityBlock {
         }
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof KitchenBellBlockEntity blockEntity && player.getMainHandItem().isEmpty()) {
             blockEntity.startSwing(hitResult.getDirection());
+            if (blockEntity.getBlockState().getBlock().equals(ModBlocks.EXPOSED_KITCHEN_BELL.get()) ||blockEntity.getBlockState().getBlock().equals(ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get())) {
+                level.playSound(null, pos, ModSounds.EXPOSED_KITCHEN_BELL_PLAYING.get(), SoundSource.RECORDS, 0.5f, 1);
+            }
+            else {
+                level.playSound(null, pos, ModSounds.KITCHEN_BELL_PLAYING.get(), SoundSource.RECORDS, 0.5f, 1);
+            }
             this.press(state, level, pos, player);
             return InteractionResult.SUCCESS;
         }
