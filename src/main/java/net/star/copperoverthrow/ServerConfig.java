@@ -34,5 +34,14 @@ public class ServerConfig {
                 .comment("Tam-Tam's Volume radius (16 blocks * x volume")
                 .translation("copperoverthrow.config.tam_tam_volume")
                 .defineInRange("tamtamVolumeRadius", 8.0, 0.0, 32.0);
+        public static final ModConfigSpec.IntValue TAMTAM_FULL_MOON_VOLUME_RADIUS = BUILDER
+                .comment("Tam-Tam's Volume radius (16 blocks * x volume")
+                .translation("copperoverthrow.config.tam_tam_full_moon_volume")
+                .defineInRange("tamtamMoonVolumeRadius", 2, 0, 32);
+        public static final ModConfigSpec.DoubleValue TAMTAM_FULL_MOON_VOLUME_CHANCE = BUILDER
+                .comment("Tam-Tam's Volume radius (16 blocks * x volume")
+                .translation("copperoverthrow.config.tam_tam_full_moon_chance")
+                .defineInRange("tamtamMoonVolumeChance", 0.05, 0.0, 1.0);
+
         public static final ModConfigSpec SPEC = BUILDER.build();
 }

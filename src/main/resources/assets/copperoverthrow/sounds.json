@@ -102,6 +102,24 @@
       "copperoverthrow:tamtamlongsound1"
     ]
   },
+  "exposed_tamtam_playing": {
+    "subtitle": "sounds.copperoverthrow.tamtam_play",
+    "sounds": [
+      "copperoverthrow:exposedtamtamlongsound1"
+    ]
+  },
+  "weathered_tamtam_playing": {
+    "subtitle": "sounds.copperoverthrow.tamtam_play",
+    "sounds": [
+      "copperoverthrow:weatheredtamtamlongsound1"
+    ]
+  },
+  "oxidized_tamtam_playing": {
+    "subtitle": "sounds.copperoverthrow.tamtam_play",
+    "sounds": [
+      "copperoverthrow:oxidizedtamtamlongsound1"
+    ]
+  },
   "tamtam_playing_rare": {
     "subtitle": "sounds.copperoverthrow.tamtam_play",
     "sounds": [

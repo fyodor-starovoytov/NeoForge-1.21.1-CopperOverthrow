@@ -120,6 +120,8 @@
   "copperoverthrow.config.stepper_leggings_water": "Stepper Leggings' Speed Boost",
   "copperoverthrow.config.stepper_leggings_speed": "Stepper Leggings' Water Mobility Efficiency",
   "copperoverthrow.config.tam_tam_volume": "Tam-Tam's Volume Radius",
+  "copperoverthrow.config.tam_tam_full_moon_volume": "Tam-Tam's Full Moon Volume Radius",
+  "copperoverthrow.config.tam_tam_full_moon_chance": "Tam-Tam's Full Moon Sound Chance",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-Tam Plays",
   "sounds.copperoverthrow.raindrum_play": "Rain Drum Plays"

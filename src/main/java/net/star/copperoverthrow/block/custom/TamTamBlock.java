@@ -38,6 +38,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
 import net.star.copperoverthrow.sound.ModSounds;
@@ -239,6 +240,9 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
 
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (Math.random()<ServerConfig.TAMTAM_FULL_MOON_VOLUME_CHANCE.get() && level.getMoonPhase() == 0 && level.isNight()){
+            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, ServerConfig.TAMTAM_FULL_MOON_VOLUME_RADIUS.get(), 1F);
+        }
         this.changeOverTime(state, level, pos, random);
     }
 
@@ -288,8 +292,6 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         }
     }@Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        // Only return the item loot if MAIN_TOP is broken directly.
-        // If a secondary part is broken, playerWillDestroy handles spawning the drop at the player's break position.
         if (state.getValue(PART) != WideThinDoubleBlock.MAIN_TOP) {
             return Collections.emptyList();
         }
@@ -361,9 +363,16 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     private void playSound(Level level, BlockPos pos, float volume){
-        if (Math.random()<0.05 && level.getMoonPhase() == 0){
-            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, volume, 1F);
-        } else if (Math.random()<0.07) {
+        if (level.getBlockState(pos).getBlock().equals(ModBlocks.EXPOSED_TAMTAM.get()) || level.getBlockState(pos).getBlock().equals(ModBlocks.WAXED_EXPOSED_TAMTAM.get())) {
+            level.playSound(null, pos, ModSounds.EXPOSED_TAM_TAM_PLAYING.get(), SoundSource.RECORDS, volume, 1F);
+        }
+        else if (level.getBlockState(pos).getBlock().equals(ModBlocks.WEATHERED_TAMTAM.get()) || level.getBlockState(pos).getBlock().equals(ModBlocks.WAXED_WEATHERED_TAMTAM.get())) {
+            level.playSound(null, pos, ModSounds.WEATHERED_TAM_TAM_PLAYING.get(), SoundSource.RECORDS, volume, 1F);
+        }
+        else if (level.getBlockState(pos).getBlock().equals(ModBlocks.OXIDIZED_TAMTAM.get()) || level.getBlockState(pos).getBlock().equals(ModBlocks.WAXED_OXIDIZED_TAMTAM.get())) {
+            level.playSound(null, pos, ModSounds.OXIDIZED_TAM_TAM_PLAYING.get(), SoundSource.RECORDS, volume - 1, 1F);
+        }
+        else if (Math.random()<0.07) {
             level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_RARE.get(), SoundSource.RECORDS, volume, 1F);
         }
         else {

@@ -25,6 +25,9 @@ public class ModSounds {
         public static final Supplier<SoundEvent> OXIDIZED_RAIN_DRUM_PLAYING = registerSoundEvent("oxidized_rain_drum_playing");
 
         public static final Supplier<SoundEvent> TAM_TAM_PLAYING = registerSoundEvent("tamtam_playing");
+        public static final Supplier<SoundEvent> EXPOSED_TAM_TAM_PLAYING = registerSoundEvent("exposed_tamtam_playing");
+        public static final Supplier<SoundEvent> WEATHERED_TAM_TAM_PLAYING = registerSoundEvent("weathered_tamtam_playing");
+        public static final Supplier<SoundEvent> OXIDIZED_TAM_TAM_PLAYING = registerSoundEvent("oxidized_tamtam_playing");
         public static final Supplier<SoundEvent> TAM_TAM_PLAYING_RARE = registerSoundEvent("tamtam_playing_rare");
         public static final Supplier<SoundEvent> TAM_TAM_PLAYING_MOON = registerSoundEvent("tamtam_playing_moon");
 
