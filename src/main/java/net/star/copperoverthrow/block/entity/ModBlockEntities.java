@@ -42,9 +42,16 @@ public class ModBlockEntities {
                     .build(null));
 
     public static final Supplier<BlockEntityType<KitchenBellBlockEntity>> KITCHEN_BELL_BE =
-            BLOCK_ENTITIES.register("kitchen_bell_be", ()-> BlockEntityType.Builder.of(
+            BLOCK_ENTITIES.register("kitchen_bell_be", () -> BlockEntityType.Builder.of(
                             KitchenBellBlockEntity::new,
-                            ModBlocks.KITCHEN_BELL.get())
+                            ModBlocks.KITCHEN_BELL.get(),
+                            ModBlocks.EXPOSED_KITCHEN_BELL.get(),
+                            ModBlocks.WEATHERED_KITCHEN_BELL.get(),
+                            ModBlocks.OXIDIZED_KITCHEN_BELL.get(),
+                            ModBlocks.WAXED_KITCHEN_BELL.get(),
+                            ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get(),
+                            ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get(),
+                            ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get())
                     .build(null));
 
     public static void register(IEventBus eventBus){

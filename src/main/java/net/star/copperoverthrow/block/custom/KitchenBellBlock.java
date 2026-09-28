@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
@@ -44,7 +45,8 @@ import java.util.function.BiConsumer;
 public class KitchenBellBlock extends BaseEntityBlock {
 
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-    protected static final VoxelShape SHAPE = Block.box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
+    protected static final VoxelShape SHAPE_BASE = Block.box(3.0, 0.0, 3.0, 13.0, 3.0, 13.0);
+    protected static final VoxelShape SHAPE_HAT = Block.box(4.0, 3.0, 4.0, 12.0, 9.0, 12.0);
     private final int ticksToStayPressed;
 
     public static final MapCodec<KitchenBellBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
@@ -70,14 +72,13 @@ public class KitchenBellBlock extends BaseEntityBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        return Shapes.or(SHAPE_BASE, SHAPE_HAT);
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (state.getValue(POWERED)) {
-            level.setBlockAndUpdate(pos.above(), Blocks.DIAMOND_BLOCK.defaultBlockState());
-            return InteractionResult.CONSUME;
+            return InteractionResult.PASS;
         }
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof KitchenBellBlockEntity blockEntity && player.getMainHandItem().isEmpty()) {
             blockEntity.startSwing(hitResult.getDirection());
@@ -141,13 +142,6 @@ public class KitchenBellBlock extends BaseEntityBlock {
         }
     }
 
-    @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!level.isClientSide && !state.getValue(POWERED)) {
-            this.checkPressed(state, level, pos);
-        }
-    }
-
     protected void checkPressed(BlockState state, Level level, BlockPos pos) {
         AbstractArrow abstractarrow = level.getEntitiesOfClass(AbstractArrow.class, state.getShape(level, pos).bounds().move(pos)).stream().findFirst().orElse(null);
         boolean flag = abstractarrow != null;
@@ -182,5 +176,4 @@ public class KitchenBellBlock extends BaseEntityBlock {
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
-
 }

@@ -737,16 +737,106 @@ public class ModBlocks {
     public static final DeferredBlock<Block> KITCHEN_BELL = registerBlock("kitchen_bell",
             () -> new KitchenBellBlock(
                     BlockSetType.COPPER,
+                    5,
+                    BlockBehaviour.Properties.of()
+                            .strength(2f)
+                            .noOcclusion()
+                            .forceSolidOn()
+                            .requiresCorrectToolForDrops()
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)));
+
+    public static final DeferredBlock<Block> EXPOSED_KITCHEN_BELL = registerBlock("exposed_kitchen_bell",
+            () -> new KitchenBellBlock(
+                    BlockSetType.COPPER,
                     10,
                     BlockBehaviour.Properties.of()
-                    .strength(2f)
-                    .noOcclusion()
-                    .forceSolidOn()
-                    .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
-                    .pushReaction(PushReaction.DESTROY)
-                    .sound(SoundType.COPPER)));
+                            .strength(2f)
+                            .noOcclusion()
+                            .forceSolidOn()
+                            .requiresCorrectToolForDrops()
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)));
 
+    public static final DeferredBlock<Block> WEATHERED_KITCHEN_BELL = registerBlock("weathered_kitchen_bell",
+            () -> new KitchenBellBlock(
+                    BlockSetType.COPPER,
+                    15,
+                    BlockBehaviour.Properties.of()
+                            .strength(2f)
+                            .noOcclusion()
+                            .forceSolidOn()
+                            .requiresCorrectToolForDrops()
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)));
+
+    public static final DeferredBlock<Block> OXIDIZED_KITCHEN_BELL = registerBlock("oxidized_kitchen_bell",
+            () -> new KitchenBellBlock(
+                    BlockSetType.COPPER,
+                    20,
+                    BlockBehaviour.Properties.of()
+                            .strength(2f)
+                            .noOcclusion()
+                            .forceSolidOn()
+                            .requiresCorrectToolForDrops()
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)));
+
+    public static final DeferredBlock<Block> WAXED_KITCHEN_BELL = registerBlock("waxed_kitchen_bell",
+            () -> new KitchenBellBlock(
+                    BlockSetType.COPPER,
+                    5,
+                    BlockBehaviour.Properties.of()
+                            .strength(2f)
+                            .noOcclusion()
+                            .forceSolidOn()
+                            .requiresCorrectToolForDrops()
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)));
+
+    public static final DeferredBlock<Block> WAXED_EXPOSED_KITCHEN_BELL = registerBlock("waxed_exposed_kitchen_bell",
+            () -> new KitchenBellBlock(
+                    BlockSetType.COPPER,
+                    10,
+                    BlockBehaviour.Properties.of()
+                            .strength(2f)
+                            .noOcclusion()
+                            .forceSolidOn()
+                            .requiresCorrectToolForDrops()
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)));
+
+    public static final DeferredBlock<Block> WAXED_WEATHERED_KITCHEN_BELL = registerBlock("waxed_weathered_kitchen_bell",
+            () -> new KitchenBellBlock(
+                    BlockSetType.COPPER,
+                    15,
+                    BlockBehaviour.Properties.of()
+                            .strength(2f)
+                            .noOcclusion()
+                            .forceSolidOn()
+                            .requiresCorrectToolForDrops()
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)));
+
+    public static final DeferredBlock<Block> WAXED_OXIDIZED_KITCHEN_BELL = registerBlock("waxed_oxidized_kitchen_bell",
+            () -> new KitchenBellBlock(
+                    BlockSetType.COPPER,
+                    20,
+                    BlockBehaviour.Properties.of()
+                            .strength(2f)
+                            .noOcclusion()
+                            .forceSolidOn()
+                            .requiresCorrectToolForDrops()
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
