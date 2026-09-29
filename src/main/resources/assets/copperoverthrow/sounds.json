@@ -146,6 +146,19 @@
       "copperoverthrow:exposed_kitchen_bell_low_high",
       "copperoverthrow:exposed_kitchen_bell_med_med"
     ]
+  },
+  "weathered_kitchen_bell_press": {
+    "subtitle": "sounds.copperoverthrow.kitchen_bell_play",
+    "sounds": [
+      "copperoverthrow:weathered_kitchen_bell_low_high",
+      "copperoverthrow:weathered_kitchen_bell_med_med"
+    ]
+  },
+  "oxidized_kitchen_bell_press": {
+    "subtitle": "sounds.copperoverthrow.kitchen_bell_play",
+    "sounds": [
+      "copperoverthrow:oxidized_kitchen_bell_med_med"
+    ]
   }
 
 }

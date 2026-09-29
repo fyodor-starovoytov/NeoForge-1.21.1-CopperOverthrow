@@ -49,6 +49,10 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModBlocks.EXPOSED_COPPER_LANTERN.getId(), new Oxidizable(ModBlocks.WEATHERED_COPPER_LANTERN.get()), false)
                 .add(ModBlocks.WEATHERED_COPPER_LANTERN.getId(), new Oxidizable(ModBlocks.OXIDIZED_COPPER_LANTERN.get()), false)
 
+                .add(ModBlocks.KITCHEN_BELL.getId(), new Oxidizable(ModBlocks.EXPOSED_KITCHEN_BELL.get()), false)
+                .add(ModBlocks.EXPOSED_KITCHEN_BELL.getId(), new Oxidizable(ModBlocks.WEATHERED_KITCHEN_BELL.get()), false)
+                .add(ModBlocks.WEATHERED_KITCHEN_BELL.getId(), new Oxidizable(ModBlocks.OXIDIZED_KITCHEN_BELL.get()), false)
+
         ;
 
 
@@ -88,6 +92,11 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModBlocks.EXPOSED_COPPER_LANTERN.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get()), false)
                 .add(ModBlocks.WEATHERED_COPPER_LANTERN.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get()), false)
                 .add(ModBlocks.OXIDIZED_COPPER_LANTERN.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get()), false)
+
+                .add(ModBlocks.KITCHEN_BELL.getId(), new Waxable(ModBlocks.WAXED_KITCHEN_BELL.get()), false)
+                .add(ModBlocks.EXPOSED_KITCHEN_BELL.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get()), false)
+                .add(ModBlocks.WEATHERED_KITCHEN_BELL.getId(), new Waxable(ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get()), false)
+                .add(ModBlocks.OXIDIZED_KITCHEN_BELL.getId(), new Waxable(ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get()), false)
 
         ;
     }

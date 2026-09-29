@@ -54,6 +54,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.RAIN_DRUM);
                         output.accept(ModBlocks.LARGE_RAIN_DRUM);
                         output.accept(ModBlocks.TAMTAM);
+                        output.accept(ModBlocks.KITCHEN_BELL);
                         output.accept(ModBlocks.COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.COPPER_CHAIN);
                         output.accept(ModBlocks.COPPER_LANTERN);
@@ -62,6 +63,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.EXPOSED_RAIN_DRUM);
                         output.accept(ModBlocks.EXPOSED_LARGE_RAIN_DRUM);
                         output.accept(ModBlocks.EXPOSED_TAMTAM);
+                        output.accept(ModBlocks.EXPOSED_KITCHEN_BELL);
                         output.accept(ModBlocks.EXPOSED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.EXPOSED_COPPER_CHAIN);
                         output.accept(ModBlocks.EXPOSED_COPPER_LANTERN);
@@ -70,6 +72,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WEATHERED_RAIN_DRUM);
                         output.accept(ModBlocks.WEATHERED_LARGE_RAIN_DRUM);
                         output.accept(ModBlocks.WEATHERED_TAMTAM);
+                        output.accept(ModBlocks.WEATHERED_KITCHEN_BELL);
                         output.accept(ModBlocks.WEATHERED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.WEATHERED_COPPER_CHAIN);
                         output.accept(ModBlocks.WEATHERED_COPPER_LANTERN);
@@ -78,6 +81,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.OXIDIZED_RAIN_DRUM);
                         output.accept(ModBlocks.OXIDIZED_LARGE_RAIN_DRUM);
                         output.accept(ModBlocks.OXIDIZED_TAMTAM);
+                        output.accept(ModBlocks.OXIDIZED_KITCHEN_BELL);
                         output.accept(ModBlocks.OXIDIZED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.OXIDIZED_COPPER_CHAIN);
                         output.accept(ModBlocks.OXIDIZED_COPPER_LANTERN);
@@ -86,6 +90,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WAXED_RAIN_DRUM);
                         output.accept(ModBlocks.WAXED_LARGE_RAIN_DRUM);
                         output.accept(ModBlocks.WAXED_TAMTAM);
+                        output.accept(ModBlocks.WAXED_KITCHEN_BELL);
                         output.accept(ModBlocks.WAXED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.WAXED_COPPER_CHAIN);
                         output.accept(ModBlocks.WAXED_COPPER_LANTERN);
@@ -94,6 +99,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WAXED_EXPOSED_RAIN_DRUM);
                         output.accept(ModBlocks.WAXED_EXPOSED_LARGE_RAIN_DRUM);
                         output.accept(ModBlocks.WAXED_EXPOSED_TAMTAM);
+                        output.accept(ModBlocks.WAXED_EXPOSED_KITCHEN_BELL);
                         output.accept(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN);
                         output.accept(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN);
@@ -102,6 +108,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WAXED_WEATHERED_RAIN_DRUM);
                         output.accept(ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM);
                         output.accept(ModBlocks.WAXED_WEATHERED_TAMTAM);
+                        output.accept(ModBlocks.WAXED_WEATHERED_KITCHEN_BELL);
                         output.accept(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN);
                         output.accept(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN);
@@ -110,6 +117,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WAXED_OXIDIZED_RAIN_DRUM);
                         output.accept(ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM);
                         output.accept(ModBlocks.WAXED_OXIDIZED_TAMTAM);
+                        output.accept(ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL);
                         output.accept(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN);
                         output.accept(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN);

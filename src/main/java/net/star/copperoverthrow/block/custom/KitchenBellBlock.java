@@ -5,19 +5,18 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -25,7 +24,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -34,37 +32,39 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
-import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
-import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
 import net.star.copperoverthrow.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
-public class KitchenBellBlock extends BaseEntityBlock {
+public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, WeatheringCopper {
 
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     protected static final VoxelShape SHAPE_BASE = Block.box(3.0, 0.0, 3.0, 13.0, 3.0, 13.0);
     protected static final VoxelShape SHAPE_HAT = Block.box(4.0, 3.0, 4.0, 12.0, 9.0, 12.0);
-    private final int ticksToStayPressed;
+    private final int TICKS_TO_STAY_PRESSED;
+    private final Supplier<SoundEvent> PRESS_SOUND;
+    private final WeatherState weatherState;
 
     public static final MapCodec<KitchenBellBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
-                instance.group(
-                        Codec.INT.fieldOf("ticks_to_stay_pressed").forGetter(block -> block.ticksToStayPressed),
-                        propertiesCodec()
-                        //WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(TamTamBlock::getAge)
-                ).apply(instance, (ticks, props) -> new KitchenBellBlock(BlockSetType.COPPER, ticks, props))
+            instance.group(
+                    Codec.INT.fieldOf("ticks_to_stay_pressed").forGetter(block -> block.TICKS_TO_STAY_PRESSED),
+                    propertiesCodec(),
+                    BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("press_sound").forGetter(block -> block.PRESS_SOUND.get()),
+                    WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(KitchenBellBlock::getAge)
+            ).apply(instance, (ticks, props, sound, weather) -> new KitchenBellBlock(BlockSetType.COPPER, ticks, props, () -> sound, weather))
     );
-
-    public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, BlockBehaviour.Properties properties) {
+    public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, BlockBehaviour.Properties properties, Supplier<SoundEvent> pressSound, WeatherState weatherState) {
         super(properties.sound(type.soundType()));
         this.registerDefaultState(
                 this.stateDefinition.any().setValue(POWERED, Boolean.valueOf(false))
         );
-        this.ticksToStayPressed = ticksToStayPressed;
+        this.TICKS_TO_STAY_PRESSED = ticksToStayPressed;
+        this.PRESS_SOUND = pressSound;
+        this.weatherState = weatherState;
     }
 
     @Override
@@ -84,12 +84,7 @@ public class KitchenBellBlock extends BaseEntityBlock {
         }
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof KitchenBellBlockEntity blockEntity && player.getMainHandItem().isEmpty()) {
             blockEntity.startSwing(hitResult.getDirection());
-            if (blockEntity.getBlockState().getBlock().equals(ModBlocks.EXPOSED_KITCHEN_BELL.get()) ||blockEntity.getBlockState().getBlock().equals(ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get())) {
-                level.playSound(null, pos, ModSounds.EXPOSED_KITCHEN_BELL_PLAYING.get(), SoundSource.RECORDS, 0.5f, 1);
-            }
-            else {
-                level.playSound(null, pos, ModSounds.KITCHEN_BELL_PLAYING.get(), SoundSource.RECORDS, 0.5f, 1);
-            }
+            level.playSound(null, pos, PRESS_SOUND.get(), SoundSource.RECORDS, 0.5f, 1);
             this.press(state, level, pos, player);
             return InteractionResult.SUCCESS;
         }
@@ -108,7 +103,7 @@ public class KitchenBellBlock extends BaseEntityBlock {
     public void press(BlockState state, Level level, BlockPos pos, @Nullable Player player) {
         level.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(true)), 3);
         this.updateNeighbours(state, level, pos);
-        level.scheduleTick(pos, this, this.ticksToStayPressed);
+        level.scheduleTick(pos, this, this.TICKS_TO_STAY_PRESSED);
         level.gameEvent(player, GameEvent.BLOCK_ACTIVATE, pos);
     }
 
@@ -161,7 +156,7 @@ public class KitchenBellBlock extends BaseEntityBlock {
         }
 
         if (flag) {
-            level.scheduleTick(new BlockPos(pos), this, this.ticksToStayPressed);
+            level.scheduleTick(new BlockPos(pos), this, this.TICKS_TO_STAY_PRESSED);
         }
     }
 
@@ -183,5 +178,20 @@ public class KitchenBellBlock extends BaseEntityBlock {
     @Override
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        this.changeOverTime(state, level, pos, random);
+    }
+
+    @Override
+    public WeatherState getAge() {
+        return this.weatherState;
+    }
+
+    @Override
+    protected boolean isRandomlyTicking(BlockState state) {
+        return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 }

@@ -48,6 +48,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.PLATES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .addTag(ModTags.Blocks.COPPER_LANTERNS)
+                .addTag(ModTags.Blocks.KITCHEN_BELLS)
                 .add(ModBlocks.LOG_STRIPPER.get());
 
         tag(BlockTags.NEEDS_STONE_TOOL)
@@ -59,6 +60,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get())
+
 
                 .add(ModBlocks.COPPER_CHAIN.get())
                 .add(ModBlocks.WEATHERED_COPPER_CHAIN.get())
@@ -72,6 +74,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.PLATES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .addTag(ModTags.Blocks.COPPER_LANTERNS)
+                .addTag(ModTags.Blocks.KITCHEN_BELLS)
                 .add(ModBlocks.LOG_STRIPPER.get());
 
         tag(BlockTags.CLIMBABLE)
@@ -116,6 +119,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.MUSICAL_BLOCKS)
                 .add(Blocks.NOTE_BLOCK)
                 .add(Blocks.JUKEBOX)
+                .addTag(ModTags.Blocks.BELLS)
                 .addTag(ModTags.Blocks.PLATES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS);
 
@@ -131,6 +135,20 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_WEATHERED_TAMTAM.get())
                 .add(ModBlocks.WAXED_TAMTAM.get())
                 .add(ModBlocks.WAXED_EXPOSED_TAMTAM.get());
+
+        tag(ModTags.Blocks.BELLS)
+                .addTag(ModTags.Blocks.KITCHEN_BELLS)
+                .add(Blocks.BELL);
+
+        tag(ModTags.Blocks.KITCHEN_BELLS)
+                .add(ModBlocks.KITCHEN_BELL.get())
+                .add(ModBlocks.EXPOSED_KITCHEN_BELL.get())
+                .add(ModBlocks.WEATHERED_KITCHEN_BELL.get())
+                .add(ModBlocks.OXIDIZED_KITCHEN_BELL.get())
+                .add(ModBlocks.WAXED_KITCHEN_BELL.get())
+                .add(ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get())
+                .add(ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get())
+                .add(ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get());
 
         tag(ModTags.Blocks.RAIN_DRUMS)
                 .add(ModBlocks.RAIN_DRUM.get())

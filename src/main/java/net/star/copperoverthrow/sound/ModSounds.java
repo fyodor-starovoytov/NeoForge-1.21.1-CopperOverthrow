@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 
 public class ModSounds {
 
+
         public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
                 DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, CopperOverthrow.MOD_ID);
 
@@ -34,6 +35,9 @@ public class ModSounds {
 
         public static final Supplier<SoundEvent> KITCHEN_BELL_PLAYING = registerSoundEvent("kitchen_bell_press");
         public static final Supplier<SoundEvent> EXPOSED_KITCHEN_BELL_PLAYING = registerSoundEvent("exposed_kitchen_bell_press");
+        public static final Supplier<SoundEvent> WEATHERED_KITCHEN_BELL_PLAYING = registerSoundEvent("weathered_kitchen_bell_press");
+        public static final Supplier<SoundEvent> OXIDIZED_KITCHEN_BELL_PLAYING = registerSoundEvent("oxidized_kitchen_bell_press");
+
 
 
         private static Supplier<SoundEvent> registerSoundEvent(String name) {

@@ -18,6 +18,8 @@ public class ModTags {
 
         public static final TagKey<Block> RAIN_DRUMS = createTag("c", "musical_blocks/rain_drums");
         public static final TagKey<Block> PLATES = createTag("c", "musical_blocks/plates");
+        public static final TagKey<Block> KITCHEN_BELLS = createTag("c", "musical_blocks/bells/kitchen_bells");
+        public static final TagKey<Block> BELLS = createTag("c", "musical_blocks/bells");
         public static final TagKey<Block> MUSICAL_BLOCKS = createTag("c", "musical_blocks");
          public static final TagKey<Block> COPPER_LANTERNS = createTag("c", "lights/copper_lanterns");
          public static final TagKey<Block> LIGHTS = createTag("c", "lights");

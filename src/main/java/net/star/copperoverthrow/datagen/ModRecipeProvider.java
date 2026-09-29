@@ -161,6 +161,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', ItemTags.PLANKS)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.KITCHEN_BELL.get(), 1)
+                .pattern(" D ")
+                .pattern("CBC")
+                .pattern("AAA")
+                .define('A', Tags.Items.INGOTS_IRON)
+                .define('B', ModTags.Items.C_COPPER_NUGGETS)
+                .define('C', Tags.Items.INGOTS_COPPER)
+                .define('D', Tags.Items.NUGGETS_IRON)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
 /*
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_BEEOSPHERE.get(), 1)
                 .pattern("CAC")
@@ -237,7 +247,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_COPPER_LANTERN.get(), ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get(), "exposed_copper_lantern");
         addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_COPPER_LANTERN.get(), ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get(), "weathered_copper_lantern");
         addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_COPPER_LANTERN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get(), "oxidized_copper_lantern");
+
+        addWaxingRecipe(recipeOutput, ModBlocks.KITCHEN_BELL.get(), ModBlocks.WAXED_KITCHEN_BELL.get(), "kitchen_bell");
+        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_KITCHEN_BELL.get(), ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get(), "exposed_kitchen_bell");
+        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_KITCHEN_BELL.get(), ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get(), "weathered_kitchen_bell");
+        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_KITCHEN_BELL.get(), ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get(), "oxidized_kitchen_bell");
     }
+
 
     protected void addWaxingRecipe(RecipeOutput recipeOutput, ItemLike unwaxed, ItemLike waxed, String unwaxedName) {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, waxed)

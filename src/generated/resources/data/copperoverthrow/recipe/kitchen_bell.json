@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/iron"
+    },
+    "B": {
+      "tag": "c:nuggets/copper"
+    },
+    "C": {
+      "tag": "c:ingots/copper"
+    },
+    "D": {
+      "tag": "c:nuggets/iron"
+    }
+  },
+  "pattern": [
+    " D ",
+    "CBC",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "copperoverthrow:kitchen_bell"
+  }
+}

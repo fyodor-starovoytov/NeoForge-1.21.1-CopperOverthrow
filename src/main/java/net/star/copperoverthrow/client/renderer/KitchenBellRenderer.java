@@ -40,13 +40,13 @@ public class KitchenBellRenderer implements BlockEntityRenderer<KitchenBellBlock
 
     public void render(KitchenBellBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         if (isBlock(blockEntity, ModBlocks.EXPOSED_KITCHEN_BELL.get(), ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get())) {
-            ShakeWeakness = 16;
+            ShakeWeakness = 15;
         } else if (isBlock(blockEntity, ModBlocks.WEATHERED_KITCHEN_BELL.get(), ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get())) {
             ShakeWeakness = 28;
         } else if (isBlock(blockEntity, ModBlocks.OXIDIZED_KITCHEN_BELL.get(), ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get())) {
-            ShakeWeakness = 36;
+            ShakeWeakness = 50;
         } else {
-            ShakeWeakness = 8;
+            ShakeWeakness = 7;
         }
 
         poseStack.pushPose();
