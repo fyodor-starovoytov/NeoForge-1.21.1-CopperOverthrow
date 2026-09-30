@@ -20,6 +20,13 @@
   "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Вощёные состаренные медные подмостки",
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Вощёные окисленные медные подмостки",
   "block.copperoverthrow.log_stripper": "Станция для работы по дереву",
+  "block.copperoverthrow.exposed_log_stripper": "Потемневшая станция для работы по дереву",
+  "block.copperoverthrow.weathered_log_stripper": "Состаренная станция для работы по дереву",
+  "block.copperoverthrow.oxidized_log_stripper": "Окисленная станция для работы по дереву",
+  "block.copperoverthrow.waxed_log_stripper": "Вощёная станция для работы по дереву",
+  "block.copperoverthrow.waxed_exposed_log_stripper": "Вощёная потемневшая станция для работы по дереву",
+  "block.copperoverthrow.waxed_weathered_log_stripper": "Вощёная состаренная станция для работы по дереву",
+  "block.copperoverthrow.waxed_oxidized_log_stripper": "Вощёная окисленная станция для работы по дереву",
 
   "block.copperoverthrow.medium_note_rain_drum": "Медный барабан дождя",
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Потемневший медный барабан дождя",
@@ -126,6 +133,9 @@
   "copperoverthrow.config.stepper_leggings_water": "Увеличение скорости шаговых поножей",
   "copperoverthrow.config.stepper_leggings_speed": "Эффективность передвижения по воде шаговых поножей",
   "copperoverthrow.config.tam_tam_volume": "Радиус громкости там-тама",
+  "copperoverthrow.config.tam_tam_full_moon_volume": "Радиус громкости там-тама во время полнолуния",
+  "copperoverthrow.config.tam_tam_full_moon_chance": "Шанс звучания там-тама во время полнолуния",
+  "copperoverthrow.config.kitchen_bell_volume": "Радиус громкости настольного звонка",
 
   "sounds.copperoverthrow.tamtam_play": "Там-там играет",
   "sounds.copperoverthrow.raindrum_play": "Барабан дождя играет",

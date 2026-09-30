@@ -20,6 +20,13 @@
   "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Vahattu kulunut kuparirakennusteline",
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Vahattu hapettunut kuparirakennusteline",
   "block.copperoverthrow.log_stripper": "Tukkien kuorinta-asema",
+  "block.copperoverthrow.exposed_log_stripper": "Altistunut tukkien kuorinta-asema",
+  "block.copperoverthrow.weathered_log_stripper": "Kulunut tukkien kuorinta-asema",
+  "block.copperoverthrow.oxidized_log_stripper": "Hapettunut tukkien kuorinta-asema",
+  "block.copperoverthrow.waxed_log_stripper": "Vahattu tukkien kuorinta-asema",
+  "block.copperoverthrow.waxed_exposed_log_stripper": "Vahattu altistunut tukkien kuorinta-asema",
+  "block.copperoverthrow.waxed_weathered_log_stripper": "Vahattu kulunut tukkien kuorinta-asema",
+  "block.copperoverthrow.waxed_oxidized_log_stripper": "Vahattu hapettunut tukkien kuorinta-asema",
 
   "block.copperoverthrow.medium_note_rain_drum": "Kuparisaderumpu",
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Altistunut kuparisaderumpu",
@@ -126,6 +133,9 @@
   "copperoverthrow.config.stepper_leggings_water": "Askelmahousujen nopeuslisä",
   "copperoverthrow.config.stepper_leggings_speed": "Askelmahousujen vesiliikkuvuustehokkuus",
   "copperoverthrow.config.tam_tam_volume": "Tam-tamin äänenvoimakkuussäde",
+  "copperoverthrow.config.tam_tam_full_moon_volume": "Tam-tamin äänenvoimakkuussäde täysikuulla",
+  "copperoverthrow.config.tam_tam_full_moon_chance": "Tam-tamin äänen todennäköisyys täysikuulla",
+  "copperoverthrow.config.kitchen_bell_volume": "Pöytäkellon äänenvoimakkuussäde",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-tam soi",
   "sounds.copperoverthrow.raindrum_play": "Saderumpu soi",

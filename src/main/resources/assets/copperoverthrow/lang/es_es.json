@@ -20,6 +20,13 @@
   "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Andamio de cobre desgastado encerado",
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Andamio de cobre oxidado encerado",
   "block.copperoverthrow.log_stripper": "Estación de descortezado",
+  "block.copperoverthrow.exposed_log_stripper": "Estación de descortezado expuesta",
+  "block.copperoverthrow.weathered_log_stripper": "Estación de descortezado desgastada",
+  "block.copperoverthrow.oxidized_log_stripper": "Estación de descortezado oxidada",
+  "block.copperoverthrow.waxed_log_stripper": "Estación de descortezado encerada",
+  "block.copperoverthrow.waxed_exposed_log_stripper": "Estación de descortezado expuesta encerada",
+  "block.copperoverthrow.waxed_weathered_log_stripper": "Estación de descortezado desgastada encerada",
+  "block.copperoverthrow.waxed_oxidized_log_stripper": "Estación de descortezado oxidada encerada",
 
   "block.copperoverthrow.medium_note_rain_drum": "Tambor de lluvia de cobre",
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Tambor de lluvia de cobre expuesto",
@@ -126,6 +133,9 @@
   "copperoverthrow.config.stepper_leggings_water": "Aumento de velocidad de las grebas de escalón",
   "copperoverthrow.config.stepper_leggings_speed": "Eficiencia de movilidad acuática de las grebas de escalón",
   "copperoverthrow.config.tam_tam_volume": "Radio de volumen del tam-tam",
+  "copperoverthrow.config.tam_tam_full_moon_volume": "Radio de volumen del tam-tam en luna llena",
+  "copperoverthrow.config.tam_tam_full_moon_chance": "Probabilidad de sonido del tam-tam en luna llena",
+  "copperoverthrow.config.kitchen_bell_volume": "Radio de volumen del timbre de mesa",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-tam suena",
   "sounds.copperoverthrow.raindrum_play": "Tambor de lluvia suena",

@@ -20,6 +20,13 @@
   "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Вощене покрите патиною мідне риштовання",
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Вощене окиснене мідне риштовання",
   "block.copperoverthrow.log_stripper": "Станція обтесування колод",
+  "block.copperoverthrow.exposed_log_stripper": "Пошкоджена станція обтесування колод",
+  "block.copperoverthrow.weathered_log_stripper": "Покрита патиною станція обтесування колод",
+  "block.copperoverthrow.oxidized_log_stripper": "Окиснена станція обтесування колод",
+  "block.copperoverthrow.waxed_log_stripper": "Вощена станція обтесування колод",
+  "block.copperoverthrow.waxed_exposed_log_stripper": "Вощена пошкоджена станція обтесування колод",
+  "block.copperoverthrow.waxed_weathered_log_stripper": "Вощена покрита патиною станція обтесування колод",
+  "block.copperoverthrow.waxed_oxidized_log_stripper": "Вощена окиснена станція обтесування колод",
 
   "block.copperoverthrow.medium_note_rain_drum": "Мідний барабан дощу",
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Пошкоджений мідний барабан дощу",
@@ -126,6 +133,9 @@
   "copperoverthrow.config.stepper_leggings_water": "Підвищення швидкості поношів кроку",
   "copperoverthrow.config.stepper_leggings_speed": "Ефективність пересування у воді поношів кроку",
   "copperoverthrow.config.tam_tam_volume": "Радіус гучності там-тама",
+  "copperoverthrow.config.tam_tam_full_moon_volume": "Радіус гучності там-тама під час повного місяця",
+  "copperoverthrow.config.tam_tam_full_moon_chance": "Шанс звучання там-тама під час повного місяця",
+  "copperoverthrow.config.kitchen_bell_volume": "Радіус гучності настільного дзвінка",
 
   "sounds.copperoverthrow.tamtam_play": "Там-там грає",
   "sounds.copperoverthrow.raindrum_play": "Барабан дощу грає",
