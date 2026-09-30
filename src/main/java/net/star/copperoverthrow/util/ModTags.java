@@ -21,8 +21,9 @@ public class ModTags {
         public static final TagKey<Block> KITCHEN_BELLS = createTag("c", "musical_blocks/bells/kitchen_bells");
         public static final TagKey<Block> BELLS = createTag("c", "musical_blocks/bells");
         public static final TagKey<Block> MUSICAL_BLOCKS = createTag("c", "musical_blocks");
-         public static final TagKey<Block> COPPER_LANTERNS = createTag("c", "lights/copper_lanterns");
-         public static final TagKey<Block> LIGHTS = createTag("c", "lights");
+        public static final TagKey<Block> COPPER_LANTERNS = createTag("c", "lights/copper_lanterns");
+        public static final TagKey<Block> LIGHTS = createTag("c", "lights");
+        public static final TagKey<Block> LOG_STRIPPING_STATION = createTag(CopperOverthrow.MOD_ID, "log_stripping_stations");
 
          private static TagKey<Block> createTag(String namespace, String path){
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(namespace, path));

@@ -20,6 +20,6 @@
     "#c:musical_blocks/rain_drums",
     "#c:lights/copper_lanterns",
     "#c:musical_blocks/bells/kitchen_bells",
-    "copperoverthrow:log_stripper"
+    "#copperoverthrow:log_stripping_stations"
   ]
 }

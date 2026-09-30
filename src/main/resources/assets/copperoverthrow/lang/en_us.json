@@ -20,7 +20,15 @@
   "block.copperoverthrow.waxed_exposed_copper_scaffolding": "Waxed Exposed Copper Scaffolding",
   "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Waxed Weathered Copper Scaffolding",
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Waxed Oxidized Copper Scaffolding",
+
   "block.copperoverthrow.log_stripper": "Log Stripping Station",
+  "block.copperoverthrow.exposed_log_stripper": "Exposed Log Stripping Station",
+  "block.copperoverthrow.weathered_log_stripper": "Weathered Log Stripping Station",
+  "block.copperoverthrow.oxidized_log_stripper": "Oxidized Log Stripping Station",
+  "block.copperoverthrow.waxed_log_stripper": "Waxed Log Stripping Station",
+  "block.copperoverthrow.waxed_exposed_log_stripper": "Waxed Exposed Log Stripping Station",
+  "block.copperoverthrow.waxed_weathered_log_stripper": "Waxed Weathered Log Stripping Station",
+  "block.copperoverthrow.waxed_oxidized_log_stripper": "Waxed Oxidized Log Stripping Station",
 
   "block.copperoverthrow.medium_note_rain_drum": "Copper Rain Drum",
   "block.copperoverthrow.exposed_medium_note_rain_drum": "Exposed Copper Rain Drum",
