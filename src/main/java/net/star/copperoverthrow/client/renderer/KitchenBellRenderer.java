@@ -72,9 +72,7 @@ public class KitchenBellRenderer implements BlockEntityRenderer<KitchenBellBlock
         }
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(getTextureForBell(blockEntity)));
-
         this.root.render(poseStack, consumer, packedLight, packedOverlay, -1);
-
         poseStack.popPose();
     }
 
