@@ -1,13 +1,16 @@
 package net.star.copperoverthrow.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -30,12 +33,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class LogStripperBlock extends BaseEntityBlock {
+public class LogStripperBlock extends BaseEntityBlock implements WeatheringCopper{
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
-    public static final MapCodec<LogStripperBlock> CODEC = simpleCodec(LogStripperBlock::new);
 
-    public LogStripperBlock(Properties properties) {
+    public static final MapCodec<LogStripperBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(
+                    propertiesCodec(),
+                    WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(LogStripperBlock::getAge)
+            ).apply(instance, LogStripperBlock::new)
+    );
+
+    private final WeatherState weatherState;
+
+    public LogStripperBlock(Properties properties, WeatherState weatherState) {
         super(properties);
+        this.weatherState = weatherState;
     }
 
     @Override
@@ -146,6 +158,21 @@ public class LogStripperBlock extends BaseEntityBlock {
             return new ItemStack(strippableData.strippedBlock().asItem()).copyWithCount(count);
         }
         return stack;
+    }
+
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        this.changeOverTime(state, level, pos, random);
+    }
+
+    @Override
+    public WeatherState getAge() {
+        return this.weatherState;
+    }
+
+    @Override
+    protected boolean isRandomlyTicking(BlockState state) {
+        return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
     @Override
