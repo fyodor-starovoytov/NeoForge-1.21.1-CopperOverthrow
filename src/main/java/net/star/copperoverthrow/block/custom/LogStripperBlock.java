@@ -60,7 +60,6 @@ public class LogStripperBlock extends BaseEntityBlock {
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-
         if (state.getBlock() != newState.getBlock()){
             if (level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity){
                 Containers.dropContents(level, pos, logStripperBlockEntity);

@@ -24,7 +24,12 @@ public class ModBlockEntities {
                             ModBlocks.LOG_STRIPPER.get(),
                             ModBlocks.EXPOSED_LOG_STRIPPER.get(),
                             ModBlocks.WEATHERED_LOG_STRIPPER.get(),
-                            ModBlocks.OXIDIZED_LOG_STRIPPER.get())
+                            ModBlocks.OXIDIZED_LOG_STRIPPER.get(),
+                            ModBlocks.WAXED_LOG_STRIPPER.get(),
+                            ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get(),
+                            ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get(),
+                            ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get()
+                    )
                     .build(null));
 
     public static final Supplier<BlockEntityType<CopperBeeosphereBlockEntity>> COPPER_BEEOSPHERE_BE =
