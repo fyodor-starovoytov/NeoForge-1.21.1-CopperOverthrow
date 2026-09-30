@@ -75,6 +75,15 @@
   "block.copperoverthrow.waxed_weathered_tamtam": "Вощёный состаренный там-там",
   "block.copperoverthrow.waxed_oxidized_tamtam": "Вощёный окисленный там-там",
 
+  "block.copperoverthrow.kitchen_bell": "Настольный звонок",
+  "block.copperoverthrow.exposed_kitchen_bell": "Потемневший настольный звонок",
+  "block.copperoverthrow.weathered_kitchen_bell": "Состаренный настольный звонок",
+  "block.copperoverthrow.oxidized_kitchen_bell": "Окисленный настольный звонок",
+  "block.copperoverthrow.waxed_kitchen_bell": "Вощёный настольный звонок",
+  "block.copperoverthrow.waxed_exposed_kitchen_bell": "Вощёный потемневший настольный звонок",
+  "block.copperoverthrow.waxed_weathered_kitchen_bell": "Вощёный состаренный настольный звонок",
+  "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Вощёный окисленный настольный звонок",
+
   "effect.copperoverthrow.conductivity": "Проводимость",
 
   "enchantment.copperoverthrow.areal": "Областной",
@@ -102,6 +111,11 @@
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Глухой стук§r",
   "tooltip.copperoverthrow.long_crash_sounding.tooltip": "§e Громкий грохот, который слышен издалека§r",
 
+  "tooltip.copperoverthrow.clean_dings_sounding.tooltip": "§e Два чистых звонка с короткой паузой§r",
+  "tooltip.copperoverthrow.harsh_dings_sounding.tooltip": "§e Два резких звонка с более долгой паузой§r",
+  "tooltip.copperoverthrow.chiming_taps_sounding.tooltip": "§e Два звонких стука с долгой паузой§r",
+  "tooltip.copperoverthrow.dull_taps_sounding.tooltip": "§e Два глухих стука с самой долгой паузой§r",
+
   "copperoverthrow.config.rain_drum_enable_notes": "Ноты при игре",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Излучают ли барабаны дождя частицы при воспроизведении нот.\n§7По умолчанию: Истина§r",
   "copperoverthrow.config.rain_drum_enable_sparks": "Искры во время полнолуния",
@@ -114,5 +128,6 @@
   "copperoverthrow.config.tam_tam_volume": "Радиус громкости там-тама",
 
   "sounds.copperoverthrow.tamtam_play": "Там-там играет",
-  "sounds.copperoverthrow.raindrum_play": "Барабан дождя играет"
+  "sounds.copperoverthrow.raindrum_play": "Барабан дождя играет",
+  "sounds.copperoverthrow.kitchen_bell_play": "Настольный звонок играет"
 }

@@ -75,6 +75,15 @@
   "block.copperoverthrow.waxed_weathered_tamtam": "Tam-tam desgastado encerado",
   "block.copperoverthrow.waxed_oxidized_tamtam": "Tam-tam oxidado encerado",
 
+  "block.copperoverthrow.kitchen_bell": "Timbre de mesa",
+  "block.copperoverthrow.exposed_kitchen_bell": "Timbre de mesa expuesto",
+  "block.copperoverthrow.weathered_kitchen_bell": "Timbre de mesa desgastado",
+  "block.copperoverthrow.oxidized_kitchen_bell": "Timbre de mesa oxidado",
+  "block.copperoverthrow.waxed_kitchen_bell": "Timbre de mesa encerado",
+  "block.copperoverthrow.waxed_exposed_kitchen_bell": "Timbre de mesa expuesto encerado",
+  "block.copperoverthrow.waxed_weathered_kitchen_bell": "Timbre de mesa desgastado encerado",
+  "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Timbre de mesa oxidado encerado",
+
   "effect.copperoverthrow.conductivity": "Conductividad",
 
   "enchantment.copperoverthrow.areal": "Área",
@@ -102,6 +111,11 @@
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Toque sordo§r",
   "tooltip.copperoverthrow.long_crash_sounding.tooltip": "§e Gran estruendo que se puede oír desde lejos§r",
 
+  "tooltip.copperoverthrow.clean_dings_sounding.tooltip": "§e Dos campanadas limpias, con una pausa corta§r",
+  "tooltip.copperoverthrow.harsh_dings_sounding.tooltip": "§e Dos campanadas estridentes, con una pausa más larga§r",
+  "tooltip.copperoverthrow.chiming_taps_sounding.tooltip": "§e Dos toques resonantes, con una pausa larga§r",
+  "tooltip.copperoverthrow.dull_taps_sounding.tooltip": "§e Dos toques sordos, con la pausa más larga§r",
+
   "copperoverthrow.config.rain_drum_enable_notes": "Notas al tocar",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Determina si los tambores de lluvia emiten partículas al tocar una nota.\n§7Por defecto: Verdadero§r",
   "copperoverthrow.config.rain_drum_enable_sparks": "Chispas durante luna llena",
@@ -114,5 +128,6 @@
   "copperoverthrow.config.tam_tam_volume": "Radio de volumen del tam-tam",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-tam suena",
-  "sounds.copperoverthrow.raindrum_play": "Tambor de lluvia suena"
+  "sounds.copperoverthrow.raindrum_play": "Tambor de lluvia suena",
+  "sounds.copperoverthrow.kitchen_bell_play": "Timbre de mesa suena"
 }

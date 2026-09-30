@@ -75,6 +75,15 @@
   "block.copperoverthrow.waxed_weathered_tamtam": "Vahattu kulunut tam-tam",
   "block.copperoverthrow.waxed_oxidized_tamtam": "Vahattu hapettunut tam-tam",
 
+  "block.copperoverthrow.kitchen_bell": "Pöytäkello",
+  "block.copperoverthrow.exposed_kitchen_bell": "Altistunut pöytäkello",
+  "block.copperoverthrow.weathered_kitchen_bell": "Kulunut pöytäkello",
+  "block.copperoverthrow.oxidized_kitchen_bell": "Hapettunut pöytäkello",
+  "block.copperoverthrow.waxed_kitchen_bell": "Vahattu pöytäkello",
+  "block.copperoverthrow.waxed_exposed_kitchen_bell": "Vahattu altistunut pöytäkello",
+  "block.copperoverthrow.waxed_weathered_kitchen_bell": "Vahattu kulunut pöytäkello",
+  "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Vahattu hapettunut pöytäkello",
+
   "effect.copperoverthrow.conductivity": "Johtavuus",
 
   "enchantment.copperoverthrow.areal": "Alueellinen",
@@ -102,6 +111,11 @@
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Matala napautus§r",
   "tooltip.copperoverthrow.long_crash_sounding.tooltip": "§e Kova kumu, joka kuuluu kauas§r",
 
+  "tooltip.copperoverthrow.clean_dings_sounding.tooltip": "§e Kaksi puhdasta kilahdusta, lyhyellä tauolla§r",
+  "tooltip.copperoverthrow.harsh_dings_sounding.tooltip": "§e Kaksi terävää kilahdusta, pidemmällä tauolla§r",
+  "tooltip.copperoverthrow.chiming_taps_sounding.tooltip": "§e Kaksi kaikavaa napautusta, pitkällä tauolla§r",
+  "tooltip.copperoverthrow.dull_taps_sounding.tooltip": "§e Kaksi matalaa napautusta, pisimmällä tauolla§r",
+
   "copperoverthrow.config.rain_drum_enable_notes": "Nuotit soittaessa",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Päästävätkö saderummut hiukkasia nuottia soitettaessa.\n§7Oletus: Tosi§r",
   "copperoverthrow.config.rain_drum_enable_sparks": "Kipinät täysikuun aikana",
@@ -114,5 +128,6 @@
   "copperoverthrow.config.tam_tam_volume": "Tam-tamin äänenvoimakkuussäde",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-tam soi",
-  "sounds.copperoverthrow.raindrum_play": "Saderumpu soi"
+  "sounds.copperoverthrow.raindrum_play": "Saderumpu soi",
+  "sounds.copperoverthrow.kitchen_bell_play": "Pöytäkello soi"
 }

@@ -3,9 +3,11 @@ package net.star.copperoverthrow.block.custom;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -13,9 +15,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.HoneycombItem;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
@@ -39,6 +39,7 @@ import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
 import net.star.copperoverthrow.sound.ModSounds;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -49,23 +50,26 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     protected static final VoxelShape SHAPE_HAT = Block.box(4.0, 3.0, 4.0, 12.0, 9.0, 12.0);
     private final int TICKS_TO_STAY_PRESSED;
     private final Supplier<SoundEvent> PRESS_SOUND;
+    private final String TOOLTIP_SOUNDING;
     private final WeatherState weatherState;
 
     public static final MapCodec<KitchenBellBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Codec.INT.fieldOf("ticks_to_stay_pressed").forGetter(block -> block.TICKS_TO_STAY_PRESSED),
                     propertiesCodec(),
+                    Codec.STRING.fieldOf("tooltip_sounding").forGetter(block -> block.TOOLTIP_SOUNDING),
                     BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("press_sound").forGetter(block -> block.PRESS_SOUND.get()),
                     WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(KitchenBellBlock::getAge)
-            ).apply(instance, (ticks, props, sound, weather) -> new KitchenBellBlock(BlockSetType.COPPER, ticks, props, () -> sound, weather))
+            ).apply(instance, (ticks, props, tip, sound, weather) -> new KitchenBellBlock(BlockSetType.COPPER, ticks, props, tip, () -> sound, weather))
     );
-    public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, BlockBehaviour.Properties properties, Supplier<SoundEvent> pressSound, WeatherState weatherState) {
+    public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, BlockBehaviour.Properties properties, String tooltip_sounding, Supplier<SoundEvent> pressSound, WeatherState weatherState) {
         super(properties.sound(type.soundType()));
         this.registerDefaultState(
                 this.stateDefinition.any().setValue(POWERED, Boolean.valueOf(false))
         );
         this.TICKS_TO_STAY_PRESSED = ticksToStayPressed;
         this.PRESS_SOUND = pressSound;
+        this.TOOLTIP_SOUNDING = tooltip_sounding;
         this.weatherState = weatherState;
     }
 
@@ -200,5 +204,22 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     @Override
     protected boolean isRandomlyTicking(BlockState state) {
         return WeatheringCopper.getNext(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        if (Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltipComponents.add(Component.empty());
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
+            tooltipComponents.add(Component.translatable(TOOLTIP_SOUNDING));
+
+        }
+        else {
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+        }
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

@@ -76,7 +76,14 @@
   "block.copperoverthrow.waxed_weathered_tamtam": "Waxed Weathered Tam-Tam",
   "block.copperoverthrow.waxed_oxidized_tamtam": "Waxed Oxidized Tam-Tam",
 
-
+  "block.copperoverthrow.kitchen_bell": "Desk Bell",
+  "block.copperoverthrow.exposed_kitchen_bell": "Exposed Desk Bell",
+  "block.copperoverthrow.weathered_kitchen_bell": "Weathered Desk Bell",
+  "block.copperoverthrow.oxidized_kitchen_bell": "Oxidized Desk Bell",
+  "block.copperoverthrow.waxed_kitchen_bell": "Waxed Desk Bell",
+  "block.copperoverthrow.waxed_exposed_kitchen_bell": "Waxed Exposed Desk Bell",
+  "block.copperoverthrow.waxed_weathered_kitchen_bell": "Waxed Weathered Desk Bell",
+  "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Waxed Oxidized Desk Bell",
 
 
   "effect.copperoverthrow.conductivity": "Conductivity",
@@ -108,7 +115,13 @@
   "tooltip.copperoverthrow.low_resonance_sounding.tooltip": "§e Short resonant chiming§r",
   "tooltip.copperoverthrow.lower_resonance_sounding.tooltip": "§e Short resonant tap§r",
   "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip": "§e Dull tap§r",
+
   "tooltip.copperoverthrow.long_crash_sounding.tooltip": "§e Loud crash that can be heard from afar§r",
+
+  "tooltip.copperoverthrow.clean_dings_sounding.tooltip": "§e Two clean dings, with a short pause§r",
+  "tooltip.copperoverthrow.harsh_dings_sounding.tooltip": "§e Two harsh dings, with a longer pause§r",
+  "tooltip.copperoverthrow.chiming_taps_sounding.tooltip": "§e Two chiming taps, with a long pause§r",
+  "tooltip.copperoverthrow.dull_taps_sounding.tooltip": "§e Two dull taps, with the longest pause§r",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notes When Playing",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Whether Rain Drums emit particles when playing a note.\n§7Default: True§r",

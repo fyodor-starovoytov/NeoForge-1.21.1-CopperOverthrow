@@ -746,6 +746,7 @@ public class ModBlocks {
                             .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
+                    "tooltip.copperoverthrow.clean_dings_sounding.tooltip",
                     ModSounds.KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.UNAFFECTED));
 
@@ -761,6 +762,7 @@ public class ModBlocks {
                             .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
+                    "tooltip.copperoverthrow.harsh_dings_sounding.tooltip",
                     ModSounds.EXPOSED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.EXPOSED));
 
@@ -776,6 +778,7 @@ public class ModBlocks {
                             .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
+                    "tooltip.copperoverthrow.chiming_taps_sounding.tooltip",
                     ModSounds.WEATHERED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.WEATHERED));
 
@@ -791,6 +794,7 @@ public class ModBlocks {
                             .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
+                    "tooltip.copperoverthrow.dull_taps_sounding.tooltip",
                     ModSounds.OXIDIZED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.OXIDIZED));
 
@@ -806,6 +810,7 @@ public class ModBlocks {
                             .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
+                    "tooltip.copperoverthrow.clean_dings_sounding.tooltip",
                     ModSounds.KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.UNAFFECTED));
 
@@ -821,6 +826,7 @@ public class ModBlocks {
                             .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
+                    "tooltip.copperoverthrow.harsh_dings_sounding.tooltip",
                     ModSounds.EXPOSED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.EXPOSED));
 
@@ -836,6 +842,7 @@ public class ModBlocks {
                             .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
+                    "tooltip.copperoverthrow.chiming_taps_sounding.tooltip",
                     ModSounds.WEATHERED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.WEATHERED));
 
@@ -851,6 +858,7 @@ public class ModBlocks {
                             .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
+                    "tooltip.copperoverthrow.dull_taps_sounding.tooltip",
                     ModSounds.OXIDIZED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.OXIDIZED));
 
