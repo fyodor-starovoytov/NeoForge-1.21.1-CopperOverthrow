@@ -4,7 +4,8 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "copperoverthrow:item/copper_trowel_handle_3d",
-		"1": "copperoverthrow:item/copper_trowel_front_3d"
+		"1": "copperoverthrow:item/copper_trowel_front_3d",
+		"particle": "copperoverthrow:item/copper_trowel_front_3d"
 	},
 	"elements": [
 		{

@@ -13,6 +13,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
@@ -80,15 +82,20 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (state.getValue(POWERED)) {
-            return InteractionResult.PASS;
+            return InteractionResult.CONSUME;
         }
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof KitchenBellBlockEntity blockEntity && player.getMainHandItem().isEmpty()) {
+        if (!level.isClientSide
+                && level.getBlockEntity(pos) instanceof KitchenBellBlockEntity blockEntity
+                && !(player.getMainHandItem().getItem() instanceof AxeItem)
+                && !(player.getMainHandItem().getItem() instanceof HoneycombItem)
+                && !(player.getOffhandItem().getItem() instanceof AxeItem)
+                && !(player.getOffhandItem().getItem() instanceof HoneycombItem)) {
             blockEntity.startSwing(hitResult.getDirection());
             level.playSound(null, pos, PRESS_SOUND.get(), SoundSource.RECORDS, 0.5f, 1);
             this.press(state, level, pos, player);
             return InteractionResult.SUCCESS;
         }
-        return InteractionResult.PASS;
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override

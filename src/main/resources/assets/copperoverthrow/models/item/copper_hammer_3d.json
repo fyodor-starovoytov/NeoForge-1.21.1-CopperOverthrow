@@ -5,7 +5,8 @@
 	"textures": {
 		"0": "copperoverthrow:item/copper_hammer_wand_3d",
 		"1": "copperoverthrow:item/copper_hammer_bottom_3d",
-		"2": "copperoverthrow:item/copper_hammer_head_3d"
+		"2": "copperoverthrow:item/copper_hammer_head_3d",
+		"particle": "copperoverthrow:item/copper_hammer_head_3d"
 	},
 	"elements": [
 		{
