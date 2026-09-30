@@ -13,7 +13,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 
 
 public class KitchenBellModel<T extends Entity> extends EntityModel<T> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "KitchenBellModel"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "kitchen_bell_model"), "main");
 	private final ModelPart root;
 
 	public KitchenBellModel(ModelPart root) {
