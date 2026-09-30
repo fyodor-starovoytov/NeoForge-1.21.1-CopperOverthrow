@@ -69,6 +69,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.EXPOSED_COPPER_CHAIN);
                         output.accept(ModBlocks.EXPOSED_COPPER_LANTERN);
 
+                        output.accept(ModBlocks.WEATHERED_LOG_STRIPPER);
                         output.accept(ModBlocks.WEATHERED_TINY_RAIN_DRUM);
                         output.accept(ModBlocks.WEATHERED_RAIN_DRUM);
                         output.accept(ModBlocks.WEATHERED_LARGE_RAIN_DRUM);
@@ -78,6 +79,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WEATHERED_COPPER_CHAIN);
                         output.accept(ModBlocks.WEATHERED_COPPER_LANTERN);
 
+                        output.accept(ModBlocks.OXIDIZED_LOG_STRIPPER);
                         output.accept(ModBlocks.OXIDIZED_TINY_RAIN_DRUM);
                         output.accept(ModBlocks.OXIDIZED_RAIN_DRUM);
                         output.accept(ModBlocks.OXIDIZED_LARGE_RAIN_DRUM);

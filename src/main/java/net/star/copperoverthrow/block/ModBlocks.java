@@ -27,16 +27,25 @@ public class ModBlocks {
                     BlockBehaviour.Properties.of()
                             .strength(4f)
                             .isValidSpawn(Blocks::never)
-                            .mapColor(DyeColor.ORANGE)
-                            .sound(SoundType.COPPER)));
+                            .mapColor(DyeColor.ORANGE)));
     public static final DeferredBlock<Block> EXPOSED_LOG_STRIPPER = registerBlock("exposed_log_stripper",
             () -> new LogStripperBlock(
                     BlockBehaviour.Properties.of()
                             .strength(4f)
                             .isValidSpawn(Blocks::never)
-                            .mapColor(DyeColor.ORANGE)
-                            .sound(SoundType.COPPER)));
-
+                            .mapColor(DyeColor.ORANGE)));
+    public static final DeferredBlock<Block> WEATHERED_LOG_STRIPPER = registerBlock("weathered_log_stripper",
+            () -> new LogStripperBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(4f)
+                            .isValidSpawn(Blocks::never)
+                            .mapColor(DyeColor.ORANGE)));
+    public static final DeferredBlock<Block> OXIDIZED_LOG_STRIPPER = registerBlock("oxidized_log_stripper",
+            () -> new LogStripperBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(4f)
+                            .isValidSpawn(Blocks::never)
+                            .mapColor(DyeColor.ORANGE)));
 
     public static final DeferredBlock<Block> COPPER_BEEOSPHERE = registerBlock("copper_beeosphere",
             () -> new CopperBeeosphereBlock(
