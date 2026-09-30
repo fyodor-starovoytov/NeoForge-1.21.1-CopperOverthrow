@@ -42,6 +42,10 @@ public class ServerConfig {
                 .comment("Tam-Tam's Volume radius (16 blocks * x volume")
                 .translation("copperoverthrow.config.tam_tam_full_moon_chance")
                 .defineInRange("tamtamMoonVolumeChance", 0.02, 0.0, 1.0);
+         public static final ModConfigSpec.DoubleValue DESK_BELL_VOLUME_RAIDUS = BUILDER
+            .comment("Desk Bell's Volume radius (16 blocks * x volume")
+            .translation("copperoverthrow.config.kitchen_bell_volume")
+            .defineInRange("kitchenbellVolumeRadius", 1.0, 0.0, 32.0);
 
         public static final ModConfigSpec SPEC = BUILDER.build();
 }

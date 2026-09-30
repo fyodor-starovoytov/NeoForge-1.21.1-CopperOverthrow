@@ -34,6 +34,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
 import net.star.copperoverthrow.sound.ModSounds;
@@ -95,7 +96,15 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
                 && !(player.getOffhandItem().getItem() instanceof AxeItem)
                 && !(player.getOffhandItem().getItem() instanceof HoneycombItem)) {
             blockEntity.startSwing(hitResult.getDirection());
-            level.playSound(null, pos, PRESS_SOUND.get(), SoundSource.RECORDS, 0.5f, 1);
+
+            float finalVolume = (float) (ServerConfig.DESK_BELL_VOLUME_RAIDUS.get() * 1);
+            level.playSound(null,
+                    pos,
+                    PRESS_SOUND.get(),
+                    SoundSource.RECORDS,
+                    finalVolume,
+                    1);
+
             this.press(state, level, pos, player);
             return InteractionResult.SUCCESS;
         }

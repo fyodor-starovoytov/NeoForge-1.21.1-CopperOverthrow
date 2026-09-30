@@ -135,6 +135,7 @@
   "copperoverthrow.config.tam_tam_volume": "Tam-Tam's Volume Radius",
   "copperoverthrow.config.tam_tam_full_moon_volume": "Tam-Tam's Full Moon Volume Radius",
   "copperoverthrow.config.tam_tam_full_moon_chance": "Tam-Tam's Full Moon Sound Chance",
+  "copperoverthrow.config.kitchen_bell_volume": "Desk Bell's Volume Radius",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-Tam Plays",
   "sounds.copperoverthrow.raindrum_play": "Rain Drum Plays",
