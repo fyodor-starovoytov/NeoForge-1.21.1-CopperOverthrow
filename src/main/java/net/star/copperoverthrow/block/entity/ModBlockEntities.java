@@ -20,7 +20,9 @@ public class ModBlockEntities {
 
     public static final Supplier<BlockEntityType<LogStripperBlockEntity>> LOG_STRIPPER_BE =
             BLOCK_ENTITIES.register("log_stripper_be", ()-> BlockEntityType.Builder.of(
-                    LogStripperBlockEntity::new, ModBlocks.LOG_STRIPPER.get())
+                    LogStripperBlockEntity::new,
+                            ModBlocks.LOG_STRIPPER.get(),
+                            ModBlocks.EXPOSED_LOG_STRIPPER.get())
                     .build(null));
 
     public static final Supplier<BlockEntityType<CopperBeeosphereBlockEntity>> COPPER_BEEOSPHERE_BE =

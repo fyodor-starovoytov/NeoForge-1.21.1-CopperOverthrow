@@ -48,8 +48,8 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_blocks"))
                     .displayItems((itemDisplayParameters, output) -> {
 
-                        output.accept(ModBlocks.LOG_STRIPPER);
 
+                        output.accept(ModBlocks.LOG_STRIPPER);
                         output.accept(ModBlocks.TINY_RAIN_DRUM);
                         output.accept(ModBlocks.RAIN_DRUM);
                         output.accept(ModBlocks.LARGE_RAIN_DRUM);
@@ -59,6 +59,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.COPPER_CHAIN);
                         output.accept(ModBlocks.COPPER_LANTERN);
 
+                        output.accept(ModBlocks.EXPOSED_LOG_STRIPPER);
                         output.accept(ModBlocks.EXPOSED_TINY_RAIN_DRUM);
                         output.accept(ModBlocks.EXPOSED_RAIN_DRUM);
                         output.accept(ModBlocks.EXPOSED_LARGE_RAIN_DRUM);

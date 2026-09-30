@@ -25,10 +25,18 @@ public class ModBlocks {
     public static final DeferredBlock<Block> LOG_STRIPPER = registerBlock("log_stripper",
             () -> new LogStripperBlock(
                     BlockBehaviour.Properties.of()
-                            .strength(2f)
+                            .strength(4f)
                             .isValidSpawn(Blocks::never)
                             .mapColor(DyeColor.ORANGE)
                             .sound(SoundType.COPPER)));
+    public static final DeferredBlock<Block> EXPOSED_LOG_STRIPPER = registerBlock("exposed_log_stripper",
+            () -> new LogStripperBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(4f)
+                            .isValidSpawn(Blocks::never)
+                            .mapColor(DyeColor.ORANGE)
+                            .sound(SoundType.COPPER)));
+
 
     public static final DeferredBlock<Block> COPPER_BEEOSPHERE = registerBlock("copper_beeosphere",
             () -> new CopperBeeosphereBlock(
