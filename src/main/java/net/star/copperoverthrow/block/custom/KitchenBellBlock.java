@@ -6,15 +6,18 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
@@ -34,6 +37,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.star.copperoverthrow.ClientConfig;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
@@ -120,11 +124,19 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
         super.onExplosionHit(state, level, pos, explosion, dropConsumer);
     }
 
-    public void press(BlockState state, Level level, BlockPos pos, @Nullable Player player) {
+    private void press(BlockState state, Level level, BlockPos pos, @Nullable Player player) {
         level.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(true)), 3);
         this.updateNeighbours(state, level, pos);
-        level.scheduleTick(pos, this, this.TICKS_TO_STAY_PRESSED);
+        level.scheduleTick(pos, this, this.TICKS_TO_STAY_PRESSED + (int) jammed(this.TICKS_TO_STAY_PRESSED));
         level.gameEvent(player, GameEvent.BLOCK_ACTIVATE, pos);
+    }
+
+    private float jammed(int press_ticks){
+        float chanceToBeJammed = ((float) press_ticks) / 100 / 5;
+        if (Math.random() < chanceToBeJammed && ServerConfig.JAMMING.get()){
+            return (float) 200 / press_ticks;
+        }
+        return 0;
     }
 
     @Override
