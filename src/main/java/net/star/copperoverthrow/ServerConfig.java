@@ -5,15 +5,20 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class ServerConfig {
         private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-        public static final ModConfigSpec.DoubleValue LOG_STRIPPER_TOOL_DAMAGE = BUILDER
-                .comment("Durability of used Tool lost per ingredient on a log stripping station")
-                .translation("copperoverthrow.config.log_stripper_tool_damage")
-                .defineInRange("logStripperToolDamage", 1.0, 0.0, 5.0);
+        public static final ModConfigSpec.IntValue HANDSAW_USE_TIME = BUILDER
+            .comment("The Handsaw use duration in ticks")
+            .translation("copperoverthrow.config.handsaw_use")
+            .defineInRange("HandSawMax", 80, 1, 999);
+
+        public static final ModConfigSpec.IntValue HANDSAW_MAX_DESTROYED_BLOCKS = BUILDER
+                .comment("Maximum of possible blocks broken at a time, having larger value may affect the frame rate")
+                .translation("copperoverthrow.config.handsaw_max")
+                .defineInRange("HandSawMax", 128, 1, 999);
 
         public static final ModConfigSpec.DoubleValue STEPPER_BOOTS_STEP_HEIGHT = BUILDER
                 .comment("Stepper Boots' added Step Height amount. 0.6 is vanilla Step Height (0.6 + x)")
                 .translation("copperoverthrow.config.stepper_boots_step_height")
-                .defineInRange("stepperBootsStepHeight", 0.5, 0.0, 3.0);
+                .defineInRange("StepperBootsStepHeight", 0.5, 0.0, 3.0);
 
         public static final ModConfigSpec.DoubleValue STEPPER_BOOTS_SAFE_FALL_DISTANCE = BUILDER
                 .comment("Stepper Boots' added Safe Distance amount. 3.0 is vanilla Safe Fall (3.0 + x)")
@@ -29,6 +34,11 @@ public class ServerConfig {
                 .comment("Stepper Leggings' added Water Mobility Efficiency (0.5 equals 50% of water resistance penalty mitigated")
                 .translation("copperoverthrow.config.stepper_leggings_water")
                 .defineInRange("stepperLeggingsWaterMobility", 0.5, 0.0, 1.0);
+
+        public static final ModConfigSpec.DoubleValue LOG_STRIPPER_TOOL_DAMAGE = BUILDER
+            .comment("Durability of used Tool lost per ingredient on a log stripping station")
+            .translation("copperoverthrow.config.log_stripper_tool_damage")
+            .defineInRange("logStripperToolDamage", 1.0, 0.0, 5.0);
 
         public static final ModConfigSpec.DoubleValue TAMTAM_BASIC_VOLUME_RADIUS = BUILDER
                 .comment("Tam-Tam's Volume radius (16 blocks * x volume")

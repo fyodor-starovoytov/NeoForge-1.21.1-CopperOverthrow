@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.custom.LogStripperBlock;
 
 import java.util.ArrayList;
@@ -33,7 +34,6 @@ import java.util.List;
 
 public class HandsawItem extends DiggerItem {
     public static final int ANIMATION_DURATION = 5;
-    private static final int USE_DURATION = 40;
 
     public HandsawItem(Tier tier, Properties properties) {
         super(tier, BlockTags.MINEABLE_WITH_AXE, properties);
@@ -46,7 +46,7 @@ public class HandsawItem extends DiggerItem {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return USE_DURATION;
+        return ServerConfig.HANDSAW_USE_TIME.get();
     }
 
     @Override
@@ -97,9 +97,16 @@ public class HandsawItem extends DiggerItem {
 
             if (hitresult instanceof BlockHitResult blockHitResult && hitresult.getType() == HitResult.Type.BLOCK) {
                 BlockPos pos = blockHitResult.getBlockPos();
-                for (BlockPos destroyPos : getBlocksToBeDestroyed(pos, level)) {
+                List<BlockPos> BlocksToBeDestroyed = new ArrayList<>(getBlocksToBeDestroyed(pos, level));
+
+                for (BlockPos destroyPos : BlocksToBeDestroyed) {
                     level.destroyBlock(destroyPos, true, player);
                 }
+
+                EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
+                        ? EquipmentSlot.OFFHAND
+                        : EquipmentSlot.MAINHAND;
+                stack.hurtAndBreak(BlocksToBeDestroyed.size(), livingEntity, equipmentslot);
             }
         }
         return super.finishUsingItem(stack, level, livingEntity);
@@ -121,7 +128,7 @@ public class HandsawItem extends DiggerItem {
         toBeChecked.addFirst(initalBlockPos.immutable());
         toBeDestroyed.addFirst(initalBlockPos.immutable());
 
-        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < 50){
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.HANDSAW_MAX_DESTROYED_BLOCKS.get()){
             BlockPos comparable = toBeChecked.removeLast();
             for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, 0, -r), comparable.offset(r, r, r))) {
                 BlockState state = level.getBlockState(pos);

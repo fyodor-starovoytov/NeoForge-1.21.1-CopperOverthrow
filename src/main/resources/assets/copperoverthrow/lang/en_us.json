@@ -145,6 +145,8 @@
   "copperoverthrow.config.tam_tam_full_moon_chance": "Tam-Tam's Full Moon Sound Chance",
   "copperoverthrow.config.kitchen_bell_volume": "Desk Bell's Volume Radius",
   "copperoverthrow.config.jamming": "Jamming",
+  "copperoverthrow.config.handsaw_use": "Handsaw Use Duration",
+  "copperoverthrow.config.handsaw_max": "Handsaw Max Destroyed Blocks",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-Tam Plays",
   "sounds.copperoverthrow.raindrum_play": "Rain Drum Plays",
