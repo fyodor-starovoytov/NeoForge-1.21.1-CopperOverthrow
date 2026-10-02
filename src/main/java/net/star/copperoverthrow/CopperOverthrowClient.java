@@ -142,7 +142,6 @@ public class CopperOverthrowClient {
         ItemStack useStack = player.getUseItem();
         if (!useStack.is(ModItems.COPPER_HANDSAW.get())) return;
 
-        // Hide off-hand pass so saw only renders once
         if (event.getHand() != player.getUsedItemHand()) {
             event.setCanceled(true);
             return;
@@ -150,26 +149,22 @@ public class CopperOverthrowClient {
 
         float partialTick = event.getPartialTick();
 
-        // 1. Raycast up to 5 blocks away to find target block
         HitResult hitResult = player.pick(5.0D, partialTick, false);
         if (!(hitResult instanceof BlockHitResult blockHit) || hitResult.getType() != HitResult.Type.BLOCK) {
-            return; // Fallback to normal hand rendering if not looking at a block
+            return;
         }
 
         PoseStack poseStack = event.getPoseStack();
 
-        // 2. Reset matrix to Camera Space
         poseStack.last().pose().identity();
         poseStack.last().normal().identity();
 
-        // 3. Rotate matrix from Camera View into World-Aligned Directions (North/South/East/West/Up/Down)
         float xRot = player.getViewXRot(partialTick);
         float yRot = player.getViewYRot(partialTick);
 
         poseStack.mulPose(Axis.XP.rotationDegrees(xRot));
         poseStack.mulPose(Axis.YP.rotationDegrees(yRot + 180.0F));
 
-        // 4. Translate directly to the 3D hit point relative to player eye position
         Vec3 eyePos = player.getEyePosition(partialTick);
         Vec3 hitPos = blockHit.getLocation();
         Vec3 offset = hitPos.subtract(eyePos);
@@ -181,7 +176,6 @@ public class CopperOverthrowClient {
         float pushPull = Mth.sin(useTicks * 1.2F) * 0.24F; // Stroke length
         float subtleTilt = Mth.cos(useTicks * 1.2F) * 2.5F;
 
-        // 6. Align saw orientation based on the targeted block face
         Direction face = blockHit.getDirection();
         Direction playerFace = player.getDirection();
 
@@ -264,7 +258,6 @@ public class CopperOverthrowClient {
             }
         }
 
-        // Apply upright tool orientation and sawing tilt
         poseStack.mulPose(Axis.XP.rotationDegrees(subtleTilt));
     }
 
