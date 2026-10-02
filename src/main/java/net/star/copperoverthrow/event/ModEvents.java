@@ -30,6 +30,7 @@ import net.star.copperoverthrow.block.custom.TamTamBlock;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
 import net.star.copperoverthrow.item.custom.CopperTrowelItem;
 import net.star.copperoverthrow.item.custom.HammerItem;
+import net.star.copperoverthrow.item.custom.HandsawItem;
 
 import javax.swing.event.TreeExpansionEvent;
 import java.util.HashSet;
@@ -88,7 +89,33 @@ if (Screen.hasShiftDown()){return;}
         return event.getLevel().getBlockState(pos).is(Tags.Blocks.ORES);
 
     }
+/*
+    @SubscribeEvent
+    public static void onHandSawUsage(BlockEvent.BreakEvent event) {
 
+        Player player = event.getPlayer();
+        ItemStack mainHandItem = player.getMainHandItem();
+
+        if(mainHandItem.getItem() instanceof HandsawItem handSaw && player instanceof ServerPlayer serverPlayer) {
+
+            BlockPos initialBlockPos = event.getPos();
+            if(HARVESTED_BLOCKS.contains(initialBlockPos)) {
+                return;
+            }
+
+            for(BlockPos pos : HandsawItem.getBlocksToBeDestroyed(initialBlockPos, serverPlayer, (Level) event.getLevel())) {
+
+                if(pos == initialBlockPos || !handSaw.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos))) {
+                    continue;
+                }
+
+                HARVESTED_BLOCKS.add(pos);
+                serverPlayer.gameMode.destroyBlock(pos);
+                HARVESTED_BLOCKS.remove(pos);
+            }
+        }
+    }
+*/
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
             Level level = event.getLevel();

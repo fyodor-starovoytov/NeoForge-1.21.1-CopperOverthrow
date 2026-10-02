@@ -2,6 +2,7 @@ package net.star.copperoverthrow.item.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.BlockDestructionProgress;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -27,6 +28,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.star.copperoverthrow.block.custom.LogStripperBlock;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HandsawItem extends DiggerItem {
     public static final int ANIMATION_DURATION = 5;
     private static final int USE_DURATION = 40;
@@ -49,10 +53,10 @@ public class HandsawItem extends DiggerItem {
     public InteractionResult useOn(UseOnContext context) {
 
         Level level = context.getLevel();
-        Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
+        BlockState clickedBlock = level.getBlockState(context.getClickedPos());
         Player player = context.getPlayer();
 
-        if (player != null && clickedBlock instanceof Block && !(clickedBlock instanceof LogStripperBlock)) {
+        if (player != null && clickedBlock.getBlock() instanceof Block && !(clickedBlock.getBlock() instanceof LogStripperBlock) && clickedBlock.is(BlockTags.LOGS)) {
             player.startUsingItem(context.getHand());
         }
 
@@ -65,7 +69,7 @@ public class HandsawItem extends DiggerItem {
 
             HitResult hitresult = this.calculateHitResult(player);
 
-            if (hitresult instanceof BlockHitResult blockhitresult && hitresult.getType() == HitResult.Type.BLOCK) {
+            if (hitresult instanceof BlockHitResult blockhitresult && hitresult.getType() == HitResult.Type.BLOCK && level.getBlockState(blockhitresult.getBlockPos()).is(BlockTags.LOGS)) {
 
                 BlockPos pos = blockhitresult.getBlockPos();
                 BlockState state = level.getBlockState(pos);
@@ -76,7 +80,7 @@ public class HandsawItem extends DiggerItem {
                 boolean flag = i % ANIMATION_DURATION == 0;
 
                 if (flag) {
-                    level.playLocalSound(player, SoundEvents.FROG_EAT, SoundSource.PLAYERS,1 , 1);
+                    level.playLocalSound(player, SoundEvents.FROG_EAT, SoundSource.PLAYERS, 1, 1);
                 }
                 return;
             }
@@ -93,9 +97,9 @@ public class HandsawItem extends DiggerItem {
 
             if (hitresult instanceof BlockHitResult blockHitResult && hitresult.getType() == HitResult.Type.BLOCK) {
                 BlockPos pos = blockHitResult.getBlockPos();
-
-                level.playSound(null, pos, getBreakingSound(), SoundSource.PLAYERS);
-                level.destroyBlock(pos, true, player);
+                for (BlockPos destroyPos : getBlocksToBeDestroyed(pos, level)) {
+                    level.destroyBlock(destroyPos, true, player);
+                }
             }
         }
         return super.finishUsingItem(stack, level, livingEntity);
@@ -107,4 +111,28 @@ public class HandsawItem extends DiggerItem {
         );
     }
 
+    public static List<BlockPos> getBlocksToBeDestroyed(BlockPos initalBlockPos, Level level) {
+        List<BlockPos> toBeChecked = new ArrayList<>();
+        List<BlockPos> toBeDestroyed = new ArrayList<>();
+        int r = 1;
+
+        Block targetBlock = level.getBlockState(initalBlockPos).getBlock();
+
+        toBeChecked.addFirst(initalBlockPos.immutable());
+        toBeDestroyed.addFirst(initalBlockPos.immutable());
+
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < 50){
+            BlockPos comparable = toBeChecked.removeLast();
+            for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, 0, -r), comparable.offset(r, r, r))) {
+                BlockState state = level.getBlockState(pos);
+
+                if (state.is(targetBlock) && !toBeDestroyed.contains(pos.immutable())) {
+                    toBeChecked.add(pos.immutable());
+                    toBeDestroyed.add(pos.immutable());
+                }
+            }
+
+        }
+        return toBeDestroyed;
+    }
 }
