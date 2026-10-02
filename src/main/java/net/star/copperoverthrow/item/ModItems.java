@@ -4,6 +4,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.PickaxeItem;
@@ -12,10 +13,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.effect.ModEffects;
-import net.star.copperoverthrow.item.custom.BeeCatcherItem;
-import net.star.copperoverthrow.item.custom.CopperChiselItem;
-import net.star.copperoverthrow.item.custom.CopperTrowelItem;
-import net.star.copperoverthrow.item.custom.HammerItem;
+import net.star.copperoverthrow.item.custom.*;
 import net.star.copperoverthrow.item.equipment.ModArmorMaterials;
 import net.star.copperoverthrow.item.equipment.StepperBootsArmorItem;
 import net.star.copperoverthrow.item.equipment.StepperLeggingsArmorItem;
@@ -56,6 +54,11 @@ public class ModItems {
     public static final DeferredItem<HammerItem> COPPER_HAMMER = ITEMS.register("copper_hammer",
             () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
                     .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 6f, -3.6f))));
+
+    public static final DeferredItem<HandsawItem> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
+            () -> new HandsawItem(ModToolTiers.COPPER, new Properties()
+                    .attributes(AxeItem.createAttributes(ModToolTiers.COPPER, 0f, -1.6f))));
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
