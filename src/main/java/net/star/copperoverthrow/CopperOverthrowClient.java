@@ -178,31 +178,74 @@ public class CopperOverthrowClient {
 
         Direction face = blockHit.getDirection();
         Direction playerFace = player.getDirection();
-
+        float playerFaceDegrees = player.getVisualRotationYInDegrees();
+        if (playerFaceDegrees>180){
+            playerFaceDegrees = -(playerFaceDegrees-180);
+        }
         switch (face) {
             case NORTH -> {
-                poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                poseStack.translate(0, -0.05F, pushPull);
+                switch (playerFace) {
+                    case NORTH, SOUTH, WEST -> {
+                        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
+                        poseStack.translate(0, -0.05F, pushPull);
+                    }
+                    case EAST -> {
+                        poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
+                        poseStack.translate(0, 0.05F, -pushPull);
+                    }
+                }
             }
             case SOUTH -> {
-                poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                poseStack.mulPose(Axis.XP.rotationDegrees(-45F));
-                poseStack.translate(0, 0.05F, -pushPull);
+                switch (playerFace) {
+                    case NORTH, SOUTH, EAST -> {
+                        poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-45F));
+                        poseStack.translate(0, 0.05F, -pushPull);
+                    }
+                    case WEST -> {
+                        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
+                        poseStack.translate(0, -0.05F, pushPull);
+                    }
+                }
             }
             case WEST -> {
-                poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F*3));
-                poseStack.translate(0, -0.05F,pushPull);
+                switch (playerFace) {
+                    case SOUTH , WEST, EAST -> {
+                        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F*3));
+                        poseStack.translate(0, -0.05F,pushPull);
+                    }
+                    case NORTH -> {
+                        poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(45.0F));
+                        poseStack.translate(0, -0.05F,pushPull);
+                    }
+                }
             }
             case EAST -> {
-                poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F*3));
-                poseStack.translate(0, -0.05F,pushPull);
+                switch (playerFace) {
+                    case NORTH, WEST, EAST -> {
+                        poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F*3));
+                        poseStack.translate(0, -0.05F,pushPull);
+                    }
+                    case SOUTH -> {
+                        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(45.0F));
+                        poseStack.translate(0, -0.05F,pushPull);
+                    }
+                }
             }
             case UP -> {
                 switch (playerFace){
