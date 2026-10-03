@@ -1,6 +1,9 @@
 package net.star.copperoverthrow.item.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.BlockDestructionProgress;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -10,13 +13,11 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.custom.LogStripperBlock;
 
@@ -80,6 +82,8 @@ public class HandsawItem extends DiggerItem {
                 boolean flag = i % ANIMATION_DURATION == 0;
 
                 if (flag) {
+                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration + 3, true);
+                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration + 3, false);
                     level.playLocalSound(player, SoundEvents.FROG_EAT, SoundSource.PLAYERS, 1, 1);
                 }
                 return;
@@ -89,6 +93,47 @@ public class HandsawItem extends DiggerItem {
             livingEntity.releaseUsingItem();
         }
     }
+
+
+    private void spawnParticles(Level level, BlockHitResult hitResult, BlockState state, Vec3 pos, int amount, boolean side) {
+        double d0 = 3.0;
+        int i = side ? 1 : -1;
+        int j = level.getRandom().nextInt(amount, amount + 5);
+        BlockParticleOption blockparticleoption = new BlockParticleOption(ParticleTypes.BLOCK, state);
+        Direction direction = hitResult.getDirection();
+        HandsawItem.DustParticlesDelta brushitem$dustparticlesdelta = HandsawItem.DustParticlesDelta.fromDirection(pos, direction);
+        Vec3 vec3 = hitResult.getLocation();
+
+        for (int k = 0; k < j; k++) {
+            level.addParticle(
+                    blockparticleoption,
+                    vec3.x - (double)(direction == Direction.WEST ? 1.0E-6F : 0.0F),
+                    vec3.y,
+                    vec3.z - (double)(direction == Direction.NORTH ? 1.0E-6F : 0.0F),
+                    brushitem$dustparticlesdelta.xd() * (double)i * 3.0 * level.getRandom().nextDouble(),
+                    0.0,
+                    brushitem$dustparticlesdelta.zd() * (double)i * 3.0 * level.getRandom().nextDouble()
+            );
+        }
+    }
+
+    static record DustParticlesDelta(double xd, double yd, double zd) {
+        private static final double ALONG_SIDE_DELTA = 1.0;
+        private static final double OUT_FROM_SIDE_DELTA = 0.1;
+
+        public static HandsawItem.DustParticlesDelta fromDirection(Vec3 pos, Direction direction) {
+            double d0 = 0.0;
+
+            return switch (direction) {
+                case DOWN, UP -> new HandsawItem.DustParticlesDelta(pos.z(), 0.0, -pos.x());
+                case NORTH -> new HandsawItem.DustParticlesDelta(1.0, 0.0, -0.1);
+                case SOUTH -> new HandsawItem.DustParticlesDelta(-1.0, 0.0, 0.1);
+                case WEST -> new HandsawItem.DustParticlesDelta(-0.1, 0.0, -1.0);
+                case EAST -> new HandsawItem.DustParticlesDelta(0.1, 0.0, 1.0);
+            };
+        }
+    }
+
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {

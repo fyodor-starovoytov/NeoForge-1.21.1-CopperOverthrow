@@ -8,7 +8,7 @@ public class ServerConfig {
         public static final ModConfigSpec.IntValue HANDSAW_USE_TIME = BUILDER
             .comment("The Handsaw use duration in ticks")
             .translation("copperoverthrow.config.handsaw_use")
-            .defineInRange("HandSawMax", 80, 1, 999);
+            .defineInRange("HandSawUse", 80, 1, 999);
 
         public static final ModConfigSpec.IntValue HANDSAW_MAX_DESTROYED_BLOCKS = BUILDER
                 .comment("Maximum of possible blocks broken at a time, having larger value may affect the frame rate")
