@@ -1,5 +1,6 @@
 package net.star.copperoverthrow;
 
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -216,17 +217,17 @@ public class CopperOverthrowClient {
         switch (face) {
             case NORTH -> {
                 switch (playerFace) {
-                    case NORTH, SOUTH, WEST -> {
+                    case WEST, NORTH, SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F, pushPull);
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
+                        poseStack.translate(0, pushPull,0.162);
                     }
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-                        poseStack.mulPose(Axis.XP.rotationDegrees(45.0F));
-                        poseStack.translate(0, 0.05F, -pushPull);
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
+                        poseStack.translate(0,  pushPull, 0.162);
                     }
                 }
             }
