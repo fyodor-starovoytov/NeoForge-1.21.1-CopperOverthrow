@@ -5,14 +5,20 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -34,6 +40,9 @@ import net.star.copperoverthrow.client.renderer.TamTamRenderer;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModItemProperties;
 import net.minecraft.resources.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod(value = CopperOverthrow.MOD_ID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
@@ -94,7 +103,7 @@ public class CopperOverthrowClient {
         return path.startsWith("waxed_") || path.contains("_waxed_") || path.contains("_waxed");
     }
 
-    /*@SubscribeEvent
+    @SubscribeEvent
     public static void onRenderHand(RenderHandEvent event) {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null || !player.isUsingItem()) return;
@@ -102,7 +111,9 @@ public class CopperOverthrowClient {
         ItemStack stack = event.getItemStack();
 
         if (stack.is(ModItems.COPPER_HANDSAW.get())) {
-
+            PoseStack poseStack = event.getPoseStack();
+            poseStack.scale(0,0,0);
+/*
             //HitResult hitResult = ProjectileUtil.getHitResultOnViewVector(player, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), player.blockInteractionRange();
             // 1. Calculate smooth elapsed time in float ticks (includes frame interpolation)
             float remainingTicks = player.getUseItemRemainingTicks() - event.getPartialTick();
@@ -131,23 +142,24 @@ public class CopperOverthrowClient {
             poseStack.mulPose(Axis.ZP.rotationDegrees(-sideSign*5));
             poseStack.mulPose(Axis.XP.rotationDegrees(tilt));
             poseStack.mulPose(Axis.YP.rotationDegrees(tilt * sideSign * 1.2f));
+        */
         }
-    }*/
 
+    }
     @SubscribeEvent
-    public static void onRenderHand(RenderHandEvent event) {
-        LocalPlayer player = Minecraft.getInstance().player;
+    public static void onRenderLevelStage(RenderLevelStageEvent event) {
+        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_ENTITIES) return;
+
+        Minecraft mc = Minecraft.getInstance();
+        LocalPlayer player = mc.player;
+
         if (player == null || !player.isUsingItem()) return;
 
         ItemStack useStack = player.getUseItem();
         if (!useStack.is(ModItems.COPPER_HANDSAW.get())) return;
 
-        if (event.getHand() != player.getUsedItemHand()) {
-            event.setCanceled(true);
-            return;
-        }
-
-        float partialTick = event.getPartialTick();
+        // 1. Get safe 1.21.1 partial ticks from DeltaTracker
+        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
 
         HitResult hitResult = player.pick(5.0D, partialTick, false);
         if (!(hitResult instanceof BlockHitResult blockHit) || hitResult.getType() != HitResult.Type.BLOCK) {
@@ -155,33 +167,52 @@ public class CopperOverthrowClient {
         }
 
         PoseStack poseStack = event.getPoseStack();
+        poseStack.pushPose();
 
-        poseStack.last().pose().identity();
-        poseStack.last().normal().identity();
-
-        float xRot = player.getViewXRot(partialTick);
-        float yRot = player.getViewYRot(partialTick);
-
-        poseStack.mulPose(Axis.XP.rotationDegrees(xRot));
-        poseStack.mulPose(Axis.YP.rotationDegrees(yRot + 180.0F));
-
-        Vec3 eyePos = player.getEyePosition(partialTick);
+        // 2. Subtract Camera Position for precise World-Space Rendering
+        Vec3 cameraPos = mc.gameRenderer.getMainCamera().getPosition();
         Vec3 hitPos = blockHit.getLocation();
-        Vec3 offset = hitPos.subtract(eyePos);
+        Vec3 offset = hitPos.subtract(cameraPos);
 
+        // Position directly at the target block contact point
         poseStack.translate(offset.x, offset.y, offset.z);
 
+        // 3. Apply Sawing Motion
         float remainingTicks = player.getUseItemRemainingTicks() - partialTick;
         float useTicks = useStack.getUseDuration(player) - remainingTicks;
-        float pushPull = Mth.sin(useTicks * 1.2F) * 0.24F; // Stroke length
+        float pushPull = Mth.sin(useTicks * 1.2F) * 0.24F;
         float subtleTilt = Mth.cos(useTicks * 1.2F) * 2.5F;
 
         Direction face = blockHit.getDirection();
         Direction playerFace = player.getDirection();
-        float playerFaceDegrees = player.getVisualRotationYInDegrees();
-        if (playerFaceDegrees>180){
-            playerFaceDegrees = -(playerFaceDegrees-180);
-        }
+
+        // Apply face-alignment rotations
+        applyFaceTransforms(poseStack, face, playerFace, pushPull);
+
+        poseStack.mulPose(Axis.XP.rotationDegrees(subtleTilt));
+
+        BlockPos targetPos = blockHit.getBlockPos();
+
+// Get brightness levels using player.level()
+        List<Integer> lightLevel = getLightLevel(player, face, targetPos);
+
+        int packedLight = LightTexture.pack(lightLevel.get(0), lightLevel.get(1));
+
+        mc.getItemRenderer().renderStatic(
+                useStack,
+                ItemDisplayContext.THIRD_PERSON_RIGHT_HAND,
+                packedLight, // Target block ambient brightness
+                OverlayTexture.NO_OVERLAY,
+                poseStack,
+                mc.renderBuffers().bufferSource(),
+                player.level(),
+                0
+        );
+
+        poseStack.popPose();
+    }
+
+    private static void applyFaceTransforms(PoseStack poseStack, Direction face, Direction playerFace, float pushPull) {
         switch (face) {
             case NORTH -> {
                 switch (playerFace) {
@@ -194,40 +225,47 @@ public class CopperOverthrowClient {
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(45.0F));
                         poseStack.translate(0, 0.05F, -pushPull);
                     }
                 }
             }
             case SOUTH -> {
                 switch (playerFace) {
-                    case NORTH, SOUTH, EAST -> {
+                    case EAST, NORTH, SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                        poseStack.mulPose(Axis.XP.rotationDegrees(-45F));
-                        poseStack.translate(0, 0.05F, -pushPull);
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
+                        poseStack.translate(0, pushPull,0.162);
                     }
                     case WEST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F, pushPull);
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
+                        poseStack.translate(0,  pushPull, 0.162);
                     }
+/*
+                    case  -> {
+                        poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
+                        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+                        poseStack.translate(0,  pushPull, 0.165);
+                    }
+*/
                 }
             }
             case WEST -> {
                 switch (playerFace) {
-                    case SOUTH , WEST, EAST -> {
+                    case SOUTH, WEST, EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F*3));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F * 3));
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                     case NORTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(45.0F));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                 }
             }
@@ -236,81 +274,111 @@ public class CopperOverthrowClient {
                     case NORTH, WEST, EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F*3));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F * 3));
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                     case SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(45.0F));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                 }
             }
             case UP -> {
-                switch (playerFace){
+                switch (playerFace) {
                     case NORTH -> {
                         poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                     case SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                     case WEST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                 }
-
             }
             case DOWN -> {
-                switch (playerFace){
+                switch (playerFace) {
                     case NORTH -> {
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                     case SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F + pushPull*0.05,pushPull);
+                        poseStack.translate(0, -0.05F + pushPull * 0.05F, pushPull);
                     }
                     case WEST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
-                        poseStack.translate(0, -0.05F,pushPull);
+                        poseStack.translate(0, -0.05F, pushPull);
                     }
                 }
-
             }
         }
-
-        poseStack.mulPose(Axis.XP.rotationDegrees(subtleTilt));
     }
 
-    @SubscribeEvent
-    public static void onRenderArm(RenderArmEvent event) {
-        LocalPlayer player = Minecraft.getInstance().player;
-        if (player == null) return;
 
-        if (player.isUsingItem() && player.getUseItem().is(ModItems.COPPER_HANDSAW.get())) {
-            event.setCanceled(true);
+    private static List<Integer> getLightLevel(LocalPlayer player, Direction face, BlockPos targetPos) {
+        List<Integer> light = new ArrayList<>();
+        switch (face) {
+            case NORTH -> {
+                int blockLight = player.level().getBrightness(LightLayer.BLOCK, targetPos.north());
+                int skyLight = player.level().getBrightness(LightLayer.SKY, targetPos.north());
+                light.add(0, blockLight);
+                light.add(1, skyLight);
+            }
+            case SOUTH -> {
+                int blockLight = player.level().getBrightness(LightLayer.BLOCK, targetPos.south());
+                int skyLight = player.level().getBrightness(LightLayer.SKY, targetPos.south());
+                light.add(0, blockLight);
+                light.add(1, skyLight);
+            }
+            case WEST -> {
+                int blockLight = player.level().getBrightness(LightLayer.BLOCK, targetPos.west());
+                int skyLight = player.level().getBrightness(LightLayer.SKY, targetPos.west());
+                light.add(0, blockLight);
+                light.add(1, skyLight);
+            }
+            case EAST -> {
+                int blockLight = player.level().getBrightness(LightLayer.BLOCK, targetPos.east());
+                int skyLight = player.level().getBrightness(LightLayer.SKY, targetPos.east());
+                light.add(0, blockLight);
+                light.add(1, skyLight);
+            }
+            case UP -> {
+                int blockLight = player.level().getBrightness(LightLayer.BLOCK, targetPos.above());
+                int skyLight = player.level().getBrightness(LightLayer.SKY, targetPos.above());
+                light.add(0, blockLight);
+                light.add(1, skyLight);
+            }
+            case DOWN -> {
+                int blockLight = player.level().getBrightness(LightLayer.BLOCK, targetPos.below());
+                int skyLight = player.level().getBrightness(LightLayer.SKY, targetPos.below());
+                light.add(0, blockLight);
+                light.add(1, skyLight);
+            }
         }
+        return light;
     }
 }
