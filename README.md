@@ -54,7 +54,7 @@ Ready-to-use version of the mod can be found on [Modrinth](https://modrinth.com/
   </tr>
 </table>
 
-[**YouTube Video**]("https://www.youtube-nocookie.com/embed/539iCzU1hUY")
+[YouTube Video]("https://www.youtube-nocookie.com/embed/539iCzU1hUY")
 
 **Available translations:**
 - English (US)
