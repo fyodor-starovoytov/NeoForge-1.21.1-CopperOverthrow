@@ -1,25 +1,64 @@
 
-Installation information
+Installation
 =======
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+Ready-to-use version of the mod can be found on [Modrinth](https://modrinth.com/mod/copper-overthrow).
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+![Copper Overthrow Mod Title](https://cdn.modrinth.com/data/cached_images/89df01d5a27f2a4a206f6d90eab326a0a5b7779b.png)
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+<table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td valign="middle">
+      <h2>
+        <b>Building Tools</b>
+      </h2>
+      <p>
+        Different tools that make builders life easier. Trowels, Chisels, Hammers, Rulers, Handsaws and other tools. Assist yourself with Copper Scaffolding and Stepladder.
+      </p>
+    </td>
+    <td valign="middle" width="60%">
+      <img src="https://cdn.modrinth.com/data/cached_images/3efdc5b5fc0709fb6e19451ecd945087adb78686.gif" alt="Animated GIF showing the hammer tool in action" width="100%">
+    </td>
+  </tr>
+</table>
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+<table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td valign="middle" width="60%">
+      <img src="https://cdn.modrinth.com/data/cached_images/4d99002d21f5fbbddde328c7420225f915171588_0.webp" alt="Armor stands displaying utility armors" width="100%">
+    </td>
+    <td valign="middle">
+      <h2>
+        <b>Utility Armor</b>
+      </h2>
+      <p>
+        The Stepper Armor grants better agility during long journeys, Crash helmet for safety when walking under blocks that may fall, Miner's helm to light up the area in front of you.
+      </p>
+    </td>
+  </tr>
+</table>
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+<table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td valign="middle">
+      <h2>
+        <b>Decorations</b>
+      </h2>
+      <p>
+        Decorate your home with puppets, paintings, signs and lights. Restrict access to the constructing cite with multiple available signs and blocks or add ambiance to your world using sounding decorations!
+      </p>
+    </td>
+    <td valign="middle" width="60%">
+      <img src="https://cdn.modrinth.com/data/cached_images/61d337a84549e92e04c1fbccfc9c75f3fe257caf_0.webp" alt="Showcase of decorative blocks and items" width="100%">
+    </td>
+  </tr>
+</table>
+
+[**YouTube Video**]("https://www.youtube-nocookie.com/embed/539iCzU1hUY")
+
+**Available translations:**
+- English (US)
+- Finnish (FI)
+- Russian (RU)
+- Ukrainian (UA)
+- Spanish (ES)
