@@ -36,17 +36,17 @@ displayName="${mod_name}" #mandatory
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="examplemod.png" #optional
+logoFile="copperoverthrowicon.png" #optional
 
 # A text field displayed in the mod UI
 #credits="" #optional
 
 # The authors of the mod, displayed in the mod UI (optional)
-#authors=""
+authors="STARFE (me)"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Example mod description.
+Just making copper useful again..
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
@@ -61,7 +61,7 @@ Example mod description.
 # The coremods config file path is not configurable and is always loaded from META-INF/coremods.json
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.${mod_id}]] #optional
+[[dependencies.copperoverthrow]] #optional
     # the modid of the dependency
     modId="neoforge" #mandatory
     # The type of the dependency. Can be one of "required", "optional", "incompatible" or "discouraged" (case insensitive).
@@ -80,7 +80,7 @@ Example mod description.
     side="BOTH"
 
 # Here's another dependency
-[[dependencies.${mod_id}]]
+[[dependencies.copperoverthrow]]
     modId="minecraft"
     type="required"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
