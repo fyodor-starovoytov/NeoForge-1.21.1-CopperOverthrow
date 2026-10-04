@@ -82,8 +82,8 @@ public class HandsawItem extends DiggerItem {
                 boolean flag = i % ANIMATION_DURATION == 0;
 
                 if (flag) {
-                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration + 3, true);
-                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration + 3, false);
+                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, true);
+                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, false);
                     level.playLocalSound(player, SoundEvents.FROG_EAT, SoundSource.PLAYERS, 1, 1);
                 }
                 return;
