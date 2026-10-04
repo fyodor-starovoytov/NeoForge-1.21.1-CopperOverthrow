@@ -81,15 +81,15 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get());
         dropSelf(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get());
 
-//        dropSelf(ModBlocks.LOG_STRIPPER.get());
-//        dropSelf(ModBlocks.EXPOSED_LOG_STRIPPER.get());
-//        dropSelf(ModBlocks.WEATHERED_LOG_STRIPPER.get());
-//        dropSelf(ModBlocks.OXIDIZED_LOG_STRIPPER.get());
-//
-//        dropSelf(ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get());
-//        dropSelf(ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get());
-//        dropSelf(ModBlocks.WAXED_LOG_STRIPPER.get());
-//        dropSelf(ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get());
+        dropSelf(ModBlocks.LOG_STRIPPER.get());
+        dropSelf(ModBlocks.EXPOSED_LOG_STRIPPER.get());
+        dropSelf(ModBlocks.WEATHERED_LOG_STRIPPER.get());
+        dropSelf(ModBlocks.OXIDIZED_LOG_STRIPPER.get());
+
+        dropSelf(ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get());
+        dropSelf(ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get());
+        dropSelf(ModBlocks.WAXED_LOG_STRIPPER.get());
+        dropSelf(ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get());
         dropSelf(ModBlocks.COPPER_BEEOSPHERE.get());
 
         dropSelf(ModBlocks.TAMTAM.get());

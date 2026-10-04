@@ -1,5 +1,5 @@
 package net.star.copperoverthrow.block.entity.renderer;
-/*
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
@@ -141,4 +141,3 @@ public class LogStripperBlockEntityRenderer implements BlockEntityRenderer<LogSt
         return (float) intGenerator /100;
     }
 }
-*/

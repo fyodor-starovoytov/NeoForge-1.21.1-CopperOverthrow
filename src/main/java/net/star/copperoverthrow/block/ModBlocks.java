@@ -22,7 +22,7 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(CopperOverthrow.MOD_ID);
 
-/*
+
     public static final DeferredBlock<Block> LOG_STRIPPER = registerBlock("log_stripper",
             () -> new LogStripperBlock(
                     BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.ORANGE),
@@ -55,7 +55,7 @@ public class ModBlocks {
             () -> new LogStripperBlock(
                     BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.ORANGE),
                     WeatheringCopper.WeatherState.OXIDIZED));
-*/
+
 
     public static final DeferredBlock<Block> COPPER_BEEOSPHERE = registerBlock("copper_beeosphere",
             () -> new CopperBeeosphereBlock(

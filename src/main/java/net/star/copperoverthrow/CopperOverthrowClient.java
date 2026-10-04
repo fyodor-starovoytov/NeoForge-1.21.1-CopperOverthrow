@@ -33,6 +33,7 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
+import net.star.copperoverthrow.block.entity.renderer.LogStripperBlockEntityRenderer;
 import net.star.copperoverthrow.client.KitchenBellModel;
 import net.star.copperoverthrow.client.TamTamModel;
 import net.star.copperoverthrow.client.renderer.KitchenBellRenderer;
@@ -60,7 +61,7 @@ public class CopperOverthrowClient {
 
     @SubscribeEvent
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
-        // event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SWINGING_BE.get(), TamTamRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellRenderer::new);
     }
@@ -111,16 +112,13 @@ public class CopperOverthrowClient {
         ItemStack stack = event.getItemStack();
 
         if (stack.is(ModItems.COPPER_HANDSAW.get())) {
-            PoseStack poseStack = event.getPoseStack();
-            poseStack.scale(0,0,0);
+            event.setCanceled(true);
 /*
             //HitResult hitResult = ProjectileUtil.getHitResultOnViewVector(player, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), player.blockInteractionRange();
-            // 1. Calculate smooth elapsed time in float ticks (includes frame interpolation)
             float remainingTicks = player.getUseItemRemainingTicks() - event.getPartialTick();
             float maxTicks = stack.getUseDuration(player);
             float useTicks = maxTicks - remainingTicks;
 
-            // 2. Determine hand side (Mainhand vs Offhand, Left vs Right)
             boolean isMainHand = event.getHand() == InteractionHand.MAIN_HAND;
             boolean isRightArm = (isMainHand && player.getMainArm() == HumanoidArm.RIGHT) ||
                     (!isMainHand && player.getMainArm() == HumanoidArm.LEFT);

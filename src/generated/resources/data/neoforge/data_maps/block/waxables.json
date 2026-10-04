@@ -24,6 +24,9 @@
     "copperoverthrow:exposed_kitchen_bell": {
       "waxed": "copperoverthrow:waxed_exposed_kitchen_bell"
     },
+    "copperoverthrow:exposed_log_stripper": {
+      "waxed": "copperoverthrow:waxed_exposed_log_stripper"
+    },
     "copperoverthrow:exposed_low_note_rain_drum": {
       "waxed": "copperoverthrow:waxed_exposed_low_note_rain_drum"
     },
@@ -38,6 +41,9 @@
     },
     "copperoverthrow:kitchen_bell": {
       "waxed": "copperoverthrow:waxed_kitchen_bell"
+    },
+    "copperoverthrow:log_stripper": {
+      "waxed": "copperoverthrow:waxed_log_stripper"
     },
     "copperoverthrow:low_note_rain_drum": {
       "waxed": "copperoverthrow:waxed_low_note_rain_drum"
@@ -59,6 +65,9 @@
     },
     "copperoverthrow:oxidized_kitchen_bell": {
       "waxed": "copperoverthrow:waxed_oxidized_kitchen_bell"
+    },
+    "copperoverthrow:oxidized_log_stripper": {
+      "waxed": "copperoverthrow:waxed_oxidized_log_stripper"
     },
     "copperoverthrow:oxidized_low_note_rain_drum": {
       "waxed": "copperoverthrow:waxed_oxidized_low_note_rain_drum"
@@ -86,6 +95,9 @@
     },
     "copperoverthrow:weathered_kitchen_bell": {
       "waxed": "copperoverthrow:waxed_weathered_kitchen_bell"
+    },
+    "copperoverthrow:weathered_log_stripper": {
+      "waxed": "copperoverthrow:waxed_weathered_log_stripper"
     },
     "copperoverthrow:weathered_low_note_rain_drum": {
       "waxed": "copperoverthrow:waxed_weathered_low_note_rain_drum"

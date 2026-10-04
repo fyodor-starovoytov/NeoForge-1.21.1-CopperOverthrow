@@ -9,6 +9,7 @@ import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.custom.KitchenBellBlock;
 import net.star.copperoverthrow.block.entity.custom.CopperBeeosphereBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
+import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
 
 import java.util.function.Supplier;
@@ -17,19 +18,19 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, CopperOverthrow.MOD_ID);
 
-//    public static final Supplier<BlockEntityType<LogStripperBlockEntity>> LOG_STRIPPER_BE =
-//            BLOCK_ENTITIES.register("log_stripper_be", ()-> BlockEntityType.Builder.of(
-//                    LogStripperBlockEntity::new,
-//                            ModBlocks.LOG_STRIPPER.get(),
-//                            ModBlocks.EXPOSED_LOG_STRIPPER.get(),
-//                            ModBlocks.WEATHERED_LOG_STRIPPER.get(),
-//                            ModBlocks.OXIDIZED_LOG_STRIPPER.get(),
-//                            ModBlocks.WAXED_LOG_STRIPPER.get(),
-//                            ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get(),
-//                            ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get(),
-//                            ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get()
-//                    )
-//                    .build(null));
+    public static final Supplier<BlockEntityType<LogStripperBlockEntity>> LOG_STRIPPER_BE =
+            BLOCK_ENTITIES.register("log_stripper_be", ()-> BlockEntityType.Builder.of(
+                    LogStripperBlockEntity::new,
+                            ModBlocks.LOG_STRIPPER.get(),
+                            ModBlocks.EXPOSED_LOG_STRIPPER.get(),
+                            ModBlocks.WEATHERED_LOG_STRIPPER.get(),
+                            ModBlocks.OXIDIZED_LOG_STRIPPER.get(),
+                            ModBlocks.WAXED_LOG_STRIPPER.get(),
+                            ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get(),
+                            ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get(),
+                            ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get()
+                    )
+                    .build(null));
 
     public static final Supplier<BlockEntityType<CopperBeeosphereBlockEntity>> COPPER_BEEOSPHERE_BE =
             BLOCK_ENTITIES.register("copper_beeosphere_be", ()-> BlockEntityType.Builder.of(

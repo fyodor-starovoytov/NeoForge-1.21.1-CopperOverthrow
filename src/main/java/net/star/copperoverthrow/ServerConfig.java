@@ -35,7 +35,7 @@ public class ServerConfig {
                 .translation("copperoverthrow.config.stepper_leggings_water")
                 .defineInRange("stepperLeggingsWaterMobility", 0.5, 0.0, 1.0);
 
-        public static final ModConfigSpec.DoubleValue LOG_STRIPPER_TOOL_DAMAGE = BUILDER
+         public static final ModConfigSpec.DoubleValue LOG_STRIPPER_TOOL_DAMAGE = BUILDER
             .comment("Durability of used Tool lost per ingredient on a log stripping station")
             .translation("copperoverthrow.config.log_stripper_tool_damage")
             .defineInRange("logStripperToolDamage", 1.0, 0.0, 5.0);

@@ -174,13 +174,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.TORCH)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)
-//                .pattern("BCB")
-//                .pattern("AAA")
-//                .define('A', Items.COPPER_BLOCK)
-//                .define('B', Tags.Items.STONES)
-//                .define('C', ItemTags.PLANKS)
-//                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)
+                .pattern("BCB")
+                .pattern("AAA")
+                .define('A', Items.COPPER_BLOCK)
+                .define('B', Tags.Items.STONES)
+                .define('C', ItemTags.PLANKS)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.KITCHEN_BELL.get(), 1)
                 .pattern(" D ")
@@ -279,6 +279,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_KITCHEN_BELL.get(), ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get(), "exposed_kitchen_bell");
         addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_KITCHEN_BELL.get(), ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get(), "weathered_kitchen_bell");
         addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_KITCHEN_BELL.get(), ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get(), "oxidized_kitchen_bell");
+
+
     }
 
 

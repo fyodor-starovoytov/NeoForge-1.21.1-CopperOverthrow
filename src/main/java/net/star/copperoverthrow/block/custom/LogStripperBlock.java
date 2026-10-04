@@ -28,10 +28,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import net.neoforged.neoforge.registries.datamaps.builtin.Strippable;
 import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-/*
+
 public class LogStripperBlock extends BaseEntityBlock implements WeatheringCopper{
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
 
@@ -188,4 +189,4 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }
- */
+
