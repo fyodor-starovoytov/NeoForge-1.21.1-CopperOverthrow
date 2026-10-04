@@ -1,5 +1,5 @@
 package net.star.copperoverthrow.block.entity.custom;
-
+/*
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -115,3 +115,4 @@ public class LogStripperBlockEntity extends BlockEntity implements Container {
         return saveWithoutMetadata(registries);
     }
 }
+*/

@@ -49,7 +49,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .addTag(ModTags.Blocks.COPPER_LANTERNS)
                 .addTag(ModTags.Blocks.KITCHEN_BELLS)
-                .addTag(ModTags.Blocks.LOG_STRIPPING_STATION);
+                //.addTag(ModTags.Blocks.LOG_STRIPPING_STATION)
+        ;
 
         tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.COPPER_SCAFFOLDING.get())
@@ -75,7 +76,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .addTag(ModTags.Blocks.COPPER_LANTERNS)
                 .addTag(ModTags.Blocks.KITCHEN_BELLS)
-                .addTag(ModTags.Blocks.LOG_STRIPPING_STATION);
+                // .addTag(ModTags.Blocks.LOG_STRIPPING_STATION)
+        ;
 
         tag(BlockTags.CLIMBABLE)
                 .add(ModBlocks.COPPER_SCAFFOLDING.get())
@@ -195,15 +197,15 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get())
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get());
 
-        tag(ModTags.Blocks.LOG_STRIPPING_STATION)
-                .add(ModBlocks.LOG_STRIPPER.get())
-                .add(ModBlocks.EXPOSED_LOG_STRIPPER.get())
-                .add(ModBlocks.WEATHERED_LOG_STRIPPER.get())
-                .add(ModBlocks.OXIDIZED_LOG_STRIPPER.get())
-                .add(ModBlocks.WAXED_LOG_STRIPPER.get())
-                .add(ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get())
-                .add(ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get())
-                .add(ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get());
+//        tag(ModTags.Blocks.LOG_STRIPPING_STATION)
+//                .add(ModBlocks.LOG_STRIPPER.get())
+//                .add(ModBlocks.EXPOSED_LOG_STRIPPER.get())
+//                .add(ModBlocks.WEATHERED_LOG_STRIPPER.get())
+//                .add(ModBlocks.OXIDIZED_LOG_STRIPPER.get())
+//                .add(ModBlocks.WAXED_LOG_STRIPPER.get())
+//                .add(ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get())
+//                .add(ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get())
+//                .add(ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get());
     }
 
 }

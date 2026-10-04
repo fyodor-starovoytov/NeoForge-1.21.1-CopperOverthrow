@@ -174,13 +174,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.TORCH)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)
-                .pattern("BCB")
-                .pattern("AAA")
-                .define('A', Items.COPPER_BLOCK)
-                .define('B', Tags.Items.STONES)
-                .define('C', ItemTags.PLANKS)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)
+//                .pattern("BCB")
+//                .pattern("AAA")
+//                .define('A', Items.COPPER_BLOCK)
+//                .define('B', Tags.Items.STONES)
+//                .define('C', ItemTags.PLANKS)
+//                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.KITCHEN_BELL.get(), 1)
                 .pattern(" D ")
@@ -235,10 +235,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         .requires(Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
-        addWaxingRecipe(recipeOutput, ModBlocks.LOG_STRIPPER.get(), ModBlocks.WAXED_LOG_STRIPPER.get(), "log_stripper");
-        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_LOG_STRIPPER.get(), ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get(), "exposed_log_stripper");
-        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_LOG_STRIPPER.get(), ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get(), "weathered_log_stripper");
-        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_LOG_STRIPPER.get(), ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get(), "oxidized_log_stripper");
+//        addWaxingRecipe(recipeOutput, ModBlocks.LOG_STRIPPER.get(), ModBlocks.WAXED_LOG_STRIPPER.get(), "log_stripper");
+//        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_LOG_STRIPPER.get(), ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get(), "exposed_log_stripper");
+//        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_LOG_STRIPPER.get(), ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get(), "weathered_log_stripper");
+//        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_LOG_STRIPPER.get(), ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get(), "oxidized_log_stripper");
 
         addWaxingRecipe(recipeOutput, ModBlocks.COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_COPPER_SCAFFOLDING.get(), "copper_scaffolding");
         addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get(), "exposed_copper_scaffolding");

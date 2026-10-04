@@ -31,7 +31,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.star.copperoverthrow.ServerConfig;
-import net.star.copperoverthrow.block.custom.LogStripperBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,7 @@ public class HandsawItem extends Item {
         BlockState clickedBlock = level.getBlockState(context.getClickedPos());
         Player player = context.getPlayer();
 
-        if (player != null && clickedBlock.getBlock() instanceof Block && !(clickedBlock.getBlock() instanceof LogStripperBlock) && clickedBlock.is(BlockTags.LOGS)) {
+        if (player != null && clickedBlock.getBlock() instanceof Block && clickedBlock.is(BlockTags.LOGS)) {
             player.startUsingItem(context.getHand());
         }
 
