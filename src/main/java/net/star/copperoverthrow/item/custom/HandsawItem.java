@@ -36,11 +36,10 @@ import net.star.copperoverthrow.block.custom.LogStripperBlock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HandsawItem extends DiggerItem {
+public class HandsawItem extends Item {
     public static final int ANIMATION_DURATION = 5;
-
-    public HandsawItem(Tier tier, Properties properties) {
-        super(tier, BlockTags.MINEABLE_WITH_AXE, properties);
+    public HandsawItem(Properties properties) {
+        super(properties);
     }
 
     @Override

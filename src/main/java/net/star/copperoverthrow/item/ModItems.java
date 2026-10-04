@@ -55,9 +55,8 @@ public class ModItems {
             () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
                     .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 6f, -3.6f))));
 
-    public static final DeferredItem<HandsawItem> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
-            () -> new HandsawItem(ModToolTiers.COPPER, new Properties()
-                    .attributes(AxeItem.createAttributes(ModToolTiers.COPPER, 0f, -1.6f))));
+    public static final DeferredItem<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
+            () -> new HandsawItem(new Properties().durability(727).stacksTo(1)));
 
 
     public static void register(IEventBus eventBus) {
