@@ -159,7 +159,6 @@ public class CopperOverthrowClient {
         ItemStack useStack = player.getUseItem();
         if (!useStack.is(ModItems.COPPER_HANDSAW.get())) return;
 
-        // 1. Get safe 1.21.1 partial ticks from DeltaTracker
         float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
 
         HitResult hitResult = player.pick(5.0D, partialTick, false);
@@ -170,15 +169,12 @@ public class CopperOverthrowClient {
         PoseStack poseStack = event.getPoseStack();
         poseStack.pushPose();
 
-        // 2. Subtract Camera Position for precise World-Space Rendering
         Vec3 cameraPos = mc.gameRenderer.getMainCamera().getPosition();
         Vec3 hitPos = blockHit.getLocation();
         Vec3 offset = hitPos.subtract(cameraPos);
 
-        // Position directly at the target block contact point
         poseStack.translate(offset.x, offset.y, offset.z);
 
-        // 3. Apply Sawing Motion
         float remainingTicks = player.getUseItemRemainingTicks() - partialTick;
         float useTicks = useStack.getUseDuration(player) - remainingTicks;
         float pushPull = Mth.sin((float) Math.pow(useTicks, 1.28)/3) * 0.24F;
@@ -187,16 +183,11 @@ public class CopperOverthrowClient {
         Direction face = blockHit.getDirection();
         Direction playerFace = player.getDirection();
 
-        // Apply face-alignment rotations
         applyFaceTransforms(poseStack, face, playerFace, pushPull);
-
         poseStack.mulPose(Axis.XP.rotationDegrees(subtleTilt));
-
         BlockPos targetPos = blockHit.getBlockPos();
 
-// Get brightness levels using player.level()
         List<Integer> lightLevel = getLightLevel(player, face, targetPos);
-
         int packedLight = LightTexture.pack(lightLevel.get(0), lightLevel.get(1));
 
         mc.getItemRenderer().renderStatic(
