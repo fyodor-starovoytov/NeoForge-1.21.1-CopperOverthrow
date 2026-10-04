@@ -181,8 +181,8 @@ public class CopperOverthrowClient {
         // 3. Apply Sawing Motion
         float remainingTicks = player.getUseItemRemainingTicks() - partialTick;
         float useTicks = useStack.getUseDuration(player) - remainingTicks;
-        float pushPull = Mth.sin(useTicks * 1.2F) * 0.24F;
-        float subtleTilt = Mth.cos(useTicks * 1.2F) * 2.5F;
+        float pushPull = Mth.sin((float) Math.pow(useTicks, 1.28)/3) * 0.24F;
+        float subtleTilt = Mth.cos((float) Math.pow(useTicks, 1.28)/3) * 2.5F;
 
         Direction face = blockHit.getDirection();
         Direction playerFace = player.getDirection();
