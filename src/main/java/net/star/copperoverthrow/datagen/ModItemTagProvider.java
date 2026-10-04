@@ -32,6 +32,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .addTag(ModTags.Items.C_TOOLS_BUILDERS)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS)
+                .addTag(ModTags.Items.C_TOOLS_SAWS)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get())
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
 
@@ -65,10 +66,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(ItemTags.BREAKS_DECORATED_POTS)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS);
+
         tag(ModTags.Items.C_TOOLS_HAMMERS)
                 .add(ModItems.COPPER_HAMMER.get());
         tag(ModTags.Items.C_TOOLS_CATCHERS)
                 .add(ModItems.BEE_CATCHER.get());
+        tag(ModTags.Items.C_TOOLS_SAWS)
+                .add(ModItems.COPPER_HANDSAW.get());
         tag(ModTags.Items.C_TOOLS_BUILDERS)
                 .add(ModItems.COPPER_TROWEL.get())
                 .add(ModItems.COPPER_CHISEL.get());

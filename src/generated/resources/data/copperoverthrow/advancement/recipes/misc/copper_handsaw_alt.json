@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "copperoverthrow:copper_hammer"
+        "recipe": "copperoverthrow:copper_handsaw_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "copperoverthrow:copper_hammer"
+      "copperoverthrow:copper_handsaw_alt"
     ]
   }
 }

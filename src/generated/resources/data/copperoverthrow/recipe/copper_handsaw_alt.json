@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:nuggets/copper"
+    },
+    "B": {
+      "tag": "c:ingots/copper"
+    },
+    "C": {
+      "tag": "c:rods/blaze"
+    }
+  },
+  "pattern": [
+    "B  ",
+    "AB ",
+    " AC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "copperoverthrow:copper_handsaw"
+  }
+}

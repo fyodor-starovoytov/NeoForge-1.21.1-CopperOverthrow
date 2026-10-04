@@ -94,7 +94,28 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("C")
                 .define('B', Items.COPPER_BLOCK)
                 .define('C', Tags.Items.RODS_BLAZE)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HANDSAW.get(), 1)
+                .pattern("  B")
+                .pattern(" BA")
+                .pattern("CA ")
+                .define('B', Tags.Items.INGOTS_COPPER)
+                .define('A', ModTags.Items.C_COPPER_NUGGETS)
+                .define('C', Tags.Items.RODS_BLAZE)
+                .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD)).save(recipeOutput);
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HANDSAW.get(), 1)
+                .pattern("B  ")
+                .pattern("AB ")
+                .pattern(" AC")
+                .define('B', Tags.Items.INGOTS_COPPER)
+                .define('A', ModTags.Items.C_COPPER_NUGGETS)
+                .define('C', Tags.Items.RODS_BLAZE)
+                .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD))
+                .save(recipeOutput, "copperoverthrow:copper_handsaw_alt");
+
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAIN_DRUM.get(), 2)
