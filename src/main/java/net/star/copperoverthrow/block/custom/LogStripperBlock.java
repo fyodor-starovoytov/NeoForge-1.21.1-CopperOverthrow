@@ -5,10 +5,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
@@ -29,9 +32,11 @@ import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import net.neoforged.neoforge.registries.datamaps.builtin.Strippable;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
+import net.star.copperoverthrow.util.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 
 public class LogStripperBlock extends BaseEntityBlock implements WeatheringCopper{
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
@@ -81,55 +86,152 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
-
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!(level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
 
-        if (level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity){
+        ItemStack heldMain = player.getMainHandItem();
+        ItemStack heldOff = player.getOffhandItem();
 
-            EquipmentSlot slot = null;
-            ItemStack axeStack = ItemStack.EMPTY;
+        EquipmentSlot slot = null;
+        ItemStack axeStack = ItemStack.EMPTY;
+        ItemStack sawStack = ItemStack.EMPTY;
 
-            if (player.getMainHandItem().is(ItemTags.AXES)) {
-                slot = EquipmentSlot.MAINHAND;
-                axeStack = player.getMainHandItem();
-            } else if (player.getOffhandItem().is(ItemTags.AXES)) {
-                slot = EquipmentSlot.OFFHAND;
-                axeStack = player.getOffhandItem();
+        if (heldMain.is(ItemTags.AXES)) {
+            slot = EquipmentSlot.MAINHAND;
+            axeStack = heldMain;
+        } else if (heldOff.is(ItemTags.AXES)) {
+            slot = EquipmentSlot.OFFHAND;
+            axeStack = heldOff;
+        }
+        if (heldMain.is(ModTags.Items.C_TOOLS_SAWS)) {
+            slot = EquipmentSlot.MAINHAND;
+            sawStack = heldMain;
+        } else if (heldOff.is(ModTags.Items.C_TOOLS_SAWS)) {
+            slot = EquipmentSlot.OFFHAND;
+            sawStack = heldOff;
+        }
+
+        ItemStack inputStack = logStripperBlockEntity.getItem(0);
+
+        // AXE STRIPPING
+        if (!inputStack.isEmpty() && isBlockStrippable(inputStack) && !axeStack.isEmpty()) {
+            int toDamage = (int) (inputStack.getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
+            axeStack.hurtAndBreak(Math.max(1, toDamage), player, slot);
+
+            ItemStack resultStack = getStrippedBlock(inputStack);
+            logStripperBlockEntity.setItem(0, resultStack);
+            if (resultStack.getItem() instanceof BlockItem blockItem) {
+                BlockState particleState = blockItem.getBlock().defaultBlockState();
+                level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(particleState));
             }
 
-            if (isBlockStrippable(logStripperBlockEntity.getItem(0)) && !axeStack.isEmpty()){
-                int toDamage = (int) (logStripperBlockEntity.getItem(0).getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
-                axeStack.hurtAndBreak(toDamage, player, (slot));
+            level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
+            return ItemInteractionResult.SUCCESS;
+        }
 
-                logStripperBlockEntity.setItem(0, getStrippedBlock(logStripperBlockEntity.getItem(0)));
+        // SAW SAWING
+        if (!inputStack.isEmpty() && isBlockPlank(inputStack) && !sawStack.isEmpty()) {
+            int toDamage = (int) (inputStack.getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
+            sawStack.hurtAndBreak(Math.max(1, toDamage), player, slot);
 
-                level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1, 1f);
-            }
+            ItemStack resultStack = getFromPlankBlock(inputStack);
+            int totalCount = resultStack.getCount();
+            int maxStack = resultStack.getMaxStackSize(); // 64
 
-            else if (logStripperBlockEntity.isEmpty() && isBlockStrippable(stack)){
-                logStripperBlockEntity.setItem(0, stack);
-                stack.shrink(stack.getCount());
-                level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1, 2f);
-            }
-            else if (stack.isEmpty() || !isBlockStrippable(stack)){
-                ItemStack stackInside = logStripperBlockEntity.getItem(0);
-                if (player.getMainHandItem().isEmpty()) {
-                    player.setItemInHand(InteractionHand.MAIN_HAND, stackInside);
+            if (totalCount > maxStack) {
+                logStripperBlockEntity.setItem(0, resultStack.copyWithCount(maxStack));
+
+                if (!level.isClientSide()) {
+                    int remaining = totalCount - maxStack;
+
+                    while (remaining > 0) {
+                        int dropCount = Math.min(remaining, maxStack);
+                        ItemStack dropStack = resultStack.copyWithCount(dropCount);
+
+                        Block.popResource(level, pos.above(), dropStack);
+
+                        remaining -= dropCount;
+                    }
                 }
-                else player.addItem(stackInside);
+            } else {
+                logStripperBlockEntity.setItem(0, resultStack);
+            }
 
+            if (resultStack.getItem() instanceof BlockItem blockItem) {
+                BlockState particleState = blockItem.getBlock().defaultBlockState();
+                level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(particleState));
+            }
+
+            level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        // INSERT ITEM INTO EMPTY STRIPPER
+        if (logStripperBlockEntity.isEmpty() && !stack.isEmpty() && stack.getItem() instanceof BlockItem) {
+            logStripperBlockEntity.setItem(0, stack.copy());
+            stack.setCount(0);
+            level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0f, 2.0f);
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        // REMOVE ITEM FROM STRIPPER
+        if (!isBlockStrippable(stack)) {
+            if (!logStripperBlockEntity.isEmpty()) {
+                ItemStack stackInside = logStripperBlockEntity.getItem(0);
+                player.addItem(stackInside);
                 logStripperBlockEntity.clearContent();
-                level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1, 1f);
+                level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+            }
+            return ItemInteractionResult.SUCCESS;
+        }
 
-            }else if (logStripperBlockEntity.getItem(0).getItem().equals(stack.getItem())){
-                int deductible = 64 - logStripperBlockEntity.getItem(0).getCount();
-                logStripperBlockEntity.setItem(0, stack);
-                stack.shrink(deductible);
-                level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1, 2f);
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    public ItemStack getFromPlankBlock(ItemStack stack) {
+        int count = stack.getCount();
+        ResourceLocation plankId = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        String path = plankId.getPath();
+        String resultPath = null;
+        if (path.contains("_log")) {
+            resultPath = path.replace("stripped_", "").replace("_log", "_planks");
+            count = count * 4;
+        } else if (path.contains("_wood")) {
+            resultPath = path.replace("stripped_", "").replace("_wood", "_planks");
+            count = count * 4;
+        } else if (path.contains("_planks")) {
+            resultPath = path.replace("_planks", "_stairs");
+        } else if (path.contains("_stairs")) {
+            resultPath = path.replace("_stairs", "_slab");
+        }
+
+        if (resultPath != null) {
+            ResourceLocation blockId = ResourceLocation.fromNamespaceAndPath(plankId.getNamespace(), resultPath);
+            Item resultBlock = BuiltInRegistries.ITEM.get(blockId);
+
+            if (resultBlock != Items.AIR) {
+                return new ItemStack(resultBlock, count);
             }
         }
-        return ItemInteractionResult.SUCCESS;
+
+        return stack;
+    }
+
+    public ItemStack getStrippedBlock(ItemStack stack) {
+
+        if (stack.getItem() instanceof BlockItem blockItem) {
+            int count = stack.getCount();
+
+            BlockState state = blockItem.getBlock().defaultBlockState();
+            Holder<Block> blockHolder = state.getBlockHolder();
+            Strippable strippableData = blockHolder.getData(NeoForgeDataMaps.STRIPPABLES);
+
+            return new ItemStack(strippableData.strippedBlock().asItem()).copyWithCount(count);
+        }
+        return stack;
     }
 
     public boolean isBlockStrippable(ItemStack stack) {
@@ -146,18 +248,12 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         return false;
     }
 
-    public ItemStack getStrippedBlock(ItemStack stack) {
-
+    public boolean isBlockPlank(ItemStack stack) {
         if (stack.getItem() instanceof BlockItem blockItem) {
-            int count = stack.getCount();
-
             BlockState state = blockItem.getBlock().defaultBlockState();
-            Holder<Block> blockHolder = state.getBlockHolder();
-            Strippable strippableData = blockHolder.getData(NeoForgeDataMaps.STRIPPABLES);
-
-            return new ItemStack(strippableData.strippedBlock().asItem()).copyWithCount(count);
+            return state.is(BlockTags.PLANKS) || state.is(BlockTags.WOODEN_STAIRS) || state.is(BlockTags.LOGS);
         }
-        return stack;
+        return false;
     }
 
     @Override
