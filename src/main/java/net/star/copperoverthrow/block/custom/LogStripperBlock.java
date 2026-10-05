@@ -128,7 +128,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
                 level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(particleState));
             }
 
-            level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
+            level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
             return ItemInteractionResult.SUCCESS;
         }
 
@@ -165,7 +165,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
                 level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(particleState));
             }
 
-            level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
+            level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
             return ItemInteractionResult.SUCCESS;
         }
 
@@ -173,17 +173,22 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         if (logStripperBlockEntity.isEmpty() && !stack.isEmpty() && stack.getItem() instanceof BlockItem) {
             logStripperBlockEntity.setItem(0, stack.copy());
             stack.setCount(0);
-            level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0f, 2.0f);
+            level.playSound(null, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0f, 2.0f);
             return ItemInteractionResult.SUCCESS;
         }
 
         // REMOVE ITEM FROM STRIPPER
-        if (!isBlockStrippable(stack)) {
+        if ((!isBlockStrippable(stack) || !isBlockPlank(stack) && player.getInventory().getFreeSlot() != -1)) {
             if (!logStripperBlockEntity.isEmpty()) {
                 ItemStack stackInside = logStripperBlockEntity.getItem(0);
-                player.addItem(stackInside);
+
+                if (!player.getInventory().add(stackInside)) {
+                    player.drop(stackInside, false);
+                }
+
                 logStripperBlockEntity.clearContent();
-                level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+
+                level.playSound(null, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
             return ItemInteractionResult.SUCCESS;
         }
