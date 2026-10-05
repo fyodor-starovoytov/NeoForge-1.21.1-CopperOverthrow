@@ -107,7 +107,7 @@
   "tooltip.copperoverthrow.when_placed.tooltip": "§7When placed:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7When used on a Block:§r",
   "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7When used on a Bee:§r",
-  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Strip the logs placed on top with an§r §6Axe§r",
+  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Strip logs placed on top with an§r §6Axe§r\n§e Saw planks to stairs and slabs with a§r §6Handsaw§r",
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Applies random§r §6Stonecutter§r §erecipe for the applied block§r",
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Captures a§r §6Bee§r §einside the catcher§r",
   "tooltip.copperoverthrow.copper_handsaw_item.tooltip" : "§e Cuts a whole§r §6tree§r §edown when used on a log§r",
