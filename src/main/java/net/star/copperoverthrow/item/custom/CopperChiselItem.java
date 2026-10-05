@@ -2,14 +2,12 @@ package net.star.copperoverthrow.item.custom;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.*;
@@ -18,46 +16,14 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
 import java.util.List;
-import java.util.Map;
 
 public class CopperChiselItem extends Item {
 
     public CopperChiselItem(Properties properties) {super(properties);
     }
-
-    /* @Override
-    public InteractionResult useOn(UseOnContext context) {
-
-        //Getting the level of the interaction happened, is it in which world or is it Server or Client
-        //Level basically means world, just renamed
-        //Level defines if it's client or server side operation
-        Level level = context.getLevel();
-
-        //Getting the clicked block when using the item
-        Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
-
-        if (CHISEL_MAP.containsKey(clickedBlock)){
-             if (!level.isClientSide){
-                // SERVER ONLY
-                    level.setBlockAndUpdate(context.getClickedPos(), CHISEL_MAP.get(clickedBlock).defaultBlockState());
-
-                    context.getItemInHand().hurtAndBreak(1, ((ServerLevel) level)
-                    //Because we know that this operation is only possible
-                    //when it's on server, we can just cast the level onto the ServerLevel
-                     , context.getPlayer(),
-                            item -> context.getPlayer().onEquippedItemBroken(item, EquipmentSlot.MAINHAND));
-
-                    level.playSound(null, context.getClickedPos(), SoundEvents.COPPER_HIT, SoundSource.BLOCKS);
-            }
-        }
-
-        return InteractionResult.SUCCESS;
-    }
-    */
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
@@ -68,39 +34,10 @@ public class CopperChiselItem extends Item {
 
         Player player = context.getPlayer();
         if (player != null && clickedBlock instanceof Block) {
-            player.startUsingItem(context.getHand());
-        }
 
-        return InteractionResult.CONSUME;
-    }
-
-
-    @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BRUSH;
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return 200;
-    }
-
-    @Override
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (remainingUseDuration >= 0 && livingEntity instanceof Player player) {
-
-            HitResult hitresult = this.calculateHitResult(player);
-
-            if (hitresult instanceof BlockHitResult blockhitresult && hitresult.getType() == HitResult.Type.BLOCK) {
-
-                int i = this.getUseDuration(stack, livingEntity) - remainingUseDuration + 1;
-
-                //Defines which tick the action is performed
-                boolean flag = i % 5 == 0;
-
-                if (flag) {
-                    BlockPos blockpos = blockhitresult.getBlockPos();
+                    BlockPos blockpos = context.getClickedPos();
                     BlockState blockstate = level.getBlockState(blockpos);
+                    ItemStack stack = context.getItemInHand();
 
                     SoundEvent soundevent;
                     if (doesResultExist(level, blockstate)) {
@@ -110,73 +47,67 @@ public class CopperChiselItem extends Item {
                     }
                     level.playSound(player, blockpos, soundevent, SoundSource.BLOCKS);
 
-                        if ((!level.isClientSide()) && doesResultExist(level, blockstate)) {
+                    if ((!level.isClientSide()) && doesResultExist(level, blockstate)) {
 
-                            while (true) {
-                                Block block = getBlock(level, blockstate);
+                        while (true) {
+                            Block block = getBlockToPlace(level, blockstate);
 
-                                if (blockstate.getBlock() instanceof StairBlock){
-                                    if (NoAvailableStairBlock(level, blockstate)){
-                                        break;
-                                    }
-
-                                    if (!(block instanceof StairBlock)) {
-                                        getBlock(level, blockstate);
-                                        continue;
-                                    }
-                                }
-
-                                if (blockstate.getBlock() instanceof WallBlock){
-                                    if (NoAvailableWallBlock(level, blockstate)){
-                                        break;
-                                    }
-
-                                    if (!(block instanceof WallBlock)) {
-                                        getBlock(level, blockstate);
-                                        continue;
-                                    }
-                                }
-
-                                if (blockstate.getBlock() instanceof SlabBlock){
-                                    if (NoAvailableSlabBlock(level, blockstate)){
-                                        break;
-                                    }
-
-                                    if (!(block instanceof SlabBlock)) {
-                                        getBlock(level, blockstate);
-                                        continue;
-                                    }
-                                }
-
-                                if (!(blockstate.getBlock() instanceof SlabBlock || blockstate.getBlock() instanceof WallBlock || blockstate.getBlock() instanceof StairBlock)){
-                                    if (NoAvailableFullBlock(level, blockstate)){
-                                        break;
-                                    }
-
-                                    if (block instanceof StairBlock || block instanceof SlabBlock || block instanceof WallBlock) {
-                                        getBlock(level, blockstate);
-                                        continue;
-                                    }
-                                }
-
-                                if (setBlock(level, blockpos, block, blockstate)) {
-                                    EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
-                                            ? EquipmentSlot.OFFHAND
-                                            : EquipmentSlot.MAINHAND;
-                                    stack.hurtAndBreak(1, livingEntity, equipmentslot);
-
+                            if (blockstate.getBlock() instanceof StairBlock){
+                                if (NoAvailableStairBlock(level, blockstate)){
                                     break;
                                 }
+
+                                if (!(block instanceof StairBlock)) {
+                                    getBlockToPlace(level, blockstate);
+                                    continue;
+                                }
+                            }
+
+                            if (blockstate.getBlock() instanceof WallBlock){
+                                if (NoAvailableWallBlock(level, blockstate)){
+                                    break;
+                                }
+
+                                if (!(block instanceof WallBlock)) {
+                                    getBlockToPlace(level, blockstate);
+                                    continue;
+                                }
+                            }
+
+                            if (blockstate.getBlock() instanceof SlabBlock){
+                                if (NoAvailableSlabBlock(level, blockstate)){
+                                    break;
+                                }
+
+                                if (!(block instanceof SlabBlock)) {
+                                    getBlockToPlace(level, blockstate);
+                                    continue;
+                                }
+                            }
+
+                            if (!(blockstate.getBlock() instanceof SlabBlock || blockstate.getBlock() instanceof WallBlock || blockstate.getBlock() instanceof StairBlock)){
+                                if (NoAvailableFullBlock(level, blockstate)){
+                                    break;
+                                }
+
+                                if (block instanceof StairBlock || block instanceof SlabBlock || block instanceof WallBlock) {
+                                    getBlockToPlace(level, blockstate);
+                                    continue;
+                                }
+                            }
+
+                            if (setBlock(level, blockpos, block, blockstate)) {
+                                EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
+                                        ? EquipmentSlot.OFFHAND
+                                        : EquipmentSlot.MAINHAND;
+                                stack.hurtAndBreak(1, player, equipmentslot);
+
+                                return InteractionResult.SUCCESS;
                             }
                         }
-                }
-                return;
+                    }
             }
-
-            livingEntity.releaseUsingItem();
-        } else {
-            livingEntity.releaseUsingItem();
-        }
+        return InteractionResult.CONSUME;
     }
 
     private boolean setBlock(Level level, BlockPos blockpos, Block block, BlockState blockstate){
@@ -194,7 +125,7 @@ public class CopperChiselItem extends Item {
         );
     }
 
-    private Block getBlock(Level level, BlockState blockstate){
+    private Block getBlockToPlace(Level level, BlockState blockstate){
 
     List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
 
