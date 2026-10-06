@@ -62,6 +62,7 @@ public class HandsawItem extends Item {
             player.startUsingItem(context.getHand());
         }
 
+        context.getPlayer().swing(context.getHand(), false);
         return InteractionResult.CONSUME;
     }
 
@@ -85,6 +86,7 @@ public class HandsawItem extends Item {
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, true);
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, false);
                     level.playLocalSound(player, SoundEvents.FROG_EAT, SoundSource.PLAYERS, 1, 1);
+                    livingEntity.swing(player.getUsedItemHand(), false);
                 }
                 return;
             }
