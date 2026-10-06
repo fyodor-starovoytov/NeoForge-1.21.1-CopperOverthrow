@@ -159,6 +159,12 @@
     "sounds": [
       "copperoverthrow:oxidized_kitchen_bell_med_med"
     ]
+  },
+  "handsaw_use": {
+    "subtitle": "sounds.copperoverthrow.handsaw_use",
+    "sounds": [
+      "copperoverthrow:handsaw_sound",
+      "copperoverthrow:handsaw_sound1"
+    ]
   }
-
 }

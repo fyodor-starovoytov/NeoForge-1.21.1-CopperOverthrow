@@ -38,7 +38,7 @@ public class ModSounds {
         public static final Supplier<SoundEvent> WEATHERED_KITCHEN_BELL_PLAYING = registerSoundEvent("weathered_kitchen_bell_press");
         public static final Supplier<SoundEvent> OXIDIZED_KITCHEN_BELL_PLAYING = registerSoundEvent("oxidized_kitchen_bell_press");
 
-
+        public static final Supplier<SoundEvent> HANDSAW_USE = registerSoundEvent("handsaw_use");
 
         private static Supplier<SoundEvent> registerSoundEvent(String name) {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, name);

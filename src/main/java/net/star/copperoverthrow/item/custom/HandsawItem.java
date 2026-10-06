@@ -31,6 +31,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.sound.ModSounds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,12 +81,12 @@ public class HandsawItem extends Item {
                 int i = this.getUseDuration(stack, livingEntity) - remainingUseDuration + 1;
 
                 //Defines which tick the action is performed
-                boolean flag = i % ANIMATION_DURATION == 0;
+                boolean flag = i % 5 == 0;
 
                 if (flag) {
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, true);
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, false);
-                    level.playLocalSound(player, SoundEvents.FROG_EAT, SoundSource.PLAYERS, 1, 1);
+                    level.playLocalSound(player, ModSounds.HANDSAW_USE.get(), SoundSource.PLAYERS, 0.1F, (float) ServerConfig.HANDSAW_USE_TIME.get() / remainingUseDuration*2.2F);
                     livingEntity.swing(player.getUsedItemHand(), false);
                 }
                 return;
