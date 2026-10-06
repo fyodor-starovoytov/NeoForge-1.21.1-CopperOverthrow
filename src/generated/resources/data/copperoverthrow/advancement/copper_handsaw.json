@@ -1,0 +1,34 @@
+{
+  "parent": "copperoverthrow:log_stripper",
+  "criteria": {
+    "has_handsaw": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:copper_handsaw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.copper_handsaw.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:copper_handsaw"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.copper_handsaw.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_handsaw"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

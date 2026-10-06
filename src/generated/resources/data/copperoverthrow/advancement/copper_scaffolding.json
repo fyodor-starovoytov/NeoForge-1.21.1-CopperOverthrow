@@ -1,0 +1,33 @@
+{
+  "parent": "copperoverthrow:copper_ingot",
+  "criteria": {
+    "has_scaffolding": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:copper_scaffolding"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.copper_scaffolding.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:copper_scaffolding"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.copper_scaffolding.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_scaffolding"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

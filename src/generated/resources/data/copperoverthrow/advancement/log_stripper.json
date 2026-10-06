@@ -1,0 +1,33 @@
+{
+  "parent": "copperoverthrow:copper_ingot",
+  "criteria": {
+    "has_stripper": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:log_stripper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.log_stripper.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:log_stripper"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.log_stripper.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_stripper"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

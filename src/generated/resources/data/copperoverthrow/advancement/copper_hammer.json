@@ -1,0 +1,34 @@
+{
+  "parent": "copperoverthrow:copper_ingot",
+  "criteria": {
+    "has_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:copper_hammer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.copper_hammer.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:copper_hammer"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.copper_hammer.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_hammer"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

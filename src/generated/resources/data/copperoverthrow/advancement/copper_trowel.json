@@ -1,0 +1,33 @@
+{
+  "parent": "copperoverthrow:copper_scaffolding",
+  "criteria": {
+    "has_trowel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:copper_trowel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.copper_trowel.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:copper_trowel"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.copper_trowel.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_trowel"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

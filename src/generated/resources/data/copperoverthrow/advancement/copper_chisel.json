@@ -1,0 +1,33 @@
+{
+  "parent": "copperoverthrow:copper_scaffolding",
+  "criteria": {
+    "has_chisel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:copper_chisel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.copper_chisel.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:copper_chisel"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.copper_chisel.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_chisel"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

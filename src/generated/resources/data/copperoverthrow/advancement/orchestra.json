@@ -1,0 +1,134 @@
+{
+  "parent": "copperoverthrow:musical",
+  "criteria": {
+    "has_orchestra": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:medium_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:exposed_medium_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:weathered_medium_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:oxidized_medium_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_medium_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_exposed_medium_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_weathered_medium_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_oxidized_medium_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:high_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:exposed_high_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:weathered_high_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:oxidized_high_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_high_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_exposed_high_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_weathered_high_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_oxidized_high_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:low_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:exposed_low_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:weathered_low_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:oxidized_low_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_low_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_exposed_low_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_weathered_low_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:waxed_oxidized_low_note_rain_drum"
+          },
+          {
+            "items": "copperoverthrow:tamtam"
+          },
+          {
+            "items": "copperoverthrow:exposed_tamtam"
+          },
+          {
+            "items": "copperoverthrow:weathered_tamtam"
+          },
+          {
+            "items": "copperoverthrow:oxidized_tamtam"
+          },
+          {
+            "items": "copperoverthrow:waxed_tamtam"
+          },
+          {
+            "items": "copperoverthrow:waxed_exposed_tamtam"
+          },
+          {
+            "items": "copperoverthrow:waxed_weathered_tamtam"
+          },
+          {
+            "items": "copperoverthrow:waxed_oxidized_tamtam"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.orchestra.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:waxed_oxidized_low_note_rain_drum"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.orchestra.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_orchestra"
+    ]
+  ],
+  "rewards": {
+    "experience": 300,
+    "recipes": [
+      "copperoverthrow:recipe_id"
+    ]
+  },
+  "sends_telemetry_event": true
+}

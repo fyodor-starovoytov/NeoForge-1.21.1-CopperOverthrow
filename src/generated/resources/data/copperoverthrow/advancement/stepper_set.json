@@ -1,0 +1,37 @@
+{
+  "parent": "copperoverthrow:copper_ingot",
+  "criteria": {
+    "has_stepper": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:copper_stepper_boots"
+          },
+          {
+            "items": "copperoverthrow:copper_stepper_leggings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.stepper_set.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:copper_stepper_boots"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.stepper_set.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_stepper"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
