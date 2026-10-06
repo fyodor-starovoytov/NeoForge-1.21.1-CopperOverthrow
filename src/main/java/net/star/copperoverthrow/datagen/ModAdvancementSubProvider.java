@@ -19,6 +19,34 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
 
     @Override
     public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
+        AdvancementHolder copperIngotAdv = Advancement.Builder.advancement()
+                .parent(ResourceLocation.withDefaultNamespace("story/mine_stone"))
+                .display(
+                        Items.COPPER_INGOT,
+                        Component.translatable("advancements.copperoverthrow.copper_ingot.title"),
+                        Component.translatable("advancements.copperoverthrow.copper_ingot.description"),
+                        null, // Background is null since it's attached to an existing parent tab
+                        AdvancementType.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .addCriterion("has_handsaw", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
+                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copper_ingot"), existingFileHelper);
 
+        AdvancementHolder copperScaffolding = Advancement.Builder.advancement()
+                .parent(copperIngotAdv)
+                .display(
+                        ModBlocks.COPPER_SCAFFOLDING.get(),
+                        Component.translatable("advancements.copperoverthrow.copper_scaffolding.title"),
+                        Component.translatable("advancements.copperoverthrow.copper_scaffolding.description"),
+                        null,
+                        AdvancementType.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .addCriterion("has_scaffolding", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.COPPER_SCAFFOLDING.get()))
+                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copper_scaffolding"), existingFileHelper);
     }
 }
