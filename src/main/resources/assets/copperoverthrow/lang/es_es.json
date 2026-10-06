@@ -8,6 +8,7 @@
   "item.copperoverthrow.copper_cookie": "Galleta de cobre",
   "item.copperoverthrow.bee_catcher": "Atrapabejas",
   "item.copperoverthrow.copper_hammer": "Martillo de cobre",
+  "item.copperoverthrow.copper_handsaw": "Serrucho de cobre",
   "item.copperoverthrow.copper_stepper_boots": "Botas de escalón",
   "item.copperoverthrow.copper_stepper_leggings": "Grebas de escalón",
 
@@ -19,6 +20,7 @@
   "block.copperoverthrow.waxed_exposed_copper_scaffolding": "Andamio de cobre expuesto encerado",
   "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Andamio de cobre desgastado encerado",
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Andamio de cobre oxidado encerado",
+
   "block.copperoverthrow.log_stripper": "Estación de descortezado",
   "block.copperoverthrow.exposed_log_stripper": "Estación de descortezado expuesta",
   "block.copperoverthrow.weathered_log_stripper": "Estación de descortezado desgastada",
@@ -99,9 +101,10 @@
   "tooltip.copperoverthrow.when_placed.tooltip": "§7Al colocar:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7Al usar en un bloque:§r",
   "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7Al usar en una abeja:§r",
-  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Descorteza los troncos colocados encima con un§r §6Hacha§r",
+  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Descorteza los troncos colocados encima con un§r §6Hacha§r\n§e Corta tablones en escaleras y losas con un§r §6Serrucho§r",
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Aplica una receta aleatoria del§r §6Cortapiedras§r §eal bloque seleccionado§r",
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Captura una§r §6Abeja§r §edentro del atrapador§r",
+  "tooltip.copperoverthrow.copper_handsaw_item.tooltip": "§e Tala un§r §6árbol§r §eentero al usarlo en un tronco§r",
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Libera§r §etodas las abejas atrapadas§r",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Mantén §eShift§r §7para más información§r",
   "tooltip.copperoverthrow.trowel_item.tooltip": "§e Coloca un bloque aleatorio de la§r §6Barra rápida§r",
@@ -136,6 +139,9 @@
   "copperoverthrow.config.tam_tam_full_moon_volume": "Radio de volumen del tam-tam en luna llena",
   "copperoverthrow.config.tam_tam_full_moon_chance": "Probabilidad de sonido del tam-tam en luna llena",
   "copperoverthrow.config.kitchen_bell_volume": "Radio de volumen del timbre de mesa",
+  "copperoverthrow.config.jamming": "Atasco",
+  "copperoverthrow.config.handsaw_use": "Duración de uso del serrucho",
+  "copperoverthrow.config.handsaw_max": "Máximo de bloques destruidos por el serrucho",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-tam suena",
   "sounds.copperoverthrow.raindrum_play": "Tambor de lluvia suena",

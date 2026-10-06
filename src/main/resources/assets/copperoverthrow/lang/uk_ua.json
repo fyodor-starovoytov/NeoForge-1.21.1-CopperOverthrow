@@ -8,6 +8,7 @@
   "item.copperoverthrow.copper_cookie": "Мідне печиво",
   "item.copperoverthrow.bee_catcher": "Ловець бджіл",
   "item.copperoverthrow.copper_hammer": "Мідний молот",
+  "item.copperoverthrow.copper_handsaw": "Мідна пила",
   "item.copperoverthrow.copper_stepper_boots": "Чоботи кроку",
   "item.copperoverthrow.copper_stepper_leggings": "Поноші кроку",
 
@@ -19,6 +20,7 @@
   "block.copperoverthrow.waxed_exposed_copper_scaffolding": "Вощене пошкоджене мідне риштовання",
   "block.copperoverthrow.waxed_weathered_copper_scaffolding": "Вощене покрите патиною мідне риштовання",
   "block.copperoverthrow.waxed_oxidized_copper_scaffolding": "Вощене окиснене мідне риштовання",
+
   "block.copperoverthrow.log_stripper": "Станція обтесування колод",
   "block.copperoverthrow.exposed_log_stripper": "Пошкоджена станція обтесування колод",
   "block.copperoverthrow.weathered_log_stripper": "Покрита патиною станція обтесування колод",
@@ -99,9 +101,10 @@
   "tooltip.copperoverthrow.when_placed.tooltip": "§7При розміщенні:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7При використанні на блоці:§r",
   "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7При використанні на бджолі:§r",
-  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Знімає кору з колод зверху за допомогою§r §6Сокири§r",
+  "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Знімає кору з колод зверху за допомогою§r §6Сокири§r\n§e Розпилює дошки на сходи та плити за допомогою§r §6Ножівки§r",
   "tooltip.copperoverthrow.copper_chisel_item.tooltip": "§e Застосовує випадковий рецепт§r §6Каменяра§r §eдо обраного блоку§r",
   "tooltip.copperoverthrow.bee_catcher_item.tooltip": "§e Ловить§r §6Бджолу§r §eвсередину ловця§r",
+  "tooltip.copperoverthrow.copper_handsaw_item.tooltip": "§e Зпилює ціле§r §6дерево§r §eпри використанні на колоді§r",
   "tooltip.copperoverthrow.bee_catcher_free_item.tooltip": "§6 Звільняє§r §eусіх збережених бджіл§r",
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Затисніть §eShift§r §7для детальнішої інформації§r",
   "tooltip.copperoverthrow.trowel_item.tooltip": "§e Розміщує випадковий блок із§r §6Панелі швидкого доступу§r",
@@ -136,6 +139,9 @@
   "copperoverthrow.config.tam_tam_full_moon_volume": "Радіус гучності там-тама під час повного місяця",
   "copperoverthrow.config.tam_tam_full_moon_chance": "Шанс звучання там-тама під час повного місяця",
   "copperoverthrow.config.kitchen_bell_volume": "Радіус гучності настільного дзвінка",
+  "copperoverthrow.config.jamming": "Заклинювання",
+  "copperoverthrow.config.handsaw_use": "Тривалість використання пили",
+  "copperoverthrow.config.handsaw_max": "Максимум знищуваних блоків пилою",
 
   "sounds.copperoverthrow.tamtam_play": "Там-там грає",
   "sounds.copperoverthrow.raindrum_play": "Барабан дощу грає",
