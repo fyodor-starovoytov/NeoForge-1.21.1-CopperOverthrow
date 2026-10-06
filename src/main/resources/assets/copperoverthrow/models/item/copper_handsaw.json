@@ -16,5 +16,13 @@
     "fixed": {
       "parent": "copperoverthrow:item/copper_handsaw_2d"
     }
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "copperoverthrow:using_saw": 1
+      },
+      "model": "copperoverthrow:item/copper_handsaw_3d_hidden"
+    }
+  ]
 }

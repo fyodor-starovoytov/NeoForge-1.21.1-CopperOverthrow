@@ -150,10 +150,10 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
                     while (remaining > 0) {
                         int dropCount = Math.min(remaining, maxStack);
                         ItemStack dropStack = resultStack.copyWithCount(dropCount);
-
                         Block.popResource(level, pos.above(), dropStack);
-
                         remaining -= dropCount;
+
+                        level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
                     }
                 }
             } else {
@@ -165,7 +165,6 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
                 level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(particleState));
             }
 
-            level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
             return ItemInteractionResult.SUCCESS;
         }
 
@@ -173,12 +172,14 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         if (logStripperBlockEntity.isEmpty() && !stack.isEmpty() && stack.getItem() instanceof BlockItem) {
             logStripperBlockEntity.setItem(0, stack.copy());
             stack.setCount(0);
-            level.playSound(null, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0f, 2.0f);
+
+            level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 2.0f);
+
             return ItemInteractionResult.SUCCESS;
         }
 
         // REMOVE ITEM FROM STRIPPER
-        if ((!isBlockStrippable(stack) || !isBlockPlank(stack) && player.getInventory().getFreeSlot() != -1)) {
+        if ((player.getInventory().getFreeSlot() != -1)) {
             if (!logStripperBlockEntity.isEmpty()) {
                 ItemStack stackInside = logStripperBlockEntity.getItem(0);
 
@@ -188,7 +189,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
                 logStripperBlockEntity.clearContent();
 
-                level.playSound(null, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0f, 1.0f);
+                level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
             return ItemInteractionResult.SUCCESS;
         }
@@ -201,8 +202,8 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         ResourceLocation plankId = BuiltInRegistries.ITEM.getKey(stack.getItem());
         String path = plankId.getPath();
         String resultPath = null;
-        if (path.contains("_log")) {
-            resultPath = path.replace("stripped_", "").replace("_log", "_planks");
+        if (path.contains("_log") || path.contains("_stem")) {
+            resultPath = path.replace("stripped_", "").replace("_log", "_planks").replace("_stem", "_planks");
             count = count * 4;
         } else if (path.contains("_wood")) {
             resultPath = path.replace("stripped_", "").replace("_wood", "_planks");
@@ -211,6 +212,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
             resultPath = path.replace("_planks", "_stairs");
         } else if (path.contains("_stairs")) {
             resultPath = path.replace("_stairs", "_slab");
+            count = count * 2;
         }
 
         if (resultPath != null) {
@@ -226,7 +228,6 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
     }
 
     public ItemStack getStrippedBlock(ItemStack stack) {
-
         if (stack.getItem() instanceof BlockItem blockItem) {
             int count = stack.getCount();
 
@@ -234,22 +235,50 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
             Holder<Block> blockHolder = state.getBlockHolder();
             Strippable strippableData = blockHolder.getData(NeoForgeDataMaps.STRIPPABLES);
 
-            return new ItemStack(strippableData.strippedBlock().asItem()).copyWithCount(count);
+            if (strippableData != null) {
+                return new ItemStack(strippableData.strippedBlock().asItem(), count);
+            }
+
+            ResourceLocation plankId = BuiltInRegistries.ITEM.getKey(stack.getItem());
+            String path = plankId.getPath();
+
+            if (path.contains("_log") && !path.startsWith("stripped_")) {
+                ResourceLocation blockId = ResourceLocation.fromNamespaceAndPath(
+                        plankId.getNamespace(),
+                        "stripped_" + path
+                );
+                Item resultBlock = BuiltInRegistries.ITEM.get(blockId);
+
+                if (resultBlock != Items.AIR) {
+                    return new ItemStack(resultBlock, count);
+                }
+            }
         }
+
         return stack;
     }
 
     public boolean isBlockStrippable(ItemStack stack) {
-
         if (stack.getItem() instanceof BlockItem blockItem) {
-
             BlockState state = blockItem.getBlock().defaultBlockState();
-
             Holder<Block> blockHolder = state.getBlockHolder();
             Strippable strippableData = blockHolder.getData(NeoForgeDataMaps.STRIPPABLES);
 
-            return strippableData != null;
+            if (strippableData != null) {
+                return true;
+            }
+
+            ResourceLocation plankId = BuiltInRegistries.ITEM.getKey(stack.getItem());
+            String path = plankId.getPath();
+            if (path.contains("_log")) {
+                ResourceLocation blockId = ResourceLocation.fromNamespaceAndPath(
+                        plankId.getNamespace(),
+                        "stripped_" + path
+                );
+                return BuiltInRegistries.ITEM.get(blockId) != Items.AIR;
+            }
         }
+
         return false;
     }
 

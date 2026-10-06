@@ -2,6 +2,7 @@ package net.star.copperoverthrow.util;
 
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.item.ModItems;
@@ -20,6 +21,11 @@ public class ModItemProperties {
 
         ItemProperties.register(ModItems.BEE_CATCHER.get(), ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "3bees"),
                 (stack, level, entity, seed) -> stack.getOrDefault(ModDataComponents.CAUGHT_BEES, List.of()).size() == 3 ? 1f : 0f);
+
+
+        ItemProperties.register(ModItems.COPPER_HANDSAW.get(), ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "using_saw"),
+                (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1f : 0f);
+
     }
 
 }
