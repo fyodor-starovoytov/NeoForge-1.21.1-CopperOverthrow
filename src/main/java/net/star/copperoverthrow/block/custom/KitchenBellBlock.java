@@ -124,6 +124,24 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
         super.onExplosionHit(state, level, pos, explosion, dropConsumer);
     }
 
+    @Override
+    protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+        if (!level.isClientSide) {
+            BlockPos pos = hit.getBlockPos();
+            if (projectile.mayInteract(level, pos)
+                    && projectile.mayBreak(level)
+                    && projectile.getDeltaMovement().length() > 0.3) {
+                float finalVolume = 0.2f * (float) projectile.getDeltaMovement().length();
+                level.playSound(null,
+                        pos,
+                        PRESS_SOUND.get(),
+                        SoundSource.RECORDS,
+                        finalVolume,
+                        1);
+            }
+        }
+    }
+
     private void press(BlockState state, Level level, BlockPos pos, @Nullable Player player) {
         level.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(true)), 3);
         this.updateNeighbours(state, level, pos);
