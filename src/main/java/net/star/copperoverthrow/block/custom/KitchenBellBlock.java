@@ -130,7 +130,10 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
             BlockPos pos = hit.getBlockPos();
             if (projectile.mayInteract(level, pos)
                     && projectile.mayBreak(level)
-                    && projectile.getDeltaMovement().length() > 0.3) {
+                    && projectile.getDeltaMovement().length() > 0.3
+                    && level.getBlockEntity(pos) instanceof KitchenBellBlockEntity blockEntity
+            ) {
+                blockEntity.startSwing(hit.getDirection());
                 float finalVolume = 0.2f * (float) projectile.getDeltaMovement().length();
                 level.playSound(null,
                         pos,
