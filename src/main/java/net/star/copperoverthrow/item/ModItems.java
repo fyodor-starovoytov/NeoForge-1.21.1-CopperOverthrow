@@ -1,13 +1,11 @@
 package net.star.copperoverthrow.item;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.PickaxeItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -56,7 +54,7 @@ public class ModItems {
                     .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 6f, -3.6f))));
 
     public static final DeferredItem<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
-            () -> new HandsawItem(new Properties().durability(727).stacksTo(1)));
+            () -> new HandsawItem(new Properties().durability(727).stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
 
 
     public static void register(IEventBus eventBus) {
