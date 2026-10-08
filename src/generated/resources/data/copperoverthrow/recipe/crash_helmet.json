@@ -6,15 +6,12 @@
       "tag": "c:ingots/copper"
     },
     "B": {
-      "item": "minecraft:honeycomb"
-    },
-    "C": {
-      "tag": "c:dyes/yellow"
+      "tag": "c:storage_blocks/copper"
     }
   },
   "pattern": [
-    "CAC",
-    "ABA"
+    "BAB",
+    "A A"
   ],
   "result": {
     "count": 1,
