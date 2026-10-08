@@ -6,6 +6,7 @@ import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.ModCreativeModeTabs;
 import net.star.copperoverthrow.item.ModItems;
+import net.star.copperoverthrow.item.equipment.ModAttributes;
 import net.star.copperoverthrow.sound.ModSounds;
 import org.slf4j.Logger;
 
@@ -53,6 +54,7 @@ public class CopperOverthrow {
         ModSounds.SOUND_EVENTS.register(modEventBus);
         ModDataComponents.register(modEventBus);
 
+        ModAttributes.register(modEventBus);
         ModEffects.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);

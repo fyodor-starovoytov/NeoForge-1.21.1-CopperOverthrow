@@ -2,6 +2,7 @@
   "creativetab.copperoverthrow.copperoverthrow_blocks": "Copper Overthrow Blocks",
   "creativetab.copperoverthrow.copperoverthrow_items": "Copper Overthrow Items",
 
+  "item.copperoverthrow.crash_helmet": "Crash Helmet",
   "item.copperoverthrow.copper_nugget": "Copper Nugget",
   "item.copperoverthrow.copper_chisel": "Copper Chisel",
   "item.copperoverthrow.copper_trowel": "Copper Trowel",
@@ -94,15 +95,12 @@
   "block.copperoverthrow.waxed_weathered_kitchen_bell": "Waxed Weathered Desk Bell",
   "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Waxed Oxidized Desk Bell",
 
-
   "effect.copperoverthrow.conductivity": "Conductivity",
-
-
 
   "enchantment.copperoverthrow.areal": "Areal",
   "enchantment.copperoverthrow.tunneling": "Tunneling",
 
-
+  "copperoverthrow.attribute.head_impact_resistance": "Head Impact Resistance",
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7When placed:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7When used on a Block:§r",
@@ -170,6 +168,7 @@
   "copperoverthrow.config.jamming": "Jamming",
   "copperoverthrow.config.handsaw_use": "Handsaw Use Duration",
   "copperoverthrow.config.handsaw_max": "Handsaw Max Destroyed Blocks",
+  "copperoverthrow.config.crash_helmet_head_impact_resistance": "Crash Helmet Head Impact Resistance",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-Tam Plays",
   "sounds.copperoverthrow.raindrum_play": "Rain Drum Plays",

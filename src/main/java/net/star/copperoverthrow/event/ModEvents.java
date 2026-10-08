@@ -4,6 +4,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -33,6 +35,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import net.neoforged.neoforge.registries.datamaps.builtin.Waxable;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
 import net.star.copperoverthrow.block.custom.TamTamBlock;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
@@ -40,6 +43,7 @@ import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.item.custom.CopperTrowelItem;
 import net.star.copperoverthrow.item.custom.HammerItem;
 import net.star.copperoverthrow.item.custom.HandsawItem;
+import net.star.copperoverthrow.item.equipment.ModAttributes;
 
 import javax.swing.event.TreeExpansionEvent;
 import java.util.HashSet;
@@ -202,23 +206,30 @@ if (Screen.hasShiftDown()){return;}
 
     @SubscribeEvent
     public static void onHeadHit(LivingDamageEvent.Pre event) {
-        if (event.getEntity() instanceof LivingEntity victim
-                && victim.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.CRASH_HELMET.get())) {
+        if (event.getEntity() instanceof LivingEntity victim) {
 
-            float originalDamage = event.getOriginalDamage();
-            Vec3 sourcePos = event.getSource().getSourcePosition();
-            float deductible = 1.0F;
+            ItemStack headStack = victim.getItemBySlot(EquipmentSlot.HEAD);
 
-            boolean isFallingDamage = event.getSource().is(DamageTypes.FALLING_ANVIL)
-                    || event.getSource().is(DamageTypes.FALLING_STALACTITE);
+            if (headStack.is(ModItems.CRASH_HELMET)) {
 
-            boolean isMaceSmashFromAbove = sourcePos != null
-                    && event.getSource().getWeaponItem() != null
-                    && event.getSource().getWeaponItem().is(Items.MACE)
-                    && sourcePos.y() >= victim.getY() + 1.5;
+                float originalDamage = event.getOriginalDamage();
+                Vec3 sourcePos = event.getSource().getSourcePosition();
+                double deductible = ServerConfig.CRASH_HELMET_HEAD_IMPACT_RESISTANCE.get();
 
-            if (isFallingDamage || isMaceSmashFromAbove) {
-                event.setNewDamage(originalDamage * (1.0F - deductible));
+                boolean isFallingBlockDamage = event.getSource().is(DamageTypes.FALLING_ANVIL)
+                        || event.getSource().is(DamageTypes.FALLING_STALACTITE)
+                        || event.getSource().is(DamageTypes.FALLING_BLOCK);
+
+                boolean isElytraCrash = event.getSource().is(DamageTypes.FLY_INTO_WALL);
+
+                boolean isMaceSmashFromAbove = sourcePos != null
+                        && event.getSource().getWeaponItem() != null
+                        && event.getSource().getWeaponItem().is(Items.MACE)
+                        && sourcePos.y() >= victim.getY() + 1.5;
+
+                if (isFallingBlockDamage || isMaceSmashFromAbove || isElytraCrash) {
+                    event.setNewDamage((float) (originalDamage * (1.0F - deductible)));
+                }
             }
         }
     }

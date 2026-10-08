@@ -12,6 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.custom.*;
+import net.star.copperoverthrow.item.equipment.CrashHelmetArmorItem;
 import net.star.copperoverthrow.item.equipment.ModArmorMaterials;
 import net.star.copperoverthrow.item.equipment.StepperBootsArmorItem;
 import net.star.copperoverthrow.item.equipment.StepperLeggingsArmorItem;
@@ -50,8 +51,8 @@ public class ModItems {
                     new Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
 
     public static final DeferredItem<ArmorItem> CRASH_HELMET = ITEMS.register("crash_helmet",
-            () -> new ArmorItem(ModArmorMaterials.CRASH_HELMET, ArmorItem.Type.HELMET,
-                    new Properties().durability(ArmorItem.Type.HELMET.getDurability(22))));
+            () -> new CrashHelmetArmorItem(ModArmorMaterials.CRASH_HELMET, ArmorItem.Type.HELMET,
+                    new Properties().durability(ArmorItem.Type.HELMET.getDurability(25))));
 
     public static final DeferredItem<HammerItem> COPPER_HAMMER = ITEMS.register("copper_hammer",
             () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
