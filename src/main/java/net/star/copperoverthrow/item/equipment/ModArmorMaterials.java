@@ -25,6 +25,11 @@ public class ModArmorMaterials {
                 attribute.put(ArmorItem.Type.BOOTS, 1);
             }), 12, 0f, 0f, () -> Items.COPPER_INGOT);
 
+    public static final Holder<ArmorMaterial> CRASH_HELMET = register("crash",
+            Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
+                attribute.put(ArmorItem.Type.HELMET, 3);
+            }), 7, 3f, 0f, () -> Items.COPPER_INGOT);
+
 
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> typeProtection,
                                                   int enchantability, float toughness, float knockbackResistance,

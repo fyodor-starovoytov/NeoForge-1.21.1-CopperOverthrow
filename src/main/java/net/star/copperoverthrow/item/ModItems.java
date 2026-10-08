@@ -51,6 +51,10 @@ public class ModItems {
             () -> new StepperBootsArmorItem(ModArmorMaterials.STEPPER_ARMOR, ArmorItem.Type.BOOTS,
                     new Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
 
+    public static final DeferredItem<ArmorItem> CRASH_HELMET = ITEMS.register("crash_helmet",
+            () -> new ArmorItem(ModArmorMaterials.CRASH_HELMET, ArmorItem.Type.HELMET,
+                    new Properties().durability(ArmorItem.Type.HELMET.getDurability(22))));
+
     public static final DeferredItem<HammerItem> COPPER_HAMMER = ITEMS.register("copper_hammer",
             () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
                     .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 6f, -3.6f))));

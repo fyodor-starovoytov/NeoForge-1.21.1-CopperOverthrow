@@ -8,7 +8,13 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -17,9 +23,11 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
@@ -28,6 +36,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
 import net.star.copperoverthrow.block.custom.TamTamBlock;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
+import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.item.custom.CopperTrowelItem;
 import net.star.copperoverthrow.item.custom.HammerItem;
 import net.star.copperoverthrow.item.custom.HandsawItem;
@@ -187,6 +196,29 @@ if (Screen.hasShiftDown()){return;}
                     event.setCanceled(true);
                     event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide).result());
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onHeadHit(LivingDamageEvent.Pre event) {
+        if (event.getEntity() instanceof LivingEntity victim
+                && victim.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.CRASH_HELMET.get())) {
+
+            float originalDamage = event.getOriginalDamage();
+            Vec3 sourcePos = event.getSource().getSourcePosition();
+            float deductible = 1.0F;
+
+            boolean isFallingDamage = event.getSource().is(DamageTypes.FALLING_ANVIL)
+                    || event.getSource().is(DamageTypes.FALLING_STALACTITE);
+
+            boolean isMaceSmashFromAbove = sourcePos != null
+                    && event.getSource().getWeaponItem() != null
+                    && event.getSource().getWeaponItem().is(Items.MACE)
+                    && sourcePos.y() >= victim.getY() + 1.5;
+
+            if (isFallingDamage || isMaceSmashFromAbove) {
+                event.setNewDamage(originalDamage * (1.0F - deductible));
             }
         }
     }
