@@ -211,6 +211,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.COOKIE)
                 .unlockedBy("has_cookie", has(Items.COOKIE)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CRASH_HELMET.get(), 1)
+                .pattern("CAC")
+                .pattern("ABA")
+                .define('A', Tags.Items.INGOTS_COPPER)
+                .define('B', Items.HONEYCOMB)
+                .define('C', Tags.Items.DYES_YELLOW)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_STEPPER_BOOTS.get(), 1)
                 .pattern("A A")
                 .pattern("A A")

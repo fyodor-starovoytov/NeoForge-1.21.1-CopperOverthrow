@@ -127,7 +127,7 @@
   "rewards": {
     "experience": 300,
     "recipes": [
-      "copperoverthrow:recipe_id"
+      "copperoverthrow:experience"
     ]
   },
   "sends_telemetry_event": true

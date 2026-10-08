@@ -151,6 +151,8 @@
   "advancements.copperoverthrow.musical.description": "Collect all Copper Musical Instruments",
   "advancements.copperoverthrow.orchestra.title": "Orchestra",
   "advancements.copperoverthrow.orchestra.description": "§r§dI said §lALL§r§d Copper Musical Instruments",
+  "advancements.copperoverthrow.crash_helmet.title": "BONK",
+  "advancements.copperoverthrow.crash_helmet.description": "Obtain Crash Helmet",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notes When Playing",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Whether Rain Drums emit particles when playing a note.\n§7Default: True§r",

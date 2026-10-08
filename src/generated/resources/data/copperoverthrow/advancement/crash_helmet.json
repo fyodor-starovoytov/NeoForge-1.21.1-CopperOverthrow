@@ -1,0 +1,33 @@
+{
+  "parent": "copperoverthrow:copper_scaffolding",
+  "criteria": {
+    "has_crash": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:crash_helmet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.crash_helmet.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:crash_helmet"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.crash_helmet.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_crash"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

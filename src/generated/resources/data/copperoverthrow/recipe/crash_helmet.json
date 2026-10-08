@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/copper"
+    },
+    "B": {
+      "item": "minecraft:honeycomb"
+    },
+    "C": {
+      "tag": "c:dyes/yellow"
+    }
+  },
+  "pattern": [
+    "CAC",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "copperoverthrow:crash_helmet"
+  }
+}

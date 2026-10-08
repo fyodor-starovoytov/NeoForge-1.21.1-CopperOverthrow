@@ -1,13 +1,13 @@
 package net.star.copperoverthrow.datagen;
 
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.*;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.star.copperoverthrow.CopperOverthrow;
@@ -15,6 +15,7 @@ import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModTags;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class ModAdvancementSubProvider implements AdvancementProvider.AdvancementGenerator {
@@ -125,6 +126,22 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
                 )
                 .addCriterion("has_stepper", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_STEPPER_BOOTS.get(), ModItems.COPPER_STEPPER_LEGGINGS.get()))
                 .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_set"), existingFileHelper);
+
+        AdvancementHolder crashHelmet = Advancement.Builder.advancement()
+                .parent(copperScaffolding)
+                .display(
+                        ModItems.CRASH_HELMET.get(),
+                        Component.translatable("advancements.copperoverthrow.crash_helmet.title"),
+                        Component.translatable("advancements.copperoverthrow.crash_helmet.description"),
+                        null,
+                        AdvancementType.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .addCriterion("has_crash", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CRASH_HELMET.get()))
+                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "crash_helmet"), existingFileHelper);
+
 
         AdvancementHolder copperHammer = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
