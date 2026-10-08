@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -36,7 +37,7 @@ import net.star.copperoverthrow.sound.ModSounds;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HandsawItem extends Item {
+public class HandsawItem extends ShearsItem {
     public static final int ANIMATION_DURATION = 5;
     public HandsawItem(Properties properties) {
         super(properties);
@@ -61,9 +62,9 @@ public class HandsawItem extends Item {
 
         if (player != null && clickedBlock.getBlock() instanceof Block && clickedBlock.is(BlockTags.LOGS)) {
             player.startUsingItem(context.getHand());
+            context.getPlayer().swing(context.getHand(), false);
         }
 
-        context.getPlayer().swing(context.getHand(), false);
         return InteractionResult.CONSUME;
     }
 
@@ -204,6 +205,16 @@ public class HandsawItem extends Item {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, net.minecraft.world.InteractionHand hand) {
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public boolean canPerformAction(ItemStack stack, net.neoforged.neoforge.common.ItemAbility itemAbility) {
+        return false;
     }
 
 }
