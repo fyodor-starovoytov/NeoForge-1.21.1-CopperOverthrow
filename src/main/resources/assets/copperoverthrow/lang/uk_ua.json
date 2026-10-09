@@ -2,6 +2,7 @@
   "creativetab.copperoverthrow.copperoverthrow_blocks": "Блоки Copper Overthrow",
   "creativetab.copperoverthrow.copperoverthrow_items": "Предмети Copper Overthrow",
 
+  "item.copperoverthrow.crash_helmet": "Будівельна каска",
   "item.copperoverthrow.copper_nugget": "Мідний самородок",
   "item.copperoverthrow.copper_chisel": "Мідне долото",
   "item.copperoverthrow.copper_trowel": "Мідна кельма",
@@ -98,6 +99,8 @@
   "enchantment.copperoverthrow.areal": "Площинність",
   "enchantment.copperoverthrow.tunneling": "Тунелювання",
 
+  "copperoverthrow.attribute.head_impact_resistance": "Опір ударам по голові",
+
   "tooltip.copperoverthrow.when_placed.tooltip": "§7При розміщенні:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7При використанні на блоці:§r",
   "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7При використанні на бджолі:§r",
@@ -146,6 +149,8 @@
   "advancements.copperoverthrow.musical.description": "Збери всі мідні музичні інструменти",
   "advancements.copperoverthrow.orchestra.title": "Оркестр",
   "advancements.copperoverthrow.orchestra.description": "§r§dЯ сказав: §lУСІ§r§d мідні інструменти!",
+  "advancements.copperoverthrow.crash_helmet.title": "BONK",
+  "advancements.copperoverthrow.crash_helmet.description": "Отримай будівельну каску",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Ноти під час гри",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Чи випромінюють барабани дощу частинки під час програвання ноти.\n§7За замовчуванням: ІСТИНА§r",
@@ -163,6 +168,7 @@
   "copperoverthrow.config.jamming": "Заклинювання",
   "copperoverthrow.config.handsaw_use": "Тривалість використання пили",
   "copperoverthrow.config.handsaw_max": "Максимум знищуваних блоків пилою",
+  "copperoverthrow.config.crash_helmet_head_impact_resistance": "Опір ударам по голові будівельної каски",
 
   "sounds.copperoverthrow.tamtam_play": "Там-там грає",
   "sounds.copperoverthrow.raindrum_play": "Барабан дощу грає",

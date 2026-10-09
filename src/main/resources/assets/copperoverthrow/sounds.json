@@ -166,5 +166,11 @@
       "copperoverthrow:handsaw_sound",
       "copperoverthrow:handsaw_sound1"
     ]
+  },
+  "crash_helmet_bonk": {
+    "subtitle": "sounds.copperoverthrow.crash_helmet_bonk",
+    "sounds": [
+      "copperoverthrow:crash_helmet_bonk"
+    ]
   }
 }

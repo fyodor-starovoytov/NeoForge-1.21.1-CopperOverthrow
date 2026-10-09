@@ -1,11 +1,13 @@
 package net.star.copperoverthrow.event;
 
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -33,6 +35,7 @@ import net.star.copperoverthrow.block.custom.TamTamBlock;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.item.custom.HammerItem;
+import net.star.copperoverthrow.sound.ModSounds;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -217,6 +220,12 @@ if (Screen.hasShiftDown()){return;}
 
                 if (isFallingBlockDamage || isMaceSmashFromAbove || isElytraCrash) {
                     event.setNewDamage((float) (originalDamage * (1.0F - deductible)));
+                    if (isMaceSmashFromAbove){
+                        Level level = victim.level();
+                        if (!level.isClientSide){
+                            level.playSound(null, victim.getOnPos(), ModSounds.CRASH_HELMET_BONK.get(), SoundSource.PLAYERS);
+                        }
+                    }
                 }
             }
         }

@@ -2,6 +2,7 @@
   "creativetab.copperoverthrow.copperoverthrow_blocks": "Copper Overthrow -kuutiot",
   "creativetab.copperoverthrow.copperoverthrow_items": "Copper Overthrow -esineet",
 
+  "item.copperoverthrow.crash_helmet": "Suojakypärä",
   "item.copperoverthrow.copper_nugget": "Kuparihippu",
   "item.copperoverthrow.copper_chisel": "Kuparitaltta",
   "item.copperoverthrow.copper_trowel": "Kuparikauha",
@@ -98,6 +99,8 @@
   "enchantment.copperoverthrow.areal": "Alueellinen",
   "enchantment.copperoverthrow.tunneling": "Tunnelointi",
 
+  "copperoverthrow.attribute.head_impact_resistance": "Pään iskunkestävyys",
+
   "tooltip.copperoverthrow.when_placed.tooltip": "§7Asetettaessa:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7Käytettäessä kuutioon:§r",
   "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7Käytettäessä mehiläiseen:§r",
@@ -146,6 +149,8 @@
   "advancements.copperoverthrow.musical.description": "Kerää kaikki kuparisoittimet",
   "advancements.copperoverthrow.orchestra.title": "Orkesteri",
   "advancements.copperoverthrow.orchestra.description": "§r§dSanoinko jo: §lKAIKKI§r§d kuparisoittimet",
+  "advancements.copperoverthrow.crash_helmet.title": "BONK",
+  "advancements.copperoverthrow.crash_helmet.description": "Hanki suojakypärä",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Nuotit soittaessa",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Päästävätkö saderummut hiukkasia nuottia soitettaessa.\n§7Oletus: Tosi§r",
@@ -163,6 +168,7 @@
   "copperoverthrow.config.jamming": "Jumiutuminen",
   "copperoverthrow.config.handsaw_use": "Kuparisahan käyttöaika",
   "copperoverthrow.config.handsaw_max": "Kuparisahan rikkomien kuutioiden enimmäismäärä",
+  "copperoverthrow.config.crash_helmet_head_impact_resistance": "Suojakypärän pään iskunkestävyys",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-tam soi",
   "sounds.copperoverthrow.raindrum_play": "Saderumpu soi",

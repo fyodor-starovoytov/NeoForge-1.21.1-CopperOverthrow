@@ -2,6 +2,7 @@
   "creativetab.copperoverthrow.copperoverthrow_blocks": "Bloques de Copper Overthrow",
   "creativetab.copperoverthrow.copperoverthrow_items": "Objetos de Copper Overthrow",
 
+  "item.copperoverthrow.crash_helmet": "Casco de obra",
   "item.copperoverthrow.copper_nugget": "Pepita de cobre",
   "item.copperoverthrow.copper_chisel": "Cincel de cobre",
   "item.copperoverthrow.copper_trowel": "Palustre de cobre",
@@ -98,6 +99,8 @@
   "enchantment.copperoverthrow.areal": "Área",
   "enchantment.copperoverthrow.tunneling": "Tunelización",
 
+  "copperoverthrow.attribute.head_impact_resistance": "Resistencia a impactos en la cabeza",
+
   "tooltip.copperoverthrow.when_placed.tooltip": "§7Al colocar:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7Al usar en un bloque:§r",
   "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7Al usar en una abeja:§r",
@@ -146,6 +149,8 @@
   "advancements.copperoverthrow.musical.description": "Junta todos los instrumentos de cobre",
   "advancements.copperoverthrow.orchestra.title": "Gran Orquesta",
   "advancements.copperoverthrow.orchestra.description": "§r§dDije §lTODOS§r§d los instrumentos de cobre",
+  "advancements.copperoverthrow.crash_helmet.title": "¡PUM!",
+  "advancements.copperoverthrow.crash_helmet.description": "Consigue un casco de obra",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notas al tocar",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Determina si los tambores de lluvia emiten partículas al tocar una nota.\n§7Por defecto: Verdadero§r",
@@ -163,6 +168,7 @@
   "copperoverthrow.config.jamming": "Atasco",
   "copperoverthrow.config.handsaw_use": "Duración de uso del serrucho",
   "copperoverthrow.config.handsaw_max": "Máximo de bloques destruidos por el serrucho",
+  "copperoverthrow.config.crash_helmet_head_impact_resistance": "Resistencia a impactos en la cabeza del casco de obra",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-tam suena",
   "sounds.copperoverthrow.raindrum_play": "Tambor de lluvia suena",
