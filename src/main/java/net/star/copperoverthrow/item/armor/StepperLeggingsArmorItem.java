@@ -1,4 +1,4 @@
-package net.star.copperoverthrow.item.equipment;
+package net.star.copperoverthrow.item.armor;
 
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;

@@ -1,13 +1,9 @@
-package net.star.copperoverthrow.item.equipment;
+package net.star.copperoverthrow.item;
 
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.PercentageAttribute;
 import net.neoforged.neoforge.registries.DeferredRegister;

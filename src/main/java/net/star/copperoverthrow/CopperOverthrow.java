@@ -6,7 +6,7 @@ import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.ModCreativeModeTabs;
 import net.star.copperoverthrow.item.ModItems;
-import net.star.copperoverthrow.item.equipment.ModAttributes;
+import net.star.copperoverthrow.item.ModAttributes;
 import net.star.copperoverthrow.sound.ModSounds;
 import org.slf4j.Logger;
 

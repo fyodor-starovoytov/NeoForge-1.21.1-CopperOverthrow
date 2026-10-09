@@ -12,10 +12,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.custom.*;
-import net.star.copperoverthrow.item.equipment.CrashHelmetArmorItem;
-import net.star.copperoverthrow.item.equipment.ModArmorMaterials;
-import net.star.copperoverthrow.item.equipment.StepperBootsArmorItem;
-import net.star.copperoverthrow.item.equipment.StepperLeggingsArmorItem;
+import net.star.copperoverthrow.item.armor.CrashHelmetArmorItem;
+import net.star.copperoverthrow.item.armor.ModArmorMaterials;
+import net.star.copperoverthrow.item.armor.StepperBootsArmorItem;
+import net.star.copperoverthrow.item.armor.StepperLeggingsArmorItem;
 
 public class ModItems {
 
