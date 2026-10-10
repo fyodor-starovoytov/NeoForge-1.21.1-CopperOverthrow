@@ -40,7 +40,7 @@ public class CrashHelmetArmorItem extends AbstractExtendedArmorItem {
                 .withModifierAdded(
                 ModAttributes.HEAD_IMPACT_RESISTANCE,
                 new AttributeModifier(
-                        ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "crash_helmet_head_impact_resistance"),
+                        ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "head_impact_resistance"),
                         ServerConfig.CRASH_HELMET_HEAD_IMPACT_RESISTANCE.get(),
                         AttributeModifier.Operation.ADD_VALUE
                 ),

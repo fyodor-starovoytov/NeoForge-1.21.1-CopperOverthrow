@@ -6,12 +6,14 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -38,6 +40,7 @@ import net.star.copperoverthrow.item.custom.HammerItem;
 import net.star.copperoverthrow.sound.ModSounds;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @EventBusSubscriber(modid = CopperOverthrow.MOD_ID)
@@ -93,33 +96,7 @@ if (Screen.hasShiftDown()){return;}
         return event.getLevel().getBlockState(pos).is(Tags.Blocks.ORES);
 
     }
-/*
-    @SubscribeEvent
-    public static void onHandSawUsage(BlockEvent.BreakEvent event) {
 
-        Player player = event.getPlayer();
-        ItemStack mainHandItem = player.getMainHandItem();
-
-        if(mainHandItem.getItem() instanceof HandsawItem handSaw && player instanceof ServerPlayer serverPlayer) {
-
-            BlockPos initialBlockPos = event.getPos();
-            if(HARVESTED_BLOCKS.contains(initialBlockPos)) {
-                return;
-            }
-
-            for(BlockPos pos : HandsawItem.getBlocksToBeDestroyed(initialBlockPos, serverPlayer, (Level) event.getLevel())) {
-
-                if(pos == initialBlockPos || !handSaw.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos))) {
-                    continue;
-                }
-
-                HARVESTED_BLOCKS.add(pos);
-                serverPlayer.gameMode.destroyBlock(pos);
-                HARVESTED_BLOCKS.remove(pos);
-            }
-        }
-    }
-*/
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
             Level level = event.getLevel();
@@ -200,30 +177,31 @@ if (Screen.hasShiftDown()){return;}
         if (event.getEntity() instanceof LivingEntity victim) {
 
             ItemStack headStack = victim.getItemBySlot(EquipmentSlot.HEAD);
+            for (var entry : headStack.getAttributeModifiers().modifiers()) {
+                if (entry.modifier().is(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "head_impact_resistance"))) {
 
-            if (headStack.is(ModItems.CRASH_HELMET)) {
+                    float originalDamage = event.getOriginalDamage();
+                    Vec3 sourcePos = event.getSource().getSourcePosition();
+                    double deductible = entry.modifier().amount();
 
-                float originalDamage = event.getOriginalDamage();
-                Vec3 sourcePos = event.getSource().getSourcePosition();
-                double deductible = ServerConfig.CRASH_HELMET_HEAD_IMPACT_RESISTANCE.get();
+                    boolean isFallingBlockDamage = event.getSource().is(DamageTypes.FALLING_ANVIL)
+                            || event.getSource().is(DamageTypes.FALLING_STALACTITE)
+                            || event.getSource().is(DamageTypes.FALLING_BLOCK);
 
-                boolean isFallingBlockDamage = event.getSource().is(DamageTypes.FALLING_ANVIL)
-                        || event.getSource().is(DamageTypes.FALLING_STALACTITE)
-                        || event.getSource().is(DamageTypes.FALLING_BLOCK);
+                    boolean isElytraCrash = event.getSource().is(DamageTypes.FLY_INTO_WALL);
 
-                boolean isElytraCrash = event.getSource().is(DamageTypes.FLY_INTO_WALL);
+                    boolean isMaceSmashFromAbove = sourcePos != null
+                            && event.getSource().getWeaponItem() != null
+                            && event.getSource().getWeaponItem().is(Items.MACE)
+                            && sourcePos.y() >= victim.getY() + 1.11;
 
-                boolean isMaceSmashFromAbove = sourcePos != null
-                        && event.getSource().getWeaponItem() != null
-                        && event.getSource().getWeaponItem().is(Items.MACE)
-                        && sourcePos.y() >= victim.getY() + 1.5;
-
-                if (isFallingBlockDamage || isMaceSmashFromAbove || isElytraCrash) {
-                    event.setNewDamage((float) (originalDamage * (1.0F - deductible)));
-                    if (isMaceSmashFromAbove){
-                        Level level = victim.level();
-                        if (!level.isClientSide){
-                            level.playSound(null, victim.getOnPos(), ModSounds.CRASH_HELMET_BONK.get(), SoundSource.PLAYERS);
+                    if (isFallingBlockDamage || isMaceSmashFromAbove || isElytraCrash) {
+                        event.setNewDamage((float) (originalDamage * (1.0F - deductible)));
+                        if (isMaceSmashFromAbove){
+                            Level level = victim.level();
+                            if (!level.isClientSide){
+                                level.playSound(null, victim.getOnPos(), ModSounds.CRASH_HELMET_BONK.get(), SoundSource.PLAYERS);
+                            }
                         }
                     }
                 }
