@@ -27,8 +27,8 @@ public class ModArmorMaterials {
 
     public static final Holder<ArmorMaterial> CRASH_HELMET = register("crash",
             Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
-                attribute.put(ArmorItem.Type.HELMET, 3);
-            }), 7, 3f, 0f, () -> Items.COPPER_INGOT);
+                attribute.put(ArmorItem.Type.HELMET, 2);
+            }), 7, 2f, 0f, () -> Items.COPPER_INGOT);
 
 
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> typeProtection,
