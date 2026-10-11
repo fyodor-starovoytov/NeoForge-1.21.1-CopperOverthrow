@@ -82,18 +82,18 @@ public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockE
     private void rotateTubes(float time, float idleSpeed, float idleDegree){
         this.tube2.xRot = -Mth.sin(time * idleSpeed - 0.28f*3) * idleDegree / 1.24f;
         this.tube2.zRot = -Mth.cos(time * idleSpeed + 0.12f*3) * idleDegree / 1.12f;
-        this.tube2.yRot = -Mth.sin(time * idleSpeed) * idleDegree;
+        this.tube2.yRot = -Mth.sin(time * idleSpeed) * idleDegree * 1.25f ;
 
         this.tube6.xRot = -Mth.sin(time * idleSpeed) * idleDegree / 1.14f;
         this.tube6.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.21f ;
-        this.tube6.yRot = Mth.cos(time * idleSpeed) * idleDegree;
+        this.tube6.yRot = Mth.cos(time * idleSpeed) * idleDegree * 1.4f;
 
         this.tube7.xRot = -Mth.sin(time * idleSpeed) * idleDegree / 1.25f;
         this.tube7.zRot = -Mth.cos(time * idleSpeed - 0.22f*3) * idleDegree / 1.12f;
-        this.tube7.yRot = Mth.sin(time * idleSpeed) * idleDegree;
+        this.tube7.yRot = Mth.sin(time * idleSpeed) * idleDegree* 1.8f;
 
         this.tube4.xRot = -Mth.sin(time * idleSpeed + 0.17f*3) * idleDegree / 1.17f;
         this.tube4.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.22f;
-        this.tube4.yRot = -Mth.cos(time * idleSpeed) * idleDegree;
+        this.tube4.yRot = -Mth.cos(time * idleSpeed) * idleDegree * 1.6f;
     }
 }
