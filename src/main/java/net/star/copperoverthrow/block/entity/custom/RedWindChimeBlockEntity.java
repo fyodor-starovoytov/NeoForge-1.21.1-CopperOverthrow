@@ -11,14 +11,14 @@ public class RedWindChimeBlockEntity extends BlockEntity {
 
     public int ticks;
     public boolean swinging;
-    public Direction clickDirection = Direction.NORTH;
+    public Direction movementDirection = Direction.NORTH;
 
     public RedWindChimeBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.WIND_CHIME_BE.get(), pos, state);
     }
 
     public void startSwing(Direction direction) {
-        this.clickDirection = direction;
+        this.movementDirection = direction;
         this.ticks = 0;
         this.swinging = true;
 
@@ -30,7 +30,7 @@ public class RedWindChimeBlockEntity extends BlockEntity {
     @Override
     public boolean triggerEvent(int id, int type) {
         if (id == 1) {
-            this.clickDirection = Direction.from3DDataValue(type);
+            this.movementDirection = Direction.from3DDataValue(type);
             this.ticks = 0;
             this.swinging = true;
             return true;

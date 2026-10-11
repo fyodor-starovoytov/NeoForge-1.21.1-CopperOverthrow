@@ -22,7 +22,6 @@ public class RedWindChimeModel<T extends Entity> extends EntityModel<T> {
     private final ModelPart tube7;
     private final ModelPart tube4;
     private final ModelPart cup;
-    private final ModelPart hitbox;
 
     public RedWindChimeModel(ModelPart root) {
         this.root = root.getChild("root");
@@ -32,7 +31,6 @@ public class RedWindChimeModel<T extends Entity> extends EntityModel<T> {
         this.tube7 = this.tubes.getChild("tube7");
         this.tube4 = this.tubes.getChild("tube4");
         this.cup = this.root.getChild("cup");
-        this.hitbox = this.root.getChild("hitbox");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -80,15 +78,7 @@ public class RedWindChimeModel<T extends Entity> extends EntityModel<T> {
 
     @Override
     public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root.getAllParts().forEach(ModelPart::resetPose);
 
-        float idleSpeed = 0.05F;
-        float idleDegree = 0.05F;
-
-        this.root.zRot = Mth.sin(ageInTicks * idleSpeed) * idleDegree;
-        this.root.yRot = Mth.sin(ageInTicks * idleSpeed) * idleDegree;
-        this.cup.yRot = -Mth.cos(ageInTicks * idleSpeed) * idleDegree;
-        this.root.y += Mth.cos(ageInTicks * idleSpeed * 2.0F) * 0.2F;
     }
 
     @Override
