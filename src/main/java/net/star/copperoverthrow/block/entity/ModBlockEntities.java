@@ -6,11 +6,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
-import net.star.copperoverthrow.block.custom.KitchenBellBlock;
-import net.star.copperoverthrow.block.entity.custom.CopperBeeosphereBlockEntity;
-import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
-import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
-import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
+import net.star.copperoverthrow.block.entity.custom.*;
 
 import java.util.function.Supplier;
 
@@ -37,7 +33,7 @@ public class ModBlockEntities {
                             CopperBeeosphereBlockEntity::new, ModBlocks.COPPER_BEEOSPHERE.get())
                     .build(null));
 
-    public static final Supplier<BlockEntityType<TamTamBlockEntity>> SWINGING_BE =
+    public static final Supplier<BlockEntityType<TamTamBlockEntity>> TAMTAM_BE =
             BLOCK_ENTITIES.register("tamtam_be", ()-> BlockEntityType.Builder.of(
                             TamTamBlockEntity::new,
                             ModBlocks.TAMTAM.get(),
@@ -49,6 +45,13 @@ public class ModBlockEntities {
                             ModBlocks.WAXED_WEATHERED_TAMTAM.get(),
                             ModBlocks.WAXED_OXIDIZED_TAMTAM.get())
                     .build(null));
+
+    public static final Supplier<BlockEntityType<RedWindChimeBlockEntity>> WIND_CHIME_BE =
+            BLOCK_ENTITIES.register("wind_chime_be", ()-> BlockEntityType.Builder.of(
+                            RedWindChimeBlockEntity::new,
+                            ModBlocks.RED_WIND_CHIME.get())
+                    .build(null));
+
 
     public static final Supplier<BlockEntityType<KitchenBellBlockEntity>> KITCHEN_BELL_BE =
             BLOCK_ENTITIES.register("kitchen_bell_be", () -> BlockEntityType.Builder.of(

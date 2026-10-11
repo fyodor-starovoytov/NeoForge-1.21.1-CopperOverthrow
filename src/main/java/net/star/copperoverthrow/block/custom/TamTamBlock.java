@@ -359,7 +359,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntities.SWINGING_BE.get(), TamTamBlockEntity::tick);
+        return createTickerHelper(type, ModBlockEntities.TAMTAM_BE.get(), TamTamBlockEntity::tick);
     }
 
     private void playSound(Level level, BlockPos pos, float volume){

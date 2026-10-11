@@ -12,10 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -35,9 +31,11 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.renderer.LogStripperBlockEntityRenderer;
 import net.star.copperoverthrow.client.KitchenBellModel;
+import net.star.copperoverthrow.client.RedWindChimeModel;
 import net.star.copperoverthrow.client.TamTamModel;
 import net.star.copperoverthrow.client.renderer.KitchenBellRenderer;
 import net.star.copperoverthrow.client.renderer.TamTamRenderer;
+import net.star.copperoverthrow.client.renderer.WindChimeRenderer;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -62,14 +60,16 @@ public class CopperOverthrowClient {
     @SubscribeEvent
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.SWINGING_BE.get(), TamTamRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.TAMTAM_BE.get(), TamTamRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.WIND_CHIME_BE.get(), WindChimeRenderer::new);
     }
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(TamTamModel.LAYER_LOCATION, TamTamModel::createBodyLayer);
         event.registerLayerDefinition(KitchenBellModel.LAYER_LOCATION, KitchenBellModel::createBodyLayer);
+        event.registerLayerDefinition(RedWindChimeModel.LAYER_LOCATION, RedWindChimeModel::createBodyLayer);
     }
 
             private static final ResourceLocation OVERLAY_TEXTURE =

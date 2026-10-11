@@ -13,7 +13,7 @@ public class TamTamBlockEntity extends BlockEntity {
     public Direction clickDirection = Direction.NORTH;
 
     public TamTamBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SWINGING_BE.get(), pos, state);
+        super(ModBlockEntities.TAMTAM_BE.get(), pos, state);
     }
 
     public void startSwing(Direction direction) {
