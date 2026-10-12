@@ -74,8 +74,6 @@ public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockE
 
             rotateTubesActive(swingTime, zSign, xSign);
 
-        } else {
-            cancelTubeRotation();
         }
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE));
@@ -101,23 +99,22 @@ public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockE
         this.tube4.yRot = -Mth.cos(time * idleSpeed) * idleDegree * 1.6f;
     }
     private void rotateTubesActive(float time, float zMotion, float xMotion){
-        float swing = (Mth.sin(time - (float) Math.PI) / ((time - (float) Math.PI)*8));
-        float xRotAngle = swing * (xMotion);
-        float zRotAngle = swing * (zMotion);
+        float swing = (Mth.sin(time/3)/(time/2));
+        float xRotAngle = swing * (-zMotion);
+        float zRotAngle = swing * (-xMotion);
 
-        this.tube2.yRot = 0;
+
         this.tube2.xRot = xRotAngle;
         this.tube2.zRot = zRotAngle;
 
-        this.tube4.yRot = 0;
+
         this.tube4.xRot = xRotAngle;
         this.tube4.zRot = zRotAngle;
 
-        this.tube7.yRot = 0;
+
         this.tube7.xRot = xRotAngle;
         this.tube7.zRot = zRotAngle;
 
-        this.tube6.yRot = 0;
         this.tube6.xRot = xRotAngle;
         this.tube6.zRot = zRotAngle;
     }
