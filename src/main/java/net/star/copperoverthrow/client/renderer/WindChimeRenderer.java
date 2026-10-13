@@ -74,7 +74,13 @@ public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockE
             System.out.println(xSign);
             System.out.println(zSign);
 
-            rotateTubesActive(swingTime, zSign, xSign, (float) blockEntity.randomX, (float) blockEntity.randomZ);
+            rotateTubesActive(swingTime, zSign, xSign,
+                    (float) blockEntity.randomX,
+                    (float) blockEntity.randomZ,
+                    (float) blockEntity.randomZ2,
+                    (float) blockEntity.randomX2,
+                    (float) blockEntity.randomZ3,
+                    (float) blockEntity.randomX3);
         }
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE));
@@ -99,7 +105,7 @@ public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockE
         this.tube4.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.22f;
         this.tube4.yRot = -Mth.cos(time * idleSpeed) * idleDegree * 1.6f;
     }
-    private void rotateTubesActive(float time, float zMotion, float xMotion, float rX, float rZ){
+    private void rotateTubesActive(float time, float zMotion, float xMotion, float rX, float rZ, float rX2, float rZ2, float rX3, float rZ3){
         float swing = (1.5f * Mth.sin(time / (1.5f * (float) Math.PI))) / (6.0f + time / 4.0F);
         float xRotAngle = swing * (-zMotion);
         float zRotAngle = swing * (-xMotion);
@@ -113,15 +119,15 @@ public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockE
         this.tube2.zRot = zRotAngle * rZ;
 
 
-        this.tube4.xRot = xRotAngle * rZ;
-        this.tube4.zRot = zRotAngle * rX;
+        this.tube4.xRot = xRotAngle * rX2;
+        this.tube4.zRot = zRotAngle * rZ2;
 
 
-        this.tube7.xRot = xRotAngle * rZ;
-        this.tube7.zRot = zRotAngle * rZ;
+        this.tube7.xRot = xRotAngle * rX3;
+        this.tube7.zRot = zRotAngle * rZ3;
 
-        this.tube6.xRot = xRotAngle * rX;
-        this.tube6.zRot = zRotAngle * rX;
+        this.tube6.xRot = xRotAngle * (rX2 * rX3);
+        this.tube6.zRot = zRotAngle * (rZ2 * rZ3);
     }
 
     private void cancelTubeRotation(){

@@ -6,11 +6,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -30,6 +28,8 @@ import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.BiConsumer;
+
 public class RedWindChimeBlock extends AbstractWindChimeBlock {
 
     public RedWindChimeBlock(Properties properties) {
@@ -45,7 +45,9 @@ public class RedWindChimeBlock extends AbstractWindChimeBlock {
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (level.isClientSide()) return;
 
-        if (level.getBlockEntity(pos) instanceof RedWindChimeBlockEntity blockEntity) {
+        BlockPos targetPos = state.getValue(UPPER) ? pos : pos.above();
+
+        if (level.getBlockEntity(targetPos) instanceof RedWindChimeBlockEntity blockEntity) {
             if (!blockEntity.swinging) {
                 double dx = entity.getX() - entity.xo;
                 double dz = entity.getZ() - entity.zo;
@@ -57,7 +59,21 @@ public class RedWindChimeBlock extends AbstractWindChimeBlock {
             }
         }
     }
-//
+
+    @Override
+    protected void onExplosionHit(BlockState state, Level level, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> dropConsumer) {
+        if (level.isClientSide()) return;
+
+        BlockPos targetPos = state.getValue(UPPER) ? pos : pos.above();
+
+        if (level.getBlockEntity(targetPos) instanceof RedWindChimeBlockEntity blockEntity) {
+            if (!blockEntity.swinging) {
+                    blockEntity.startSwing(explosion.radius()/10, explosion.radius()/10);
+            }
+        }
+    }
+
+    //
 //    @Override
 //    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 //        AABB checkArea = new AABB(pos).inflate(1.0D, 1.0D, 1.0D);

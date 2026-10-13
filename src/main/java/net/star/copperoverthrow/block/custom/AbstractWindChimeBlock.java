@@ -3,15 +3,21 @@ package net.star.copperoverthrow.block.custom;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HangingRootsBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
@@ -19,15 +25,15 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractWindChimeBlock extends BaseEntityBlock {
     public static final MapCodec<RedWindChimeBlock> CODEC = simpleCodec(RedWindChimeBlock::new);
-    protected static final VoxelShape SHAPE = Block.box(4, 4.0, 4.0, 12.0, 16.0, 12.0);
+
+    public static final BooleanProperty UPPER = BooleanProperty.create("upper");
+
+    protected static final VoxelShape TOP_SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 16.0, 12.0);
+    protected static final VoxelShape BOTTOM_SHAPE = Block.box(4.0, 10.0, 4.0, 12.0, 16.0, 12.0);
 
     public AbstractWindChimeBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    protected VoxelShape getShape(BlockState p_153342_, BlockGetter p_153343_, BlockPos p_153344_, CollisionContext p_153345_) {
-        return SHAPE;
+        this.registerDefaultState(this.stateDefinition.any().setValue(UPPER, true));
     }
 
     @Override
@@ -35,25 +41,76 @@ public abstract class AbstractWindChimeBlock extends BaseEntityBlock {
         return CODEC;
     }
 
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return state.getValue(UPPER) ? TOP_SHAPE : BOTTOM_SHAPE;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(UPPER);
+    }
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RedWindChimeBlockEntity(pos, state);
+        return state.getValue(UPPER) ? new RedWindChimeBlockEntity(pos, state) : null;
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockPos blockpos = context.getClickedPos();
+        Level level = context.getLevel();
+
+        if (blockpos.getY() > level.getMinBuildHeight() && level.getBlockState(blockpos.below()).canBeReplaced(context)) {
+            return this.defaultBlockState().setValue(UPPER, true);
+        }
+        return null;
     }
 
     @Override
-    protected boolean canSurvive(BlockState p_153347_, LevelReader p_153348_, BlockPos p_153349_) {
-        BlockPos blockpos = p_153349_.above();
-        BlockState blockstate = p_153348_.getBlockState(blockpos);
-        return blockstate.isFaceSturdy(p_153348_, blockpos, Direction.DOWN);
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+        if (!level.isClientSide()) {
+            BlockPos belowPos = pos.below();
+            level.setBlock(belowPos, state.setValue(UPPER, false), 3);
+            level.blockUpdated(pos, Blocks.AIR);
+        }
     }
 
     @Override
-    protected BlockState updateShape(BlockState p_153351_, Direction p_153352_, BlockState p_153353_, LevelAccessor p_153354_, BlockPos p_153355_, BlockPos p_153356_) {
-        if (p_153352_ == Direction.UP && !this.canSurvive(p_153351_, p_153354_, p_153355_)) {
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        if (state.getValue(UPPER)) {
+            BlockPos abovePos = pos.above();
+            return level.getBlockState(abovePos).isFaceSturdy(level, abovePos, Direction.DOWN);
+        } else {
+            BlockState aboveState = level.getBlockState(pos.above());
+            return aboveState.is(this) && aboveState.getValue(UPPER);
+        }
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (!state.canSurvive(level, currentPos)) {
             return Blocks.AIR.defaultBlockState();
         }
-        return super.updateShape(p_153351_, p_153352_, p_153353_, p_153354_, p_153355_, p_153356_);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide()) {
+            boolean isUpper = state.getValue(UPPER);
+            BlockPos otherPos = isUpper ? pos.below() : pos.above();
+            BlockState otherState = level.getBlockState(otherPos);
+
+            // If the other half matches, destroy it cleanly to avoid drops duplication or ghost blocks
+            if (otherState.is(this)) {
+                level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
+                level.levelEvent(player, 2001, otherPos, Block.getId(otherState));
+            }
+        }
+        super.playerWillDestroy(level, pos, state, player);
+        return state;
+    }
 }

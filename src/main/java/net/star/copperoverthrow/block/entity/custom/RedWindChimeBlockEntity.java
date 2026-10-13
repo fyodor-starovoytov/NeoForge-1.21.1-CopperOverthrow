@@ -21,6 +21,10 @@ public class RedWindChimeBlockEntity extends BlockEntity {
     public double zMotion;
     public double randomX;
     public double randomZ;
+    public double randomX2;
+    public double randomZ2;
+    public double randomX3;
+    public double randomZ3;
 
     public RedWindChimeBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.WIND_CHIME_BE.get(), pos, state);
@@ -33,6 +37,10 @@ public class RedWindChimeBlockEntity extends BlockEntity {
         tag.putDouble("zMotion", zMotion);
         tag.putDouble("randomX", randomX);
         tag.putDouble("randomZ", randomZ);
+        tag.putDouble("randomX2", randomX2);
+        tag.putDouble("randomZ2", randomZ2);
+        tag.putDouble("randomX3", randomX3);
+        tag.putDouble("randomZ3", randomZ3);
         tag.putBoolean("swinging", swinging);
         tag.putInt("ticks", ticks);
     }
@@ -44,6 +52,10 @@ public class RedWindChimeBlockEntity extends BlockEntity {
         zMotion = tag.getDouble("zMotion");
         randomX = tag.getDouble("randomX");
         randomZ = tag.getDouble("randomZ");
+        randomX2 = tag.getDouble("randomX3");
+        randomZ2 = tag.getDouble("randomZ3");
+        randomX3 = tag.getDouble("randomX2");
+        randomZ3 = tag.getDouble("randomZ2");
         swinging = tag.getBoolean("swinging");
         ticks = tag.getInt("ticks");
     }
@@ -66,8 +78,13 @@ public class RedWindChimeBlockEntity extends BlockEntity {
         this.swinging = true;
         this.xMotion = xMotion * 10;
         this.zMotion = zMotion * 10;
-        this.randomX = Math.random() * zMotion * 5;
-        this.randomZ = Math.random() * xMotion * 5;
+        this.randomX = Math.random() + zMotion * 2;
+        this.randomZ = Math.random() + xMotion * 2;
+        this.randomX2 = Math.random() + zMotion * 2;
+        this.randomZ2 = Math.random() + xMotion * 2;
+        this.randomX3 = Math.random() + zMotion * 2;
+        this.randomZ3 = Math.random() + xMotion * 2;
+
 
         if (this.level != null && !this.level.isClientSide) {
             this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
@@ -96,6 +113,10 @@ public class RedWindChimeBlockEntity extends BlockEntity {
             blockEntity.zMotion = 0;
             blockEntity.randomX = 0;
             blockEntity.randomZ = 0;
+            blockEntity.randomX2 = 0;
+            blockEntity.randomZ2 = 0;
+            blockEntity.randomX3 = 0;
+            blockEntity.randomZ3 = 0;
         }
     }
 }
