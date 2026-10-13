@@ -67,5 +67,10 @@ public class ServerConfig {
                 .comment("Whether Desk Bell has a small chance to get jammed. Default: TRUE")
                 .translation("copperoverthrow.config.jamming")
                 .define("jamming", true);
+
+        public static final ModConfigSpec.IntValue WIND_CHIME_MAX_ROTATION = BUILDER
+            .comment("Wind Chimes' maximum rotation in degrees on hit")
+            .translation("copperoverthrow.config.wind_chime_max_rotation")
+            .defineInRange("windChimeMaxRotation", 60, 1, 360);
         public static final ModConfigSpec SPEC = BUILDER.build();
 }

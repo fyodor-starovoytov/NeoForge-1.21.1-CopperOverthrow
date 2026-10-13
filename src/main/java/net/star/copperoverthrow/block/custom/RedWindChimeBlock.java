@@ -51,8 +51,6 @@ public class RedWindChimeBlock extends AbstractWindChimeBlock {
                 double dz = entity.getZ() - entity.zo;
                 boolean entityIsMoving = (dx * dx + dz * dz) > 0.001D;
 
-                System.out.println(dx);
-
                 if (entityIsMoving) {
                     blockEntity.startSwing(dx, dz);
                 }

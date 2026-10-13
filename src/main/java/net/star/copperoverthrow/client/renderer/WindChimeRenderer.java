@@ -7,13 +7,12 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
 import net.star.copperoverthrow.client.RedWindChimeModel;
 
@@ -63,17 +62,19 @@ public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockE
 
         rotateTubesIdle(time, idleSpeed, idleDegree);
 
+
+
         if (blockEntity.swinging) {
             float swingTime = (float) blockEntity.ticks + partialTick;
 
-            System.out.println("Swing Rendered");
-            System.out.println(blockEntity.xMotion);
+            float xSign = Math.max(Math.min((float) blockEntity.xMotion, (float) ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25), (float) -ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25);
+            float zSign = Math.max(Math.min((float) blockEntity.zMotion, (float) ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25), (float) -ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25);
 
-            float xSign = ((float) blockEntity.xMotion);
-            float zSign = ((float) blockEntity.zMotion);
+            System.out.println("Swing rendered");
+            System.out.println(xSign);
+            System.out.println(zSign);
 
-            rotateTubesActive(swingTime, zSign, xSign);
-
+            rotateTubesActive(swingTime, zSign, xSign, (float) blockEntity.randomX, (float) blockEntity.randomZ);
         }
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE));
@@ -98,25 +99,29 @@ public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockE
         this.tube4.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.22f;
         this.tube4.yRot = -Mth.cos(time * idleSpeed) * idleDegree * 1.6f;
     }
-    private void rotateTubesActive(float time, float zMotion, float xMotion){
-        float swing = (Mth.sin(time/3)/(time/2));
+    private void rotateTubesActive(float time, float zMotion, float xMotion, float rX, float rZ){
+        float swing = (1.5f * Mth.sin(time / (1.5f * (float) Math.PI))) / (6.0f + time / 4.0F);
         float xRotAngle = swing * (-zMotion);
         float zRotAngle = swing * (-xMotion);
 
+        this.root.xRot = xRotAngle/2 * rZ;
+        this.root.zRot = zRotAngle/2 * rX;
 
-        this.tube2.xRot = xRotAngle;
-        this.tube2.zRot = zRotAngle;
+        this.cup.y = zRotAngle/2 * rX;
+
+        this.tube2.xRot = xRotAngle * rX;
+        this.tube2.zRot = zRotAngle * rZ;
 
 
-        this.tube4.xRot = xRotAngle;
-        this.tube4.zRot = zRotAngle;
+        this.tube4.xRot = xRotAngle * rZ;
+        this.tube4.zRot = zRotAngle * rX;
 
 
-        this.tube7.xRot = xRotAngle;
-        this.tube7.zRot = zRotAngle;
+        this.tube7.xRot = xRotAngle * rZ;
+        this.tube7.zRot = zRotAngle * rZ;
 
-        this.tube6.xRot = xRotAngle;
-        this.tube6.zRot = zRotAngle;
+        this.tube6.xRot = xRotAngle * rX;
+        this.tube6.zRot = zRotAngle * rX;
     }
 
     private void cancelTubeRotation(){
