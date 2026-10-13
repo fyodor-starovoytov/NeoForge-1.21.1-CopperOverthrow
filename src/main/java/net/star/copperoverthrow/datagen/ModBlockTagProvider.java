@@ -122,6 +122,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(Blocks.JUKEBOX)
                 .addTag(ModTags.Blocks.BELLS)
                 .addTag(ModTags.Blocks.PLATES)
+                .addTag(ModTags.Blocks.WIND_CHIMES)
                 .addTag(ModTags.Blocks.RAIN_DRUMS);
 
         tag(ModTags.Blocks.LIGHTS)
@@ -140,6 +141,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.BELLS)
                 .addTag(ModTags.Blocks.KITCHEN_BELLS)
                 .add(Blocks.BELL);
+
+        tag(ModTags.Blocks.WIND_CHIMES)
+                .add(ModBlocks.RED_WIND_CHIME.get());
 
         tag(ModTags.Blocks.KITCHEN_BELLS)
                 .add(ModBlocks.KITCHEN_BELL.get())

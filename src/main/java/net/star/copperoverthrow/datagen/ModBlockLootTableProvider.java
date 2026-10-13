@@ -112,6 +112,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get());
         dropSelf(ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get());
 
+        dropSelf(ModBlocks.RED_WIND_CHIME.get());
+
     }
 
     @Override

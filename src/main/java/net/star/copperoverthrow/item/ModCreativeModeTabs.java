@@ -50,10 +50,11 @@ public class ModCreativeModeTabs {
 
                     .icon(() -> new ItemStack(ModBlocks.TAMTAM.get()))
 
-                    //Defines the order of the TABS with blocks being after items ONLY IF THERE IS MULTIPLE TABS
                     .withTabsBefore(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copperoverthrow_items_tab"))
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_blocks"))
                     .displayItems((itemDisplayParameters, output) -> {
+
+                        output.accept(ModBlocks.RED_WIND_CHIME);
 
                         output.accept(ModBlocks.LOG_STRIPPER);
                         output.accept(ModBlocks.TINY_RAIN_DRUM);

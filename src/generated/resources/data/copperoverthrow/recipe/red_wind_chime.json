@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/gold"
+    },
+    "B": {
+      "item": "minecraft:gold_nugget"
+    },
+    "C": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "pattern": [
+    "BCB",
+    "AAA",
+    " A "
+  ],
+  "result": {
+    "count": 2,
+    "id": "copperoverthrow:red_wind_chime"
+  }
+}

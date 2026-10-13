@@ -4,6 +4,7 @@
     "minecraft:jukebox",
     "#c:musical_blocks/bells",
     "#c:musical_blocks/plates",
+    "#c:musical_blocks/wind_chimes",
     "#c:musical_blocks/rain_drums"
   ]
 }

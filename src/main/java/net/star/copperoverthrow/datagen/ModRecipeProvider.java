@@ -89,14 +89,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_string", has(Items.STRING))
                 .save(recipeOutput, "copperoverthrow:bee_catcher_alt");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HAMMER.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_HAMMER.get(), 1)
                 .pattern("B")
                 .pattern("C")
                 .define('B', Items.COPPER_BLOCK)
                 .define('C', Tags.Items.RODS_BLAZE)
                 .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD)).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HANDSAW.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_HANDSAW.get(), 1)
                 .pattern("  B")
                 .pattern(" BA")
                 .pattern("CA ")
@@ -106,7 +106,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD)).save(recipeOutput);
 
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HANDSAW.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_HANDSAW.get(), 1)
                 .pattern("B  ")
                 .pattern("AB ")
                 .pattern(" AC")
@@ -116,6 +116,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD))
                 .save(recipeOutput, "copperoverthrow:copper_handsaw_alt");
 
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RED_WIND_CHIME.get(), 2)
+                .pattern("BCB")
+                .pattern("AAA")
+                .pattern(" A ")
+                .define('A', Tags.Items.INGOTS_GOLD)
+                .define('B', Items.GOLD_NUGGET)
+                .define('C', Items.RED_WOOL)
+                .unlockedBy("has_gold", has(Items.GOLD_INGOT)).save(recipeOutput);
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAIN_DRUM.get(), 2)
