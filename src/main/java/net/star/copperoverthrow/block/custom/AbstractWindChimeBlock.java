@@ -18,10 +18,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Collections;
+import java.util.List;
 
 public abstract class AbstractWindChimeBlock extends BaseEntityBlock {
     public static final MapCodec<RedWindChimeBlock> CODEC = simpleCodec(RedWindChimeBlock::new);
@@ -98,19 +102,19 @@ public abstract class AbstractWindChimeBlock extends BaseEntityBlock {
     }
 
     @Override
-    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (!level.isClientSide()) {
-            boolean isUpper = state.getValue(UPPER);
-            BlockPos otherPos = isUpper ? pos.below() : pos.above();
-            BlockState otherState = level.getBlockState(otherPos);
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            if (!level.isClientSide()) {
+                boolean isUpper = state.getValue(UPPER);
+                BlockPos otherPos = isUpper ? pos.below() : pos.above();
+                BlockState otherState = level.getBlockState(otherPos);
 
-            // If the other half matches, destroy it cleanly to avoid drops duplication or ghost blocks
-            if (otherState.is(this)) {
-                level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
-                level.levelEvent(player, 2001, otherPos, Block.getId(otherState));
+                if (otherState.is(this)) {
+                    level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
+                    level.levelEvent(null, 2001, otherPos, Block.getId(otherState));
+                }
             }
         }
-        super.playerWillDestroy(level, pos, state, player);
-        return state;
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 }

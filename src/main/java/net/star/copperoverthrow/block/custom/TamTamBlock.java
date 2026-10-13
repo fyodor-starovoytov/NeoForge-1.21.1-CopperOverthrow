@@ -290,7 +290,9 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
                 playSound(level, pos, finalVolume);
             }
         }
-    }@Override
+    }
+
+    @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         if (state.getValue(PART) != WideThinDoubleBlock.MAIN_TOP) {
             return Collections.emptyList();
