@@ -6,17 +6,22 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.star.copperoverthrow.ClientConfig;
+import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.sound.ModSounds;
 
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class RedWindChimeBlockEntity extends BlockEntity {
 
+    private final Supplier<SoundEvent> CHIME_SOUND = ModSounds.CRASH_HELMET_BONK;
     public int ticks;
     public boolean swinging;
     public double xMotion;
@@ -29,7 +34,7 @@ public class RedWindChimeBlockEntity extends BlockEntity {
     public double randomZ3;
     private int chimesRemaining = 0;
     private int chimeDelayTicks = 0;
-    private double volume = 1;
+    private double volume = 0.5;
 
 
 
@@ -115,17 +120,26 @@ public class RedWindChimeBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, RedWindChimeBlockEntity blockEntity) {
-        if (!level.isClientSide && blockEntity.chimesRemaining > 0) {
-            if (blockEntity.chimeDelayTicks <= 0) {
-                float randomPitch = 0.9f + level.random.nextFloat() * 0.4f;
-                level.playSound(null, pos, ModSounds.WEATHERED_RAIN_DRUM_PLAYING.get(), SoundSource.RECORDS, (float) blockEntity.volume, randomPitch);
 
-                int delay = level.random.nextIntBetweenInclusive(0, 3);
 
-                blockEntity.chimesRemaining--;
-                blockEntity.chimeDelayTicks = delay;
-            } else {
-                blockEntity.chimeDelayTicks--;
+        if (!level.isClientSide) {
+
+            if (Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() || (level.isThundering() && Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() * 4)) {
+                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(1, 5);
+            }
+
+            if (blockEntity.chimesRemaining > 0) {
+                if (blockEntity.chimeDelayTicks <= 0) {
+                    float randomPitch = 0.9f + level.random.nextFloat() * 0.4f;
+                    level.playSound(null, pos, blockEntity.CHIME_SOUND.get(), SoundSource.RECORDS, (float) blockEntity.volume, randomPitch);
+
+                    int delay = level.random.nextIntBetweenInclusive(0, 3);
+
+                    blockEntity.chimesRemaining--;
+                    blockEntity.chimeDelayTicks = delay;
+                } else {
+                    blockEntity.chimeDelayTicks--;
+                }
             }
         }
 

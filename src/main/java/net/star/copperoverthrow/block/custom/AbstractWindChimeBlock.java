@@ -132,18 +132,4 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
             }}
         super.onRemove(state, level, pos, newState, isMoving);
     }
-
-    public void idlePlayChimeSound(Level level, BlockPos pos){
-        double chancePerTick = ClientConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get();
-
-        float randomPitch = 0.8f + level.random.nextFloat() * 0.4f;
-
-        if (level.isThundering()){
-            if (Math.random() < chancePerTick * 4){
-                level.playLocalSound(pos, CHIME_SOUND.get(), SoundSource.RECORDS, 1, randomPitch, false);
-            }
-        } else if (Math.random() < chancePerTick) {
-            level.playLocalSound(pos, CHIME_SOUND.get(), SoundSource.RECORDS, 1, randomPitch, false);
-        }
-    }
 }

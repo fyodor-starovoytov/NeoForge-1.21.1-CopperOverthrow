@@ -72,5 +72,10 @@ public class ServerConfig {
             .comment("Wind Chimes' maximum rotation in degrees on hit")
             .translation("copperoverthrow.config.wind_chime_max_rotation")
             .defineInRange("windChimeMaxRotation", 60, 1, 360);
+        public static final ModConfigSpec.DoubleValue WIND_CHIME_IDLE_SOUND_CHANCE = BUILDER
+                .comment("Wind Chimes' probability to play idle sound")
+                .translation("copperoverthrow.config.wind_chime_idle_sound_chance")
+                .defineInRange("windChimeIdleSoundChance", 0.002, 0.0, 1.0);
+
         public static final ModConfigSpec SPEC = BUILDER.build();
 }
