@@ -17,7 +17,7 @@ import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
 import net.star.copperoverthrow.client.RedWindChimeModel;
 
 @OnlyIn(Dist.CLIENT)
-public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockEntity> {
+public class RedWindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockEntity> {
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/red_wind_chime.png");
 
@@ -27,7 +27,7 @@ public class WindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockE
     private final ModelPart tube6;
     private final ModelPart tube7;
     private final ModelPart tube4;
-    public WindChimeRenderer(BlockEntityRendererProvider.Context context) {
+    public RedWindChimeRenderer(BlockEntityRendererProvider.Context context) {
         ModelPart bakedRoot = context.bakeLayer(RedWindChimeModel.LAYER_LOCATION);
         this.root = bakedRoot.getChild("root");
         this.cup = this.root.getChild("cup");

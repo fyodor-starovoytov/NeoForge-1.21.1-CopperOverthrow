@@ -46,7 +46,7 @@ public class ModBlockEntities {
                             ModBlocks.WAXED_OXIDIZED_TAMTAM.get())
                     .build(null));
 
-    public static final Supplier<BlockEntityType<RedWindChimeBlockEntity>> WIND_CHIME_BE =
+    public static final Supplier<BlockEntityType<RedWindChimeBlockEntity>> RED_WIND_CHIME_BE =
             BLOCK_ENTITIES.register("wind_chime_be", ()-> BlockEntityType.Builder.of(
                             RedWindChimeBlockEntity::new,
                             ModBlocks.RED_WIND_CHIME.get())

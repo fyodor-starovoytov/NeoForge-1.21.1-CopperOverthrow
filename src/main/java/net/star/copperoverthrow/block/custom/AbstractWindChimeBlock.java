@@ -25,6 +25,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.ClientConfig;
 import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,7 +68,12 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        if (state.is(ModBlocks.RED_WIND_CHIME)){
         return state.getValue(UPPER) ? new RedWindChimeBlockEntity(pos, state) : null;
+        }
+        if (state.is(ModBlocks.LUNAR_WIND_CHIME)){
+            return state.getValue(UPPER) ? new (pos, state) : null;
+        }
     }
 
     @Nullable

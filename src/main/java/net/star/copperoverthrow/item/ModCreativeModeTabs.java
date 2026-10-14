@@ -54,8 +54,6 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_blocks"))
                     .displayItems((itemDisplayParameters, output) -> {
 
-                        output.accept(ModBlocks.RED_WIND_CHIME);
-
                         output.accept(ModBlocks.LOG_STRIPPER);
                         output.accept(ModBlocks.TINY_RAIN_DRUM);
                         output.accept(ModBlocks.RAIN_DRUM);
@@ -136,6 +134,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN);
                         output.accept(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN);
 
+                        output.accept(ModBlocks.RED_WIND_CHIME);
+                        output.accept(ModBlocks.LUNAR_WIND_CHIME);
                     }).build());
 
     public static void register(IEventBus eventBus) {

@@ -35,7 +35,7 @@ import net.star.copperoverthrow.client.RedWindChimeModel;
 import net.star.copperoverthrow.client.TamTamModel;
 import net.star.copperoverthrow.client.renderer.KitchenBellRenderer;
 import net.star.copperoverthrow.client.renderer.TamTamRenderer;
-import net.star.copperoverthrow.client.renderer.WindChimeRenderer;
+import net.star.copperoverthrow.client.renderer.RedWindChimeRenderer;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -62,7 +62,7 @@ public class CopperOverthrowClient {
         event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.TAMTAM_BE.get(), TamTamRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.WIND_CHIME_BE.get(), WindChimeRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.RED_WIND_CHIME_BE.get(), RedWindChimeRenderer::new);
     }
 
     @SubscribeEvent

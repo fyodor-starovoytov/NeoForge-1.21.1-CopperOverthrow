@@ -33,7 +33,20 @@ public class ModBlocks {
                             .noOcclusion()
                             .instabreak()
                             .noTerrainParticles(),
-                    ModSounds.WEATHERED_RAIN_DRUM_PLAYING));
+                    ModSounds.CRASH_HELMET_BONK));
+
+    public static final DeferredBlock<Block> LUNAR_WIND_CHIME = registerBlock("lunar_wind_chime",
+            () -> new AbstractWindChimeBlock(
+                    BlockBehaviour
+                            .Properties.of()
+                            .strength(0.5f)
+                            .isValidSpawn(Blocks::never)
+                            .noCollission()
+                            .noOcclusion()
+                            .instabreak()
+                            .noTerrainParticles(),
+                    ModSounds.TAM_TAM_PLAYING_MOON));
+
 
     public static final DeferredBlock<Block> LOG_STRIPPER = registerBlock("log_stripper",
             () -> new LogStripperBlock(

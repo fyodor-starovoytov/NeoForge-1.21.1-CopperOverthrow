@@ -11,7 +11,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.star.copperoverthrow.ClientConfig;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.sound.ModSounds;
@@ -39,7 +38,7 @@ public class RedWindChimeBlockEntity extends BlockEntity {
 
 
     public RedWindChimeBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.WIND_CHIME_BE.get(), pos, state);
+        super(ModBlockEntities.RED_WIND_CHIME_BE.get(), pos, state);
     }
 
     @Override

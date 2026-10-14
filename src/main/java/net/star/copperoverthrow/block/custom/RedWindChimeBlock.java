@@ -29,7 +29,7 @@ public class RedWindChimeBlock extends AbstractWindChimeBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.WIND_CHIME_BE.get(), RedWindChimeBlockEntity::tick);
+        return createTickerHelper(blockEntityType, ModBlockEntities.RED_WIND_CHIME_BE.get(), RedWindChimeBlockEntity::tick);
     }
 
     @Override
