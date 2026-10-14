@@ -6,10 +6,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
+import net.star.copperoverthrow.sound.ModSounds;
 
 import javax.annotation.Nullable;
 
@@ -25,6 +27,11 @@ public class RedWindChimeBlockEntity extends BlockEntity {
     public double randomZ2;
     public double randomX3;
     public double randomZ3;
+    private int chimesRemaining = 0;
+    private int chimeDelayTicks = 0;
+    private double volume = 1;
+
+
 
     public RedWindChimeBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.WIND_CHIME_BE.get(), pos, state);
@@ -91,6 +98,12 @@ public class RedWindChimeBlockEntity extends BlockEntity {
         }
     }
 
+    public void triggerChimeSequence(int chimesCount, double volume) {
+        this.chimesRemaining = chimesCount;
+        this.chimeDelayTicks = 0;
+        this.volume = volume;
+    }
+
     @Override
     public boolean triggerEvent(int id, int type) {
         if (id == 1) {
@@ -102,11 +115,25 @@ public class RedWindChimeBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, RedWindChimeBlockEntity blockEntity) {
+        if (!level.isClientSide && blockEntity.chimesRemaining > 0) {
+            if (blockEntity.chimeDelayTicks <= 0) {
+                float randomPitch = 0.9f + level.random.nextFloat() * 0.4f;
+                level.playSound(null, pos, ModSounds.WEATHERED_RAIN_DRUM_PLAYING.get(), SoundSource.RECORDS, (float) blockEntity.volume, randomPitch);
+
+                int delay = level.random.nextIntBetweenInclusive(0, 3);
+
+                blockEntity.chimesRemaining--;
+                blockEntity.chimeDelayTicks = delay;
+            } else {
+                blockEntity.chimeDelayTicks--;
+            }
+        }
+
         if (blockEntity.swinging) {
             blockEntity.ticks++;
         }
 
-        if (blockEntity.ticks >= 148) { //Duration in Ticks
+        if (blockEntity.ticks >= 148) { // Duration in Ticks
             blockEntity.swinging = false;
             blockEntity.ticks = 0;
             blockEntity.xMotion = 0;

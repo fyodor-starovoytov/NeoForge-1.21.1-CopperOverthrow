@@ -1,5 +1,6 @@
 package net.star.copperoverthrow.block;
 
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -31,7 +32,8 @@ public class ModBlocks {
                             .noCollission()
                             .noOcclusion()
                             .instabreak()
-                            .noTerrainParticles()));
+                            .noTerrainParticles(),
+                    ModSounds.WEATHERED_RAIN_DRUM_PLAYING));
 
     public static final DeferredBlock<Block> LOG_STRIPPER = registerBlock("log_stripper",
             () -> new LogStripperBlock(
