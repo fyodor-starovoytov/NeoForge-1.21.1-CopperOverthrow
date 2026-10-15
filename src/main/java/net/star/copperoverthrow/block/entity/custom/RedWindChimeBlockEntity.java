@@ -124,7 +124,7 @@ public class RedWindChimeBlockEntity extends BlockEntity {
         if (!level.isClientSide) {
 
             if (Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() || (level.isThundering() && Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() * 4)) {
-                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(1, 5);
+                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(1, 6);
             }
 
             if (blockEntity.chimesRemaining > 0) {

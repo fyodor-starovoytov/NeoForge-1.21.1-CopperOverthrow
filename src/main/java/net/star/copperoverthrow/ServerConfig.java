@@ -75,7 +75,7 @@ public class ServerConfig {
         public static final ModConfigSpec.DoubleValue WIND_CHIME_IDLE_SOUND_CHANCE = BUILDER
                 .comment("Wind Chimes' probability to play idle sound")
                 .translation("copperoverthrow.config.wind_chime_idle_sound_chance")
-                .defineInRange("windChimeIdleSoundChance", 0.002, 0.0, 1.0);
+                .defineInRange("windChimeIdleSoundChance", 0.004, 0.0, 1.0);
 
         public static final ModConfigSpec SPEC = BUILDER.build();
 }
