@@ -68,12 +68,7 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        if (state.is(ModBlocks.RED_WIND_CHIME)){
         return state.getValue(UPPER) ? new RedWindChimeBlockEntity(pos, state) : null;
-        }
-        if (state.is(ModBlocks.LUNAR_WIND_CHIME)){
-            return state.getValue(UPPER) ? new (pos, state) : null;
-        }
     }
 
     @Nullable
