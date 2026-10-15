@@ -94,6 +94,8 @@
   "block.copperoverthrow.waxed_weathered_kitchen_bell": "Вощений покритий патиною настільний дзвінок",
   "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Вощений окиснений настільний дзвінок",
 
+  "block.copperoverthrow.red_wind_chime": "Червоний вітряний дзвіночок",
+
   "effect.copperoverthrow.conductivity": "Провідність",
 
   "enchantment.copperoverthrow.areal": "Площинність",
@@ -165,6 +167,9 @@
   "copperoverthrow.config.tam_tam_full_moon_volume": "Радіус гучності там-тама під час повного місяця",
   "copperoverthrow.config.tam_tam_full_moon_chance": "Шанс звучання там-тама під час повного місяця",
   "copperoverthrow.config.kitchen_bell_volume": "Радіус гучності настільного дзвінка",
+  "copperoverthrow.config.wind_chime_max_rotation": "Максимальний поворот вітряних дзвіночків у градусах при ударі",
+  "copperoverthrow.config.wind_chime_idle_sound_chance": "Ймовірність відтворення фонового звуку вітряними дзвіночками",
+  "copperoverthrow.config.wind_chime_idle_range": "Дальність перевірки вітряних дзвіночків, щоб визначити, чи простір достатньо відкритий для відтворення фонових звуків, потребує проходження для оновлення",
   "copperoverthrow.config.jamming": "Заклинювання",
   "copperoverthrow.config.handsaw_use": "Тривалість використання пили",
   "copperoverthrow.config.handsaw_max": "Максимум знищуваних блоків пилою",
@@ -172,5 +177,6 @@
 
   "sounds.copperoverthrow.tamtam_play": "Там-там грає",
   "sounds.copperoverthrow.raindrum_play": "Барабан дощу грає",
-  "sounds.copperoverthrow.kitchen_bell_play": "Настільний дзвінок грає"
+  "sounds.copperoverthrow.kitchen_bell_play": "Настільний дзвінок грає",
+  "sounds.copperoverthrow.wind_chime_play": "Вітряний дзвіночок дзвенить"
 }

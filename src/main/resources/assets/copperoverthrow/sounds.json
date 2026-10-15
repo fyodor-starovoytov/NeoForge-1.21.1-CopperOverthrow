@@ -172,5 +172,14 @@
     "sounds": [
       "copperoverthrow:crash_helmet_bonk"
     ]
+  },
+  "red_chime": {
+    "subtitle": "sounds.copperoverthrow.wind_chime_play",
+    "sounds": [
+      "copperoverthrow:red_chime0",
+      "copperoverthrow:red_chime2"
+    ]
   }
+
+
 }

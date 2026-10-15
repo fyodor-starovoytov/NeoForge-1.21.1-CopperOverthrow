@@ -94,6 +94,8 @@
   "block.copperoverthrow.waxed_weathered_kitchen_bell": "Timbre de mesa desgastado encerado",
   "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Timbre de mesa oxidado encerado",
 
+  "block.copperoverthrow.red_wind_chime": "Campanilla de viento roja",
+
   "effect.copperoverthrow.conductivity": "Conductividad",
 
   "enchantment.copperoverthrow.areal": "Área",
@@ -165,6 +167,9 @@
   "copperoverthrow.config.tam_tam_full_moon_volume": "Radio de volumen del tam-tam en luna llena",
   "copperoverthrow.config.tam_tam_full_moon_chance": "Probabilidad de sonido del tam-tam en luna llena",
   "copperoverthrow.config.kitchen_bell_volume": "Radio de volumen del timbre de mesa",
+  "copperoverthrow.config.wind_chime_max_rotation": "Rotación máxima de las campanillas de viento en grados al golpear",
+  "copperoverthrow.config.wind_chime_idle_sound_chance": "Probabilidad de las campanillas de viento de reproducir un sonido inactivo",
+  "copperoverthrow.config.wind_chime_idle_range": "Rango de comprobación de las campanillas de viento para ver si el espacio está lo suficientemente abierto para reproducir sonidos inactivos, requiere ser recorrido para actualizarse",
   "copperoverthrow.config.jamming": "Atasco",
   "copperoverthrow.config.handsaw_use": "Duración de uso del serrucho",
   "copperoverthrow.config.handsaw_max": "Máximo de bloques destruidos por el serrucho",
@@ -172,5 +177,6 @@
 
   "sounds.copperoverthrow.tamtam_play": "Tam-tam suena",
   "sounds.copperoverthrow.raindrum_play": "Tambor de lluvia suena",
-  "sounds.copperoverthrow.kitchen_bell_play": "Timbre de mesa suena"
+  "sounds.copperoverthrow.kitchen_bell_play": "Timbre de mesa suena",
+  "sounds.copperoverthrow.wind_chime_play": "Campanilla de viento suena"
 }

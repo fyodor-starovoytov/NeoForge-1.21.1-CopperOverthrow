@@ -95,6 +95,9 @@
   "block.copperoverthrow.waxed_weathered_kitchen_bell": "Waxed Weathered Desk Bell",
   "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Waxed Oxidized Desk Bell",
 
+
+  "block.copperoverthrow.red_wind_chime": "Red Wind Chime",
+
   "effect.copperoverthrow.conductivity": "Conductivity",
 
   "enchantment.copperoverthrow.areal": "Areal",
@@ -171,8 +174,14 @@
   "copperoverthrow.config.handsaw_use": "Handsaw Use Duration",
   "copperoverthrow.config.handsaw_max": "Handsaw Max Destroyed Blocks",
   "copperoverthrow.config.crash_helmet_head_impact_resistance": "Crash Helmet Head Impact Resistance",
+  "copperoverthrow.config.wind_chime_max_rotation": "Wind Chimes' maximum rotation in degrees on hit",
+  "copperoverthrow.config.wind_chime_idle_sound_chance": "Wind Chimes' probability to play idle sound",
+  "copperoverthrow.config.wind_chime_idle_range": "Wind Chimes' check range to see if the chime is open enough to play idle sounds, needs to be walk through to be updated",
 
   "sounds.copperoverthrow.tamtam_play": "Tam-Tam Plays",
   "sounds.copperoverthrow.raindrum_play": "Rain Drum Plays",
-  "sounds.copperoverthrow.kitchen_bell_play": "Kitchen Bell Plays"
+  "sounds.copperoverthrow.kitchen_bell_play": "Kitchen Bell Plays",
+  "sounds.copperoverthrow.wind_chime_play": "Wind Chime Chimes",
+  "sounds.copperoverthrow.handsaw_use": "Hand Saw Being Used",
+  "sounds.copperoverthrow.crash_helmet_bonk": "BONK!"
 }
