@@ -14,6 +14,7 @@ public class ModSounds {
 
         public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
                 DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, CopperOverthrow.MOD_ID);
+        public static final Supplier<SoundEvent> RED_CHIME = registerSoundEvent("red_chime");
 
         public static final Supplier<SoundEvent> RAIN_DRUM_RAINING = registerSoundEvent("raindrumb1");
         public static final Supplier<SoundEvent> WEATHERED_RAIN_DRUM_RAINING = registerSoundEvent("weathered_rain_drum");

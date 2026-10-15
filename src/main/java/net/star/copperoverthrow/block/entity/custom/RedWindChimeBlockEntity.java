@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 public class RedWindChimeBlockEntity extends BlockEntity {
 
-    private final Supplier<SoundEvent> CHIME_SOUND = ModSounds.CRASH_HELMET_BONK;
+    private final Supplier<SoundEvent> CHIME_SOUND = ModSounds.RED_CHIME;
     public int ticks;
     public boolean swinging;
     public double xMotion;
@@ -33,7 +33,8 @@ public class RedWindChimeBlockEntity extends BlockEntity {
     public double randomZ3;
     private int chimesRemaining = 0;
     private int chimeDelayTicks = 0;
-    private double volume = 0.5;
+    private double volume = 0.2;
+    private boolean willDoIdleSounds = true;
 
 
 
@@ -84,6 +85,10 @@ public class RedWindChimeBlockEntity extends BlockEntity {
         return tag;
     }
 
+    public void onOpenAir(boolean isOnOpenAir){
+        this.willDoIdleSounds = isOnOpenAir;
+    }
+
     public void startSwing(double xMotion, double zMotion) {
         this.ticks = 0;
         this.swinging = true;
@@ -123,16 +128,18 @@ public class RedWindChimeBlockEntity extends BlockEntity {
 
         if (!level.isClientSide) {
 
-            if (Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() || (level.isThundering() && Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() * 4)) {
-                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(1, 6);
+            if (blockEntity.willDoIdleSounds &&
+                    (Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get()
+                            || (level.isThundering() && Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() * 2))) {
+                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(3, 7);
             }
 
             if (blockEntity.chimesRemaining > 0) {
                 if (blockEntity.chimeDelayTicks <= 0) {
-                    float randomPitch = 0.9f + level.random.nextFloat() * 0.4f;
+                    float randomPitch = 0.6f + level.random.nextFloat() * 0.2f;
                     level.playSound(null, pos, blockEntity.CHIME_SOUND.get(), SoundSource.RECORDS, (float) blockEntity.volume, randomPitch);
 
-                    int delay = level.random.nextIntBetweenInclusive(0, 3);
+                    int delay = level.random.nextIntBetweenInclusive(0, 4);
 
                     blockEntity.chimesRemaining--;
                     blockEntity.chimeDelayTicks = delay;
@@ -157,6 +164,7 @@ public class RedWindChimeBlockEntity extends BlockEntity {
             blockEntity.randomZ2 = 0;
             blockEntity.randomX3 = 0;
             blockEntity.randomZ3 = 0;
+            blockEntity.volume = 0.2;
         }
     }
 }

@@ -33,7 +33,7 @@ public class ModBlocks {
                             .noOcclusion()
                             .instabreak()
                             .noTerrainParticles(),
-                    ModSounds.CRASH_HELMET_BONK));
+                    ModSounds.RED_CHIME));
 
     public static final DeferredBlock<Block> LUNAR_WIND_CHIME = registerBlock("lunar_wind_chime",
             () -> new Block(
