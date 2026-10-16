@@ -67,8 +67,8 @@ public class RedWindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlo
         if (blockEntity.swinging) {
             float swingTime = (float) blockEntity.ticks + partialTick;
 
-            float xSign = Math.max(Math.min((float) blockEntity.xMotion, (float) ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25), (float) -ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25);
-            float zSign = Math.max(Math.min((float) blockEntity.zMotion, (float) ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25), (float) -ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25);
+            float xSign = Math.max(Math.min((float) blockEntity.xMotion, (float) Math.toRadians(ServerConfig.WIND_CHIME_MAX_ROTATION.get())), (float) -Math.toRadians(ServerConfig.WIND_CHIME_MAX_ROTATION.get()));
+            float zSign = Math.max(Math.min((float) blockEntity.zMotion, (float) Math.toRadians(ServerConfig.WIND_CHIME_MAX_ROTATION.get())), (float) -Math.toRadians(ServerConfig.WIND_CHIME_MAX_ROTATION.get()));
 
             rotateTubesActive(swingTime, zSign, xSign,
                     (float) blockEntity.randomX,
