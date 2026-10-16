@@ -179,7 +179,12 @@
       "copperoverthrow:red_chime0",
       "copperoverthrow:red_chime2"
     ]
+  },
+  "lunar_chime": {
+    "subtitle": "sounds.copperoverthrow.wind_chime_play",
+    "sounds": [
+      "copperoverthrow:lunar_chime0"
+    ]
   }
-
 
 }

@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 
 public class LunarWindChimeBlockEntity extends BlockEntity {
 
-    private final Supplier<SoundEvent> CHIME_SOUND = ModSounds.TAM_TAM_PLAYING_MOON;
+    private final Supplier<SoundEvent> CHIME_SOUND = ModSounds.LUNAR_CHIME;
     public int ticks;
     public boolean swinging;
     public double xMotion;

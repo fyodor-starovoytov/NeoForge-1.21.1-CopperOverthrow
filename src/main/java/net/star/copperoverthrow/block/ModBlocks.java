@@ -45,7 +45,7 @@ public class ModBlocks {
                             .noOcclusion()
                             .instabreak()
                             .noTerrainParticles(),
-                    ModSounds.TAM_TAM_PLAYING_MOON));
+                    ModSounds.LUNAR_CHIME));
 
 
     public static final DeferredBlock<Block> LOG_STRIPPER = registerBlock("log_stripper",

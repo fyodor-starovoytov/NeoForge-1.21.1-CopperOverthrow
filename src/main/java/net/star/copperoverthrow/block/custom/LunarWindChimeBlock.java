@@ -56,10 +56,10 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
                 double dz = entity.getZ() - entity.zo;
                 boolean entityIsMoving = (dx * dx + dz * dz) > 0.001D;
 
-                double volume = (Math.abs(dx) + Math.abs(dz)) * 30;
+                double volume = (Math.abs(dx) + Math.abs(dz)) * 10;
 
                 if (entityIsMoving) {
-                    int chimeCount = level.random.nextInt(3, 6);
+                    int chimeCount = level.random.nextInt(2, 4);
                     blockEntity.triggerChimeSequence(chimeCount, volume);
                     blockEntity.startSwing(dx, dz);
                 }
@@ -79,7 +79,7 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
             if (!blockEntity.swinging) {
                 blockEntity.startSwing(explosion.radius()/10, explosion.radius()/10);
                 int chimeCount = level.random.nextInt(3, 6);
-                blockEntity.triggerChimeSequence(chimeCount, explosion.radius()/3);
+                blockEntity.triggerChimeSequence(chimeCount, explosion.radius()/4);
             }
 
             blockEntity.onOpenAir(!isBlockObstructed(pos, level));
