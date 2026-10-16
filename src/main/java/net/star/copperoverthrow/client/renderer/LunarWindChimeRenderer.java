@@ -64,8 +64,6 @@ public class LunarWindChimeRenderer implements BlockEntityRenderer<LunarWindChim
 
         rotateTubesIdle(time, idleSpeed, idleDegree);
 
-
-
         if (blockEntity.swinging) {
             float swingTime = (float) blockEntity.ticks + partialTick;
 
@@ -109,27 +107,18 @@ public class LunarWindChimeRenderer implements BlockEntityRenderer<LunarWindChim
     }
     private void rotateTubesActive(float time, float zMotion, float xMotion, float rX, float rZ, float rX2, float rZ2, float rX3, float rZ3){
         float swing = (1.5f * Mth.sin(time / (1.5f * (float) Math.PI))) / (6.0f + time / 4.0F);
-        float xRotAngle = swing * (-zMotion);
-        float zRotAngle = swing * (-xMotion);
+        float xRotAngle = swing * (-zMotion + -xMotion);
 
-        this.root.xRot = xRotAngle/2 * rZ;
-        this.root.zRot = zRotAngle/2 * rX;
+        this.root.xRot = xRotAngle/12 * rZ;
 
-        this.tube2.xRot = xRotAngle * rX;
-        this.tube2.zRot = zRotAngle * rZ;
+        this.tube2.xRot = xRotAngle * (rX*rZ);
 
+        this.tube4.xRot = xRotAngle * (rX2*rZ2);
 
-        this.tube4.xRot = xRotAngle * rX2;
-        this.tube4.zRot = zRotAngle * rZ2;
+        this.tube7.xRot = xRotAngle * (rX3*rZ3);
 
-
-        this.tube7.xRot = xRotAngle * rX3;
-        this.tube7.zRot = zRotAngle * rZ3;
-
-        this.tube6.xRot = xRotAngle * (rX2 * rX3);
-        this.tube6.zRot = zRotAngle * (rZ2 * rZ3);
+        this.tube7.xRot = xRotAngle * (rX3 * rZ);
 
         this.tube5.xRot = xRotAngle * (rZ2 * rX3);
-        this.tube5.zRot = zRotAngle * (rX2 * rZ3);
     }
 }
