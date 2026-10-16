@@ -95,6 +95,7 @@
   "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Vahattu hapettunut pöytäkello",
 
   "block.copperoverthrow.red_wind_chime": "Punainen tuulikello",
+  "block.copperoverthrow.lunar_wind_chime": "Kuuntuulikello",
 
   "effect.copperoverthrow.conductivity": "Johtavuus",
 
@@ -130,6 +131,7 @@
   "tooltip.copperoverthrow.harsh_dings_sounding.tooltip": "§e Kaksi terävää kilahdusta, pidemmällä tauolla§r",
   "tooltip.copperoverthrow.chiming_taps_sounding.tooltip": "§e Kaksi kaikavaa napautusta, pitkällä tauolla§r",
   "tooltip.copperoverthrow.dull_taps_sounding.tooltip": "§e Kaksi matalaa napautusta, pisimmällä tauolla§r",
+  "tooltip.copperoverthrow.eerie_lunar_rumble.tooltip": "§e Aavemainen kumina§r",
 
   "advancements.copperoverthrow.copper_ingot.title": "Eiku menoksi",
   "advancements.copperoverthrow.copper_ingot.description": "Sulata itsellesi kupariharkko",
@@ -178,5 +180,7 @@
   "sounds.copperoverthrow.tamtam_play": "Tam-tam soi",
   "sounds.copperoverthrow.raindrum_play": "Saderumpu soi",
   "sounds.copperoverthrow.kitchen_bell_play": "Pöytäkello soi",
-  "sounds.copperoverthrow.wind_chime_play": "Tuulikello soi"
+  "sounds.copperoverthrow.wind_chime_play": "Tuulikello soi",
+  "sounds.copperoverthrow.handsaw_use": "Kuparisaha käytössä",
+  "sounds.copperoverthrow.crash_helmet_bonk": "BONK!"
 }

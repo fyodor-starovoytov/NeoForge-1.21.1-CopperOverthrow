@@ -95,6 +95,7 @@
   "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Вощёный окисленный настольный звонок",
 
   "block.copperoverthrow.red_wind_chime": "Красный ветряной колокольчик",
+  "block.copperoverthrow.lunar_wind_chime": "Лунный ветряной колокольчик",
 
   "effect.copperoverthrow.conductivity": "Проводимость",
 
@@ -130,6 +131,7 @@
   "tooltip.copperoverthrow.harsh_dings_sounding.tooltip": "§e Два резких звонка с более долгой паузой§r",
   "tooltip.copperoverthrow.chiming_taps_sounding.tooltip": "§e Два звонких стука с долгой паузой§r",
   "tooltip.copperoverthrow.dull_taps_sounding.tooltip": "§e Два глухих стука с самой долгой паузой§r",
+  "tooltip.copperoverthrow.eerie_lunar_rumble.tooltip": "§e Жутковатый гул§r",
 
   "advancements.copperoverthrow.copper_ingot.title": "Понеслась!",
   "advancements.copperoverthrow.copper_ingot.description": "Выплави свой первый медный слиток",
@@ -178,5 +180,7 @@
   "sounds.copperoverthrow.tamtam_play": "Там-там играет",
   "sounds.copperoverthrow.raindrum_play": "Барабан дождя играет",
   "sounds.copperoverthrow.kitchen_bell_play": "Настольный звонок играет",
-  "sounds.copperoverthrow.wind_chime_play": "Ветряной колокольчик звенит"
+  "sounds.copperoverthrow.wind_chime_play": "Ветряной колокольчик звенит",
+  "sounds.copperoverthrow.handsaw_use": "Использование ручной пилы",
+  "sounds.copperoverthrow.crash_helmet_bonk": "БОНЬК!"
 }

@@ -95,6 +95,7 @@
   "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Вощений окиснений настільний дзвінок",
 
   "block.copperoverthrow.red_wind_chime": "Червоний вітряний дзвіночок",
+  "block.copperoverthrow.lunar_wind_chime": "Місячний вітряний дзвіночок",
 
   "effect.copperoverthrow.conductivity": "Провідність",
 
@@ -130,6 +131,7 @@
   "tooltip.copperoverthrow.harsh_dings_sounding.tooltip": "§e Два різких передзвони з довшою паузою§r",
   "tooltip.copperoverthrow.chiming_taps_sounding.tooltip": "§e Два дзвінких стуки з тривалою паузою§r",
   "tooltip.copperoverthrow.dull_taps_sounding.tooltip": "§e Два глухих стуки з найтривалішою паузою§r",
+  "tooltip.copperoverthrow.eerie_lunar_rumble.tooltip": "§e Моторошний гул§r",
 
   "advancements.copperoverthrow.copper_ingot.title": "Погнали!",
   "advancements.copperoverthrow.copper_ingot.description": "Виплав свій перший мідний злиток",
@@ -178,5 +180,7 @@
   "sounds.copperoverthrow.tamtam_play": "Там-там грає",
   "sounds.copperoverthrow.raindrum_play": "Барабан дощу грає",
   "sounds.copperoverthrow.kitchen_bell_play": "Настільний дзвінок грає",
-  "sounds.copperoverthrow.wind_chime_play": "Вітряний дзвіночок дзвенить"
+  "sounds.copperoverthrow.wind_chime_play": "Вітряний дзвіночок дзвенить",
+  "sounds.copperoverthrow.handsaw_use": "Використання ручної пили",
+  "sounds.copperoverthrow.crash_helmet_bonk": "BONK!"
 }

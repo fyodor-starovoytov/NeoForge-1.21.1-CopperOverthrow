@@ -95,6 +95,7 @@
   "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Timbre de mesa oxidado encerado",
 
   "block.copperoverthrow.red_wind_chime": "Campanilla de viento roja",
+  "block.copperoverthrow.lunar_wind_chime": "Campanilla de viento lunar",
 
   "effect.copperoverthrow.conductivity": "Conductividad",
 
@@ -130,6 +131,7 @@
   "tooltip.copperoverthrow.harsh_dings_sounding.tooltip": "§e Dos campanadas estridentes, con una pausa más larga§r",
   "tooltip.copperoverthrow.chiming_taps_sounding.tooltip": "§e Dos toques resonantes, con una pausa larga§r",
   "tooltip.copperoverthrow.dull_taps_sounding.tooltip": "§e Dos toques sordos, con la pausa más larga§r",
+  "tooltip.copperoverthrow.eerie_lunar_rumble.tooltip": "§e Zumbido lunar siniestro§r",
 
   "advancements.copperoverthrow.copper_ingot.title": "Aquí vamos",
   "advancements.copperoverthrow.copper_ingot.description": "Funde tu primer lingote de cobre",
@@ -178,5 +180,7 @@
   "sounds.copperoverthrow.tamtam_play": "Tam-tam suena",
   "sounds.copperoverthrow.raindrum_play": "Tambor de lluvia suena",
   "sounds.copperoverthrow.kitchen_bell_play": "Timbre de mesa suena",
-  "sounds.copperoverthrow.wind_chime_play": "Campanilla de viento suena"
+  "sounds.copperoverthrow.wind_chime_play": "Campanilla de viento suena",
+  "sounds.copperoverthrow.handsaw_use": "Uso de sierra manual",
+  "sounds.copperoverthrow.crash_helmet_bonk": "¡BONK!"
 }
