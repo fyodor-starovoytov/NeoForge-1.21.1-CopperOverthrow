@@ -23,6 +23,7 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -32,6 +33,12 @@ public class RedWindChimeBlock extends AbstractWindChimeBlock {
 
     public RedWindChimeBlock(Properties properties, Supplier<SoundEvent> chimeSound) {
         super(properties, chimeSound);
+    }
+
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return state.getValue(UPPER) ?  new RedWindChimeBlockEntity(pos, state) : null;
     }
 
     @Override
@@ -64,8 +71,6 @@ public class RedWindChimeBlock extends AbstractWindChimeBlock {
 
         }
     }
-
-
 
     @Override
     protected void onExplosionHit(BlockState state, Level level, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> dropConsumer) {

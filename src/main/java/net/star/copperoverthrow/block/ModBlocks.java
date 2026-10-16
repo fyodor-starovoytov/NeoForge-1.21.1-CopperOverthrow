@@ -36,7 +36,7 @@ public class ModBlocks {
                     ModSounds.RED_CHIME));
 
     public static final DeferredBlock<Block> LUNAR_WIND_CHIME = registerBlock("lunar_wind_chime",
-            () -> new Block(
+            () -> new LunarWindChimeBlock(
                     BlockBehaviour
                             .Properties.of()
                             .strength(0.5f)
@@ -44,7 +44,8 @@ public class ModBlocks {
                             .noCollission()
                             .noOcclusion()
                             .instabreak()
-                            .noTerrainParticles()));
+                            .noTerrainParticles(),
+                    ModSounds.TAM_TAM_PLAYING_MOON));
 
 
     public static final DeferredBlock<Block> LOG_STRIPPER = registerBlock("log_stripper",

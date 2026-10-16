@@ -31,9 +31,11 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.renderer.LogStripperBlockEntityRenderer;
 import net.star.copperoverthrow.client.KitchenBellModel;
+import net.star.copperoverthrow.client.LunarWindChimeModel;
 import net.star.copperoverthrow.client.RedWindChimeModel;
 import net.star.copperoverthrow.client.TamTamModel;
 import net.star.copperoverthrow.client.renderer.KitchenBellRenderer;
+import net.star.copperoverthrow.client.renderer.LunarWindChimeRenderer;
 import net.star.copperoverthrow.client.renderer.TamTamRenderer;
 import net.star.copperoverthrow.client.renderer.RedWindChimeRenderer;
 import net.star.copperoverthrow.item.ModItems;
@@ -63,6 +65,7 @@ public class CopperOverthrowClient {
         event.registerBlockEntityRenderer(ModBlockEntities.TAMTAM_BE.get(), TamTamRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.RED_WIND_CHIME_BE.get(), RedWindChimeRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.LUNAR_WIND_CHIME_BE.get(), LunarWindChimeRenderer::new);
     }
 
     @SubscribeEvent
@@ -70,6 +73,7 @@ public class CopperOverthrowClient {
         event.registerLayerDefinition(TamTamModel.LAYER_LOCATION, TamTamModel::createBodyLayer);
         event.registerLayerDefinition(KitchenBellModel.LAYER_LOCATION, KitchenBellModel::createBodyLayer);
         event.registerLayerDefinition(RedWindChimeModel.LAYER_LOCATION, RedWindChimeModel::createBodyLayer);
+        event.registerLayerDefinition(LunarWindChimeModel.LAYER_LOCATION, LunarWindChimeModel::createBodyLayer);
     }
 
             private static final ResourceLocation OVERLAY_TEXTURE =

@@ -70,10 +70,6 @@ public class RedWindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlo
             float xSign = Math.max(Math.min((float) blockEntity.xMotion, (float) ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25), (float) -ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25);
             float zSign = Math.max(Math.min((float) blockEntity.zMotion, (float) ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25), (float) -ServerConfig.WIND_CHIME_MAX_ROTATION.get() /25);
 
-            System.out.println("Swing rendered");
-            System.out.println(xSign);
-            System.out.println(zSign);
-
             rotateTubesActive(swingTime, zSign, xSign,
                     (float) blockEntity.randomX,
                     (float) blockEntity.randomZ,
@@ -128,25 +124,5 @@ public class RedWindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlo
 
         this.tube6.xRot = xRotAngle * (rX2 * rX3);
         this.tube6.zRot = zRotAngle * (rZ2 * rZ3);
-    }
-
-    private void cancelTubeRotation(){
-        this.tube6.xRot = 0.0F;
-        this.tube6.zRot = 0.0F;
-        this.tube6.yRot = 0.0F;
-
-        this.tube2.xRot = 0.0F;
-        this.tube2.zRot = 0.0F;
-        this.tube2.yRot = 0.0F;
-
-        this.tube7.xRot = 0.0F;
-        this.tube7.zRot = 0.0F;
-        this.tube7.yRot = 0.0F;
-
-        this.tube4.xRot = 0.0F;
-        this.tube4.zRot = 0.0F;
-        this.tube4.yRot = 0.0F;
-
-
     }
 }

@@ -26,6 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.ClientConfig;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.ModBlocks;
+import net.star.copperoverthrow.block.entity.custom.LunarWindChimeBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,6 +52,19 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(UPPER, true));
     }
 
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        
+        if (state.is(ModBlocks.LUNAR_WIND_CHIME)) {
+            return state.getValue(UPPER) ? new LunarWindChimeBlockEntity(pos, state) : null;
+        }
+        if (state.is(ModBlocks.RED_WIND_CHIME)) {
+            return state.getValue(UPPER) ? new RedWindChimeBlockEntity(pos, state) : null;
+        }
+        return null;
+    }
+    
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
@@ -66,10 +80,6 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
         builder.add(UPPER);
     }
 
-    @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return state.getValue(UPPER) ? new RedWindChimeBlockEntity(pos, state) : null;
-    }
 
     @Nullable
     @Override
@@ -133,4 +143,5 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
             }}
         super.onRemove(state, level, pos, newState, isMoving);
     }
+
 }
