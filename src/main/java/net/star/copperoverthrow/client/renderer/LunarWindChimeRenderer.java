@@ -56,10 +56,10 @@ public class LunarWindChimeRenderer implements BlockEntityRenderer<LunarWindChim
         float idleDegree = 0.05F;
         float idleRotationDegree = 360F;
 
-        this.root.yRot = Mth.sin(time * idleSpeed/500) * idleRotationDegree;
+        this.root.yRot = Mth.sin(time * idleSpeed/800 + blockEntity.getBlockPos().getX() + blockEntity.getBlockPos().getZ()) * idleRotationDegree;
         this.root.y = 0.0F + Mth.cos(time * idleSpeed * 2.0F) * 0.05F;
 
-        this.top_coin.yRot = -Mth.cos(time * idleSpeed/680) * idleRotationDegree;
+        this.top_coin.yRot = -Mth.cos(time * idleSpeed/780) * idleRotationDegree;
         this.top_coin.y = 0.0F + Mth.cos(time * idleSpeed * 2.0F) * 0.02F;
 
         rotateTubesIdle(time, idleSpeed, idleDegree);
@@ -109,16 +109,16 @@ public class LunarWindChimeRenderer implements BlockEntityRenderer<LunarWindChim
         float swing = (1.5f * Mth.sin(time / (1.5f * (float) Math.PI))) / (6.0f + time / 4.0F);
         float xRotAngle = swing * (-zMotion + -xMotion);
 
-        this.root.xRot = xRotAngle/12 * rZ;
+        this.root.zRot = xRotAngle/12 * rZ;
 
-        this.tube2.xRot = xRotAngle * (rX*rZ);
+        this.tube2.zRot = xRotAngle * (rX*rZ);
 
-        this.tube4.xRot = xRotAngle * (rX2*rZ2);
+        this.tube4.zRot = xRotAngle * (rX2*rZ2);
 
-        this.tube7.xRot = xRotAngle * (rX3*rZ3);
+        this.tube7.zRot = xRotAngle * (rX3*rZ3);
 
-        this.tube7.xRot = xRotAngle * (rX3 * rZ);
+        this.tube7.zRot = xRotAngle * (rX3 * rZ);
 
-        this.tube5.xRot = xRotAngle * (rZ2 * rX3);
+        this.tube5.zRot = xRotAngle * (rZ2 * rX3);
     }
 }

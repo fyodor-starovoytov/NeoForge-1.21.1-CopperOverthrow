@@ -131,14 +131,14 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
     @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.low_pitch.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.low_resonance_sounding.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.eerie_lunar_rumble.tooltip"));
         }
         else {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.low_pitch.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);

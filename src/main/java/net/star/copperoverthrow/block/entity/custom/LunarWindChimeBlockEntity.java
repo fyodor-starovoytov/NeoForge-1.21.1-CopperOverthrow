@@ -128,9 +128,9 @@ public class LunarWindChimeBlockEntity extends BlockEntity {
         if (!level.isClientSide) {
 
             if (blockEntity.willDoIdleSounds &&
-                    (Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get()
-                            || (level.isThundering() && Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() * 2))) {
-                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(3, 7);
+                    (Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() / 2
+                            || (level.getMoonPhase() == 0 && Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get()))) {
+                level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, (float) blockEntity.volume, 1);
             }
 
             if (blockEntity.chimesRemaining > 0) {

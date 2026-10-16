@@ -97,6 +97,7 @@
 
 
   "block.copperoverthrow.red_wind_chime": "Red Wind Chime",
+  "block.copperoverthrow.lunar_wind_chime": "Lunar Wind Chime",
 
   "effect.copperoverthrow.conductivity": "Conductivity",
 
@@ -133,6 +134,8 @@
   "tooltip.copperoverthrow.harsh_dings_sounding.tooltip": "§e Two harsh dings, with a longer pause§r",
   "tooltip.copperoverthrow.chiming_taps_sounding.tooltip": "§e Two chiming taps, with a long pause§r",
   "tooltip.copperoverthrow.dull_taps_sounding.tooltip": "§e Two dull taps, with the longest pause§r",
+
+  "tooltip.copperoverthrow.eerie_lunar_rumble.tooltip": "§e Eerie rumble§r",
 
   "advancements.copperoverthrow.copper_ingot.title": "Here we go",
   "advancements.copperoverthrow.copper_ingot.description": "Smelt yourself a Copper Ingot",
