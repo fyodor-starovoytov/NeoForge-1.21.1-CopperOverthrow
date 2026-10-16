@@ -113,6 +113,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get());
 
         dropSelf(ModBlocks.RED_WIND_CHIME.get());
+        dropSelf(ModBlocks.LUNAR_WIND_CHIME.get());
 
     }
 

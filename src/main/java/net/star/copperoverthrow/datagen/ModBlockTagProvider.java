@@ -143,7 +143,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(Blocks.BELL);
 
         tag(ModTags.Blocks.WIND_CHIMES)
-                .add(ModBlocks.RED_WIND_CHIME.get());
+                .add(ModBlocks.RED_WIND_CHIME.get())
+                .add(ModBlocks.LUNAR_WIND_CHIME.get());
 
         tag(ModTags.Blocks.KITCHEN_BELLS)
                 .add(ModBlocks.KITCHEN_BELL.get())

@@ -126,6 +126,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.RED_WOOL)
                 .unlockedBy("has_gold", has(Items.GOLD_INGOT)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LUNAR_WIND_CHIME.get(), 2)
+                .pattern(" B ")
+                .pattern("AAA")
+                .pattern(" A ")
+                .define('A', Tags.Items.INGOTS_IRON)
+                .define('B', Tags.Items.GEMS_AMETHYST)
+                .unlockedBy("has_amethyst", has(Items.AMETHYST_SHARD)).save(recipeOutput);
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAIN_DRUM.get(), 2)
                 .pattern("CBC")
