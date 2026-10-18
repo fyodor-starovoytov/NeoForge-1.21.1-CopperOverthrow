@@ -284,6 +284,15 @@ public class ModBlocks {
                     .noLootTable()
                     .noTerrainParticles()
                     .air()));
+    public static final DeferredBlock<HologramBlock> HOLOGRAM_BLOCK = registerBlock("hologram_block",
+            () -> new HologramBlock(BlockBehaviour.Properties.of()
+                    .replaceable()
+                    .noCollission()
+                    .noOcclusion()
+                    .replaceable()
+                    .noLootTable()
+                    .noTerrainParticles()));
+
 
     public static final DeferredBlock<Block> RAIN_DRUM = registerBlock("medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()

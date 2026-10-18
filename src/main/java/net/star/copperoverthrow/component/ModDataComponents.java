@@ -3,8 +3,11 @@ package net.star.copperoverthrow.component;
 import java.util.List;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.item.component.CustomData;
@@ -27,13 +30,27 @@ public class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<CustomData>>> CAUGHT_BEES =
             register("caught_bees", builder -> builder.persistent(CustomData.CODEC.listOf()));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> TEMPORAL_INITIAL_BLOCKPOS =
+            register("temporal_initial_blockpos",builder -> builder.networkSynchronized(BlockPos.STREAM_CODEC));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> TEMPORAL_SECONDARY_BLOCKPOS =
+            register("temporal_secondary_blockpos",builder -> builder.networkSynchronized(BlockPos.STREAM_CODEC));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Direction>> TEMPORAL_DIRECTION =
+            register("temporal_direction",builder -> builder.networkSynchronized(Direction.STREAM_CODEC));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<BlockPos>>> TEMPORAL_BLOCKPOS_LIST =
+            register("temporal_blockpos_list",builder -> builder.networkSynchronized(BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list())));
+
+
 
 
 
     private static <T>DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builderOperator){
-        return DATA_COMPONENT_TYPES.register(name, () -> builderOperator.apply(DataComponentType.builder()).build());}
+        return DATA_COMPONENT_TYPES.register(name,
+                () -> builderOperator.apply(DataComponentType.builder()).build());}
+
     public static void register(IEventBus eventBus) {
         DATA_COMPONENT_TYPES.register(eventBus);
     }
-
 }
