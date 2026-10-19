@@ -3,9 +3,7 @@ Installation
 =======
 
 Ready-to-use version of the mod can be found on [Modrinth](https://modrinth.com/mod/copper-overthrow).
-
 ![Copper Overthrow Mod Title](https://cdn.modrinth.com/data/cached_images/89df01d5a27f2a4a206f6d90eab326a0a5b7779b.png)
-
 <table cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td valign="middle">
@@ -13,11 +11,11 @@ Ready-to-use version of the mod can be found on [Modrinth](https://modrinth.com/
         <b>Building Tools</b>
       </h2>
       <p>
-        Different tools that make builders life easier. Trowels, Chisels, Hammers, Rulers, Handsaws and other tools. Assist yourself with Copper Scaffolding and Stepladder.
+        Different tools that make builders life easier. Trowels, Chisels, Rulers. Assist yourself with Copper Scaffolding and terraform with ease using Copper Hammer and Copper Handsaw.
       </p>
     </td>
     <td valign="middle" width="60%">
-      <img src="https://cdn.modrinth.com/data/cached_images/3efdc5b5fc0709fb6e19451ecd945087adb78686.gif" alt="Animated GIF showing the hammer tool in action" width="100%">
+      <img src="https://cdn.modrinth.com/data/cached_images/9676ee593ec2ab70aa5e19828e73e42757a13efa_0.webp" alt="Pictore showing the Handsaw in action" width="100%">
     </td>
   </tr>
 </table>
@@ -25,7 +23,7 @@ Ready-to-use version of the mod can be found on [Modrinth](https://modrinth.com/
 <table cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td valign="middle" width="60%">
-      <img src="https://cdn.modrinth.com/data/cached_images/4d99002d21f5fbbddde328c7420225f915171588_0.webp" alt="Armor stands displaying utility armors" width="100%">
+      <img src="https://cdn.modrinth.com/data/cached_images/efe23bb1812eebc664421e794e2be8b6ef2f96d3_0.webp" alt="Armor stands displaying utility armors" width="100%">
     </td>
     <td valign="middle">
       <h2>
@@ -54,9 +52,11 @@ Ready-to-use version of the mod can be found on [Modrinth](https://modrinth.com/
   </tr>
 </table>
 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/539iCzU1hUY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 **Available translations:**
-- English (US)
-- Finnish (FI)
-- Russian (RU)
-- Ukrainian (UA)
-- Spanish (ES)
+  - English (US)
+  - Finnish (FI)
+  - Russian (RU)
+  - Ukrainian (UA)
+  - Spanish (ES)
