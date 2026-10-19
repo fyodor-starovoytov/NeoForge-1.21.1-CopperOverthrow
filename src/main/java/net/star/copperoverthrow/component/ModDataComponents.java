@@ -34,13 +34,13 @@ public class ModDataComponents {
             register("temporal_initial_blockpos",builder -> builder.networkSynchronized(BlockPos.STREAM_CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> TEMPORAL_SECONDARY_BLOCKPOS =
-            register("temporal_secondary_blockpos",builder -> builder.networkSynchronized(BlockPos.STREAM_CODEC));
+            register("temporal_secondary_blockpos",builder -> builder.persistent(BlockPos.CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Direction>> TEMPORAL_DIRECTION =
-            register("temporal_direction",builder -> builder.networkSynchronized(Direction.STREAM_CODEC));
+            register("temporal_direction",builder -> builder.persistent(Direction.CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<BlockPos>>> TEMPORAL_BLOCKPOS_LIST =
-            register("temporal_blockpos_list",builder -> builder.networkSynchronized(BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list())));
+            register("temporal_blockpos_list",builder -> builder.persistent(BlockPos.CODEC.listOf()));
 
 
 
