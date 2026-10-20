@@ -290,7 +290,6 @@ public class ModBlocks {
                     .noCollission()
                     .noOcclusion()
                     .instabreak()
-                    .noLootTable()
                     .noTerrainParticles()));
 
 

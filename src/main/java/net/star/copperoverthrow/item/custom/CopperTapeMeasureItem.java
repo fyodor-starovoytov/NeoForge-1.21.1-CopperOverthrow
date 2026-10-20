@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec2;
 import net.star.copperoverthrow.block.ModBlocks;
+import net.star.copperoverthrow.block.custom.HologramBlock;
 import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.item.ModItems;
 
@@ -138,7 +139,7 @@ public class CopperTapeMeasureItem extends Item {
 
                     for (var position : toMark) {
                         if (level.getBlockState(position).isAir()) {
-                            level.setBlockAndUpdate(position, hologramBlock.defaultBlockState());
+                            level.setBlockAndUpdate(position, hologramBlock.defaultBlockState().setValue(HologramBlock.PLACED_BY_RULER, true));
                             toDelete.add(position);
                         }
                     }

@@ -259,6 +259,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         .requires(Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.HOLOGRAM_BLOCK.get(), 16)
+                .requires(Items.COPPER_GRATE)
+                .requires(Tags.Items.DYES_BLACK)
+                .requires(Tags.Items.DYES_YELLOW)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
 //        addWaxingRecipe(recipeOutput, ModBlocks.LOG_STRIPPER.get(), ModBlocks.WAXED_LOG_STRIPPER.get(), "log_stripper");
 //        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_LOG_STRIPPER.get(), ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get(), "exposed_log_stripper");
 //        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_LOG_STRIPPER.get(), ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get(), "weathered_log_stripper");

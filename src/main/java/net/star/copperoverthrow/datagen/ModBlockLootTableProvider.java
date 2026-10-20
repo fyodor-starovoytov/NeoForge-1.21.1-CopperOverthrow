@@ -115,6 +115,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.RED_WIND_CHIME.get());
         dropSelf(ModBlocks.LUNAR_WIND_CHIME.get());
 
+        dropSelf(ModBlocks.HOLOGRAM_BLOCK.get());
+
     }
 
     @Override
