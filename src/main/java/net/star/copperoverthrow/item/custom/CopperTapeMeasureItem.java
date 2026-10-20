@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec2;
+import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.custom.HologramBlock;
 import net.star.copperoverthrow.component.ModDataComponents;
@@ -172,7 +173,7 @@ public class CopperTapeMeasureItem extends Item {
         Vec2 target = new Vec2(secondary.getX(), secondary.getZ());
 
         Vec2 diff = new Vec2(secondary.getX() - initial.getX(), target.y - center.y);
-        int r = Math.round(diff.length());
+        int r = Math.min(Math.round(diff.length()), ServerConfig.MEASURE_MAX_DISTANCE.get());
 
         int centerX = Math.round(center.x);
         int centerZ = Math.round(center.y);

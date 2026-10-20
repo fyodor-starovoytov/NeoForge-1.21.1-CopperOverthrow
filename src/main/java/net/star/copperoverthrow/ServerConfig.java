@@ -14,8 +14,13 @@ public class ServerConfig {
                 .comment("Maximum of possible blocks broken at a time, having larger value may affect the frame rate")
                 .translation("copperoverthrow.config.handsaw_max")
                 .defineInRange("HandSawMax", 128, 1, 999);
+        public static final ModConfigSpec.IntValue MEASURE_MAX_DISTANCE = BUILDER
+            .comment("Maximum distance a measure creates hologram blocks")
+            .translation("copperoverthrow.config.measure_max_distance")
+            .defineInRange("MeasureMaxDistance", 100, 1, 999);
 
-        public static final ModConfigSpec.DoubleValue CRASH_HELMET_HEAD_IMPACT_RESISTANCE = BUILDER
+
+    public static final ModConfigSpec.DoubleValue CRASH_HELMET_HEAD_IMPACT_RESISTANCE = BUILDER
                 .comment("Crash Helmets' Head Impact Resistance Percentage")
                 .translation("copperoverthrow.config.crash_helmet_head_impact_resistance")
                 .defineInRange("CrashHelmetHeadImpactResistance", 1.0, 0.0, 1.0);
