@@ -67,8 +67,8 @@ public class CopperTapeMeasureItem extends Item {
                 List<BlockPos> toUnmark = new ArrayList<>();
 
                 if (initialPos != null && secondaryPos != null) {
-                    if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.UP || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.DOWN) {
-                        List<BlockPos> toMark = new ArrayList<>(getFlatHorizontalCircleBlocks(initialPos, secondaryPos));
+/*                    if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.UP || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.DOWN) {
+                         List<BlockPos> toMark = new ArrayList<>(getFlatHorizontalCircleBlocks(initialPos, secondaryPos));
 
                         for (var position : toMark){
                             if (level.getBlockState(position).isAir()) {
@@ -78,7 +78,7 @@ public class CopperTapeMeasureItem extends Item {
                         }
                     }
                     stack.set(ModDataComponents.TEMPORAL_BLOCKPOS_LIST, toUnmark);
-
+*/
                     Player player = context.getPlayer();
                     if (player != null) {
                         EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
@@ -141,7 +141,7 @@ public class CopperTapeMeasureItem extends Item {
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
 
-        if(entity instanceof Player player){
+        if(entity instanceof Player player && !level.isClientSide){
             if (stack.get(ModDataComponents.IS_USED) != null) {
                 List<BlockPos> toUnmark = new ArrayList<>();
 
@@ -152,7 +152,7 @@ public class CopperTapeMeasureItem extends Item {
                 if (/*lastLookedAtPos != secondaryPos && */(
                         stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.UP || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.DOWN)) {
                     List<BlockPos> toMark = new ArrayList<>(getFlatHorizontalCircleBlocks(initialPos, secondaryPos));
-
+                    """ MOVE THE METHOD OF PLACING BLOCKS ON RIGHT CLICK TO HERE SO INSTEAD IT JUST LEAVES THE PREVIEW"""
                     for (var position : toMark) {
                         if (level.getBlockState(position).isAir()) {
                             level.setBlockAndUpdate(position, hologramBlock.defaultBlockState());
