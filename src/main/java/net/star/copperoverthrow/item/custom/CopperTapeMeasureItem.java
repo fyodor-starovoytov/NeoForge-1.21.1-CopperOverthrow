@@ -158,7 +158,7 @@ public class CopperTapeMeasureItem extends Item {
     private static BlockPos getBlockLookedAt(Player player){
 
         BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
-                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(1f))),
+                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(3f))),
                 ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
 
         BlockPos secondaryPos = traceResult.getBlockPos();
