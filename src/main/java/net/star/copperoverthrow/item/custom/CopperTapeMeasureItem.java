@@ -124,17 +124,26 @@ public class CopperTapeMeasureItem extends Item {
                     }
                     toDelete.clear();
 
-                    if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.UP
-                            || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.DOWN) {
+                    List<BlockPos> toMark = getFlatCircleBlocksY(initialPos, secondaryPos);
 
-                        List<BlockPos> toMark = getFlatHorizontalCircleBlocks(initialPos, secondaryPos);
-                        for (var position : toMark) {
-                            if (level.getBlockState(position).isAir()) {
-                                level.setBlockAndUpdate(position, hologramBlock.defaultBlockState());
-                                toDelete.add(position);
-                            }
+                    if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.EAST
+                            || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.WEST) {
+                        toMark = getFlatCircleBlocksZ(initialPos, secondaryPos);
+                    }
+
+                    if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.NORTH
+                            || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.SOUTH) {
+                        toMark = getFlatCircleBlocksX(initialPos, secondaryPos);
+                    }
+
+                    for (var position : toMark) {
+                        if (level.getBlockState(position).isAir()) {
+                            level.setBlockAndUpdate(position, hologramBlock.defaultBlockState());
+                            toDelete.add(position);
                         }
                     }
+
+
 
                     stack.set(ModDataComponents.TEMPORAL_BLOCKPOS_LIST, toDelete);
                     stack.set(ModDataComponents.TEMPORARY_LAST_REGISTERED_BLOCK, secondaryPos);
@@ -147,7 +156,7 @@ public class CopperTapeMeasureItem extends Item {
     private static BlockPos getBlockLookedAt(Player player){
 
         BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
-                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(6f))),
+                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(1f))),
                 ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
 
         BlockPos secondaryPos = traceResult.getBlockPos();
@@ -155,7 +164,7 @@ public class CopperTapeMeasureItem extends Item {
         return secondaryPos;
     }
 
-    public static List<BlockPos> getFlatHorizontalCircleBlocks(BlockPos initial, BlockPos secondary) {
+    public static List<BlockPos> getFlatCircleBlocksY(BlockPos initial, BlockPos secondary) {
         List<BlockPos> circleBlocks = new ArrayList<>();
 
         Vec2 center = new Vec2(initial.getX(), initial.getZ());
@@ -176,11 +185,58 @@ public class CopperTapeMeasureItem extends Item {
                 }
             }
         }
+        return circleBlocks;
+    }
+
+    public static List<BlockPos> getFlatCircleBlocksZ(BlockPos initial, BlockPos secondary) {
+        List<BlockPos> circleBlocks = new ArrayList<>();
+
+        Vec2 center = new Vec2(initial.getX(), initial.getY());
+        Vec2 target = new Vec2(secondary.getX(), secondary.getY());
+
+        Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
+        int r = Math.round(diff.length());
+
+        int centerX = Math.round(center.x);
+        int centerY = Math.round(center.y);
+
+        for (int x = -r; x <= r; x++) {
+            for (int y = -r; y <= r; y++) {
+                float distanceSq = (x * x) + (y * y);
+
+                if (distanceSq >= Math.pow(r - 0.5f, 2) && distanceSq <= Math.pow(r + 0.5f, 2)) {
+                    circleBlocks.add(new BlockPos(centerX + x, centerY + y, initial.getZ()));
+                }
+            }
+        }
 
         return circleBlocks;
     }
 
+    public static List<BlockPos> getFlatCircleBlocksX(BlockPos initial, BlockPos secondary) {
+        List<BlockPos> circleBlocks = new ArrayList<>();
 
+        Vec2 center = new Vec2(initial.getY(), initial.getZ());
+        Vec2 target = new Vec2(secondary.getY(), secondary.getZ());
+
+        Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
+        int r = Math.round(diff.length());
+
+        int centerY = Math.round(center.x);
+        int centerZ = Math.round(center.y);
+
+        for (int y = -r; y <= r; y++) {
+            for (int z = -r; z <= r; z++) {
+                float distanceSq = (y * y) + (z * z);
+
+                if (distanceSq >= Math.pow(r - 0.5f, 2) && distanceSq <= Math.pow(r + 0.5f, 2)) {
+                    circleBlocks.add(new BlockPos(initial.getX(), centerY + y, centerZ + z));
+                }
+            }
+        }
+
+        return circleBlocks;
+    }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
