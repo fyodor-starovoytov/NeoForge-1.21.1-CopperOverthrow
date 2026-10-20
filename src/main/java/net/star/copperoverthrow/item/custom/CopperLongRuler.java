@@ -150,6 +150,10 @@ public class CopperLongRuler extends Item {
     public static List<BlockPos> getVector(BlockPos initial, BlockPos secondary) {
         List<BlockPos> vectorBlocks = new ArrayList<>();
 
+        if (initial.distSqr(secondary) > ServerConfig.MEASURE_MAX_DISTANCE.get() * ServerConfig.MEASURE_MAX_DISTANCE.get()) {
+            return vectorBlocks;
+        }
+
         int x1 = initial.getX();
         int y1 = initial.getY();
         int z1 = initial.getZ();
