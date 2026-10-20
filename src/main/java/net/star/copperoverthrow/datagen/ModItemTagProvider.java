@@ -82,6 +82,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.COPPER_HANDSAW.get());
         tag(ModTags.Items.C_TOOLS_BUILDERS)
                 .add(ModItems.COPPER_TROWEL.get())
+                .add(ModItems.COPPER_TAPE_MEASURE.get())
                 .add(ModItems.COPPER_CHISEL.get());
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)

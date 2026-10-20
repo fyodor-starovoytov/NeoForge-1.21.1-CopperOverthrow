@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "c:nuggets/copper"
+    },
+    "B": {
+      "tag": "c:ingots/copper"
+    },
+    "C": {
+      "tag": "c:gems/amethyst"
+    },
+    "D": {
+      "item": "copperoverthrow:hologram_block"
+    }
+  },
+  "pattern": [
+    "ABC",
+    "ACD",
+    "ABC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "copperoverthrow:copper_tape_measure"
+  }
+}

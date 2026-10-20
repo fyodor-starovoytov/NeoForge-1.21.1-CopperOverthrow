@@ -117,6 +117,30 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeOutput, "copperoverthrow:copper_handsaw_alt");
 
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TAPE_MEASURE.get(), 1)
+                .pattern("CBA")
+                .pattern("DCB")
+                .pattern("CBA")
+                .define('B', Tags.Items.INGOTS_COPPER)
+                .define('A', ModTags.Items.C_COPPER_NUGGETS)
+                .define('C', Tags.Items.GEMS_AMETHYST)
+                .define('D', ModBlocks.HOLOGRAM_BLOCK)
+                .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
+                .save(recipeOutput, "copperoverthrow:copper_tape_measure_alt");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TAPE_MEASURE.get(), 1)
+                .pattern("ABC")
+                .pattern("BCD")
+                .pattern("ABC")
+                .define('B', Tags.Items.INGOTS_COPPER)
+                .define('A', ModTags.Items.C_COPPER_NUGGETS)
+                .define('C', Tags.Items.GEMS_AMETHYST)
+                .define('D', ModBlocks.HOLOGRAM_BLOCK)
+                .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
+                .save(recipeOutput);
+
+
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RED_WIND_CHIME.get(), 2)
                 .pattern("BCB")
                 .pattern("AAA")
