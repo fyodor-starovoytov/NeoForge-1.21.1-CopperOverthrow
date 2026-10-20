@@ -197,7 +197,7 @@ public class CopperTapeMeasureItem extends Item {
         Vec2 target = new Vec2(secondary.getX(), secondary.getY());
 
         Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
-        int r = Math.round(diff.length());
+        int r = Math.min(Math.round(diff.length()), ServerConfig.MEASURE_MAX_DISTANCE.get());
 
         int centerX = Math.round(center.x);
         int centerY = Math.round(center.y);
@@ -222,7 +222,7 @@ public class CopperTapeMeasureItem extends Item {
         Vec2 target = new Vec2(secondary.getY(), secondary.getZ());
 
         Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
-        int r = Math.round(diff.length());
+        int r = Math.min(Math.round(diff.length()), ServerConfig.MEASURE_MAX_DISTANCE.get());
 
         int centerY = Math.round(center.x);
         int centerZ = Math.round(center.y);
