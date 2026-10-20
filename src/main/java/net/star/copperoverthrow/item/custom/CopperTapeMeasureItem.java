@@ -35,17 +35,15 @@ public class CopperTapeMeasureItem extends Item {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-
         Level level = context.getLevel();
         Direction dir = context.getClickedFace();
         BlockPos pos = context.getClickedPos().relative(dir);
+        ItemStack stack = context.getItemInHand();
 
-        if (!level.isClientSide){
-            ItemStack stack = context.getItemInHand();
-
+        if (!level.isClientSide) {
             if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == null
                     && stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) == null
-            && stack.get(ModDataComponents.IS_USED) == null) {
+                    && stack.get(ModDataComponents.IS_USED) == null) {
 
                 stack.set(ModDataComponents.TEMPORAL_DIRECTION, dir);
                 stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, pos);
@@ -54,58 +52,23 @@ public class CopperTapeMeasureItem extends Item {
 
                 return InteractionResult.SUCCESS;
             }
+
             else if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) != null
                     && stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) != null
                     && stack.get(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS) == null
                     && stack.get(ModDataComponents.IS_USED) != null) {
 
                 stack.set(ModDataComponents.IS_USED, null);
-
                 stack.set(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS, pos);
-                BlockPos initialPos = stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS);
-                BlockPos secondaryPos = stack.get(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS);
-                List<BlockPos> toUnmark = new ArrayList<>();
 
-                if (initialPos != null && secondaryPos != null) {
-/*                    if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.UP || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.DOWN) {
-                         List<BlockPos> toMark = new ArrayList<>(getFlatHorizontalCircleBlocks(initialPos, secondaryPos));
-
-                        for (var position : toMark){
-                            if (level.getBlockState(position).isAir()) {
-                                level.setBlockAndUpdate(position, hologramBlock.defaultBlockState());
-                                toUnmark.add(position);
-                            }
-                        }
-                    }
-                    stack.set(ModDataComponents.TEMPORAL_BLOCKPOS_LIST, toUnmark);
-*/
-                    Player player = context.getPlayer();
-                    if (player != null) {
-                        EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
-                                ? EquipmentSlot.OFFHAND
-                                : EquipmentSlot.MAINHAND;
-                        stack.hurtAndBreak(1, player, equipmentslot);
-                    }
-                    return InteractionResult.SUCCESS;
+                Player player = context.getPlayer();
+                if (player != null) {
+                    EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
+                            ? EquipmentSlot.OFFHAND
+                            : EquipmentSlot.MAINHAND;
+                    stack.hurtAndBreak(1, player, equipmentslot);
                 }
-
-                else if (Screen.hasShiftDown() && stack.is(ModItems.COPPER_TAPE_MEASURE)) {
-                    stack.set(ModDataComponents.IS_USED, null);
-                    stack.set(ModDataComponents.TEMPORAL_DIRECTION, null);
-                    stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, null);
-                    stack.set(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS, null);
-
-                    if (stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST) != null) {
-                        List<BlockPos> toDelete = new ArrayList<>(stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST));
-
-                        for (var position : toDelete) {
-                            if (level.getBlockState(position).is(hologramBlock)) {
-                                level.destroyBlock(position, false);
-                            }
-                        }
-                    }
-                    return InteractionResult.SUCCESS;
-                }
+                return InteractionResult.SUCCESS;
             }
         }
         return InteractionResult.PASS;
@@ -137,42 +100,44 @@ public class CopperTapeMeasureItem extends Item {
         return  InteractionResultHolder.pass(stack);
     }
 
-
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-
-        if(entity instanceof Player player && !level.isClientSide){
+        if (entity instanceof Player player && !level.isClientSide) {
             if (stack.get(ModDataComponents.IS_USED) != null) {
-                List<BlockPos> toUnmark = new ArrayList<>();
-
-                /*BlockPos lastLookedAtPos = stack.get(ModDataComponents.TEMPORARY_LAST_REGISTERED_BLOCK);*/
                 BlockPos initialPos = stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS);
-                BlockPos secondaryPos =  getBlockLookedAt(player);
+                BlockPos secondaryPos = getBlockLookedAt(player); // Current target look pos
 
-                if (/*lastLookedAtPos != secondaryPos && */(
-                        stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.UP || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.DOWN)) {
-                    List<BlockPos> toMark = new ArrayList<>(getFlatHorizontalCircleBlocks(initialPos, secondaryPos));
-                    """ MOVE THE METHOD OF PLACING BLOCKS ON RIGHT CLICK TO HERE SO INSTEAD IT JUST LEAVES THE PREVIEW"""
-                    for (var position : toMark) {
-                        if (level.getBlockState(position).isAir()) {
-                            level.setBlockAndUpdate(position, hologramBlock.defaultBlockState());
-                            toUnmark.add(position);
+                if (initialPos == null || secondaryPos == null) return;
+
+                BlockPos lastLookedAtPos = stack.get(ModDataComponents.TEMPORARY_LAST_REGISTERED_BLOCK);
+
+                if (!secondaryPos.equals(lastLookedAtPos)) {
+                    List<BlockPos> toDelete = new ArrayList<>();
+                    if (stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST) != null) {
+                        toDelete.addAll(stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST));
+                    }
+
+                    for (var position : toDelete) {
+                        if (level.getBlockState(position).is(hologramBlock)) {
+                            level.destroyBlock(position, false);
                         }
                     }
-                }
-                stack.set(ModDataComponents.TEMPORAL_SKETCH_BLOCKPOS_LIST, toUnmark);
-                /*stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, secondaryPos);*/
-            }
+                    toDelete.clear();
 
-            if (stack.get(ModDataComponents.IS_USED) == null && stack.get(ModDataComponents.TEMPORAL_SKETCH_BLOCKPOS_LIST) != null){
+                    if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.UP
+                            || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.DOWN) {
 
-                /*stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, null);*/
-                List<BlockPos> toDelete = new ArrayList<>(stack.get(ModDataComponents.TEMPORAL_SKETCH_BLOCKPOS_LIST));
-                stack.set(ModDataComponents.TEMPORAL_SKETCH_BLOCKPOS_LIST, null);
-                for (var position : toDelete) {
-                    if (level.getBlockState(position).is(hologramBlock)) {
-                        level.destroyBlock(position, false);
+                        List<BlockPos> toMark = getFlatHorizontalCircleBlocks(initialPos, secondaryPos);
+                        for (var position : toMark) {
+                            if (level.getBlockState(position).isAir()) {
+                                level.setBlockAndUpdate(position, hologramBlock.defaultBlockState());
+                                toDelete.add(position);
+                            }
+                        }
                     }
+
+                    stack.set(ModDataComponents.TEMPORAL_BLOCKPOS_LIST, toDelete);
+                    stack.set(ModDataComponents.TEMPORARY_LAST_REGISTERED_BLOCK, secondaryPos);
                 }
             }
         }
@@ -228,13 +193,6 @@ public class CopperTapeMeasureItem extends Item {
             if (stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) != null) {
                 tooltipComponents.add(Component.literal("§7" + (stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS).toShortString())));
             }
-            if (stack.get(ModDataComponents.TEMPORAL_SKETCH_BLOCKPOS_LIST) != null) {
-                tooltipComponents.add(Component.literal("§7" + (stack.get(ModDataComponents.TEMPORAL_SKETCH_BLOCKPOS_LIST))));
-            }
-            if (stack.get(ModDataComponents.IS_USED) != null) {
-                tooltipComponents.add(Component.literal("§7" + (stack.get(ModDataComponents.IS_USED))));
-            }
-
 
             if (stack.get(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS) != null) {
                 tooltipComponents.add(Component.literal("§7" + (stack.get(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS).toShortString())));

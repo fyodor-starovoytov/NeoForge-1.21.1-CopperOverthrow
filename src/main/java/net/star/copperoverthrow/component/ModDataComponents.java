@@ -31,7 +31,7 @@ public class ModDataComponents {
             register("caught_bees", builder -> builder.persistent(CustomData.CODEC.listOf()));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> TEMPORAL_INITIAL_BLOCKPOS =
-            register("temporal_initial_blockpos",builder -> builder.networkSynchronized(BlockPos.STREAM_CODEC));
+            register("temporal_initial_blockpos",builder -> builder.persistent(BlockPos.CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> TEMPORAL_SECONDARY_BLOCKPOS =
             register("temporal_secondary_blockpos",builder -> builder.persistent(BlockPos.CODEC));
