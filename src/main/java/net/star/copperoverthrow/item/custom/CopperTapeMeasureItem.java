@@ -130,12 +130,12 @@ public class CopperTapeMeasureItem extends Item {
 
                     if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.EAST
                             || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.WEST) {
-                        toMark = getFlatCircleBlocksZ(initialPos, secondaryPos);
+                        toMark = getFlatCircleBlocksX(initialPos, secondaryPos);
                     }
 
                     if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.NORTH
                             || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.SOUTH) {
-                        toMark = getFlatCircleBlocksX(initialPos, secondaryPos);
+                        toMark = getFlatCircleBlocksZ(initialPos, secondaryPos);
                     }
 
                     for (var position : toMark) {
