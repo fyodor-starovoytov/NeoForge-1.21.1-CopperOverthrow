@@ -29,6 +29,7 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModItems.COPPER_CHISEL);
                         output.accept(ModItems.COPPER_TROWEL);
+                        output.accept(ModItems.COPPER_TAPE_MEASURE);
 
                         output.accept(ModItems.COPPER_HAMMER);
                         output.accept(ModItems.COPPER_HANDSAW);
@@ -133,6 +134,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING);
                         output.accept(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN);
                         output.accept(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN);
+
+                        output.accept(ModBlocks.HOLOGRAM_BLOCK);
 
                         output.accept(ModBlocks.RED_WIND_CHIME);
                         output.accept(ModBlocks.LUNAR_WIND_CHIME);
