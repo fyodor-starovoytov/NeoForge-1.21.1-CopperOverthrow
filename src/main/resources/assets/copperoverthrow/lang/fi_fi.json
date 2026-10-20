@@ -12,6 +12,9 @@
   "item.copperoverthrow.copper_handsaw": "Kuparisaha",
   "item.copperoverthrow.copper_stepper_boots": "Askelmansaappaat",
   "item.copperoverthrow.copper_stepper_leggings": "Askelmahousut",
+  "item.copperoverthrow.copper_tape_measure": "Kuparisekstantti",
+
+  "block.copperoverthrow.hologram_block": "Hologrammikuutio",
 
   "block.copperoverthrow.copper_scaffolding": "Kuparirakennusteline",
   "block.copperoverthrow.exposed_copper_scaffolding": "Altistunut kuparirakennusteline",
@@ -115,6 +118,7 @@
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Pidä §eShift§r §7painettuna saadaksesi lisätietoja§r",
   "tooltip.copperoverthrow.trowel_item.tooltip": "§e Asettaa satunnaisen kuution§r §6Pikapalkista§r",
   "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Soittaa satunnaisia säveliä kun§r §6Sataa§r",
+  "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Luo§r §6ympyrän§r§e ensimmäisen pisteen ympärille rajautuen toiseen§r",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Kaiku:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Sävelkorkeus:§r §bKorkea§r",
