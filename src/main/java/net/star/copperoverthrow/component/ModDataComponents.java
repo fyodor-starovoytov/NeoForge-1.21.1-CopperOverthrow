@@ -48,6 +48,9 @@ public class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> IS_USED =
             register("is_used",builder -> builder.persistent(Codec.INT));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> TEMPORARY_LAST_REGISTERED_BLOCK =
+            register("last_registered_block",builder -> builder.persistent(BlockPos.CODEC));
+
 
 
 
