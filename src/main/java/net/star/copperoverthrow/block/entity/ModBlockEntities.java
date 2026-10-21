@@ -54,7 +54,7 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<BambooWindChimeBlockEntity>> BAMBOO_WIND_CHIME_BE =
             BLOCK_ENTITIES.register("bamboo_wind_chime_be", ()-> BlockEntityType.Builder.of(
                             BambooWindChimeBlockEntity::new,
-                            ModBlocks.RED_WIND_CHIME.get())
+                            ModBlocks.BAMBOO_WIND_CHIME.get())
                     .build(null));
     public static final Supplier<BlockEntityType<LunarWindChimeBlockEntity>> LUNAR_WIND_CHIME_BE =
             BLOCK_ENTITIES.register("lunar_wind_chime_be", ()-> BlockEntityType.Builder.of(

@@ -21,7 +21,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
-import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
+import net.star.copperoverthrow.block.entity.custom.BambooWindChimeBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class BambooWindChimeBlock extends AbstractWindChimeBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.RED_WIND_CHIME_BE.get(), BambooWindChimeBlockEntity::tick);
+        return createTickerHelper(blockEntityType, ModBlockEntities.BAMBOO_WIND_CHIME_BE.get(), BambooWindChimeBlockEntity::tick);
     }
 
     @Override
