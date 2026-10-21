@@ -93,21 +93,37 @@ public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindCh
     }
 
     private void rotateTubesIdle(float time, float idleSpeed, float idleDegree){
+        this.tube0.xRot = -Mth.sin(time * idleSpeed + 0.45f * 3) * idleDegree / 1.15f;
+        this.tube0.zRot = -Mth.cos(time * idleSpeed - 0.31f * 3) * idleDegree / 1.25f;
+        this.tube0.yRot = Mth.sin(time * idleSpeed + 0.2f) * idleDegree * 1.35f;
+
+        this.tube1.xRot = -Mth.sin(time * idleSpeed - 0.15f * 3) * idleDegree / 1.22f;
+        this.tube1.zRot = -Mth.cos(time * idleSpeed + 0.38f * 3) * idleDegree / 1.18f;
+        this.tube1.yRot = -Mth.cos(time * idleSpeed - 0.1f) * idleDegree * 1.45f;
+
         this.tube2.xRot = -Mth.sin(time * idleSpeed - 0.28f*3) * idleDegree / 1.24f;
         this.tube2.zRot = -Mth.cos(time * idleSpeed + 0.12f*3) * idleDegree / 1.12f;
-        this.tube2.yRot = -Mth.sin(time * idleSpeed) * idleDegree * 1.25f ;
+        this.tube2.yRot = -Mth.sin(time * idleSpeed) * idleDegree * 1.25f;
 
-        this.tube6.xRot = -Mth.sin(time * idleSpeed) * idleDegree / 1.14f;
-        this.tube6.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.21f ;
-        this.tube6.yRot = Mth.cos(time * idleSpeed) * idleDegree * 1.4f;
-
-        this.tube7.xRot = -Mth.sin(time * idleSpeed) * idleDegree / 1.25f;
-        this.tube7.zRot = -Mth.cos(time * idleSpeed - 0.22f*3) * idleDegree / 1.12f;
-        this.tube7.yRot = Mth.sin(time * idleSpeed) * idleDegree* 1.8f;
+        this.tube3.xRot = -Mth.sin(time * idleSpeed + 0.52f * 3) * idleDegree / 1.19f;
+        this.tube3.zRot = -Mth.cos(time * idleSpeed - 0.18f * 3) * idleDegree / 1.28f;
+        this.tube3.yRot = Mth.sin(time * idleSpeed + 0.4f) * idleDegree * 1.55f;
 
         this.tube4.xRot = -Mth.sin(time * idleSpeed + 0.17f*3) * idleDegree / 1.17f;
         this.tube4.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.22f;
         this.tube4.yRot = -Mth.cos(time * idleSpeed) * idleDegree * 1.6f;
+
+        this.tube6.xRot = -Mth.sin(time * idleSpeed) * idleDegree / 1.14f;
+        this.tube6.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.21f;
+        this.tube6.yRot = Mth.cos(time * idleSpeed) * idleDegree * 1.4f;
+
+        this.tube7.xRot = -Mth.sin(time * idleSpeed) * idleDegree / 1.25f;
+        this.tube7.zRot = -Mth.cos(time * idleSpeed - 0.22f*3) * idleDegree / 1.12f;
+        this.tube7.yRot = Mth.sin(time * idleSpeed) * idleDegree * 1.8f;
+
+        this.tube8.xRot = -Mth.sin(time * idleSpeed - 0.41f * 3) * idleDegree / 1.28f;
+        this.tube8.zRot = -Mth.cos(time * idleSpeed + 0.29f * 3) * idleDegree / 1.15f;
+        this.tube8.yRot = -Mth.sin(time * idleSpeed + 0.5f) * idleDegree * 1.7f;
     }
     private void rotateTubesActive(float time, float zMotion, float xMotion, float rX, float rZ, float rX2, float rZ2, float rX3, float rZ3){
         float swing = (1.5f * Mth.sin(time / (1.5f * (float) Math.PI))) / (6.0f + time / 4.0F);
@@ -119,18 +135,38 @@ public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindCh
 
         this.cup.y = zRotAngle/2 * rX;
 
+        float t0 = time + 0.5f;
+        float t1 = time + 1.2f;
+        float t3 = time + 1.8f;
+        float t8 = time + 2.4f;
+
+        float swing0 = (1.5f * Mth.sin(t0 / (1.5f * (float) Math.PI))) / (6.0f + t0 / 4.0F);
+        float swing1 = (1.5f * Mth.sin(t1 / (1.5f * (float) Math.PI))) / (6.0f + t1 / 4.0F);
+        float swing3 = (1.5f * Mth.sin(t3 / (1.5f * (float) Math.PI))) / (6.0f + t3 / 4.0F);
+        float swing8 = (1.5f * Mth.sin(t8 / (1.5f * (float) Math.PI))) / (6.0f + t8 / 4.0F);
+
+        this.tube0.xRot = swing0 * (-zMotion) * rX;
+        this.tube0.zRot = swing0 * (-xMotion) * rZ;
+
+        this.tube1.xRot = swing1 * (-zMotion) * rX2;
+        this.tube1.zRot = swing1 * (-xMotion) * rZ2;
+
         this.tube2.xRot = xRotAngle * rX;
         this.tube2.zRot = zRotAngle * rZ;
 
+        this.tube3.xRot = swing3 * (-zMotion) * rX3;
+        this.tube3.zRot = swing3 * (-xMotion) * rZ3;
 
         this.tube4.xRot = xRotAngle * rX2;
         this.tube4.zRot = zRotAngle * rZ2;
 
+        this.tube6.xRot = xRotAngle * (rX2 * rX3);
+        this.tube6.zRot = zRotAngle * (rZ2 * rZ3);
 
         this.tube7.xRot = xRotAngle * rX3;
         this.tube7.zRot = zRotAngle * rZ3;
 
-        this.tube6.xRot = xRotAngle * (rX2 * rX3);
-        this.tube6.zRot = zRotAngle * (rZ2 * rZ3);
+        this.tube8.xRot = swing8 * (-zMotion) * (rX * rX3);
+        this.tube8.zRot = swing8 * (-xMotion) * (rZ * rZ3);
     }
 }
