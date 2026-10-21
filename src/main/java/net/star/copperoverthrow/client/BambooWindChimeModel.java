@@ -3,12 +3,24 @@ package net.star.copperoverthrow.client;
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.star.copperoverthrow.CopperOverthrow;
 
 import net.star.copperoverthrow.CopperOverthrow;
 
 public class BambooWindChimeModel<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(CopperOverthrow.MOD_ID, "bamboo_wind_chime"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "bamboo_wind_chime"), "main");
 	private final ModelPart root;
 	private final ModelPart cup;
 	private final ModelPart tubes;
@@ -21,7 +33,7 @@ public class BambooWindChimeModel<T extends Entity> extends EntityModel<T> {
 	private final ModelPart tube7;
 	private final ModelPart tube8;
 
-	public wooden_wind_chime(ModelPart root) {
+	public BambooWindChimeModel(ModelPart root) {
 		this.root = root.getChild("root");
 		this.cup = this.root.getChild("cup");
 		this.tubes = this.root.getChild("tubes");
@@ -129,7 +141,7 @@ public class BambooWindChimeModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+		root.render(poseStack, buffer, packedLight, packedOverlay, color);
 	}
 }

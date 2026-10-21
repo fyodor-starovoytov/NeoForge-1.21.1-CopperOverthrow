@@ -35,6 +35,18 @@ public class ModBlocks {
                             .noTerrainParticles(),
                     ModSounds.RED_CHIME));
 
+    public static final DeferredBlock<Block> BAMBOO_WIND_CHIME = registerBlock("bamboo_wind_chime",
+            () -> new BambooWindChimeBlock(
+                    BlockBehaviour
+                            .Properties.of()
+                            .strength(0.5f)
+                            .isValidSpawn(Blocks::never)
+                            .noCollission()
+                            .noOcclusion()
+                            .instabreak()
+                            .noTerrainParticles(),
+                    ModSounds.CRASH_HELMET_BONK));
+
     public static final DeferredBlock<Block> LUNAR_WIND_CHIME = registerBlock("lunar_wind_chime",
             () -> new LunarWindChimeBlock(
                     BlockBehaviour
