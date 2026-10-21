@@ -137,7 +137,7 @@ public class BambooWindChimeBlock extends AbstractWindChimeBlock {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.low_resonance_sounding.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.lower_resonance_sounding.tooltip"));
         }
         else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
