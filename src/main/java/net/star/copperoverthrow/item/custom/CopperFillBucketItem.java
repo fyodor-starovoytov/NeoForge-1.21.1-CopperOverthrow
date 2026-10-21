@@ -2,8 +2,15 @@ package net.star.copperoverthrow.item.custom;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ParticleUtils;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.IntProviderType;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -34,7 +41,7 @@ public class CopperFillBucketItem extends Item {
         BlockState clickedBlock = level.getBlockState(pos);
         Player player = context.getPlayer();
 
-        if (!level.isClientSide && player != null && clickedBlock.getBlock() instanceof HologramBlock) {
+        if (player != null && clickedBlock.getBlock() instanceof HologramBlock) {
             ItemStack consumableStack = player.getOffhandItem();
             if (context.getHand() == InteractionHand.OFF_HAND){
                 consumableStack = player.getMainHandItem();
@@ -62,12 +69,19 @@ public class CopperFillBucketItem extends Item {
                     if (!placeContext.canPlace()) {
                         return InteractionResult.FAIL;}
 
-                    InteractionResult result = blockItem.place(placeContext);
+                    if (level.isClientSide){
+                        ParticleUtils.spawnParticlesOnBlockFaces(
+                                level, fillPos, new BlockParticleOption(ParticleTypes.BLOCK, blockItem.getBlock().defaultBlockState()), UniformInt.of(1, 4));
+                    }
 
-                    if (result.consumesAction()) {
-                        if (level instanceof ServerLevel serverLevel) {
-                            EquipmentSlot slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-                            context.getItemInHand().hurtAndBreak(1, serverLevel, player, tool -> player.onEquippedItemBroken(tool, slot));
+                    if (!level.isClientSide) {
+                        InteractionResult result = blockItem.place(placeContext);
+
+                        if (result.consumesAction()) {
+                            if (level instanceof ServerLevel serverLevel) {
+                                EquipmentSlot slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+                                context.getItemInHand().hurtAndBreak(1, serverLevel, player, tool -> player.onEquippedItemBroken(tool, slot));
+                            }
                         }
                     }
                 }
