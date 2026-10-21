@@ -27,8 +27,12 @@ public class ModItems {
             () -> new BeeCatcherItem(
                     new Properties().stacksTo(1)));
 
+
     public static final DeferredItem<Item> COPPER_TAPE_MEASURE = ITEMS.register("copper_tape_measure",
             () -> new CopperTapeMeasureItem(new Properties().durability(256).stacksTo(1)));
+
+    public static final DeferredItem<Item> COPPER_FILL_BUCKET = ITEMS.register("copper_fill_bucket",
+            () -> new CopperFillBucketItem(new Properties().durability(256).stacksTo(1)));
 
     public static final DeferredItem<Item> COPPER_LONG_RULER = ITEMS.register("copper_long_ruler",
             () -> new CopperLongRuler(new Properties().durability(256).stacksTo(1)));
