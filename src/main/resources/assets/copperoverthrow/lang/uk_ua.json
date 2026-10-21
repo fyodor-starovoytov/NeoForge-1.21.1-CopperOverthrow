@@ -13,6 +13,7 @@
   "item.copperoverthrow.copper_stepper_boots": "Чоботи кроку",
   "item.copperoverthrow.copper_stepper_leggings": "Поноші кроку",
   "item.copperoverthrow.copper_tape_measure": "Мідний секстант",
+  "item.copperoverthrow.copper_long_ruler": "Довга мідна лінійка",
 
   "block.copperoverthrow.hologram_block": "Голографічний блок",
 
@@ -119,6 +120,7 @@
   "tooltip.copperoverthrow.trowel_item.tooltip": "§e Розміщує випадковий блок із§r §6Панелі швидкого доступу§r",
   "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Грає випадкові ноти під час§r §6Дощу§r",
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Створює§r §6коло§r§e навколо першої точки, що межує з другою§r",
+  "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Створює§r §6лінію§r§e з голографічних блоків від однієї точки до іншої§r",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Звучання:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Висота тону:§r §bВисока§r",

@@ -7,6 +7,7 @@
   "item.copperoverthrow.copper_chisel": "Copper Chisel",
   "item.copperoverthrow.copper_trowel": "Copper Trowel",
   "item.copperoverthrow.copper_tape_measure": "Copper Sextant",
+  "item.copperoverthrow.copper_long_ruler": "Copper Long Ruler",
   "item.copperoverthrow.copper_cookie": "Copper Cookie",
   "item.copperoverthrow.bee_catcher": "Bee Catcher",
   "item.copperoverthrow.copper_hammer": "Copper Hammer",
@@ -119,7 +120,8 @@
   "tooltip.copperoverthrow.press_shift.tooltip": "§7Hold §eShift§r §7for more information§r",
   "tooltip.copperoverthrow.trowel_item.tooltip": "§e Places random block from the§r §6Hotbar§r",
   "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Will play random notes when§r §6Raining§r",
-  "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Creates a§r §6circle§r§e around the first point bordering the second one",
+  "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Creates a§r §6circle§r§e of hologram blocks around the first point bordering the second one",
+  "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Creates a§r §6line§r§e of hologram blocks from one point to another",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Sounding:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Pitch:§r §bHigh§r",

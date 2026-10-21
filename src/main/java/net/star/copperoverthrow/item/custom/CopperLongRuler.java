@@ -244,7 +244,7 @@ public class CopperLongRuler extends Item {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_sextant.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_long_ruler.tooltip"));
         } else {
             if (stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) != null) {
                 tooltipComponents.add(Component.literal("§7" + (stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS).toShortString())));

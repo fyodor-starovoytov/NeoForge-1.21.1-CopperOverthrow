@@ -29,6 +29,7 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModItems.COPPER_CHISEL);
                         output.accept(ModItems.COPPER_TROWEL);
+                        output.accept(ModItems.COPPER_LONG_RULER);
                         output.accept(ModItems.COPPER_TAPE_MEASURE);
 
                         output.accept(ModItems.COPPER_HAMMER);

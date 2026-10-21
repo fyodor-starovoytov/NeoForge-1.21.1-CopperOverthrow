@@ -13,6 +13,7 @@
   "item.copperoverthrow.copper_stepper_boots": "Шаговые сапоги",
   "item.copperoverthrow.copper_stepper_leggings": "Шаговые поножи",
   "item.copperoverthrow.copper_tape_measure": "Медный секстант",
+  "item.copperoverthrow.copper_long_ruler": "Длинная медная линейка",
 
   "block.copperoverthrow.hologram_block": "Голографический блок",
 
@@ -119,6 +120,7 @@
   "tooltip.copperoverthrow.trowel_item.tooltip": "§e Размещает случайный блок из§r §6Панели быстрого доступа§r",
   "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Воспроизводит случайные ноты во время§r §6Дождя§r",
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Создаёт§r §6окружность§r§e вокруг первой точки, граничащую со второй§r",
+  "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Создаёт§r §6линию§r§e из голографических блоков от одной точки до другой§r",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Звучание:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Высота тона:§r §bВысокий§r",
