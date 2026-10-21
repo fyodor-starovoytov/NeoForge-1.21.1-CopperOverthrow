@@ -76,7 +76,6 @@ public class CopperFillBucketItem extends Item {
 
                     if (!level.isClientSide) {
                         InteractionResult result = blockItem.place(placeContext);
-
                         if (result.consumesAction()) {
                             if (level instanceof ServerLevel serverLevel) {
                                 EquipmentSlot slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;

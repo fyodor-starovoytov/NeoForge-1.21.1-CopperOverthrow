@@ -42,6 +42,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.COPPER_NUGGET.get());
         basicItem(ModItems.COPPER_COOKIE.get());
         handheldItem(ModItems.COPPER_CHISEL.get());
+        handheldItem(ModItems.COPPER_FILL_BUCKET.get());
 
         trimmedArmorItem(ModItems.COPPER_STEPPER_BOOTS);
         trimmedArmorItem(ModItems.COPPER_STEPPER_LEGGINGS);

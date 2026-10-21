@@ -159,7 +159,24 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
                 .save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_FILL_BUCKET.get(), 1)
+                .pattern("D")
+                .pattern("B")
+                .pattern("C")
+                .define('B', Tags.Items.INGOTS_COPPER)
+                .define('C', Tags.Items.GEMS_AMETHYST)
+                .define('D', Tags.Items.STRINGS)
+                .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
+                .save(recipeOutput);
 
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BAMBOO_WIND_CHIME.get(), 2)
+                .pattern(" C ")
+                .pattern("AAA")
+                .pattern(" A ")
+                .define('C', ItemTags.LOGS)
+                .define('A', Items.BAMBOO)
+                .unlockedBy("has_bamboo", has(Items.BAMBOO)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RED_WIND_CHIME.get(), 2)
                 .pattern("BCB")
