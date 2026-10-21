@@ -74,7 +74,7 @@ public class CopperLongRuler extends Item {
                 return InteractionResult.SUCCESS;
             }
         }
-        return InteractionResult.PASS;
+        return InteractionResult.FAIL;
     }
 
 
