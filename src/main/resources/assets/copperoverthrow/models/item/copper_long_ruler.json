@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+
+  "base": {
+    "parent": "copperoverthrow:item/copper_long_ruler_3d_n"
+  },
+
+  "perspectives": {
+    "gui": {
+      "parent": "copperoverthrow:item/copper_long_ruler_2d"
+    },
+    "ground": {
+      "parent": "copperoverthrow:item/copper_long_ruler_2d"
+    },
+    "fixed": {
+      "parent": "copperoverthrow:item/copper_long_ruler_2d"
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "copperoverthrow:using_ruler": 1
+      },
+      "model": "copperoverthrow:item/copper_long_ruler_override"
+    }
+  ]
+}
