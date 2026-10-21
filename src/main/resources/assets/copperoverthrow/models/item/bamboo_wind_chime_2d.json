@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "copperoverthrow:item/bamboo_wind_chime_item_2d"
+  }
+}

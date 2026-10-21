@@ -140,6 +140,7 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.RED_WIND_CHIME);
                         output.accept(ModBlocks.LUNAR_WIND_CHIME);
+                        output.accept(ModBlocks.BAMBOO_WIND_CHIME);
                     }).build());
 
     public static void register(IEventBus eventBus) {
