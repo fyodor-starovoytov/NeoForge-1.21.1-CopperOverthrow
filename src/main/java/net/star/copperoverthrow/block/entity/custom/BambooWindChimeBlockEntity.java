@@ -131,7 +131,7 @@ public class BambooWindChimeBlockEntity extends BlockEntity {
             if (blockEntity.willDoIdleSounds &&
                     (Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get()
                             || (level.isThundering() && Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() * 2))) {
-                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(4, 12);
+                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(2, 8);
             }
 
             if (blockEntity.chimesRemaining > 0) {

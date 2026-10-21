@@ -60,7 +60,7 @@ public class BambooWindChimeBlock extends AbstractWindChimeBlock {
                 double volume = (Math.abs(dx) + Math.abs(dz)) * 30;
 
                 if (entityIsMoving) {
-                    int chimeCount = level.random.nextInt(3, 6);
+                    int chimeCount = level.random.nextInt(5, 14);
                     blockEntity.triggerChimeSequence(chimeCount, volume);
                     blockEntity.startSwing(dx, dz);
                 }
