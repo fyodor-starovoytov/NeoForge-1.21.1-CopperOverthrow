@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CopperTrowelItem extends Item {
+public class CopperTrowelItem extends AbstractRepairableCopperItem {
 
     public CopperTrowelItem(Properties properties) {
         super(properties);

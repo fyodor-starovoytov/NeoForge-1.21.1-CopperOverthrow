@@ -29,7 +29,7 @@ import net.star.copperoverthrow.item.ModItems;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CopperLongRuler extends Item {
+public class CopperLongRuler extends AbstractRepairableCopperItem {
     public CopperLongRuler(Properties properties) {
         super(properties);
     }

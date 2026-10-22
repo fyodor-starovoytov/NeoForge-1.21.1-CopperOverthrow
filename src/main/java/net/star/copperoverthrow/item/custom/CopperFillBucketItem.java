@@ -28,7 +28,7 @@ import net.star.copperoverthrow.block.custom.HologramBlock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CopperFillBucketItem extends Item {
+public class CopperFillBucketItem extends AbstractRepairableCopperItem {
     public CopperFillBucketItem(Properties properties) {
         super(properties);
     }

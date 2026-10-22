@@ -31,6 +31,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.Tags;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.sound.ModSounds;
 
@@ -41,6 +42,11 @@ public class HandsawItem extends ShearsItem {
     public static final int ANIMATION_DURATION = 5;
     public HandsawItem(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
+        return repairCandidate.is(Tags.Items.INGOTS_COPPER) || super.isValidRepairItem(stack, repairCandidate);
     }
 
     @Override

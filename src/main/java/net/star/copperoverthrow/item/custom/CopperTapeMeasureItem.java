@@ -28,7 +28,7 @@ import net.star.copperoverthrow.item.ModItems;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CopperTapeMeasureItem extends Item {
+public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
     private final Block hologramBlock = ModBlocks.HOLOGRAM_BLOCK.get();
 
     public CopperTapeMeasureItem(Properties properties) {

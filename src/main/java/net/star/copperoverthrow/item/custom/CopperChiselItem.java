@@ -20,7 +20,7 @@ import net.minecraft.world.phys.HitResult;
 
 import java.util.List;
 
-public class CopperChiselItem extends Item {
+public class CopperChiselItem extends AbstractRepairableCopperItem {
 
     public CopperChiselItem(Properties properties) {super(properties);
     }
