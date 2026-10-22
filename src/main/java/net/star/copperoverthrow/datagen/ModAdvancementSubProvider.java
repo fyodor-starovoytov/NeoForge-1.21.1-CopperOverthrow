@@ -67,6 +67,22 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
                 .addCriterion("has_chisel", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_CHISEL.get()))
                 .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copper_chisel"), existingFileHelper);
 
+        AdvancementHolder artist = Advancement.Builder.advancement()
+                .parent(copperScaffolding)
+                .display(
+                        ModItems.COPPER_FILL_BUCKET.get(),
+                        Component.translatable("advancements.copperoverthrow.artist.title"),
+                        Component.translatable("advancements.copperoverthrow.artist.description"),
+                        null,
+                        AdvancementType.GOAL,
+                        true,
+                        true,
+                        false
+                )
+                .addCriterion("has_artist", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_FILL_BUCKET.get(), ModItems.COPPER_TAPE_MEASURE.get(), ModItems.COPPER_LONG_RULER.get()))
+                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "artist"), existingFileHelper);
+
+
         AdvancementHolder copperTrowel = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
                 .display(
@@ -176,6 +192,24 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
                         ModBlocks.LARGE_RAIN_DRUM.get(),
                         ModBlocks.TAMTAM.get()))
                 .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "musical"), existingFileHelper);
+
+        AdvancementHolder avatar = Advancement.Builder.advancement()
+                .parent(musical)
+                .display(
+                        ModBlocks.BAMBOO_WIND_CHIME,
+                        Component.translatable("advancements.copperoverthrow.avatar.title"),
+                        Component.translatable("advancements.copperoverthrow.avatar.description"),
+                        null,
+                        AdvancementType.GOAL,
+                        true,
+                        true,
+                        false
+                )
+                .addCriterion("has_avatar", InventoryChangeTrigger.TriggerInstance.hasItems(
+                        ModBlocks.BAMBOO_WIND_CHIME.get(),
+                        ModBlocks.LUNAR_WIND_CHIME.get(),
+                        ModBlocks.RED_WIND_CHIME.get()))
+                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "avatar"), existingFileHelper);
 
         AdvancementHolder orchestra = Advancement.Builder.advancement()
                 .parent(musical)

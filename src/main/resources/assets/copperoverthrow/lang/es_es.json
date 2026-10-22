@@ -164,6 +164,8 @@
   "advancements.copperoverthrow.orchestra.description": "§r§dDije §lTODOS§r§d los instrumentos de cobre",
   "advancements.copperoverthrow.crash_helmet.title": "¡PUM!",
   "advancements.copperoverthrow.crash_helmet.description": "Consigue un casco de obra",
+  "advancements.copperoverthrow.artist.title": "Picasso",
+  "advancements.copperoverthrow.artist.description": "Conviértete en un artista constructor",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notas al tocar",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Determina si los tambores de lluvia emiten partículas al tocar una nota.\n§7Por defecto: Verdadero§r",
@@ -191,5 +193,9 @@
   "sounds.copperoverthrow.kitchen_bell_play": "Timbre de mesa suena",
   "sounds.copperoverthrow.wind_chime_play": "Campanilla de viento suena",
   "sounds.copperoverthrow.handsaw_use": "Uso de sierra manual",
-  "sounds.copperoverthrow.crash_helmet_bonk": "¡BONK!"
+  "sounds.copperoverthrow.crash_helmet_bonk": "¡BONK!",
+
+  "block.copperoverthrow.inverted_hologram_block": "Bloque de holograma invertido",
+  "advancements.copperoverthrow.avatar.title": "Avatar",
+  "advancements.copperoverthrow.avatar.description": "Domina los elementos y conviértete en el Avatar."
 }

@@ -1,0 +1,40 @@
+{
+  "parent": "copperoverthrow:copper_scaffolding",
+  "criteria": {
+    "has_artist": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:copper_fill_bucket"
+          },
+          {
+            "items": "copperoverthrow:copper_tape_measure"
+          },
+          {
+            "items": "copperoverthrow:copper_long_ruler"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.artist.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:copper_fill_bucket"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.artist.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_artist"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

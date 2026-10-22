@@ -164,6 +164,8 @@
   "advancements.copperoverthrow.orchestra.description": "§r§dЯ сказав: §lУСІ§r§d мідні інструменти!",
   "advancements.copperoverthrow.crash_helmet.title": "BONK",
   "advancements.copperoverthrow.crash_helmet.description": "Отримай будівельну каску",
+  "advancements.copperoverthrow.artist.title": "Пікассо",
+  "advancements.copperoverthrow.artist.description": "Станьте художником-будівельником",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Ноти під час гри",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Чи випромінюють барабани дощу частинки під час програвання ноти.\n§7За замовчуванням: ІСТИНА§r",
@@ -191,5 +193,9 @@
   "sounds.copperoverthrow.kitchen_bell_play": "Настільний дзвінок грає",
   "sounds.copperoverthrow.wind_chime_play": "Вітряний дзвіночок дзвенить",
   "sounds.copperoverthrow.handsaw_use": "Використання ручної пили",
-  "sounds.copperoverthrow.crash_helmet_bonk": "BONK!"
+  "sounds.copperoverthrow.crash_helmet_bonk": "BONK!",
+
+  "block.copperoverthrow.inverted_hologram_block": "Інвертований голографічний блок",
+  "advancements.copperoverthrow.avatar.title": "Аватар",
+  "advancements.copperoverthrow.avatar.description": "Oпануйте стихії та станьте Аватаром."
 }

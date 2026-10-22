@@ -164,6 +164,8 @@
   "advancements.copperoverthrow.orchestra.description": "§r§dЯ сказал: §lВСЕ§r§d медные инструменты!",
   "advancements.copperoverthrow.crash_helmet.title": "БОНЬК",
   "advancements.copperoverthrow.crash_helmet.description": "Заполучи строительную каску",
+  "advancements.copperoverthrow.artist.title": "Пикассо",
+  "advancements.copperoverthrow.artist.description": "Стань художником-строителем",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Ноты при игре",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Излучают ли барабаны дождя частицы при воспроизведении нот.\n§7По умолчанию: Истина§r",
@@ -191,5 +193,9 @@
   "sounds.copperoverthrow.kitchen_bell_play": "Настольный звонок играет",
   "sounds.copperoverthrow.wind_chime_play": "Ветряной колокольчик звенит",
   "sounds.copperoverthrow.handsaw_use": "Использование ручной пилы",
-  "sounds.copperoverthrow.crash_helmet_bonk": "БОНЬК!"
+  "sounds.copperoverthrow.crash_helmet_bonk": "БОНЬК!",
+
+  "block.copperoverthrow.inverted_hologram_block": "Инвертированный голографический блок",
+  "advancements.copperoverthrow.avatar.title": "Аватар",
+  "advancements.copperoverthrow.avatar.description": "Стань Аватаром."
 }
