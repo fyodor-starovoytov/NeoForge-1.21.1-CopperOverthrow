@@ -185,6 +185,11 @@
     "sounds": [
       "copperoverthrow:lunar_chime0"
     ]
+  },
+  "bamboo_chime": {
+    "subtitle": "sounds.copperoverthrow.wind_chime_play",
+    "sounds": [
+      "copperoverthrow:bamboo_wind_chime"
+    ]
   }
-
 }

@@ -10,6 +10,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.custom.*;
 import net.star.copperoverthrow.item.armor.CrashHelmetArmorItem;
@@ -27,15 +28,14 @@ public class ModItems {
             () -> new BeeCatcherItem(
                     new Properties().stacksTo(1)));
 
-
     public static final DeferredItem<Item> COPPER_TAPE_MEASURE = ITEMS.register("copper_tape_measure",
-            () -> new CopperTapeMeasureItem(new Properties().durability(256).stacksTo(1)));
+            () -> new CopperTapeMeasureItem(new Properties().durability(256).stacksTo(1), ModBlocks.HOLOGRAM_BLOCK.get()));
 
     public static final DeferredItem<Item> COPPER_FILL_BUCKET = ITEMS.register("copper_fill_bucket",
-            () -> new CopperFillBucketItem(new Properties().durability(256).stacksTo(1)));
+            () -> new CopperFillBucketItem(new Properties().durability(727).stacksTo(1)));
 
     public static final DeferredItem<Item> COPPER_LONG_RULER = ITEMS.register("copper_long_ruler",
-            () -> new CopperLongRuler(new Properties().durability(256).stacksTo(1)));
+            () -> new CopperLongRuler(new Properties().durability(256).stacksTo(1), ModBlocks.HOLOGRAM_BLOCK.get()));
 
     public static final DeferredItem<Item> COPPER_CHISEL = ITEMS.register("copper_chisel",
             () -> new CopperChiselItem(new Properties().durability(256).stacksTo(1)));

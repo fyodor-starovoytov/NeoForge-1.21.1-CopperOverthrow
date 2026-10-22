@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 public class BambooWindChimeBlockEntity extends BlockEntity {
 
-    private final Supplier<SoundEvent> CHIME_SOUND = ModSounds.CRASH_HELMET_BONK;
+    private final Supplier<SoundEvent> CHIME_SOUND = ModSounds.BAMBOO_CHIME;
     public int ticks;
     public boolean swinging;
     public double xMotion;
@@ -131,7 +131,7 @@ public class BambooWindChimeBlockEntity extends BlockEntity {
             if (blockEntity.willDoIdleSounds &&
                     (Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get()
                             || (level.isThundering() && Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() * 2))) {
-                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(2, 8);
+                blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(2, 6);
             }
 
             if (blockEntity.chimesRemaining > 0) {
@@ -139,7 +139,7 @@ public class BambooWindChimeBlockEntity extends BlockEntity {
                     float randomPitch = 0.6f + level.random.nextFloat() * 0.2f;
                     level.playSound(null, pos, blockEntity.CHIME_SOUND.get(), SoundSource.RECORDS, (float) blockEntity.volume, randomPitch);
 
-                    int delay = level.random.nextIntBetweenInclusive(0, 5);
+                    int delay = level.random.nextIntBetweenInclusive(0, 3);
 
                     blockEntity.chimesRemaining--;
                     blockEntity.chimeDelayTicks = delay;

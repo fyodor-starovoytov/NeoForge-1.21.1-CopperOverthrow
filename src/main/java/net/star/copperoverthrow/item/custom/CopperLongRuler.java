@@ -30,10 +30,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CopperLongRuler extends AbstractRepairableCopperItem {
-    public CopperLongRuler(Properties properties) {
+    private final Block hologramBlock;
+
+
+    public CopperLongRuler(Properties properties, HologramBlock block) {
         super(properties);
+        this.hologramBlock = block;
     }
-    private final Block hologramBlock = ModBlocks.HOLOGRAM_BLOCK.get();
 
     @Override
     public InteractionResult useOn(UseOnContext context) {

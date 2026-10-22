@@ -124,7 +124,7 @@
   "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Will play random notes when§r §6Raining§r",
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Creates a§r §6circle§r§e of hologram blocks around the first point bordering the second one",
   "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Creates a§r §6line§r§e of hologram blocks from one point to another",
-  "tooltip.copperoverthrow.copper_fill_bucket.tooltip": "§e Fills all connected§r §6Hologram Blocks§r§e with blocks in Off Hand",
+  "tooltip.copperoverthrow.copper_fill_bucket.tooltip": "§e Fills all connected§r §6Hologram Blocks§r§e with blocks in Off Hand.\n If the Block in Off Hand is a Hologram Block the Brush will§r §6expand§r§e the Hologram Blocks instead",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Sounding:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Pitch:§r §bHigh§r",

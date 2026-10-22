@@ -29,10 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
-    private final Block hologramBlock = ModBlocks.HOLOGRAM_BLOCK.get();
+    private final Block hologramBlock;
 
-    public CopperTapeMeasureItem(Properties properties) {
+    public CopperTapeMeasureItem(Properties properties, HologramBlock block) {
         super(properties);
+        this.hologramBlock = block;
     }
 
     @Override
