@@ -14,6 +14,7 @@
   "item.copperoverthrow.copper_stepper_leggings": "Askelmahousut",
   "item.copperoverthrow.copper_tape_measure": "Kuparisekstantti",
   "item.copperoverthrow.copper_long_ruler": "Pitkä kupariviivoitin",
+  "item.copperoverthrow.copper_fill_bucket": "Täyttösivellin",
 
   "block.copperoverthrow.hologram_block": "Hologrammikuutio",
 
@@ -98,6 +99,7 @@
   "block.copperoverthrow.waxed_weathered_kitchen_bell": "Vahattu kulunut pöytäkello",
   "block.copperoverthrow.waxed_oxidized_kitchen_bell": "Vahattu hapettunut pöytäkello",
 
+  "block.copperoverthrow.bamboo_wind_chime": "Bambutuulikello",
   "block.copperoverthrow.red_wind_chime": "Punainen tuulikello",
   "block.copperoverthrow.lunar_wind_chime": "Kuuntuulikello",
 
@@ -121,6 +123,7 @@
   "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Soittaa satunnaisia säveliä kun§r §6Sataa§r",
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Luo§r §6ympyrän§r§e ensimmäisen pisteen ympärille rajautuen toiseen§r",
   "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Luo§r §6viivan§r§e hologrammikuutioita pisteestä toiseen§r",
+  "tooltip.copperoverthrow.copper_fill_bucket.tooltip": "§e Täyttää kaikki yhdistetyt§r §6Hologrammikuutiot§r§e toisessa kädessä olevilla kuutioilla.\n Jos toisen käden kuutio on hologrammikuutio, harja§r §6laajentaa§r§e hologrammikuutioita",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Kaiku:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Sävelkorkeus:§r §bKorkea§r",

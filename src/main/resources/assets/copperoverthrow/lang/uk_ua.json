@@ -14,6 +14,7 @@
   "item.copperoverthrow.copper_stepper_leggings": "Поноші кроку",
   "item.copperoverthrow.copper_tape_measure": "Мідний секстант",
   "item.copperoverthrow.copper_long_ruler": "Довга мідна лінійка",
+  "item.copperoverthrow.copper_fill_bucket": "Пензель для заповнення",
 
   "block.copperoverthrow.hologram_block": "Голографічний блок",
 
@@ -100,6 +101,7 @@
 
   "block.copperoverthrow.red_wind_chime": "Червоний вітряний дзвіночок",
   "block.copperoverthrow.lunar_wind_chime": "Місячний вітряний дзвіночок",
+  "block.copperoverthrow.bamboo_wind_chime": "Бамбуковий вітряний дзвіночок",
 
   "effect.copperoverthrow.conductivity": "Провідність",
 
@@ -121,6 +123,7 @@
   "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Грає випадкові ноти під час§r §6Дощу§r",
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Створює§r §6коло§r§e навколо першої точки, що межує з другою§r",
   "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Створює§r §6лінію§r§e з голографічних блоків від однієї точки до іншої§r",
+  "tooltip.copperoverthrow.copper_fill_bucket.tooltip": "§e Заповнює всі з'єднані§r §6Голографічні блоки§r§e блоками з додаткової руки.\n Якщо блок у додатковій руці є голографічним блоком, пензель§r §6розширить§r§e голографічні блоки",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Звучання:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Висота тону:§r §bВисока§r",

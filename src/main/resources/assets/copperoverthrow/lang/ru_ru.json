@@ -14,6 +14,7 @@
   "item.copperoverthrow.copper_stepper_leggings": "Шаговые поножи",
   "item.copperoverthrow.copper_tape_measure": "Медный секстант",
   "item.copperoverthrow.copper_long_ruler": "Длинная медная линейка",
+  "item.copperoverthrow.copper_fill_bucket": "Кисть для заполнения",
 
   "block.copperoverthrow.hologram_block": "Голографический блок",
 
@@ -100,6 +101,7 @@
 
   "block.copperoverthrow.red_wind_chime": "Красный ветряной колокольчик",
   "block.copperoverthrow.lunar_wind_chime": "Лунный ветряной колокольчик",
+  "block.copperoverthrow.bamboo_wind_chime": "Бамбуковый ветряной колокольчик",
 
   "effect.copperoverthrow.conductivity": "Проводимость",
 
@@ -121,6 +123,7 @@
   "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Воспроизводит случайные ноты во время§r §6Дождя§r",
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Создаёт§r §6окружность§r§e вокруг первой точки, граничащую со второй§r",
   "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Создаёт§r §6линию§r§e из голографических блоков от одной точки до другой§r",
+  "tooltip.copperoverthrow.copper_fill_bucket.tooltip": "§e Заполняет все соединенные§r §6Голографические блоки§r§e блоками из вспомогательной руки.\n Если блок во вспомогательной руке является голографическим блоком, кисть§r §6расширит§r§e голографические блоки",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Звучание:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Высота тона:§r §bВысокий§r",

@@ -14,6 +14,7 @@
   "item.copperoverthrow.copper_stepper_leggings": "Grebas de escalón",
   "item.copperoverthrow.copper_tape_measure": "Sextante de cobre",
   "item.copperoverthrow.copper_long_ruler": "Regla larga de cobre",
+  "item.copperoverthrow.copper_fill_bucket": "Brocha de relleno",
 
   "block.copperoverthrow.hologram_block": "Bloque holográfico",
 
@@ -100,6 +101,7 @@
 
   "block.copperoverthrow.red_wind_chime": "Campanilla de viento roja",
   "block.copperoverthrow.lunar_wind_chime": "Campanilla de viento lunar",
+  "block.copperoverthrow.bamboo_wind_chime": "Campanilla de viento de bambú",
 
   "effect.copperoverthrow.conductivity": "Conductividad",
 
@@ -121,6 +123,7 @@
   "tooltip.copperoverthrow.rain_drum_block.tooltip": "§e Reproducirá notas aleatorias cuando§r §6Llueva§r",
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Crea un§r §6círculo§r§e alrededor del primer punto que bordea el segundo§r",
   "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Crea una§r §6línea§r§e de bloques holográficos de un punto a otro§r",
+  "tooltip.copperoverthrow.copper_fill_bucket.tooltip": "§e Rellena todos los§r §6Bloques holográficos§r§e conectados con bloques en la mano secundaria.\n Si el bloque en la mano secundaria es un bloque holográfico, el pincel§r §6ampliará§r§e los bloques holográficos en su lugar",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Resonancia:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Tono:§r §bAgudo§r",
