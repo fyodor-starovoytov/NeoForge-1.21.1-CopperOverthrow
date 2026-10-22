@@ -126,7 +126,7 @@ public class CopperFillBucketItem extends Item {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_handsaw_item.tooltip"));
+            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_fill_bucket.tooltip"));
         }
         else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
