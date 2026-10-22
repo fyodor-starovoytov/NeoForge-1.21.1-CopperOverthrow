@@ -51,6 +51,11 @@ public class CopperFillBucketItem extends Item {
                 List<BlockPos> BlocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(pos, level));
 
                 for (BlockPos fillPos : BlocksToBeFilled) {
+
+                    if (consumableStack.isEmpty()) {
+                        break;
+                    }
+
                     BlockHitResult hitResult = new BlockHitResult(
                             context.getClickLocation(),
                             context.getClickedFace(),
@@ -67,7 +72,7 @@ public class CopperFillBucketItem extends Item {
                     );
 
                     if (!placeContext.canPlace()) {
-                        return InteractionResult.FAIL;}
+                        continue;}
 
                     if (level.isClientSide){
                         ParticleUtils.spawnParticlesOnBlockFaces(
