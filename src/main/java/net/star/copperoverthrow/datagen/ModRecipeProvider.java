@@ -1,15 +1,10 @@
 package net.star.copperoverthrow.datagen;
 
-import com.mojang.datafixers.types.templates.Tag;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MinecartItem;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
@@ -320,11 +315,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         .requires(Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.HOLOGRAM_BLOCK.get(), 16)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.HOLOGRAM_BLOCK.get(), 24)
                 .requires(Items.COPPER_GRATE)
                 .requires(Tags.Items.DYES_BLACK)
                 .requires(Tags.Items.DYES_YELLOW)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.INVERTED_HOLOGRAM_BLOCK.get(), 1)
+                .requires(ModBlocks.HOLOGRAM_BLOCK)
+                .unlockedBy("has_hologram", has(ModBlocks.HOLOGRAM_BLOCK)).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.HOLOGRAM_BLOCK.get(), 1)
+                .requires(ModBlocks.INVERTED_HOLOGRAM_BLOCK)
+                .unlockedBy("has_hologram", has(ModBlocks.HOLOGRAM_BLOCK))
+                .save(recipeOutput, "copperoverthrow:hologram_from_inverted");
+
 
 //        addWaxingRecipe(recipeOutput, ModBlocks.LOG_STRIPPER.get(), ModBlocks.WAXED_LOG_STRIPPER.get(), "log_stripper");
 //        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_LOG_STRIPPER.get(), ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get(), "exposed_log_stripper");

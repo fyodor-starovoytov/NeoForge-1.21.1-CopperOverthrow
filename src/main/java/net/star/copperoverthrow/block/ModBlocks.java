@@ -1,6 +1,5 @@
 package net.star.copperoverthrow.block;
 
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -298,12 +297,10 @@ public class ModBlocks {
                     .air()));
     public static final DeferredBlock<HologramBlock> HOLOGRAM_BLOCK = registerBlock("hologram_block",
             () -> new HologramBlock(BlockBehaviour.Properties.of()
-                    .replaceable()
-                    .noCollission()
-                    .noOcclusion()
-                    .instabreak()
-                    .noTerrainParticles()));
-
+                    .replaceable().noCollission().noOcclusion().instabreak().noTerrainParticles()));
+    public static final DeferredBlock<HologramBlock> INVERTED_HOLOGRAM_BLOCK = registerBlock("inverted_hologram_block",
+            () -> new HologramBlock(BlockBehaviour.Properties.of()
+                    .replaceable().noCollission().noOcclusion().instabreak().noTerrainParticles()));
 
     public static final DeferredBlock<Block> RAIN_DRUM = registerBlock("medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()

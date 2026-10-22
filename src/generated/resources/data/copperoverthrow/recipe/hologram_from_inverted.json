@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "copperoverthrow:inverted_hologram_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "copperoverthrow:hologram_block"
+  }
+}

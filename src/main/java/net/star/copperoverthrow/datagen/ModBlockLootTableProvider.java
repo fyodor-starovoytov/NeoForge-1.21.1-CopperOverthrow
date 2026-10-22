@@ -117,6 +117,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.BAMBOO_WIND_CHIME.get());
 
         dropSelf(ModBlocks.HOLOGRAM_BLOCK.get());
+        dropSelf(ModBlocks.INVERTED_HOLOGRAM_BLOCK.get());
 
     }
 
