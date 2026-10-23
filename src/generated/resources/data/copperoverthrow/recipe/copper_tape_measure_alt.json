@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "A": {
-      "tag": "c:nuggets/copper"
+      "item": "minecraft:spyglass"
     },
     "B": {
       "tag": "c:ingots/copper"
@@ -16,9 +16,9 @@
     }
   },
   "pattern": [
-    "CBA",
-    "DCB",
-    "CBA"
+    " BA",
+    "BDB",
+    "CCC"
   ],
   "result": {
     "count": 1,
