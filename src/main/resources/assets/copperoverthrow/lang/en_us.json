@@ -168,6 +168,10 @@
   "advancements.copperoverthrow.orchestra.description": "§r§dI said §lALL§r§d Copper Musical Instruments",
   "advancements.copperoverthrow.crash_helmet.title": "BONK",
   "advancements.copperoverthrow.crash_helmet.description": "Obtain Crash Helmet",
+  "advancements.copperoverthrow.artist.title": "Picasso",
+  "advancements.copperoverthrow.artist.description": "Become a Builder Artist",
+  "advancements.copperoverthrow.avatar.title": "Avatar",
+  "advancements.copperoverthrow.avatar.description": "Obtain all variants of Wind Chime",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notes When Playing",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Whether Rain Drums emit particles when playing a note.\n§7Default: True§r",

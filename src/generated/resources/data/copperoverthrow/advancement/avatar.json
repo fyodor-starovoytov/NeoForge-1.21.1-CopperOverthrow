@@ -1,0 +1,40 @@
+{
+  "parent": "copperoverthrow:musical",
+  "criteria": {
+    "has_avatar": {
+      "conditions": {
+        "items": [
+          {
+            "items": "copperoverthrow:bamboo_wind_chime"
+          },
+          {
+            "items": "copperoverthrow:lunar_wind_chime"
+          },
+          {
+            "items": "copperoverthrow:red_wind_chime"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.copperoverthrow.avatar.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "copperoverthrow:bamboo_wind_chime"
+    },
+    "title": {
+      "translate": "advancements.copperoverthrow.avatar.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_avatar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
