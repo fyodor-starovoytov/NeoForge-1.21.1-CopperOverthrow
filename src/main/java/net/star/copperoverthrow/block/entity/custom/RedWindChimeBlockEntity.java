@@ -64,10 +64,10 @@ public class RedWindChimeBlockEntity extends BlockEntity {
         zMotion = tag.getDouble("zMotion");
         randomX = tag.getDouble("randomX");
         randomZ = tag.getDouble("randomZ");
-        randomX2 = tag.getDouble("randomX3");
-        randomZ2 = tag.getDouble("randomZ3");
-        randomX3 = tag.getDouble("randomX2");
-        randomZ3 = tag.getDouble("randomZ2");
+        randomX2 = tag.getDouble("randomX2");
+        randomZ2 = tag.getDouble("randomZ2");
+        randomX3 = tag.getDouble("randomX3");
+        randomZ3 = tag.getDouble("randomZ3");
         swinging = tag.getBoolean("swinging");
         ticks = tag.getInt("ticks");
     }
@@ -129,8 +129,8 @@ public class RedWindChimeBlockEntity extends BlockEntity {
         if (!level.isClientSide) {
 
             if (blockEntity.willDoIdleSounds &&
-                    (Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get()
-                            || (level.isThundering() && Math.random() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() * 2))) {
+                    (level.random.nextFloat() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get()
+                            || (level.isThundering() && level.random.nextFloat() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() * 2))) {
                 blockEntity.chimesRemaining = level.random.nextIntBetweenInclusive(3, 7);
             }
 

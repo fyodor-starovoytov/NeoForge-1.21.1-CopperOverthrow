@@ -42,16 +42,12 @@ public class LogStripperBlockEntity extends BlockEntity implements Container {
 
     @Override
     public ItemStack getItem(int slot) {
-        setChanged();
         return inventory.get(slot);
     }
 
-    @Override
     public ItemStack removeItem(int slot, int amount) {
         setChanged();
-        ItemStack stack = inventory.get(slot);
-        stack.shrink(amount);
-        return inventory.set(slot, stack);
+        return ContainerHelper.removeItem(inventory, slot, amount);
     }
 
     @Override

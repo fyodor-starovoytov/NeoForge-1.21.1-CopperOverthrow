@@ -1,7 +1,6 @@
 package net.star.copperoverthrow.event;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -37,59 +36,67 @@ import net.star.copperoverthrow.sound.ModSounds;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 @EventBusSubscriber(modid = CopperOverthrow.MOD_ID)
 public class ModEvents {
-    private static final Set<BlockPos> HARVESTED_BLOCKS = new HashSet<>();
+    private static final Set<BlockPos> HARVESTED_BLOCKS = ConcurrentHashMap.newKeySet();
 
     @SubscribeEvent
     public static void onHammerUsage(BlockEvent.BreakEvent event) {
-if (Screen.hasShiftDown()){return;}
-
         Player player = event.getPlayer();
+        if (player.level().isClientSide() || !(player instanceof ServerPlayer serverPlayer)) {
+            return;
+        }
+
         ItemStack mainHandItem = player.getMainHandItem();
-
-        if(mainHandItem.getItem() instanceof HammerItem hammer && player instanceof ServerPlayer serverPlayer) {
-
-            int area = 1;
-            int deep = 0;
-
-            Holder<Enchantment> arealHolder = event.getLevel().registryAccess()
-                    .lookupOrThrow(Registries.ENCHANTMENT)
-                    .getOrThrow(ModEnchantments.AREAL);
-
-            Holder<Enchantment> tunnelingHolder = event.getLevel().registryAccess()
-                    .lookupOrThrow(Registries.ENCHANTMENT)
-                    .getOrThrow(ModEnchantments.TUNNELING);
-
-            if (mainHandItem.getEnchantmentLevel(arealHolder) != 0){
-                area = 2;
-            }
-            if (mainHandItem.getEnchantmentLevel(tunnelingHolder) != 0){
-                deep = mainHandItem.getEnchantmentLevel(tunnelingHolder);
-            }
-
+        if (mainHandItem.getItem() instanceof HammerItem hammer) {
             BlockPos initialBlockPos = event.getPos();
-            if(HARVESTED_BLOCKS.contains(initialBlockPos)) {
+
+            if (!HARVESTED_BLOCKS.add(initialBlockPos)) {
                 return;
             }
 
-            for(BlockPos pos : HammerItem.getBlocksToBeDestroyed(area, deep, initialBlockPos, serverPlayer)) {
+            try {
+                int area = 1;
+                int deep = 0;
 
-                if(pos == initialBlockPos || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos)) || hasOreTag(event, pos)) {
-                    continue;
+                Holder<Enchantment> arealHolder = event.getLevel().registryAccess()
+                        .lookupOrThrow(Registries.ENCHANTMENT)
+                        .getOrThrow(ModEnchantments.AREAL);
+
+                Holder<Enchantment> tunnelingHolder = event.getLevel().registryAccess()
+                        .lookupOrThrow(Registries.ENCHANTMENT)
+                        .getOrThrow(ModEnchantments.TUNNELING);
+
+                if (mainHandItem.getEnchantmentLevel(arealHolder) != 0) {
+                    area = 2;
+                }
+                if (mainHandItem.getEnchantmentLevel(tunnelingHolder) != 0) {
+                    deep = mainHandItem.getEnchantmentLevel(tunnelingHolder);
                 }
 
-                HARVESTED_BLOCKS.add(pos);
-                serverPlayer.gameMode.destroyBlock(pos);
-                HARVESTED_BLOCKS.remove(pos);
+                for (BlockPos pos : HammerItem.getBlocksToBeDestroyed(area, deep, initialBlockPos, serverPlayer)) {
+                    if (pos.equals(initialBlockPos) || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos)) || hasOreTag(event, pos)) {
+                        continue;
+                    }
+
+                    if (HARVESTED_BLOCKS.add(pos)) {
+                        try {
+                            serverPlayer.gameMode.destroyBlock(pos);
+                        } finally {
+                            HARVESTED_BLOCKS.remove(pos);
+                        }
+                    }
+                }
+            } finally {
+                HARVESTED_BLOCKS.remove(initialBlockPos);
             }
         }
     }
 
-    private static boolean hasOreTag(BlockEvent.BreakEvent event, BlockPos pos){
+    private static boolean hasOreTag(BlockEvent.BreakEvent event, BlockPos pos) {
         return event.getLevel().getBlockState(pos).is(Tags.Blocks.ORES);
-
     }
 
     @SubscribeEvent
