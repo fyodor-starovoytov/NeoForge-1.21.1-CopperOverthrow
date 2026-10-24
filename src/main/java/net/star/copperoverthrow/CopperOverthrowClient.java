@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -25,7 +26,10 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
@@ -34,7 +38,6 @@ import net.star.copperoverthrow.client.*;
 import net.star.copperoverthrow.client.renderer.*;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModItemProperties;
-import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,34 +116,6 @@ public class CopperOverthrowClient {
 
         if (stack.is(ModItems.COPPER_HANDSAW.get())) {
             event.setCanceled(true);
-/*
-            //HitResult hitResult = ProjectileUtil.getHitResultOnViewVector(player, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), player.blockInteractionRange();
-            float remainingTicks = player.getUseItemRemainingTicks() - event.getPartialTick();
-            float maxTicks = stack.getUseDuration(player);
-            float useTicks = maxTicks - remainingTicks;
-
-            boolean isMainHand = event.getHand() == InteractionHand.MAIN_HAND;
-            boolean isRightArm = (isMainHand && player.getMainArm() == HumanoidArm.RIGHT) ||
-                    (!isMainHand && player.getMainArm() == HumanoidArm.LEFT);
-            float sideTranslate = isRightArm ? 0.5F : -0.5F;
-            float sideSign = isRightArm ? 1F : -1F;
-
-            PoseStack poseStack = event.getPoseStack();
-
-            float pushPull = -1.7f + Mth.sin(useTicks * 0.6F) * 2F;
-
-            float tilt = Mth.cos((float) ((Math.PI/2) + useTicks * 0.6F)) * 10F;
-
-            float centerX = sideTranslate;
-            float centerY = -0.50F;
-            float centerZ = -0.7F + pushPull;
-
-            poseStack.translate(centerX, centerY, centerZ);
-
-            poseStack.mulPose(Axis.ZP.rotationDegrees(-sideSign*5));
-            poseStack.mulPose(Axis.XP.rotationDegrees(tilt));
-            poseStack.mulPose(Axis.YP.rotationDegrees(tilt * sideSign * 1.2f));
-        */
         }
 
     }
@@ -324,7 +299,6 @@ public class CopperOverthrowClient {
             }
         }
     }
-
 
     private static List<Integer> getLightLevel(LocalPlayer player, Direction face, BlockPos targetPos) {
         List<Integer> light = new ArrayList<>();

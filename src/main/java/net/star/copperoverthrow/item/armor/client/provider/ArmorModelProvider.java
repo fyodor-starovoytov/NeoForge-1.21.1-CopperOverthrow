@@ -1,9 +1,9 @@
 package net.star.copperoverthrow.item.armor.client.provider;
 
-import net.star.copperoverthrow.item.armor.client.model.ArmorModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.star.copperoverthrow.item.armor.client.model.ArmorModel;
 
 /**
  * the armor model provider

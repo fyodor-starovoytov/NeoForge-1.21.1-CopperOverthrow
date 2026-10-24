@@ -1,21 +1,17 @@
 package net.star.copperoverthrow.event;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,22 +26,16 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import net.neoforged.neoforge.registries.datamaps.builtin.Waxable;
 import net.star.copperoverthrow.CopperOverthrow;
-import net.star.copperoverthrow.ServerConfig;
-import net.star.copperoverthrow.block.ModBlocks;
-import net.star.copperoverthrow.block.custom.HologramBlock;
 import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
 import net.star.copperoverthrow.block.custom.TamTamBlock;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
-import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.item.custom.HammerItem;
 import net.star.copperoverthrow.sound.ModSounds;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @EventBusSubscriber(modid = CopperOverthrow.MOD_ID)

@@ -1,11 +1,11 @@
 package net.star.copperoverthrow.item.armor.client.provider;
 
-import net.star.copperoverthrow.item.armor.client.model.ArmorModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.star.copperoverthrow.item.armor.client.model.ArmorModel;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

@@ -1,18 +1,14 @@
 package net.star.copperoverthrow.datagen;
 
-import com.jcraft.jorbis.Block;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
-import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModTags;
 import org.jetbrains.annotations.Nullable;
 

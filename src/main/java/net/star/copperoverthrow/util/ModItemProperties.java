@@ -2,13 +2,11 @@ package net.star.copperoverthrow.util;
 
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.item.ModItems;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ModItemProperties {
     public static void addCustomItemProperties(){

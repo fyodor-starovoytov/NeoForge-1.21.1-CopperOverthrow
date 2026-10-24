@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.ServerConfig;
-import net.star.copperoverthrow.item.ModAttributes;
+import net.star.copperoverthrow.attribute.ModAttributes;
 import org.jetbrains.annotations.Nullable;
 
 public class CrashHelmetArmorItem extends AbstractExtendedArmorItem {

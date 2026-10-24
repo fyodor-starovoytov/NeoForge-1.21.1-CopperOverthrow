@@ -4,19 +4,22 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShearsItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.effect.ModEffects;
-import net.star.copperoverthrow.item.custom.*;
 import net.star.copperoverthrow.item.armor.CrashHelmetArmorItem;
 import net.star.copperoverthrow.item.armor.ModArmorMaterials;
 import net.star.copperoverthrow.item.armor.StepperBootsArmorItem;
 import net.star.copperoverthrow.item.armor.StepperLeggingsArmorItem;
+import net.star.copperoverthrow.item.custom.*;
 
 public class ModItems {
 

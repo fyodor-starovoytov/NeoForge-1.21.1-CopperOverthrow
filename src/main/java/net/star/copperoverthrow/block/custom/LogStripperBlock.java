@@ -36,7 +36,6 @@ import net.star.copperoverthrow.util.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 
 public class LogStripperBlock extends BaseEntityBlock implements WeatheringCopper{
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);

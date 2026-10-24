@@ -13,9 +13,7 @@ import net.minecraft.util.Mth;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.custom.LunarWindChimeBlockEntity;
-import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
 import net.star.copperoverthrow.client.LunarWindChimeModel;
-import net.star.copperoverthrow.client.RedWindChimeModel;
 
 public class LunarWindChimeRenderer implements BlockEntityRenderer<LunarWindChimeBlockEntity> {
     private static final ResourceLocation TEXTURE =

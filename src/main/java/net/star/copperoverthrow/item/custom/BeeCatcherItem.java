@@ -8,22 +8,22 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.star.copperoverthrow.block.custom.CopperBeeosphereBlock;
-import net.star.copperoverthrow.block.entity.custom.CopperBeeosphereBlockEntity;
 import net.star.copperoverthrow.component.ModDataComponents;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static net.minecraft.world.entity.Entity.RemovalReason.DISCARDED;
 
 public class BeeCatcherItem extends Item {
 

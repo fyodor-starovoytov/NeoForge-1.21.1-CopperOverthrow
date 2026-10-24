@@ -1,6 +1,5 @@
 package net.star.copperoverthrow.block.custom;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -14,22 +13,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.block.entity.custom.CopperBeeosphereBlockEntity;
-import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.item.custom.BeeCatcherItem;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 

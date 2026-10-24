@@ -3,14 +3,10 @@ package net.star.copperoverthrow.datagen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.fml.common.Mod;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
-import net.star.copperoverthrow.item.ModItems;
 
 import java.util.Set;
 

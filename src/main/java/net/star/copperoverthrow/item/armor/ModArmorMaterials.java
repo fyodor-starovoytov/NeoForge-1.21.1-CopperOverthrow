@@ -21,6 +21,8 @@ import java.util.function.Supplier;
 public class ModArmorMaterials {
     public static final Holder<ArmorMaterial> STEPPER_ARMOR = register("copper",
             Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
+                attribute.put(ArmorItem.Type.HELMET, 1);
+                attribute.put(ArmorItem.Type.CHESTPLATE, 5);
                 attribute.put(ArmorItem.Type.LEGGINGS, 4);
                 attribute.put(ArmorItem.Type.BOOTS, 1);
             }), 12, 0f, 0f, () -> Items.COPPER_INGOT);
@@ -28,6 +30,9 @@ public class ModArmorMaterials {
     public static final Holder<ArmorMaterial> CRASH_HELMET = register("crash",
             Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
                 attribute.put(ArmorItem.Type.HELMET, 2);
+                attribute.put(ArmorItem.Type.CHESTPLATE, 7);
+                attribute.put(ArmorItem.Type.LEGGINGS, 6);
+                attribute.put(ArmorItem.Type.BOOTS, 2);
             }), 7, 2f, 0f, () -> Items.COPPER_INGOT);
 
 
@@ -38,11 +43,6 @@ public class ModArmorMaterials {
         Holder<SoundEvent> equipSound = SoundEvents.ARMOR_EQUIP_GENERIC;
         Supplier<Ingredient> ingredient = () -> Ingredient.of(ingredientItem.get());
         List<ArmorMaterial.Layer> layers = List.of(new ArmorMaterial.Layer(location));
-
-        EnumMap<ArmorItem.Type, Integer> typeMap = new EnumMap<>(ArmorItem.Type.class);
-        for (ArmorItem.Type type : ArmorItem.Type.values()) {
-            typeMap.put(type, typeProtection.get(type));
-        }
 
         return Registry.registerForHolder(BuiltInRegistries.ARMOR_MATERIAL, location,
                 new ArmorMaterial(typeProtection, enchantability, equipSound, ingredient, layers, toughness, knockbackResistance));

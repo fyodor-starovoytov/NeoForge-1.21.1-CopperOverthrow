@@ -23,14 +23,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.star.copperoverthrow.ClientConfig;
-import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.custom.LunarWindChimeBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
 public class AbstractWindChimeBlock extends BaseEntityBlock {
