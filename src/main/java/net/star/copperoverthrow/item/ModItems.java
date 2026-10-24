@@ -47,8 +47,8 @@ public class ModItems {
             () -> new Item(new Properties().food(new FoodProperties.Builder()
                     .nutrition(3)
                     .saturationModifier(2.0F)
-                    .effect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1.0F)
-                    .effect(new MobEffectInstance(ModEffects.CONDUCTIVITY_EFFECT, 1200, 0, false, false, true), 1.0F)
+                    .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1.0F)
+                    .effect(() -> new MobEffectInstance(ModEffects.CONDUCTIVITY_EFFECT, 1200, 0, false, false, true), 1.0F)
                     .alwaysEdible()
                     .build())));
 

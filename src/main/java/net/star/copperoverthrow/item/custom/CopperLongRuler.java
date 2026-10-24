@@ -80,12 +80,11 @@ public class CopperLongRuler extends AbstractRepairableCopperItem {
         return InteractionResult.FAIL;
     }
 
-
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack stack = player.getItemInHand(usedHand);
-        if (!level.isClientSide){
-            if (Screen.hasShiftDown() && stack.is(ModItems.COPPER_LONG_RULER)){
+        if (player.isShiftKeyDown()){
+            if (!level.isClientSide && stack.is(ModItems.COPPER_LONG_RULER)){
                 stack.set(ModDataComponents.IS_USED, null);
                 stack.set(ModDataComponents.TEMPORAL_DIRECTION, null);
                 stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, null);
@@ -111,7 +110,7 @@ public class CopperLongRuler extends AbstractRepairableCopperItem {
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (entity instanceof Player player && !level.isClientSide) {
-            if (stack.get(ModDataComponents.IS_USED) != null) {
+            if (stack.get(ModDataComponents.IS_USED) != null && isSelected) {
                 BlockPos initialPos = stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS);
                 BlockPos secondaryPos = getBlockLookedAt(player);
 

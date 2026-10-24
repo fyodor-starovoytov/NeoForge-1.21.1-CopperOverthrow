@@ -80,8 +80,8 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack stack = player.getItemInHand(usedHand);
-        if (!level.isClientSide){
-            if (Screen.hasShiftDown() && stack.is(ModItems.COPPER_TAPE_MEASURE)){
+        if (player.isShiftKeyDown()){
+            if (!level.isClientSide && stack.is(ModItems.COPPER_TAPE_MEASURE)){
                 stack.set(ModDataComponents.IS_USED, null);
                 stack.set(ModDataComponents.TEMPORAL_DIRECTION, null);
                 stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, null);
@@ -106,7 +106,7 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (entity instanceof Player player && !level.isClientSide) {
-            if (stack.get(ModDataComponents.IS_USED) != null) {
+            if (stack.get(ModDataComponents.IS_USED) != null && isSelected) {
                 BlockPos initialPos = stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS);
                 BlockPos secondaryPos = getBlockLookedAt(player); // Current target look pos
 
@@ -145,9 +145,6 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
                             toDelete.add(position);
                         }
                     }
-
-
-
                     stack.set(ModDataComponents.TEMPORAL_BLOCKPOS_LIST, toDelete);
                     stack.set(ModDataComponents.TEMPORARY_LAST_REGISTERED_BLOCK, secondaryPos);
                 }

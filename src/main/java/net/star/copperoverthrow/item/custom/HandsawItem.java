@@ -36,7 +36,9 @@ import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.sound.ModSounds;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class HandsawItem extends ShearsItem {
     public static final int ANIMATION_DURATION = 5;
@@ -90,10 +92,10 @@ public class HandsawItem extends ShearsItem {
                 //Defines which tick the action is performed
                 boolean flag = i % 5 == 0;
 
-                if (flag) {
+                if (flag && level.isClientSide) {
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, true);
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, false);
-                    level.playLocalSound(player, ModSounds.HANDSAW_USE.get(), SoundSource.PLAYERS, 0.1F, (float) ServerConfig.HANDSAW_USE_TIME.get() / remainingUseDuration*2.2F);
+                    level.playLocalSound(player, ModSounds.HANDSAW_USE.get(), SoundSource.PLAYERS, 0.1F, (float) ServerConfig.HANDSAW_USE_TIME.get() / remainingUseDuration*2.2F + 0.1f);
                     livingEntity.swing(player.getUsedItemHand(), false);
                 }
                 return;
@@ -176,24 +178,28 @@ public class HandsawItem extends ShearsItem {
     public static List<BlockPos> getBlocksToBeDestroyed(BlockPos initalBlockPos, Level level) {
         List<BlockPos> toBeChecked = new ArrayList<>();
         List<BlockPos> toBeDestroyed = new ArrayList<>();
+        Set<BlockPos> visited = new HashSet<>();
         int r = 1;
 
         Block targetBlock = level.getBlockState(initalBlockPos).getBlock();
 
-        toBeChecked.addFirst(initalBlockPos.immutable());
-        toBeDestroyed.addFirst(initalBlockPos.immutable());
+        BlockPos initialImmutable = initalBlockPos.immutable();
+        toBeChecked.addFirst(initialImmutable);
+        toBeDestroyed.addFirst(initialImmutable);
+        visited.add(initialImmutable);
 
         while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.HANDSAW_MAX_DESTROYED_BLOCKS.get()){
             BlockPos comparable = toBeChecked.removeLast();
             for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, 0, -r), comparable.offset(r, r, r))) {
                 BlockState state = level.getBlockState(pos);
+                BlockPos immutablePos = pos.immutable();
 
-                if (state.is(targetBlock) && !toBeDestroyed.contains(pos.immutable())) {
-                    toBeChecked.add(pos.immutable());
-                    toBeDestroyed.add(pos.immutable());
+                if (state.is(targetBlock) && !visited.contains(immutablePos)) {
+                    toBeChecked.add(immutablePos);
+                    toBeDestroyed.add(immutablePos);
+                    visited.add(immutablePos);
                 }
             }
-
         }
         return toBeDestroyed;
     }

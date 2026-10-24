@@ -40,6 +40,7 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
         Level level = context.getLevel();
         Player player = context.getPlayer();
 
+        if (!level.isClientSide) {
         if (player == null) {
             return InteractionResult.PASS;
         }
@@ -48,7 +49,6 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
         if (validBlocks.isEmpty()) {
             return InteractionResult.PASS;
         }
-
         ItemStack placableStack = validBlocks.get(level.random.nextInt(validBlocks.size()));
         BlockItem blockItem = (BlockItem) placableStack.getItem();
 
@@ -69,10 +69,7 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
 
         if (!placeContext.canPlace()) {
             return InteractionResult.FAIL;}
-
-        if (!level.isClientSide) {
             InteractionResult result = blockItem.place(placeContext);
-            level.playSound(null, context.getClickedPos(), SoundEvents.COPPER_HIT, SoundSource.PLAYERS);
 
             if (result.consumesAction()) {
                 if (level instanceof ServerLevel serverLevel) {
