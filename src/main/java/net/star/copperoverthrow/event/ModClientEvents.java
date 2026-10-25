@@ -3,6 +3,7 @@ package net.star.copperoverthrow.event;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.item.ModItems;
@@ -21,6 +22,7 @@ public class ModClientEvents {
         public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
             event.registerItem(new ArmorClientExtension(new SimpleModelProvider(CrashHelmetModel::createBodyLayer, CrashHelmetModel::new)), ModItems.CRASH_HELMET);
         }
-    }
 
+
+    }
 }
