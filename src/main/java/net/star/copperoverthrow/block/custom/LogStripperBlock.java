@@ -64,6 +64,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         return SHAPE;
     }
 
+
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new LogStripperBlockEntity(pos, state);

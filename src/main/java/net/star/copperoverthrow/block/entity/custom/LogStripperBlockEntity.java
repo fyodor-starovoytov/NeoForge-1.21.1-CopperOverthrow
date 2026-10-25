@@ -28,6 +28,9 @@ public class LogStripperBlockEntity extends BlockEntity implements Container {
         return inventory.size();
     }
 
+
+
+
     @Override
     public boolean isEmpty() {
         for (int i = 0; i < getContainerSize(); i++) {
@@ -58,8 +61,6 @@ public class LogStripperBlockEntity extends BlockEntity implements Container {
 
     @Override
     public void setItem(int slot, ItemStack stack) {
-        setChanged();
-
         if (getItem(0).getItem().equals(stack.getItem())){
             int itemCount = getItem(0).getCount();
             if (itemCount >= 64){
@@ -75,6 +76,10 @@ public class LogStripperBlockEntity extends BlockEntity implements Container {
         }
         else {inventory.set(slot, stack.copyWithCount(stack.getCount()));}
 
+        setChanged();
+        if (level != null && !level.isClientSide()) {
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        }
     }
 
     @Override
@@ -103,6 +108,7 @@ public class LogStripperBlockEntity extends BlockEntity implements Container {
     public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
+
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
