@@ -13,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -124,56 +125,58 @@ public class CopperOverthrowClient {
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_ENTITIES) return;
 
         Minecraft mc = Minecraft.getInstance();
-        LocalPlayer player = mc.player;
-
-        if (player == null || !player.isUsingItem()) return;
-
-        ItemStack useStack = player.getUseItem();
-        if (!useStack.is(ModItems.COPPER_HANDSAW.get())) return;
+        if (mc.level == null) return;
 
         float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
-
-        HitResult hitResult = player.pick(5.0D, partialTick, false);
-        if (!(hitResult instanceof BlockHitResult blockHit) || hitResult.getType() != HitResult.Type.BLOCK) {
-            return;
-        }
-
         PoseStack poseStack = event.getPoseStack();
-        poseStack.pushPose();
-
         Vec3 cameraPos = mc.gameRenderer.getMainCamera().getPosition();
-        Vec3 hitPos = blockHit.getLocation();
-        Vec3 offset = hitPos.subtract(cameraPos);
 
-        poseStack.translate(offset.x, offset.y, offset.z);
+        for (Player player : mc.level.players()) {
+            if (!player.isUsingItem()) continue;
 
-        float remainingTicks = player.getUseItemRemainingTicks() - partialTick;
-        float useTicks = useStack.getUseDuration(player) - remainingTicks;
-        float pushPull = Mth.sin((float) Math.pow(useTicks, 1.28)/3) * 0.24F;
-        float subtleTilt = Mth.cos((float) Math.pow(useTicks, 1.28)/3) * 2.5F;
+            ItemStack useStack = player.getUseItem();
+            if (!useStack.is(ModItems.COPPER_HANDSAW.get())) continue;
 
-        Direction face = blockHit.getDirection();
-        Direction playerFace = player.getDirection();
+            HitResult hitResult = player.pick(5.0D, partialTick, false);
+            if (!(hitResult instanceof BlockHitResult blockHit) || hitResult.getType() != HitResult.Type.BLOCK) {
+                continue;
+            }
 
-        applyFaceTransforms(poseStack, face, playerFace, pushPull);
-        poseStack.mulPose(Axis.XP.rotationDegrees(subtleTilt));
-        BlockPos targetPos = blockHit.getBlockPos();
+            poseStack.pushPose();
 
-        List<Integer> lightLevel = getLightLevel(player, face, targetPos);
-        int packedLight = LightTexture.pack(lightLevel.get(0), lightLevel.get(1));
+            Vec3 hitPos = blockHit.getLocation();
+            Vec3 offset = hitPos.subtract(cameraPos);
 
-        mc.getItemRenderer().renderStatic(
-                useStack,
-                ItemDisplayContext.THIRD_PERSON_RIGHT_HAND,
-                packedLight, // Target block ambient brightness
-                OverlayTexture.NO_OVERLAY,
-                poseStack,
-                mc.renderBuffers().bufferSource(),
-                player.level(),
-                0
-        );
+            poseStack.translate(offset.x, offset.y, offset.z);
 
-        poseStack.popPose();
+            float remainingTicks = player.getUseItemRemainingTicks() - partialTick;
+            float useTicks = useStack.getUseDuration(player) - remainingTicks;
+            float pushPull = Mth.sin((float) Math.pow(useTicks, 1.28) / 3) * 0.24F;
+            float subtleTilt = Mth.cos((float) Math.pow(useTicks, 1.28) / 3) * 2.5F;
+
+            Direction face = blockHit.getDirection();
+            Direction playerFace = player.getDirection();
+
+            applyFaceTransforms(poseStack, face, playerFace, pushPull);
+            poseStack.mulPose(Axis.XP.rotationDegrees(subtleTilt));
+            BlockPos targetPos = blockHit.getBlockPos();
+
+            List<Integer> lightLevel = getLightLevel(player, face, targetPos);
+            int packedLight = LightTexture.pack(lightLevel.get(0), lightLevel.get(1));
+
+            mc.getItemRenderer().renderStatic(
+                    useStack,
+                    ItemDisplayContext.THIRD_PERSON_RIGHT_HAND,
+                    packedLight,
+                    OverlayTexture.NO_OVERLAY,
+                    poseStack,
+                    mc.renderBuffers().bufferSource(),
+                    player.level(),
+                    0
+            );
+
+            poseStack.popPose();
+        }
     }
 
     private static void applyFaceTransforms(PoseStack poseStack, Direction face, Direction playerFace, float pushPull) {
@@ -300,7 +303,7 @@ public class CopperOverthrowClient {
         }
     }
 
-    private static List<Integer> getLightLevel(LocalPlayer player, Direction face, BlockPos targetPos) {
+    private static List<Integer> getLightLevel(Player player, Direction face, BlockPos targetPos) {
         List<Integer> light = new ArrayList<>();
         switch (face) {
             case NORTH -> {
