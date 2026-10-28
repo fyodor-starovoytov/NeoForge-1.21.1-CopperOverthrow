@@ -17,7 +17,7 @@ public class ModClientEvents {
     public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(new ArmorClientExtension(new SimpleModelProvider(CrashHelmetModel::createBodyLayer, CrashHelmetModel::new)), ModItems.CRASH_HELMET);
 
-        event.registerItem(CustomSpyglassArmposeExtension.INSTANCE, ModItems.COPPER_TAPE_MEASURE.get());
+        event.registerItem(CustomSpyglassArmposeExtension.INSTANCE, ModItems.COPPER_SEXTANT.get());
         event.registerItem(CustomSpyglassArmposeExtension.INSTANCE, ModItems.COPPER_LONG_RULER.get());
     }
 }

@@ -112,7 +112,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeOutput, "copperoverthrow:copper_handsaw_alt");
 
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TAPE_MEASURE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_SEXTANT.get(), 1)
                 .pattern(" BA")
                 .pattern("BDB")
                 .pattern("CCC")
@@ -123,7 +123,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
                 .save(recipeOutput, "copperoverthrow:copper_tape_measure_alt");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TAPE_MEASURE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_SEXTANT.get(), 1)
                 .pattern("AB ")
                 .pattern("BDB")
                 .pattern("CCC")
