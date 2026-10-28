@@ -43,6 +43,7 @@ import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
 import net.star.copperoverthrow.sound.ModSounds;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -97,22 +98,22 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new TamTamBlockEntity(pos, state);
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
+    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, @NotNull ItemStack stack) {
         Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
         Direction sideDir = facing.getClockWise();
         level.setBlock(pos.below(), state.setValue(PART, WideThinDoubleBlock.BOTTOM), 3);
@@ -121,7 +122,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    protected boolean canSurvive(BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
         WideThinDoubleBlock part = state.getValue(PART);
         Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
         Direction sideDir = facing.getCounterClockWise();
@@ -154,41 +155,53 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     @Override
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         WideThinDoubleBlock part = state.getValue(PART);
-        Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
+        Direction facing = state.getValue(FACING);
         Direction sideDir = facing.getClockWise();
+        Direction counterSideDir = facing.getCounterClockWise();
 
-        if (direction.getAxis() == Direction.Axis.Y) {
-                if (part == WideThinDoubleBlock.MAIN_TOP && direction == Direction.UP) {
-                    if (Block.canSupportCenter(level, pos, direction)) {
-                        return Blocks.AIR.defaultBlockState();
-                    }
-                }
-                if (part == WideThinDoubleBlock.BOTTOM && direction == Direction.UP) {
-                    if (!isSameStructure(neighborState) || neighborState.getValue(PART) != WideThinDoubleBlock.MAIN_TOP){
-                        return Blocks.AIR.defaultBlockState();
-                    }
-                }
+        boolean isValid = switch (part) {
+            case MAIN_TOP -> {
+                BlockPos clockwisePos = pos.relative(sideDir);
+                BlockPos bottomPos = pos.below();
+                BlockPos bottomClockwisePos = clockwisePos.below();
 
-            if (part == WideThinDoubleBlock.TOP_CLOCKWISE && direction == Direction.DOWN) {
-                if (!isSameStructure(neighborState) || neighborState.getValue(PART) != WideThinDoubleBlock.BOTTOM_CLOCKWISE){
-                    return Blocks.AIR.defaultBlockState();
-                }
+                yield level.getBlockState(clockwisePos).is(this) &&
+                        level.getBlockState(bottomPos).is(this) &&
+                        level.getBlockState(bottomClockwisePos).is(this);
             }
+            case TOP_CLOCKWISE -> {
+                BlockPos counterClockwisePos = pos.relative(counterSideDir);
+                BlockPos belowPos = pos.below();
+                BlockPos bottomClockwisePos = counterClockwisePos.below();
+
+                yield level.getBlockState(counterClockwisePos).is(this) &&
+                        level.getBlockState(belowPos).is(this) &&
+                        level.getBlockState(bottomClockwisePos).is(this);
+            }
+            case BOTTOM -> {
+                BlockPos abovePos = pos.above();
+                BlockPos clockwisePos = pos.relative(sideDir);
+                BlockPos bottomClockwisePos = clockwisePos.above();
+                yield level.getBlockState(abovePos).is(this) &&
+                        level.getBlockState(pos.relative(sideDir)).is(this) &&
+                        level.getBlockState(pos.relative(sideDir).above()).is(this);
+            }
+            case BOTTOM_CLOCKWISE -> {
+                yield level.getBlockState(pos.relative(counterSideDir)).is(this) &&
+                        level.getBlockState(pos.above()).is(this) &&
+                        level.getBlockState(pos.relative(counterSideDir).above()).is(this);
+            }
+        };
+
+        if (!isValid) {
+            return Blocks.AIR.defaultBlockState();
         }
 
-        if (!(direction.getAxis() == facing.getAxis()) && !(direction.getAxis() == Direction.Axis.Y)) {
-            if (part == WideThinDoubleBlock.MAIN_TOP) {
-                if (!isSameStructure(level.getBlockState(pos.relative(sideDir))) || level.getBlockState(pos.relative(sideDir)).getValue(PART) != WideThinDoubleBlock.TOP_CLOCKWISE) {
-                    return Blocks.AIR.defaultBlockState();
-                }
-            }
-        }
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
-
     @Override
-    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
+    public BlockState getToolModifiedState(@NotNull BlockState state, @NotNull UseOnContext context, @NotNull ItemAbility itemAbility, boolean simulate) {
         BlockState modifiedState = super.getToolModifiedState(state, context, itemAbility, simulate);
 
         if (modifiedState != null && !simulate) {
@@ -240,7 +253,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         if (Math.random()<ServerConfig.TAMTAM_FULL_MOON_VOLUME_CHANCE.get() && level.getMoonPhase() == 0 && level.isNight()){
             level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, ServerConfig.TAMTAM_FULL_MOON_VOLUME_RADIUS.get(), 1F);
         }
@@ -248,7 +261,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    public WeatheringCopper.WeatherState getAge() {
+    public WeatheringCopper.@NotNull WeatherState getAge() {
         return this.weatherState;
     }
 
@@ -258,7 +271,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, BlockHitResult hitResult) {
         Direction direction = hitResult.getDirection();
         Direction facing = state.getValue(FACING);
         Direction counterSideDir = facing.getCounterClockWise();
@@ -278,7 +291,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+    protected void onProjectileHit(Level level, @NotNull BlockState state, BlockHitResult hit, @NotNull Projectile projectile) {
         Direction direction = hit.getDirection();
         BlockPos pos = hit.getBlockPos();
         BlockState blockState = level.getBlockState(pos);
@@ -294,7 +307,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+    public @NotNull List<ItemStack> getDrops(BlockState state, LootParams.@NotNull Builder builder) {
         if (state.getValue(PART) != WideThinDoubleBlock.MAIN_TOP) {
             return Collections.emptyList();
         }
@@ -302,7 +315,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+    public @NotNull BlockState playerWillDestroy(Level level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Player player) {
         if (!level.isClientSide) {
             WideThinDoubleBlock part = state.getValue(PART);
             Direction facing = state.getValue(FACING);
@@ -361,7 +374,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return createTickerHelper(type, ModBlockEntities.TAMTAM_BE.get(), TamTamBlockEntity::tick);
     }
 
@@ -393,18 +406,18 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected BlockState rotate(BlockState state, Rotation rotation) {
+    protected @NotNull BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    protected BlockState mirror(BlockState state, Mirror mirror) {
+    protected @NotNull BlockState mirror(BlockState state, Mirror mirror) {
         Rotation rotation = mirror.getRotation(state.getValue(FACING));
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+    protected boolean isPathfindable(@NotNull BlockState state, @NotNull PathComputationType pathComputationType) {
         return false;
     }
 
@@ -414,7 +427,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         if (state.getValue(HorizontalDirectionalBlock.FACING).getAxis() == Direction.Axis.Z) {
             //The not default texture
             return SHAPE_NORTH_SOUTH;
@@ -437,14 +450,14 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         }
 
         @Override
-        public String getSerializedName() {
+        public @NotNull String getSerializedName() {
             return this.name;
         }
     }
 
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));

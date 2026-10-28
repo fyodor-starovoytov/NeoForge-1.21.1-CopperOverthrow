@@ -38,6 +38,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -66,7 +67,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, BlockBehaviour.Properties properties, String tooltip_sounding, Supplier<SoundEvent> pressSound, WeatherState weatherState) {
         super(properties.sound(type.soundType()));
         this.registerDefaultState(
-                this.stateDefinition.any().setValue(POWERED, Boolean.valueOf(false))
+                this.stateDefinition.any().setValue(POWERED, Boolean.FALSE)
         );
         this.TICKS_TO_STAY_PRESSED = ticksToStayPressed;
         this.PRESS_SOUND = pressSound;
@@ -75,17 +76,17 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return Shapes.or(SHAPE_BASE, SHAPE_HAT);
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
         if (state.getValue(POWERED)) {
             return InteractionResult.CONSUME;
         }
@@ -112,7 +113,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    protected void onExplosionHit(BlockState state, Level level, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> dropConsumer) {
+    protected void onExplosionHit(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Explosion explosion, @NotNull BiConsumer<ItemStack, BlockPos> dropConsumer) {
         if (explosion.canTriggerBlocks() && !state.getValue(POWERED)) {
             this.press(state, level, pos, null);
         }
@@ -121,7 +122,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+    protected void onProjectileHit(Level level, @NotNull BlockState state, @NotNull BlockHitResult hit, @NotNull Projectile projectile) {
         if (!level.isClientSide) {
             BlockPos pos = hit.getBlockPos();
             if (projectile.mayInteract(level, pos)
@@ -142,8 +143,8 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     private void press(BlockState state, Level level, BlockPos pos, @Nullable Player player) {
-        level.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(true)), 3);
-        this.updateNeighbours(state, level, pos);
+        level.setBlock(pos, state.setValue(POWERED, Boolean.TRUE), 3);
+        this.updateNeighbours(level, pos);
         level.scheduleTick(pos, this, this.TICKS_TO_STAY_PRESSED + (int) jammed(this.TICKS_TO_STAY_PRESSED));
         level.gameEvent(player, GameEvent.BLOCK_ACTIVATE, pos);
     }
@@ -157,15 +158,15 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
         return createTickerHelper(blockEntityType, ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellBlockEntity::tick);
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+    protected void onRemove(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!isMoving && !state.is(newState.getBlock())) {
             if (state.getValue(POWERED)) {
-                this.updateNeighbours(state, level, pos);
+                this.updateNeighbours(level, pos);
             }
 
             super.onRemove(state, level, pos, newState, isMoving);
@@ -173,22 +174,22 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    protected int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
+    protected int getSignal(BlockState blockState, @NotNull BlockGetter blockAccess, @NotNull BlockPos pos, @NotNull Direction side) {
         return blockState.getValue(POWERED) ? 15 : 0;
     }
 
     @Override
-    protected int getDirectSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
+    protected int getDirectSignal(BlockState blockState, @NotNull BlockGetter blockAccess, @NotNull BlockPos pos, @NotNull Direction side) {
         return blockState.getValue(POWERED) && Direction.DOWN == side ? 15 : 0;
     }
 
     @Override
-    protected boolean isSignalSource(BlockState state) {
+    protected boolean isSignalSource(@NotNull BlockState state) {
         return true;
     }
 
     @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void tick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         if (state.getValue(POWERED)) {
             this.checkPressed(state, level, pos);
         }
@@ -199,8 +200,8 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
         boolean flag = abstractarrow != null;
         boolean flag1 = state.getValue(POWERED);
         if (flag != flag1) {
-            level.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(flag)), 3);
-            this.updateNeighbours(state, level, pos);
+            level.setBlock(pos, state.setValue(POWERED, flag), 3);
+            this.updateNeighbours(level, pos);
             level.gameEvent(abstractarrow, flag ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos);
         }
 
@@ -209,7 +210,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
         }
     }
 
-    private void updateNeighbours(BlockState state, Level level, BlockPos pos) {
+    private void updateNeighbours(Level level, BlockPos pos) {
         level.updateNeighborsAt(pos, this);
         level.updateNeighborsAt(pos.relative(Direction.DOWN), this);
     }
@@ -220,22 +221,22 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new KitchenBellBlockEntity(pos, state);
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
+    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.MODEL;
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         this.changeOverTime(state, level, pos, random);
     }
 
     @Override
-    public WeatherState getAge() {
+    public @NotNull WeatherState getAge() {
         return this.weatherState;
     }
 
@@ -245,7 +246,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));

@@ -33,6 +33,7 @@ import net.neoforged.neoforge.registries.datamaps.builtin.Strippable;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 import net.star.copperoverthrow.util.ModTags;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -55,28 +56,28 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE;
     }
 
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new LogStripperBlockEntity(pos, state);
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
+    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.MODEL;
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+    protected void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (state.getBlock() != newState.getBlock()){
             if (level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity){
                 Containers.dropContents(level, pos, logStripperBlockEntity);
@@ -87,7 +88,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
         if (!(level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
@@ -119,7 +120,9 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         // AXE STRIPPING
         if (!inputStack.isEmpty() && isBlockStrippable(inputStack) && !axeStack.isEmpty()) {
             int toDamage = (int) (inputStack.getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
-            axeStack.hurtAndBreak(Math.max(1, toDamage), player, slot);
+            if (slot != null) {
+                axeStack.hurtAndBreak(Math.max(1, toDamage), player, slot);
+            }
 
             ItemStack resultStack = getStrippedBlock(inputStack);
             logStripperBlockEntity.setItem(0, resultStack);
@@ -135,7 +138,9 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         // SAW SAWING
         if (!inputStack.isEmpty() && isBlockPlank(inputStack) && !sawStack.isEmpty()) {
             int toDamage = (int) (inputStack.getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
-            sawStack.hurtAndBreak(Math.max(1, toDamage), player, slot);
+            if (slot != null) {
+                sawStack.hurtAndBreak(Math.max(1, toDamage), player, slot);
+            }
 
             ItemStack resultStack = getFromPlankBlock(inputStack);
             int totalCount = resultStack.getCount();
@@ -291,12 +296,12 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         this.changeOverTime(state, level, pos, random);
     }
 
     @Override
-    public WeatherState getAge() {
+    public @NotNull WeatherState getAge() {
         return this.weatherState;
     }
 
@@ -306,7 +311,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());

@@ -6,6 +6,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class CopperLanternBlock extends LanternBlock implements WeatheringCopper {
 
@@ -17,12 +18,12 @@ public class CopperLanternBlock extends LanternBlock implements WeatheringCopper
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         this.changeOverTime(state, level, pos, random);
     }
 
     @Override
-    public WeatherState getAge() {
+    public @NotNull WeatherState getAge() {
         return this.weatherState;
     }
 

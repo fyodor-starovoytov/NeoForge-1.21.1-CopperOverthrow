@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.NotNull;
 
 
 public class CopperScaffoldingBlock extends ScaffoldingBlock implements WeatheringCopper, SimpleWaterloggedBlock{
@@ -29,35 +30,35 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
 
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         this.changeOverTime(state, level, pos, random);
     }
 
     @Override
-    public WeatherState getAge() {
+    public @NotNull WeatherState getAge() {
         return this.weatherState;
     }
 
     @Override
-    public boolean isScaffolding(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
+    public boolean isScaffolding(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos, @NotNull LivingEntity entity) {
         return true;
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public @NotNull BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockPos blockpos = context.getClickedPos();
         Level level = context.getLevel();
         int i = getDistance(level, blockpos);
         return this.defaultBlockState()
-                .setValue(WATERLOGGED, Boolean.valueOf(level.getFluidState(blockpos).getType() == Fluids.WATER))
-                .setValue(DISTANCE, Integer.valueOf(i))
-                .setValue(BOTTOM, Boolean.valueOf(this.isBottom(level, blockpos, i)));
+                .setValue(WATERLOGGED, level.getFluidState(blockpos).getType() == Fluids.WATER)
+                .setValue(DISTANCE, i)
+                .setValue(BOTTOM, this.isBottom(level, blockpos, i));
     }
 
     @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void tick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         int i = getDistance(level, pos);
-        BlockState blockstate = state.setValue(DISTANCE, Integer.valueOf(i)).setValue(BOTTOM, Boolean.valueOf(this.isBottom(level, pos, i)));
+        BlockState blockstate = state.setValue(DISTANCE, i).setValue(BOTTOM, this.isBottom(level, pos, i));
         if (blockstate.getValue(DISTANCE) == 7) {
             if (state.getValue(DISTANCE) == 7) {
                 FallingBlockEntity.fall(level, pos, blockstate);
@@ -70,7 +71,7 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
     }
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    protected boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
         return getDistance(level, pos) < 7;
     }
 

@@ -32,13 +32,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.ClientConfig;
 import net.star.copperoverthrow.sound.ModSounds;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class RainDrumBlockTall extends MultiBlockTallDecoration implements WeatheringCopper {
     private final float PITCH;
     private final float VOLUME;
-    private final double X1_Z1;
     private final double X2_Z2;
     private final int BLOCK_HEIGHT;
     private final VoxelShape SHAPE;
@@ -62,31 +62,30 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
         this.PITCH = pitch;
         this.VOLUME = volume;
         this.BLOCK_HEIGHT = blockHeight;
-        this.X1_Z1 = x1_z1;
         this.X2_Z2 = x2_z2;
-        this.SHAPE = Block.box(X1_Z1, 0, X1_Z1, X2_Z2, 16, X2_Z2);
+        this.SHAPE = Block.box(x1_z1, 0, x1_z1, X2_Z2, 16, X2_Z2);
         this.TOOLTIP = tooltip_pitch;
         this.TOOLTIP_SOUNDING = tooltip_sounding;
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+    public void animateTick(@NotNull BlockState state, Level level, BlockPos pos, @NotNull RandomSource random) {
         if (level.isRainingAt(pos.above())) {
 
-            float finalSoundProbality = SOUND_PROBABILITY;
+            float finalSoundProbability = SOUND_PROBABILITY;
             float finalVolume = VOLUME;
             if (level.isThundering()){
-                finalSoundProbality = SOUND_PROBABILITY + THUNDER_SOUND_PROBABILITY_ADDITION;
+                finalSoundProbability = SOUND_PROBABILITY + THUNDER_SOUND_PROBABILITY_ADDITION;
                 finalVolume = VOLUME + THUNDER_VOLUME_ADDITION;
             }
 
-            if (random.nextFloat() < finalSoundProbality) {
-                float finalPitch = Math.min(10 , Math.max (0.85f , random.nextFloat() * randomFloat() + PITCH));
+            if (random.nextFloat() < finalSoundProbability) {
+                float finalPitch = Math.clamp(random.nextFloat() * randomFloat() + PITCH, 0.85f, 10);
                   soundToBePlayedRaining(level, pos, finalVolume, finalPitch);
                 if (random.nextFloat() < PARTICLE_PROBABILITY && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()) {
                     ParticleUtils.spawnParticleInBlock(
@@ -125,7 +124,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
 
                     if (fluid != Fluids.EMPTY) {
                         if (random.nextFloat() < 0.05f) {
-                            float finalPitch = Math.min(2.0f, Math.max(0.85f, PITCH + (random.nextFloat() - 0.5f) * 0.2f));
+                            float finalPitch = Math.clamp(PITCH + (random.nextFloat() - 0.5f) * 0.2f, 0.85f, 2.0f);
                             soundToBePlayedPlaying(level, pos, VOLUME, finalPitch, true);
                             if (isLava) {
                                 level.playLocalSound(
@@ -175,7 +174,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+    protected void onProjectileHit(Level level, @NotNull BlockState state, @NotNull BlockHitResult hit, @NotNull Projectile projectile) {
         if (!level.isClientSide) {
             BlockPos pos = hit.getBlockPos();
             if (projectile.mayInteract(level, pos)
@@ -194,7 +193,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
 
         if (!level.isClientSide){
             soundToBePlayedPlaying(level, pos, VOLUME, PITCH, false);
@@ -215,26 +214,26 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+    protected void onRemove(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean movedByPiston) {
         if (!level.isClientSide){
             soundToBePlayedPlaying(level, pos, VOLUME - 0.5f, PITCH, false);
         }
     }
 
     @Override
-    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+    protected void onPlace(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean movedByPiston) {
         if (!level.isClientSide){
             soundToBePlayedPlaying(level, pos, VOLUME  - 0.5f, PITCH, false);
         }
     }
 
     @Override
-    public WeatheringCopper.WeatherState getAge() {
+    public WeatheringCopper.@NotNull WeatherState getAge() {
         return this.weatherState;
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         this.changeOverTime(state, level, pos, random);
     }
 
@@ -271,7 +270,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable(TOOLTIP));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
@@ -291,4 +290,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
+    public int getBLOCK_HEIGHT() {
+        return BLOCK_HEIGHT;
+    }
 }

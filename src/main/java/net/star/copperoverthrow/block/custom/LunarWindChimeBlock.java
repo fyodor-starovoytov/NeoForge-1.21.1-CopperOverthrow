@@ -22,6 +22,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.LunarWindChimeBlockEntity;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -40,12 +41,12 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
 
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
         return createTickerHelper(blockEntityType, ModBlockEntities.LUNAR_WIND_CHIME_BE.get(), LunarWindChimeBlockEntity::tick);
     }
 
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    public void entityInside(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Entity entity) {
         if (level.isClientSide()) return;
 
         BlockPos targetPos = state.getValue(UPPER) ? pos : pos.above();
@@ -65,12 +66,12 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
                 }
             }
 
-            blockEntity.onOpenAir(!isBlockObstructed(pos, level));
+            blockEntity.onOpenAir(isBlockObstructed(pos, level));
         }
     }
 
     @Override
-    protected void onExplosionHit(BlockState state, Level level, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> dropConsumer) {
+    protected void onExplosionHit(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Explosion explosion, @NotNull BiConsumer<ItemStack, BlockPos> dropConsumer) {
         if (level.isClientSide()) return;
 
         BlockPos targetPos = state.getValue(UPPER) ? pos : pos.above();
@@ -82,7 +83,7 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
                 blockEntity.triggerChimeSequence(chimeCount, explosion.radius()/4);
             }
 
-            blockEntity.onOpenAir(!isBlockObstructed(pos, level));
+            blockEntity.onOpenAir(isBlockObstructed(pos, level));
         }
     }
 
@@ -125,11 +126,11 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
         BlockHitResult hitEast = level.clip(contextEast);
         boolean isObstructed = hitSouth.getType() != HitResult.Type.MISS && hitEast.getType() != HitResult.Type.MISS && hitWest.getType() != HitResult.Type.MISS && hitNorth.getType() != HitResult.Type.MISS;
 
-        return isObstructed;
+        return !isObstructed;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.low_pitch.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
