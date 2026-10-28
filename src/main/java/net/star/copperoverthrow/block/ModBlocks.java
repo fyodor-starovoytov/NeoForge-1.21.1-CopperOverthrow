@@ -4,12 +4,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ScaffoldingBlockItem;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -298,6 +296,15 @@ public class ModBlocks {
                     .noLootTable()
                     .noTerrainParticles()
                     .air()));
+
+    public static final DeferredBlock<TemporalLightBlock> TEMPORAL_LIGHT_BLOCK = registerBlock("temporal_light_block",
+            () -> new TemporalLightBlock(BlockBehaviour.Properties.of()
+                    .replaceable()
+                    .strength(-1.0F, 3600000.8F)
+                    .noLootTable()
+                    .noOcclusion()
+                    .lightLevel(TemporalLightBlock.LIGHT_EMISSION)));
+
     public static final DeferredBlock<HologramBlock> HOLOGRAM_BLOCK = registerBlock("hologram_block",
             () -> new HologramBlock(BlockBehaviour.Properties.of()
                     .replaceable().noCollission().noOcclusion().instabreak().noTerrainParticles()));

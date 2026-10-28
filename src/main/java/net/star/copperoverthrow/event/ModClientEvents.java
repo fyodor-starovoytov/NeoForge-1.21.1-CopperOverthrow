@@ -9,6 +9,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.item.armor.client.ArmorClientExtension;
 import net.star.copperoverthrow.item.armor.client.model.CrashHelmetModel;
+import net.star.copperoverthrow.item.armor.client.model.MiningHelmModel;
 import net.star.copperoverthrow.item.armor.client.provider.SimpleModelProvider;
 
 import java.util.Map;
@@ -21,6 +22,7 @@ public class ModClientEvents {
         @SubscribeEvent
         public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
             event.registerItem(new ArmorClientExtension(new SimpleModelProvider(CrashHelmetModel::createBodyLayer, CrashHelmetModel::new)), ModItems.CRASH_HELMET);
+            event.registerItem(new ArmorClientExtension(new SimpleModelProvider(MiningHelmModel::createBodyLayer, MiningHelmModel::new)), ModItems.MINING_HELM);
         }
 
 

@@ -36,6 +36,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COPPER_HAMMER);
                         output.accept(ModItems.COPPER_HANDSAW);
 
+                        output.accept(ModItems.MINING_HELM);
                         output.accept(ModItems.CRASH_HELMET);
                         output.accept(ModItems.COPPER_STEPPER_LEGGINGS);
                         output.accept(ModItems.COPPER_STEPPER_BOOTS);
