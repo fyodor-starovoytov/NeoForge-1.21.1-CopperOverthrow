@@ -78,7 +78,7 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
                         true,
                         false
                 )
-                .addCriterion("has_artist", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_FILL_BUCKET.get(), ModItems.COPPER_TAPE_MEASURE.get(), ModItems.COPPER_LONG_RULER.get()))
+                .addCriterion("has_artist", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_FILL_BUCKET.get(), ModItems.COPPER_SEXTANT.get(), ModItems.COPPER_LONG_RULER.get()))
                 .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "artist"), existingFileHelper);
 
 

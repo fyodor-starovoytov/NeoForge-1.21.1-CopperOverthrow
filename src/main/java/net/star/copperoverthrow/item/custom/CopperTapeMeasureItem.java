@@ -79,7 +79,7 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack stack = player.getItemInHand(usedHand);
         if (player.isShiftKeyDown()){
-            if (!level.isClientSide && stack.is(ModItems.COPPER_TAPE_MEASURE)){
+            if (!level.isClientSide && stack.is(ModItems.COPPER_SEXTANT)){
                 stack.set(ModDataComponents.IS_USED, null);
                 stack.set(ModDataComponents.TEMPORAL_DIRECTION, null);
                 stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, null);
@@ -149,7 +149,6 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
             }
         }
     }
-
 
     private static BlockPos getBlockLookedAt(Player player){
 

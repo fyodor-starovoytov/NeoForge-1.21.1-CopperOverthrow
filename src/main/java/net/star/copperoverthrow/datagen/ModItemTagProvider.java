@@ -82,7 +82,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ModTags.Items.C_TOOLS_BUILDERS)
                 .add(ModItems.COPPER_TROWEL.get())
                 .add(ModItems.COPPER_CHISEL.get())
-                .add(ModItems.COPPER_TAPE_MEASURE.get())
+                .add(ModItems.COPPER_SEXTANT.get())
                 .add(ModItems.COPPER_LONG_RULER.get())
                 .add(ModItems.COPPER_FILL_BUCKET.get());
 
