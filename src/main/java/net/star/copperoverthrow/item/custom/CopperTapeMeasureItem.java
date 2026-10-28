@@ -1,6 +1,7 @@
 package net.star.copperoverthrow.item.custom;
 
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -9,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec2;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.custom.HologramBlock;
 import net.star.copperoverthrow.component.ModDataComponents;
@@ -25,6 +28,7 @@ import net.star.copperoverthrow.item.ModItems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
     private final Block hologramBlock;
@@ -149,7 +153,6 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
             }
         }
     }
-
 
     private static BlockPos getBlockLookedAt(Player player){
 
