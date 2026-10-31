@@ -7,13 +7,16 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
+import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -36,7 +39,6 @@ public class FireflyEntity extends Animal implements FlyingAnimal {
         this.setPathfindingMalus(PathType.DANGER_FIRE, -1.0F);
         this.setPathfindingMalus(PathType.WATER, -1.0F);
         this.setPathfindingMalus(PathType.WATER_BORDER, 16.0F);
-        this.setPathfindingMalus(PathType.COCOA, -1.0F);
         this.setPathfindingMalus(PathType.FENCE, -1.0F);
     }
 
@@ -47,12 +49,16 @@ public class FireflyEntity extends Animal implements FlyingAnimal {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new PanicGoal(this, 4));
-        this.goalSelector.addGoal(1, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.0, stack -> stack.is(Items.GLOW_BERRIES), false));
+        this.goalSelector.addGoal(0, new FireflyPanicGoal(this, 1.5));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, stack -> stack.is(Items.GLOW_BERRIES), false));
 
-        this.goalSelector.addGoal(3, new FloatGoal(this));
-        this.goalSelector.addGoal(4, new FireflyWanderGoal());
+        this.goalSelector.addGoal(4, new FloatGoal(this));
+        this.goalSelector.addGoal(5, new FireflyWanderGoal());
+
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0, false));
+        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Bat.class, true));
+
     }
 
     @Override
@@ -73,19 +79,27 @@ public class FireflyEntity extends Animal implements FlyingAnimal {
     public static AttributeSupplier.Builder createAttributes(){
         return Animal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)
-                .add(Attributes.FLYING_SPEED, 2.0F)
-                .add(Attributes.MOVEMENT_SPEED, 0.05F)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.03)
+                .add(Attributes.FLYING_SPEED, 0.15F)
+                .add(Attributes.MOVEMENT_SPEED, 0.2F)
                 .add(Attributes.FOLLOW_RANGE, 48.0);
     }
 
     @Override
-    public @Nullable AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
-        return ModEntities.FIREFLY.get().create(level);
+    public float getFlyingSpeed() {
+        return (float) this.getAttributeValue(Attributes.FLYING_SPEED);
     }
 
     @Override
     public boolean isFlying() {
         return !this.onGround();
+    }
+
+
+    @Override
+    public @Nullable AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+        return ModEntities.FIREFLY.get().create(level);
     }
 
     @Override
@@ -131,8 +145,24 @@ public class FireflyEntity extends Animal implements FlyingAnimal {
         }
 
         @Override
-        public boolean isRunning() {
-            return super.isRunning();
+        protected boolean findRandomPosition() {
+            Vec3 vec3 = FireflyEntity.this.getViewVector(0.0F);
+
+            Vec3 vec32 = HoverRandomPos.getPos(this.mob, 20, 7, vec3.x, vec3.z, (float) (Math.PI / 2), 3, 1);
+
+            if (vec32 == null) {
+                vec32 = AirAndWaterRandomPos.getPos(this.mob, 20, 4, -2, vec3.x, vec3.z, (float) (Math.PI / 2));
+            }
+
+            if (vec32 == null) {
+                return false;
+            }
+
+            this.posX = vec32.x;
+            this.posY = vec32.y;
+            this.posZ = vec32.z;
+
+            return true;
         }
     }
 
