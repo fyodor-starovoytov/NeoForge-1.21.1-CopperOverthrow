@@ -22,6 +22,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -31,6 +32,8 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
 import net.star.copperoverthrow.block.custom.TamTamBlock;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
+import net.star.copperoverthrow.entity.ModEntities;
+import net.star.copperoverthrow.entity.custom.FireflyEntity;
 import net.star.copperoverthrow.item.custom.HammerItem;
 import net.star.copperoverthrow.sound.ModSounds;
 
@@ -209,5 +212,10 @@ public class ModEvents {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(ModEntities.FIREFLY.get(), FireflyEntity.createAttributes().build());
     }
 }

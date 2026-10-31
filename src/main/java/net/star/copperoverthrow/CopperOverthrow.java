@@ -16,6 +16,7 @@ import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.effect.ModEffects;
+import net.star.copperoverthrow.entity.ModEntities;
 import net.star.copperoverthrow.item.ModCreativeModeTabs;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.sound.ModSounds;
@@ -37,6 +38,7 @@ public class CopperOverthrow {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        ModEntities.register(modEventBus);
         ModBlockEntities.register(modEventBus);
 
         ModSounds.SOUND_EVENTS.register(modEventBus);
