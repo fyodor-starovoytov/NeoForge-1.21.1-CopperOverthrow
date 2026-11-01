@@ -1,9 +1,19 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": [
-    "minecraft:plains",
-    "minecraft:forest"
-  ],
+  "biomes": {
+    "type": "neoforge:and",
+    "values": [
+      "#c:is_overworld",
+      {
+        "type": "neoforge:or",
+        "values": [
+          "#c:is_plains",
+          "#c:is_forest",
+          "minecraft:flower_forest"
+        ]
+      }
+    ]
+  },
   "spawners": {
     "type": "copperoverthrow:firefly",
     "maxCount": 3,
