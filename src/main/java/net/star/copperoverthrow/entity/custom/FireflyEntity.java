@@ -26,6 +26,7 @@ import net.star.copperoverthrow.entity.ModEntities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
+import java.util.List;
 
 
 public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnimal {
@@ -51,9 +52,11 @@ public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnim
         this.goalSelector.addGoal(0, new FireflyPanicGoal(this, 1.5));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, stack -> stack.is(Items.GLOW_BERRIES), false));
+        this.goalSelector.addGoal(4, new FlirtGoal(this, 1.1));
+        this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1));
 
-        this.goalSelector.addGoal(4, new FloatGoal(this));
-        this.goalSelector.addGoal(5, new FireflyWanderGoal());
+        this.goalSelector.addGoal(6, new FloatGoal(this));
+        this.goalSelector.addGoal(7, new FireflyWanderGoal());
 
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0, false));
         this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Bat.class, true));
@@ -168,6 +171,106 @@ public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnim
         return true;
     }
 
+    class FlirtGoal extends FollowParentGoal {
+
+        @javax.annotation.Nullable
+        private Animal partner;
+        private final Animal animal;
+        private final double speedModifier;
+        private int timeToRecalcPath;
+
+        public FlirtGoal(Animal animal, double speedModifier) {
+            super(animal, speedModifier);
+            this.animal = animal;
+            this.speedModifier = speedModifier;
+        }
+
+        @Override
+        public boolean canUse() {
+            if (this.animal.getAge() < 0) {
+                return false;
+            } else {
+                List<? extends Animal> list = this.animal
+                        .level()
+                        .getEntitiesOfClass((Class<? extends Animal>)this.animal.getClass(), this.animal.getBoundingBox().inflate(8.0, 4.0, 8.0));
+                Animal nearestPartner = null;
+                double nearestDistSqr = Double.MAX_VALUE;
+
+                for (Animal potentialPartner : list) {
+
+                    if (potentialPartner == this.animal) {
+                        continue;
+                    }
+
+                    if (potentialPartner.getAge() >= 0 && potentialPartner.isAlive()) {
+                        double distSqr = this.animal.distanceToSqr(potentialPartner);
+                        if (distSqr < nearestDistSqr) {
+                            nearestDistSqr = distSqr;
+                            nearestPartner = potentialPartner;
+                        }
+                    }
+                }
+
+                if (nearestPartner == null) {
+                    return false;
+                }
+
+                this.partner = nearestPartner;
+                return true;
+            }
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            if (this.animal.getAge() < 0) {
+                return false;
+            }
+            if (this.partner == null || !this.partner.isAlive()) {
+                return false;
+            }
+            double distSqr = this.animal.distanceToSqr(this.partner);
+            return distSqr <= 256.0;
+        }
+
+        @Override
+        public void start() {
+            this.timeToRecalcPath = 0;
+        }
+
+        @Override
+        public void stop() {
+            this.partner = null;
+        }
+
+        @Override
+        public void tick() {
+            if (this.partner == null) return;
+
+            this.animal.getLookControl().setLookAt(this.partner, 10.0F, (float) this.animal.getMaxHeadXRot());
+
+            if (--this.timeToRecalcPath <= 0) {
+                this.timeToRecalcPath = this.adjustedTickDelay(10);
+
+                double distSqr = this.animal.distanceToSqr(this.partner);
+
+                if (distSqr > 4.0) {
+                    this.animal.getNavigation().moveTo(this.partner, this.speedModifier);
+                } else {
+
+                    double angle = (this.animal.tickCount * 0.2) + (this.animal.getId() % 6);
+                    double offsetX = Math.cos(angle) * 1.5;
+                    double offsetZ = Math.sin(angle) * 1.5;
+
+                    this.animal.getNavigation().moveTo(
+                            this.partner.getX() + offsetX,
+                            this.partner.getY(),
+                            this.partner.getZ() + offsetZ,
+                            this.speedModifier
+                    );
+                }
+            }
+        }
+    }
 
     class FireflyPanicGoal extends PanicGoal {
         public FireflyPanicGoal(PathfinderMob mob, double speedModifier) {

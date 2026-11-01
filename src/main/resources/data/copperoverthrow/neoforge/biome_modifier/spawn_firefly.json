@@ -18,6 +18,6 @@
     "type": "copperoverthrow:firefly",
     "maxCount": 3,
     "minCount": 1,
-    "weight": 45
+    "weight": 60
   }
 }
