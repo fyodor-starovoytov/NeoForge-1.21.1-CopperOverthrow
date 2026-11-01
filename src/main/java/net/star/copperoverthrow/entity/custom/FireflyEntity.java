@@ -57,10 +57,6 @@ public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnim
 
         this.goalSelector.addGoal(6, new FloatGoal(this));
         this.goalSelector.addGoal(7, new FireflyWanderGoal());
-
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0, false));
-        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Bat.class, true));
-
     }
 
     @Override
