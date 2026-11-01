@@ -15,7 +15,7 @@ public class ModEntities {
             DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, CopperOverthrow.MOD_ID);
 
     public static final Supplier<EntityType<FireflyEntity>> FIREFLY =
-            ENTITY_TYPES.register("firefly", () -> EntityType.Builder.of(FireflyEntity::new, MobCategory.CREATURE)
+            ENTITY_TYPES.register("firefly", () -> EntityType.Builder.of(FireflyEntity::new, MobCategory.AMBIENT)
                     .sized(0.7f, 0.4f).build("firefly"));
 
 

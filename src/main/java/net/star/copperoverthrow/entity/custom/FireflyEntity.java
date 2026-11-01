@@ -14,9 +14,7 @@ import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
-import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 
 
-public class FireflyEntity extends Animal implements FlyingAnimal {
+public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnimal {
     public final AnimationState idleAnimationState = new AnimationState();
     private float idleAnimationTimeout = 0;
 
