@@ -16,8 +16,8 @@
   },
   "spawners": {
     "type": "copperoverthrow:firefly",
-    "maxCount": 3,
+    "maxCount": 2,
     "minCount": 1,
-    "weight": 60
+    "weight": 50
   }
 }

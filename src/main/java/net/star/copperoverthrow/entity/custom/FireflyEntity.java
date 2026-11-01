@@ -52,7 +52,7 @@ public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnim
         this.goalSelector.addGoal(0, new FireflyPanicGoal(this, 1.5));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, stack -> stack.is(Items.GLOW_BERRIES), false));
-        this.goalSelector.addGoal(4, new FlirtGoal(this, 1.1));
+        this.goalSelector.addGoal(4, new FlirtGoal(this, 1.0));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1));
 
         this.goalSelector.addGoal(6, new FloatGoal(this));
@@ -215,6 +215,10 @@ public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnim
                     return false;
                 }
 
+                if (isPanicking()){
+                    return false;
+                }
+
                 this.partner = nearestPartner;
                 return true;
             }
@@ -228,8 +232,14 @@ public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnim
             if (this.partner == null || !this.partner.isAlive()) {
                 return false;
             }
+
+            if (isPanicking()){
+                return false;
+            }
+
             double distSqr = this.animal.distanceToSqr(this.partner);
             return distSqr <= 256.0;
+
         }
 
         @Override
@@ -246,20 +256,20 @@ public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnim
         public void tick() {
             if (this.partner == null) return;
 
-            this.animal.getLookControl().setLookAt(this.partner, 10.0F, (float) this.animal.getMaxHeadXRot());
+            this.animal.getLookControl().setLookAt(this.partner, 5.0F, (float) this.animal.getMaxHeadXRot());
 
             if (--this.timeToRecalcPath <= 0) {
-                this.timeToRecalcPath = this.adjustedTickDelay(10);
+                this.timeToRecalcPath = this.adjustedTickDelay(5);
 
                 double distSqr = this.animal.distanceToSqr(this.partner);
 
-                if (distSqr > 4.0) {
+                if (distSqr > 10.0) {
                     this.animal.getNavigation().moveTo(this.partner, this.speedModifier);
                 } else {
 
-                    double angle = (this.animal.tickCount * 0.2) + (this.animal.getId() % 6);
-                    double offsetX = Math.cos(angle) * 1.5;
-                    double offsetZ = Math.sin(angle) * 1.5;
+                    double angle = (this.animal.tickCount * 0.2) + (this.animal.getId() % 12);
+                    double offsetX = Math.cos(angle) * 3.5;
+                    double offsetZ = Math.sin(angle) * -3.5;
 
                     this.animal.getNavigation().moveTo(
                             this.partner.getX() + offsetX,
@@ -275,6 +285,11 @@ public class FireflyEntity extends AbstractNocturnalAnimal implements FlyingAnim
     class FireflyPanicGoal extends PanicGoal {
         public FireflyPanicGoal(PathfinderMob mob, double speedModifier) {
             super(mob, speedModifier);
+        }
+
+        @Override
+        public boolean isInterruptable() {
+            return false;
         }
 
         @Override
