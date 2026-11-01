@@ -43,6 +43,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COPPER_COOKIE);
 
                         output.accept(ModItems.BEE_CATCHER);
+                        output.accept(ModItems.FIREFLY_SPAWN_EGG);
 
 
                     }).build());

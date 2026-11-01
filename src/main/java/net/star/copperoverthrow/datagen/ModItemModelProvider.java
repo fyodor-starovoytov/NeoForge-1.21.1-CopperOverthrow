@@ -46,6 +46,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         trimmedArmorItem(ModItems.COPPER_STEPPER_BOOTS);
         trimmedArmorItem(ModItems.COPPER_STEPPER_LEGGINGS);
         basicItem(ModItems.CRASH_HELMET.get());
+
+        withExistingParent(ModItems.FIREFLY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     // Shoutout to El_Redstoniano for making this

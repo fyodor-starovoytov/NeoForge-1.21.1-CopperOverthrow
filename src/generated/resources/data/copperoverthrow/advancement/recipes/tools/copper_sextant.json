@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "copperoverthrow:copper_tape_measure"
+        "recipe": "copperoverthrow:copper_sextant"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "copperoverthrow:copper_tape_measure"
+      "copperoverthrow:copper_sextant"
     ]
   }
 }

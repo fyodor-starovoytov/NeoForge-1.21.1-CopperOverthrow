@@ -10,11 +10,13 @@ import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.ShearsItem;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.effect.ModEffects;
+import net.star.copperoverthrow.entity.ModEntities;
 import net.star.copperoverthrow.item.armor.CrashHelmetArmorItem;
 import net.star.copperoverthrow.item.armor.ModArmorMaterials;
 import net.star.copperoverthrow.item.armor.StepperBootsArmorItem;
@@ -74,6 +76,9 @@ public class ModItems {
     public static final DeferredItem<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
             () -> new HandsawItem(new Properties().durability(727).stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
 
+    public static final DeferredItem<Item> FIREFLY_SPAWN_EGG = ITEMS.register("firefly_spawn_egg",
+            () -> new DeferredSpawnEggItem(ModEntities.FIREFLY, 0x101F01, 0x00FF04,
+                    new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

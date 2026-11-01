@@ -17,6 +17,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -96,7 +97,6 @@ public class FireflyEntity extends Animal implements FlyingAnimal {
         return !this.onGround();
     }
 
-
     @Override
     public @Nullable AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
         return ModEntities.FIREFLY.get().create(level);
@@ -136,6 +136,38 @@ public class FireflyEntity extends Animal implements FlyingAnimal {
         if(this.level().isClientSide()) {
             this.setupAnimationStates();
         }
+    }
+
+    @Override
+    public void aiStep() {
+        if (this.isAlive()) {
+            boolean flag = this.isSunSensitive() && this.isSunBurnTick();
+            if (flag) {
+                ItemStack itemstack = this.getItemBySlot(EquipmentSlot.HEAD);
+                if (!itemstack.isEmpty()) {
+                    if (itemstack.isDamageableItem()) {
+                        Item item = itemstack.getItem();
+                        itemstack.setDamageValue(itemstack.getDamageValue() + this.random.nextInt(2));
+                        if (itemstack.getDamageValue() >= itemstack.getMaxDamage()) {
+                            this.onEquippedItemBroken(item, EquipmentSlot.HEAD);
+                            this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+                        }
+                    }
+
+                    flag = false;
+                }
+
+                if (flag) {
+                    this.igniteForSeconds(8.0F);
+                }
+            }
+        }
+
+        super.aiStep();
+    }
+
+    protected boolean isSunSensitive() {
+        return true;
     }
 
 

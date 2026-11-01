@@ -8,11 +8,12 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.entity.custom.FireflyEntity;
 
 
-public class FireflyModel extends HierarchicalModel<FireflyEntity> {
+public class FireflyModel<T extends Entity> extends HierarchicalModel<FireflyEntity> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "firefly"), "main");
     private final ModelPart root;
 
