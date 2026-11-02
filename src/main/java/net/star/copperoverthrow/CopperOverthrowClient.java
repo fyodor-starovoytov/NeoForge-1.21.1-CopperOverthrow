@@ -137,7 +137,7 @@ public class CopperOverthrowClient {
             ItemStack useStack = player.getUseItem();
             if (!useStack.is(ModItems.COPPER_HANDSAW.get())) continue;
 
-            HitResult hitResult = player.pick(5.0D, partialTick, false);
+            HitResult hitResult = player.pick(8.0D, partialTick, false);
             if (!(hitResult instanceof BlockHitResult blockHit) || hitResult.getType() != HitResult.Type.BLOCK) {
                 continue;
             }

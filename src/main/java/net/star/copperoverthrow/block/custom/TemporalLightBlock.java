@@ -19,8 +19,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class TemporalLightBlock extends LightBlock {
 
-    public static int MIN_LIFESPAN_TICKS = 5;
-    public static int MAX_LIFESPAN_TICKS = 15;
+    public static int MIN_LIFESPAN_TICKS = 100;
+    public static int MAX_LIFESPAN_TICKS = 200;
 
     public TemporalLightBlock(Properties properties) {
         super(properties);

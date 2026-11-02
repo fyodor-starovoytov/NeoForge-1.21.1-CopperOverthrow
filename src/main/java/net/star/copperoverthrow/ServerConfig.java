@@ -25,7 +25,13 @@ public class ServerConfig {
                 .translation("copperoverthrow.config.crash_helmet_head_impact_resistance")
                 .defineInRange("CrashHelmetHeadImpactResistance", 1.0, 0.0, 1.0);
 
-        public static final ModConfigSpec.DoubleValue STEPPER_BOOTS_STEP_HEIGHT = BUILDER
+    public static final ModConfigSpec.IntValue EXOSKELETON_REACH = BUILDER
+            .comment("Stepper Boots' added block reach amount")
+            .translation("copperoverthrow.config.exoskeleton_reach")
+            .defineInRange("ExoskeletonReach", 3, 0, 10);
+
+
+    public static final ModConfigSpec.DoubleValue STEPPER_BOOTS_STEP_HEIGHT = BUILDER
                 .comment("Stepper Boots' added Step Height amount. 0.6 is vanilla Step Height (0.6 + x)")
                 .translation("copperoverthrow.config.stepper_boots_step_height")
                 .defineInRange("StepperBootsStepHeight", 0.5, 0.0, 3.0);

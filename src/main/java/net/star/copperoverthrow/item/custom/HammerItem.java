@@ -22,7 +22,7 @@ public class HammerItem extends DiggerItem {
         List<BlockPos> positions = new ArrayList<>();
 
         BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
-                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(6f))),
+                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(8f))),
                 ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
         if(traceResult.getType() == HitResult.Type.MISS) {
             return positions;

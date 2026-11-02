@@ -22,7 +22,7 @@ public class ModArmorMaterials {
     public static final Holder<ArmorMaterial> STEPPER_ARMOR = register("copper",
             Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
                 attribute.put(ArmorItem.Type.HELMET, 1);
-                attribute.put(ArmorItem.Type.CHESTPLATE, 5);
+                attribute.put(ArmorItem.Type.CHESTPLATE, 4);
                 attribute.put(ArmorItem.Type.LEGGINGS, 4);
                 attribute.put(ArmorItem.Type.BOOTS, 1);
             }), 12, 0f, 0f, () -> Items.COPPER_INGOT);
@@ -30,8 +30,8 @@ public class ModArmorMaterials {
     public static final Holder<ArmorMaterial> CRASH_HELMET = register("crash",
             Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
                 attribute.put(ArmorItem.Type.HELMET, 2);
-                attribute.put(ArmorItem.Type.CHESTPLATE, 7);
-                attribute.put(ArmorItem.Type.LEGGINGS, 6);
+                attribute.put(ArmorItem.Type.CHESTPLATE, 5);
+                attribute.put(ArmorItem.Type.LEGGINGS, 4);
                 attribute.put(ArmorItem.Type.BOOTS, 2);
             }), 7, 2f, 0f, () -> Items.COPPER_INGOT);
 

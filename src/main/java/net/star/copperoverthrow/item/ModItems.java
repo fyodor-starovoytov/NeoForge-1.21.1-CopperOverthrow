@@ -64,6 +64,10 @@ public class ModItems {
             () -> new CrashHelmetArmorItem(ModArmorMaterials.CRASH_HELMET, ArmorItem.Type.HELMET,
                     new Properties().durability(ArmorItem.Type.HELMET.getDurability(25))));
 
+    public static final DeferredItem<ArmorItem> COPPER_EXOSKELETON = ITEMS.register("copper_exoskeleton",
+            () -> new CopperExoskeletonArmorItem(ModArmorMaterials.STEPPER_ARMOR, ArmorItem.Type.CHESTPLATE,
+                    new Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(25))));
+
     public static final DeferredItem<ArmorItem> MINING_HELM = ITEMS.register("mining_helm",
             () -> new MiningHelmArmorItem(ModArmorMaterials.CRASH_HELMET, ArmorItem.Type.HELMET,
                     new Properties().durability(ArmorItem.Type.HELMET.getDurability(25))));
