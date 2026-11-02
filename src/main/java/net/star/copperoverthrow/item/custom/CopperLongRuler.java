@@ -42,7 +42,7 @@ public class CopperLongRuler extends AbstractRepairableCopperItem {
         Direction dir = context.getClickedFace();
         BlockPos pos = context.getClickedPos().relative(dir);
 
-        if (!level.isClientSide){
+        if (!level.isClientSide) {
             if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == null
                     && stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) == null
                     && stack.get(ModDataComponents.IS_USED) == null) {
@@ -53,9 +53,7 @@ public class CopperLongRuler extends AbstractRepairableCopperItem {
                 stack.set(ModDataComponents.IS_USED, 1);
 
                 return InteractionResult.SUCCESS;
-            }
-
-            else if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) != null
+            } else if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) != null
                     && stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) != null
                     && stack.get(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS) == null
                     && stack.get(ModDataComponents.IS_USED) != null) {
@@ -69,6 +67,22 @@ public class CopperLongRuler extends AbstractRepairableCopperItem {
                             ? EquipmentSlot.OFFHAND
                             : EquipmentSlot.MAINHAND;
                     stack.hurtAndBreak(1, player, equipmentslot);
+                }
+                return InteractionResult.SUCCESS;
+            } else if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown() && stack.is(ModItems.COPPER_LONG_RULER)) {
+                stack.set(ModDataComponents.IS_USED, null);
+                stack.set(ModDataComponents.TEMPORAL_DIRECTION, null);
+                stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, null);
+                stack.set(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS, null);
+
+                if (stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST) != null) {
+                    List<BlockPos> toDelete = new ArrayList<>(stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST));
+
+                    for (var position : toDelete) {
+                        if (level.getBlockState(position).is(hologramBlock)) {
+                            level.destroyBlock(position, false);
+                        }
+                    }
                 }
                 return InteractionResult.SUCCESS;
             }
