@@ -41,6 +41,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COPPER_STEPPER_BOOTS);
 
                         output.accept(ModItems.COPPER_COOKIE);
+                        output.accept(ModItems.FIREFLY_LARVAE);
 
                         output.accept(ModItems.BEE_CATCHER);
                         output.accept(ModItems.FIREFLY_SPAWN_EGG);
@@ -144,6 +145,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.RED_WIND_CHIME);
                         output.accept(ModBlocks.LUNAR_WIND_CHIME);
                         output.accept(ModBlocks.BAMBOO_WIND_CHIME);
+
                     }).build());
 
     public static void register(IEventBus eventBus) {

@@ -40,6 +40,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         basicItem(ModItems.COPPER_NUGGET.get());
         basicItem(ModItems.COPPER_COOKIE.get());
+        basicItem(ModItems.FIREFLY_LARVAE.get());
         handheldItem(ModItems.COPPER_CHISEL.get());
         handheldItem(ModItems.COPPER_FILL_BUCKET.get());
 

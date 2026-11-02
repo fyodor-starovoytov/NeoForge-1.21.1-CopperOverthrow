@@ -57,6 +57,15 @@ public class ModItems {
                     .alwaysEdible()
                     .build())));
 
+    public static final DeferredItem<Item> FIREFLY_LARVAE = ITEMS.register("firefly_larvae",
+            () -> new Item(new Properties().food(new FoodProperties.Builder()
+                    .nutrition(1)
+                    .saturationModifier(2.0F)
+                    .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 600, 0, false, false, true), 1.0F)
+                    .alwaysEdible()
+                    .build())));
+
+
     public static final DeferredItem<ArmorItem> COPPER_STEPPER_LEGGINGS = ITEMS.register("copper_stepper_leggings",
             () -> new StepperLeggingsArmorItem(ModArmorMaterials.STEPPER_ARMOR, ArmorItem.Type.LEGGINGS,
                     new Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));

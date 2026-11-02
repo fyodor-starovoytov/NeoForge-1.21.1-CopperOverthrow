@@ -9,29 +9,35 @@
           "conditions": [
             {
               "condition": "minecraft:killed_by_player"
+            },
+            {
+              "chance": 0.6,
+              "condition": "minecraft:random_chance"
             }
           ],
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             },
             {
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1.0,
+                "max": 0.35,
                 "min": 0.0
               },
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
+            },
+            {
+              "function": "minecraft:limit_count",
+              "limit": {
+                "max": 2.0
+              }
             }
           ],
-          "name": "minecraft:glowstone_dust"
+          "name": "copperoverthrow:firefly_larvae"
         }
       ],
       "rolls": 1.0
