@@ -6,6 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +24,11 @@ import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.custom.HologramBlock;
+import net.star.copperoverthrow.client.DynamicLightManager;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 
 public class MiningHelmArmorItem extends CrashHelmetArmorItem {
     private static final ResourceLocation TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "mining_helm");
@@ -39,32 +44,35 @@ public class MiningHelmArmorItem extends CrashHelmetArmorItem {
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (entity instanceof Player player && player.getEquipmentSlotForItem(stack).equals(EquipmentSlot.HEAD)){
 
-            if(!level.isClientSide && level.getBlockState(getBlockLookedAt(player, 10f)).isAir()){
-                level.setBlockAndUpdate(getBlockLookedAt(player, 10f), ModBlocks.TEMPORAL_LIGHT_BLOCK.get().defaultBlockState().setValue(LightBlock.LEVEL, 11));
-            }
-            if(!level.isClientSide && level.getBlockState(getBlockLookedAt(player, 8f)).isAir()){
-                level.setBlockAndUpdate(getBlockLookedAt(player, 8f), ModBlocks.TEMPORAL_LIGHT_BLOCK.get().defaultBlockState().setValue(LightBlock.LEVEL, 9));
-            }
-            if(!level.isClientSide && level.getBlockState(getBlockLookedAt(player, 5f)).isAir()){
-                level.setBlockAndUpdate(getBlockLookedAt(player, 5f), ModBlocks.TEMPORAL_LIGHT_BLOCK.get().defaultBlockState().setValue(LightBlock.LEVEL, 8));
-            }
-            if(!level.isClientSide && level.getBlockState(getBlockLookedAt(player, 3f)).isAir()){
-                level.setBlockAndUpdate(getBlockLookedAt(player, 3f), ModBlocks.TEMPORAL_LIGHT_BLOCK.get().defaultBlockState().setValue(LightBlock.LEVEL, 6));
-            }
-            if(!level.isClientSide && level.getBlockState(getBlockLookedAt(player, 1f)).isAir()){
-                level.setBlockAndUpdate(getBlockLookedAt(player, 1f), ModBlocks.TEMPORAL_LIGHT_BLOCK.get().defaultBlockState().setValue(LightBlock.LEVEL, 3));
+            if (level.isClientSide) {
+                BlockPos pos = getBlockLookedAt(player);
+
+                if (pos != null) {
+                    DynamicLightManager.setLight(pos, 15);
+                }
             }
         }
     }
 
+    private static BlockPos getBlockLookedAt(Player player){
+        double reach = player.getAttributeBaseValue(Attributes.BLOCK_INTERACTION_RANGE);
 
-    private static BlockPos getBlockLookedAt(Player player, float factor){
-        BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(2f),
-                (player.getEyePosition(2f).add(player.getViewVector(2f).scale(factor))),
-                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-        BlockPos secondaryPos = traceResult.getBlockPos();
+        Vec3 startPos = player.getEyePosition(1.0f);
+        Vec3 viewVector = player.getViewVector(1.0f);
+        Vec3 endPos = startPos.add(viewVector.scale(reach + 1));
 
-        return secondaryPos;
+        Level level = player.level();
+        BlockHitResult traceResult = level.clip(new ClipContext(
+                startPos,
+                endPos,
+                ClipContext.Block.OUTLINE,
+                ClipContext.Fluid.NONE,
+                player
+        ));
+
+        return traceResult.getType() == HitResult.Type.BLOCK ?
+                traceResult.getBlockPos().relative(traceResult.getDirection())
+                : null;
     }
-
 }
+
