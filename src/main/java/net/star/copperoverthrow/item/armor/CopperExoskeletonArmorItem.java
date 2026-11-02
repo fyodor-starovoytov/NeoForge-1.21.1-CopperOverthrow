@@ -46,6 +46,15 @@ public class CopperExoskeletonArmorItem extends AbstractExtendedArmorItem {
                         AttributeModifier.Operation.ADD_VALUE
                 ),
                 EquipmentSlotGroup.CHEST
-        );
+        )
+                .withModifierAdded(
+                        Attributes.BLOCK_BREAK_SPEED,
+                        new AttributeModifier(
+                                ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "break_speed"),
+                                ServerConfig.EXOSKELETON_BLOCK_BREAK_SPEED.get(),
+                                AttributeModifier.Operation.ADD_VALUE
+                        ),
+                        EquipmentSlotGroup.CHEST
+                );
     }
 }

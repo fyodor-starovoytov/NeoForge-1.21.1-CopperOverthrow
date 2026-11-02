@@ -25,8 +25,13 @@ public class ServerConfig {
                 .translation("copperoverthrow.config.crash_helmet_head_impact_resistance")
                 .defineInRange("CrashHelmetHeadImpactResistance", 1.0, 0.0, 1.0);
 
+    public static final ModConfigSpec.DoubleValue EXOSKELETON_BLOCK_BREAK_SPEED = BUILDER
+            .comment("Copper Exoskeleton's Added Block Break Speed")
+            .translation("copperoverthrow.config.exoskeleton_breaking_speed")
+            .defineInRange("ExoskeletonBreakingSpeed", 0.3, 0.0, 1.0);
+
     public static final ModConfigSpec.IntValue EXOSKELETON_REACH = BUILDER
-            .comment("Stepper Boots' added block reach amount")
+            .comment("Copper Exoskeleton's added block reach amount")
             .translation("copperoverthrow.config.exoskeleton_reach")
             .defineInRange("ExoskeletonReach", 3, 0, 10);
 
