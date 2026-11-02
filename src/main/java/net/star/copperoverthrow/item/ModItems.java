@@ -69,8 +69,8 @@ public class ModItems {
                     new Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(25))));
 
     public static final DeferredItem<ArmorItem> MINING_HELM = ITEMS.register("mining_helm",
-            () -> new MiningHelmArmorItem(ModArmorMaterials.CRASH_HELMET, ArmorItem.Type.HELMET,
-                    new Properties().durability(ArmorItem.Type.HELMET.getDurability(25))));
+            () -> new MiningHelmArmorItem(ModArmorMaterials.STEPPER_ARMOR, ArmorItem.Type.HELMET,
+                    new Properties().durability(ArmorItem.Type.HELMET.getDurability(10))));
 
     public static final DeferredItem<HammerItem> COPPER_HAMMER = ITEMS.register("copper_hammer",
             () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
