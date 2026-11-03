@@ -2,22 +2,26 @@ package net.star.copperoverthrow.item.armor.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.star.copperoverthrow.CopperOverthrow;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
-
 /**
  * pre-made model for armors.
  * <br> extend to make custom armors models
  */
 public class ArmorModel extends HumanoidModel<LivingEntity> {
+    private static final ResourceLocation EMISSIVE_TEXTURE = ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/models/armor/glowing_goggles_emissive.png");
+
     public final ModelPart leftBoot;
     public final ModelPart rightBoot;
 
@@ -98,8 +102,16 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
 
     @Override
     public void renderToBuffer(@NotNull PoseStack stack, @NotNull VertexConsumer consumer, int packedLight, int packedOverlay, int color) {
+        // 1. Render the base armor normally
         super.renderToBuffer(stack, consumer, packedLight, packedOverlay, color);
         this.leftBoot.render(stack, consumer, packedLight, packedOverlay, color);
         this.rightBoot.render(stack, consumer, packedLight, packedOverlay, color);
+
+        MAKE SURE NO SUCH BUG ON OTHER ARMOR
+        if (this.head.visible) {
+            net.minecraft.client.renderer.MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+            VertexConsumer emissiveConsumer = bufferSource.getBuffer(RenderType.armorCutoutNoCull(EMISSIVE_TEXTURE));
+            this.head.render(stack, emissiveConsumer, 15728880, packedOverlay, 0xFFFFFFFF);
+        }
     }
 }
