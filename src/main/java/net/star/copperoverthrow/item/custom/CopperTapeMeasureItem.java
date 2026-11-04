@@ -71,7 +71,7 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
                 }
                 return InteractionResult.SUCCESS;
             }
-            else if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown() && stack.is(ModItems.COPPER_TAPE_MEASURE)) {
+            else if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown() && stack.is(ModItems.COPPER_SEXTANT)) {
                 stack.set(ModDataComponents.IS_USED, null);
                 stack.set(ModDataComponents.TEMPORAL_DIRECTION, null);
                 stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, null);

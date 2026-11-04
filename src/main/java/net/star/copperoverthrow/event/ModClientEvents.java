@@ -8,9 +8,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.item.armor.client.ArmorClientExtension;
 import net.star.copperoverthrow.item.armor.client.model.CopperExoskeletonModel;
-import net.star.copperoverthrow.item.armor.client.model.CopperExoskeletonModel;
 import net.star.copperoverthrow.item.armor.client.model.CrashHelmetModel;
-import net.star.copperoverthrow.item.armor.client.model.MiningHelmModel;
 import net.star.copperoverthrow.item.armor.client.model.MiningHelmModel;
 import net.star.copperoverthrow.item.armor.client.provider.SimpleModelProvider;
 

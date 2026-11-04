@@ -107,7 +107,6 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
         this.leftBoot.render(stack, consumer, packedLight, packedOverlay, color);
         this.rightBoot.render(stack, consumer, packedLight, packedOverlay, color);
 
-        MAKE SURE NO SUCH BUG ON OTHER ARMOR
         if (this.head.visible) {
             net.minecraft.client.renderer.MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
             VertexConsumer emissiveConsumer = bufferSource.getBuffer(RenderType.armorCutoutNoCull(EMISSIVE_TEXTURE));
