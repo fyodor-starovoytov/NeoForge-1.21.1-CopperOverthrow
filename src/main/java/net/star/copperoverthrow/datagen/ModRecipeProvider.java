@@ -26,8 +26,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("AAA")
                 .pattern("AAA")
                 .pattern("AAA")
-                .define('A', ModItems.COPPER_NUGGET.get())
-                .unlockedBy("has_copper_nugget", has(ModItems.COPPER_NUGGET.get())).save(recipeOutput);
+                .define('A', ModTags.Items.C_COPPER_NUGGETS)
+                .unlockedBy("has_copper_nugget", has(ModItems.COPPER_NUGGET.get()))
+                .save(recipeOutput, "copperoverthrow:copper_ingot_from_nuggets");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CHISEL.get())
                 .pattern("  A")
@@ -112,7 +113,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeOutput, "copperoverthrow:copper_handsaw_alt");
 
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TAPE_MEASURE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_SEXTANT.get(), 1)
                 .pattern(" BA")
                 .pattern("BDB")
                 .pattern("CCC")
@@ -123,7 +124,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
                 .save(recipeOutput, "copperoverthrow:copper_tape_measure_alt");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TAPE_MEASURE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_SEXTANT.get(), 1)
                 .pattern("AB ")
                 .pattern("BDB")
                 .pattern("CCC")

@@ -24,7 +24,7 @@ public class ModItemProperties {
         ItemProperties.register(ModItems.COPPER_HANDSAW.get(), ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "using_saw"),
                 (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1f : 0f);
 
-        ItemProperties.register(ModItems.COPPER_TAPE_MEASURE.get(), ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "using_tape"),
+        ItemProperties.register(ModItems.COPPER_SEXTANT.get(), ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "using_tape"),
                 (stack, level, entity, seed) -> stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) != null ? 1f : 0f);
 
         ItemProperties.register(ModItems.COPPER_LONG_RULER.get(), ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "using_ruler"),

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_amethyst": {
+    "has_copper_nugget": {
       "conditions": {
         "items": [
           {
-            "items": "#c:gems/amethyst"
+            "items": "copperoverthrow:copper_nugget"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "copperoverthrow:copper_tape_measure"
+        "recipe": "copperoverthrow:copper_ingot_from_nuggets"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_amethyst"
+      "has_copper_nugget"
     ]
   ],
   "rewards": {
     "recipes": [
-      "copperoverthrow:copper_tape_measure"
+      "copperoverthrow:copper_ingot_from_nuggets"
     ]
   }
 }
