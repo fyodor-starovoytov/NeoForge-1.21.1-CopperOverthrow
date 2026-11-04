@@ -15,6 +15,9 @@
   "item.copperoverthrow.copper_stepper_boots": "Stepper Boots",
   "item.copperoverthrow.copper_stepper_leggings": "Stepper Leggings",
   "item.copperoverthrow.copper_fill_bucket": "Fill Brush",
+  "item.copperoverthrow.copper_glowing_goggles": "Glowing Goggles",
+  "item.copperoverthrow.copper_exoskeleton": "Copper Exoskeleton",
+
 
   "block.copperoverthrow.hologram_block": "Hologram Block",
   "block.copperoverthrow.inverted_hologram_block": "Inverted Hologram Block",
@@ -111,6 +114,8 @@
   "enchantment.copperoverthrow.tunneling": "Tunneling",
 
   "copperoverthrow.attribute.head_impact_resistance": "Head Impact Resistance",
+  "copperoverthrow.attribute.night_vision": "Night Vision",
+
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7When placed:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7When used on a Block:§r",
@@ -172,6 +177,8 @@
   "advancements.copperoverthrow.artist.description": "Become a Builder Artist",
   "advancements.copperoverthrow.avatar.title": "Avatar",
   "advancements.copperoverthrow.avatar.description": "Obtain all variants of Wind Chime",
+  "advancements.copperoverthrow.mining_set.title": "Down we go",
+  "advancements.copperoverthrow.mining_set.description": "Obtain essentials for mining deep below.",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notes When Playing",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Whether Rain Drums emit particles when playing a note.\n§7Default: True§r",
