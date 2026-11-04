@@ -26,6 +26,7 @@ public class ClientConfig {
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
+        if (event.getConfig().getSpec() != SPEC || event instanceof ModConfigEvent.Unloading) return;
         rainDrumsNoteParticles = RAIN_DRUMS_NOTE_PARTICLES.get();
         rainDrumsSparkingParticles = RAIN_DRUMS_SPARK_PARTICLES.get();
     }
