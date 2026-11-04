@@ -26,8 +26,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("AAA")
                 .pattern("AAA")
                 .pattern("AAA")
-                .define('A', ModItems.COPPER_NUGGET.get())
-                .unlockedBy("has_copper_nugget", has(ModItems.COPPER_NUGGET.get())).save(recipeOutput);
+                .define('A', ModTags.Items.C_COPPER_NUGGETS)
+                .unlockedBy("has_copper_nugget", has(ModItems.COPPER_NUGGET.get()))
+                .save(recipeOutput, "copperoverthrow:copper_ingot_from_nuggets");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CHISEL.get())
                 .pattern("  A")

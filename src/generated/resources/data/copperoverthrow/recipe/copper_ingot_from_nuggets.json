@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "copperoverthrow:copper_nugget"
+      "tag": "c:nuggets/copper"
     }
   },
   "pattern": [
