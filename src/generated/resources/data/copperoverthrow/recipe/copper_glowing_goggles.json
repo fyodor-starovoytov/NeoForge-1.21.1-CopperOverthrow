@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:nuggets/copper"
+    },
+    "B": {
+      "tag": "c:leathers"
+    },
+    "C": {
+      "item": "minecraft:glow_ink_sac"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "A A",
+    "CAC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "copperoverthrow:copper_glowing_goggles"
+  }
+}

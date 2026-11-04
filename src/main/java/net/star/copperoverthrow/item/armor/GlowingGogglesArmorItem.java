@@ -7,12 +7,17 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.attribute.ModAttributes;
 import org.jetbrains.annotations.Nullable;
 
 public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
@@ -23,6 +28,24 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
     @Override
     public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
         return TEXTURE;
+    }
+
+
+    @Override
+    public ItemAttributeModifiers getDefaultAttributeModifiers() {
+
+        ItemAttributeModifiers base = super.getDefaultAttributeModifiers();
+
+        return base
+                .withModifierAdded(
+                        ModAttributes.NIGHT_VISION,
+                        new AttributeModifier(
+                                ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "night_vision"),
+                                1,
+                                AttributeModifier.Operation.ADD_VALUE
+                        ),
+                        EquipmentSlotGroup.HEAD
+                );
     }
 
     @Override

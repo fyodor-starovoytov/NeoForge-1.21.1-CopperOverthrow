@@ -4,6 +4,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.BooleanAttribute;
 import net.neoforged.neoforge.common.PercentageAttribute;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.star.copperoverthrow.CopperOverthrow;
@@ -20,6 +21,14 @@ public class ModAttributes{
                     0.0,
                     0.0,
                     1.0
+            ).setSyncable(true)
+    );
+
+    public static final Holder<Attribute> NIGHT_VISION = ATTRIBUTES.register(
+            "night_vision",
+            () -> new BooleanAttribute(
+                    "copperoverthrow.attribute.night_vision",
+                    false
             ).setSyncable(true)
     );
 

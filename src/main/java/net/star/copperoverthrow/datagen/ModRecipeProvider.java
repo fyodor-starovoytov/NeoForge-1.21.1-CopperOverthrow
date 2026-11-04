@@ -292,6 +292,26 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Tags.Items.STORAGE_BLOCKS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_GLOWING_GOGGLES.get(), 1)
+                .pattern("BBB")
+                .pattern("A A")
+                .pattern("CAC")
+                .define('A', ModTags.Items.C_COPPER_NUGGETS)
+                .define('B', Tags.Items.LEATHERS)
+                .define('C', Items.GLOW_INK_SAC)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_EXOSKELETON.get(), 1)
+                .pattern("A A")
+                .pattern("ECE")
+                .pattern("BDB")
+                .define('A', Tags.Items.STORAGE_BLOCKS_COPPER)
+                .define('B', Items.STICKY_PISTON)
+                .define('C', Tags.Items.STORAGE_BLOCKS_REDSTONE)
+                .define('D', Tags.Items.GEMS_QUARTZ)
+                .define('E', Tags.Items.STORAGE_BLOCKS_IRON)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_STEPPER_BOOTS.get(), 1)
                 .pattern("A A")
                 .pattern("A A")

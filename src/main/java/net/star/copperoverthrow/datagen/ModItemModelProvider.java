@@ -46,6 +46,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         trimmedArmorItem(ModItems.COPPER_STEPPER_BOOTS);
         trimmedArmorItem(ModItems.COPPER_STEPPER_LEGGINGS);
         basicItem(ModItems.CRASH_HELMET.get());
+        basicItem(ModItems.COPPER_GLOWING_GOGGLES.get());
         basicItem(ModItems.COPPER_EXOSKELETON.get());
     }
 

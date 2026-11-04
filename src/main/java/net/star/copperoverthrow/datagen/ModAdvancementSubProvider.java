@@ -142,6 +142,22 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
                 .addCriterion("has_stepper", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_STEPPER_BOOTS.get(), ModItems.COPPER_STEPPER_LEGGINGS.get()))
                 .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_set"), existingFileHelper);
 
+        AdvancementHolder miningSet = Advancement.Builder.advancement()
+                .parent(copperIngotAdv)
+                .display(
+                        ModItems.COPPER_GLOWING_GOGGLES.get(),
+                        Component.translatable("advancements.copperoverthrow.mining_set.title"),
+                        Component.translatable("advancements.copperoverthrow.mining_set.description"),
+                        null,
+                        AdvancementType.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .addCriterion("has_mining", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_GLOWING_GOGGLES.get(), ModItems.COPPER_EXOSKELETON.get()))
+                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "mining_set"), existingFileHelper);
+
+
         AdvancementHolder crashHelmet = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
                 .display(
@@ -159,7 +175,7 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
 
 
         AdvancementHolder copperHammer = Advancement.Builder.advancement()
-                .parent(copperIngotAdv)
+                .parent(miningSet)
                 .display(
                         ModItems.COPPER_HAMMER.get(),
                         Component.translatable("advancements.copperoverthrow.copper_hammer.title"),

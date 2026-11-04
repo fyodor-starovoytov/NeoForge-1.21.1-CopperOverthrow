@@ -1,5 +1,5 @@
 {
-  "parent": "copperoverthrow:copper_ingot",
+  "parent": "copperoverthrow:mining_set",
   "criteria": {
     "has_hammer": {
       "conditions": {
