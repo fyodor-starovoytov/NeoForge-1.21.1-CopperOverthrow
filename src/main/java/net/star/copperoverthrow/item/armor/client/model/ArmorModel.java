@@ -7,6 +7,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -108,9 +109,11 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
         this.rightBoot.render(stack, consumer, packedLight, packedOverlay, color);
 
         if (this.head.visible) {
+
             net.minecraft.client.renderer.MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-            VertexConsumer emissiveConsumer = bufferSource.getBuffer(RenderType.armorCutoutNoCull(EMISSIVE_TEXTURE));
-            this.head.render(stack, emissiveConsumer, 15728880, packedOverlay, 0xFFFFFFFF);
+            VertexConsumer emissiveConsumer = bufferSource.getBuffer(RenderType.createArmorDecalCutoutNoCull(EMISSIVE_TEXTURE));
+            //15728880 Max packed light
+            this.head.render(stack, emissiveConsumer, 15728880, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
         }
     }
 }

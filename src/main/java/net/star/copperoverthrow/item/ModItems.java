@@ -68,8 +68,8 @@ public class ModItems {
             () -> new CopperExoskeletonArmorItem(ModArmorMaterials.STEPPER_ARMOR, ArmorItem.Type.CHESTPLATE,
                     new Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(25))));
 
-    public static final DeferredItem<ArmorItem> MINING_HELM = ITEMS.register("mining_helm",
-            () -> new MiningHelmArmorItem(ModArmorMaterials.STEPPER_ARMOR, ArmorItem.Type.HELMET,
+    public static final DeferredItem<ArmorItem> COPPER_GLOWING_GOGGLES = ITEMS.register("copper_glowing_goggles",
+            () -> new GlowingGogglesArmorItem(ModArmorMaterials.STEPPER_ARMOR, ArmorItem.Type.HELMET,
                     new Properties().durability(ArmorItem.Type.HELMET.getDurability(10))));
 
     public static final DeferredItem<HammerItem> COPPER_HAMMER = ITEMS.register("copper_hammer",
