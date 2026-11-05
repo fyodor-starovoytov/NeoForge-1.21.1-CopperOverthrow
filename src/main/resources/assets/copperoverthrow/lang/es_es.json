@@ -15,6 +15,8 @@
   "item.copperoverthrow.copper_sextant": "Sextante de cobre",
   "item.copperoverthrow.copper_long_ruler": "Regla larga de cobre",
   "item.copperoverthrow.copper_fill_bucket": "Brocha de relleno",
+  "item.copperoverthrow.copper_glowing_goggles": "Gafas luminosas",
+  "item.copperoverthrow.copper_exoskeleton": "Exoesqueleto de cobre",
 
   "block.copperoverthrow.hologram_block": "Bloque holográfico",
 
@@ -109,6 +111,7 @@
   "enchantment.copperoverthrow.tunneling": "Tunelización",
 
   "copperoverthrow.attribute.head_impact_resistance": "Resistencia a impactos en la cabeza",
+  "copperoverthrow.attribute.night_vision": "Visión nocturna",
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7Al colocar:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7Al usar en un bloque:§r",
@@ -166,6 +169,8 @@
   "advancements.copperoverthrow.crash_helmet.description": "Consigue un casco de obra",
   "advancements.copperoverthrow.artist.title": "Picasso",
   "advancements.copperoverthrow.artist.description": "Conviértete en un artista constructor",
+  "advancements.copperoverthrow.mining_set.title": "Hacia abajo",
+  "advancements.copperoverthrow.mining_set.description": "Consigue lo esencial para minar en las profundidades.",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notas al tocar",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Determina si los tambores de lluvia emiten partículas al tocar una nota.\n§7Por defecto: Verdadero§r",

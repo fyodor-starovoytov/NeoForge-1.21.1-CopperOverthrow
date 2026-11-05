@@ -15,6 +15,8 @@
   "item.copperoverthrow.copper_sextant": "Мідний секстант",
   "item.copperoverthrow.copper_long_ruler": "Довга мідна лінійка",
   "item.copperoverthrow.copper_fill_bucket": "Пензель для заповнення",
+  "item.copperoverthrow.copper_glowing_goggles": "Сяючі окуляри",
+  "item.copperoverthrow.copper_exoskeleton": "Мідний екзоскелет",
 
   "block.copperoverthrow.hologram_block": "Голографічний блок",
 
@@ -109,6 +111,7 @@
   "enchantment.copperoverthrow.tunneling": "Тунелювання",
 
   "copperoverthrow.attribute.head_impact_resistance": "Опір ударам по голові",
+  "copperoverthrow.attribute.night_vision": "Нічне бачення",
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7При розміщенні:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7При використанні на блоці:§r",
@@ -166,6 +169,8 @@
   "advancements.copperoverthrow.crash_helmet.description": "Отримай будівельну каску",
   "advancements.copperoverthrow.artist.title": "Пікассо",
   "advancements.copperoverthrow.artist.description": "Станьте художником-будівельником",
+  "advancements.copperoverthrow.mining_set.title": "Спускаємось вниз",
+  "advancements.copperoverthrow.mining_set.description": "Здобудьте найнеобхідніше для видобутку глибоко під землею.",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Ноти під час гри",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Чи випромінюють барабани дощу частинки під час програвання ноти.\n§7За замовчуванням: ІСТИНА§r",

@@ -15,6 +15,8 @@
   "item.copperoverthrow.copper_sextant": "Медный секстант",
   "item.copperoverthrow.copper_long_ruler": "Длинная медная линейка",
   "item.copperoverthrow.copper_fill_bucket": "Кисть для заполнения",
+  "item.copperoverthrow.copper_glowing_goggles": "Светящиеся очки",
+  "item.copperoverthrow.copper_exoskeleton": "Медный экзоскелет",
 
   "block.copperoverthrow.hologram_block": "Голографический блок",
 
@@ -109,6 +111,7 @@
   "enchantment.copperoverthrow.tunneling": "Туннелирование",
 
   "copperoverthrow.attribute.head_impact_resistance": "Сопротивление ударам по голове",
+  "copperoverthrow.attribute.night_vision": "Ночное зрение",
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7При размещении:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7При использовании на блоке:§r",
@@ -166,6 +169,8 @@
   "advancements.copperoverthrow.crash_helmet.description": "Заполучи строительную каску",
   "advancements.copperoverthrow.artist.title": "Пикассо",
   "advancements.copperoverthrow.artist.description": "Стань художником-строителем",
+  "advancements.copperoverthrow.mining_set.title": "Спускаемся вниз",
+  "advancements.copperoverthrow.mining_set.description": "Получите всё необходимое для добычи глубоко под землей.",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Ноты при игре",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Излучают ли барабаны дождя частицы при воспроизведении нот.\n§7По умолчанию: Истина§r",

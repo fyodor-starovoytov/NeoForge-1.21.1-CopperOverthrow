@@ -15,6 +15,8 @@
   "item.copperoverthrow.copper_sextant": "Kuparisekstantti",
   "item.copperoverthrow.copper_long_ruler": "Pitkä kupariviivoitin",
   "item.copperoverthrow.copper_fill_bucket": "Täyttösivellin",
+  "item.copperoverthrow.copper_glowing_goggles": "Hohtavat suojalasit",
+  "item.copperoverthrow.copper_exoskeleton": "Kuparinen eksoluuranko",
 
   "block.copperoverthrow.hologram_block": "Hologrammikuutio",
 
@@ -109,6 +111,7 @@
   "enchantment.copperoverthrow.tunneling": "Tunnelointi",
 
   "copperoverthrow.attribute.head_impact_resistance": "Pään iskunkestävyys",
+  "copperoverthrow.attribute.night_vision": "Pimeänäkö",
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7Asetettaessa:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7Käytettäessä kuutioon:§r",
@@ -166,6 +169,8 @@
   "advancements.copperoverthrow.crash_helmet.description": "Hanki suojakypärä",
   "advancements.copperoverthrow.artist.title": "Picasso",
   "advancements.copperoverthrow.artist.description": "Tule rakentaja-taiteilijaksi",
+  "advancements.copperoverthrow.mining_set.title": "Alas mennään",
+  "advancements.copperoverthrow.mining_set.description": "Hanki välttämättömät varusteet syvyyksissä louhimiseen.",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Nuotit soittaessa",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Päästävätkö saderummut hiukkasia nuottia soitettaessa.\n§7Oletus: Tosi§r",
