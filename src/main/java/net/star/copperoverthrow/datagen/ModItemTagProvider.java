@@ -57,11 +57,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.COPPER_STEPPER_BOOTS.get());
         tag(ItemTags.LEG_ARMOR)
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
-        tag(ItemTags.CHEST_ARMOR)
-                .add(ModItems.COPPER_EXOSKELETON.get());
-        tag(ItemTags.HEAD_ARMOR)
-                .add(ModItems.CRASH_HELMET.get())
-                .add(ModItems.COPPER_GLOWING_GOGGLES.get());
+
         tag(ItemTags.EQUIPPABLE_ENCHANTABLE)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get())
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get())
@@ -99,6 +95,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTags.TRIMMABLE_ARMOR)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get())
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
+
 
 
     }

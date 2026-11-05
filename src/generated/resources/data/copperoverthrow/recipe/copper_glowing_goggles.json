@@ -10,12 +10,15 @@
     },
     "C": {
       "item": "minecraft:glow_ink_sac"
+    },
+    "D": {
+      "tag": "c:ingots/copper"
     }
   },
   "pattern": [
     "BBB",
     "A A",
-    "CAC"
+    "CDC"
   ],
   "result": {
     "count": 1,
