@@ -310,7 +310,7 @@ public class ModBlocks {
                     .replaceable().noCollission().noOcclusion().instabreak().noTerrainParticles()));
     public static final DeferredBlock<HologramBlock> INVERTED_HOLOGRAM_BLOCK = registerBlock("inverted_hologram_block",
             () -> new HologramBlock(BlockBehaviour.Properties.of()
-                    .replaceable().noCollission().noOcclusion().instabreak().noTerrainParticles()));
+                    .replaceable().noOcclusion().instabreak().noTerrainParticles()));
 
     public static final DeferredBlock<Block> RAIN_DRUM = registerBlock("medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
