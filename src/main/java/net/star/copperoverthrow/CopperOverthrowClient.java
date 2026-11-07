@@ -21,18 +21,16 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
-import net.neoforged.neoforge.client.event.RenderHandEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.ConfigScreenHandler;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterItemDecorationsEvent;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.renderer.LogStripperBlockEntityRenderer;
 import net.star.copperoverthrow.client.*;
@@ -43,12 +41,12 @@ import net.star.copperoverthrow.util.ModItemProperties;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod(value = CopperOverthrow.MOD_ID, dist = Dist.CLIENT)
-@EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
+@Mod(value = CopperOverthrow.MOD_ID)
+@Mod.EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
 public class CopperOverthrowClient {
 
     public CopperOverthrowClient(ModContainer container) {
-        container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        container.registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, ConfigurationScreen::new);
     }
 
     @SubscribeEvent
@@ -77,7 +75,7 @@ public class CopperOverthrowClient {
     }
 
             private static final ResourceLocation OVERLAY_TEXTURE =
-                    ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/gui/waxed_overlay.png");
+                    ResourceLocation.tryBuild(CopperOverthrow.MOD_ID, "textures/gui/waxed_overlay.png");
 
     @SubscribeEvent
     public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
@@ -127,7 +125,7 @@ public class CopperOverthrowClient {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null) return;
 
-        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
+        float partialTick = event.getPartialTick();
         PoseStack poseStack = event.getPoseStack();
         Vec3 cameraPos = mc.gameRenderer.getMainCamera().getPosition();
 
@@ -150,7 +148,7 @@ public class CopperOverthrowClient {
             poseStack.translate(offset.x, offset.y, offset.z);
 
             float remainingTicks = player.getUseItemRemainingTicks() - partialTick;
-            float useTicks = useStack.getUseDuration(player) - remainingTicks;
+            float useTicks = useStack.getUseDuration() - remainingTicks;
             float pushPull = Mth.sin((float) Math.pow(useTicks, 1.28) / 3) * 0.24F;
             float subtleTilt = Mth.cos((float) Math.pow(useTicks, 1.28) / 3) * 2.5F;
 

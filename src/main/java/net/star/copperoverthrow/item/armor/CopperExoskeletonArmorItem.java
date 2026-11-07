@@ -1,24 +1,31 @@
 package net.star.copperoverthrow.item.armor;
 
-import net.minecraft.core.Holder;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
+import net.minecraftforge.common.ForgeMod;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class CopperExoskeletonArmorItem extends AbstractExtendedArmorItem {
-    private static final ResourceLocation TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "copper_exoskeleton");
-    public CopperExoskeletonArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
+    private static final String TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "copper_exoskeleton");
+    public CopperExoskeletonArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }
 
@@ -28,33 +35,37 @@ public class CopperExoskeletonArmorItem extends AbstractExtendedArmorItem {
     }
 
     @Override
-    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         return TEXTURE;
     }
 
     @Override
-    public ItemAttributeModifiers getDefaultAttributeModifiers() {
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+        if (slot == EquipmentSlot.CHEST) {
+            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 
-        ItemAttributeModifiers base = super.getDefaultAttributeModifiers();
+            builder.putAll(super.getDefaultAttributeModifiers(slot));
 
-        return base
-                .withModifierAdded(
-                        Attributes.BLOCK_INTERACTION_RANGE,
-                new AttributeModifier(
-                        ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "long_reach"),
-                        ServerConfig.EXOSKELETON_REACH.get(),
-                        AttributeModifier.Operation.ADD_VALUE
-                ),
-                EquipmentSlotGroup.CHEST
-        )
-                .withModifierAdded(
-                        Attributes.BLOCK_BREAK_SPEED,
-                        new AttributeModifier(
-                                ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "break_speed"),
-                                ServerConfig.EXOSKELETON_BLOCK_BREAK_SPEED.get(),
-                                AttributeModifier.Operation.ADD_VALUE
-                        ),
-                        EquipmentSlotGroup.CHEST
-                );
+            builder.put(
+                    ForgeMod.BLOCK_REACH.get(),
+                    new AttributeModifier(
+                            "Exoskeleton reach",
+                            ServerConfig.EXOSKELETON_REACH.get(),
+                            AttributeModifier.Operation.ADDITION
+                    )
+            );
+
+            builder.put(
+                    ModAttributes.BREAK_SPEED.get(),
+                    new AttributeModifier(
+                            "Exoskeleton breaking speed",
+                            ServerConfig.EXOSKELETON_BLOCK_BREAK_SPEED.get(),
+                            AttributeModifier.Operation.ADDITION
+                    )
+            );
+
+            return builder.build();
+        }
+        return super.getDefaultAttributeModifiers(slot);
     }
 }

@@ -106,7 +106,7 @@ public class HandsawItem extends ShearsItem {
         int j = level.getRandom().nextInt(amount, amount + 5);
         BlockParticleOption blockparticleoption = new BlockParticleOption(ParticleTypes.BLOCK, state);
         Direction direction = hitResult.getDirection();
-        HandsawItem.DustParticlesDelta brushitem$dustparticlesdelta = HandsawItem.DustParticlesDelta.fromDirection(pos, direction);
+        DustParticlesDelta brushitem$dustparticlesdelta = DustParticlesDelta.fromDirection(pos, direction);
         Vec3 vec3 = hitResult.getLocation();
 
         for (int k = 0; k < j; k++) {
@@ -126,15 +126,15 @@ public class HandsawItem extends ShearsItem {
         private static final double ALONG_SIDE_DELTA = 1.0;
         private static final double OUT_FROM_SIDE_DELTA = 0.1;
 
-        public static HandsawItem.DustParticlesDelta fromDirection(Vec3 pos, Direction direction) {
+        public static DustParticlesDelta fromDirection(Vec3 pos, Direction direction) {
             double d0 = 0.0;
 
             return switch (direction) {
-                case DOWN, UP -> new HandsawItem.DustParticlesDelta(pos.z(), 0.0, -pos.x());
-                case NORTH -> new HandsawItem.DustParticlesDelta(1.0, 0.0, -0.1);
-                case SOUTH -> new HandsawItem.DustParticlesDelta(-1.0, 0.0, 0.1);
-                case WEST -> new HandsawItem.DustParticlesDelta(-0.1, 0.0, -1.0);
-                case EAST -> new HandsawItem.DustParticlesDelta(0.1, 0.0, 1.0);
+                case DOWN, UP -> new DustParticlesDelta(pos.z(), 0.0, -pos.x());
+                case NORTH -> new DustParticlesDelta(1.0, 0.0, -0.1);
+                case SOUTH -> new DustParticlesDelta(-1.0, 0.0, 0.1);
+                case WEST -> new DustParticlesDelta(-0.1, 0.0, -1.0);
+                case EAST -> new DustParticlesDelta(0.1, 0.0, 1.0);
             };
         }
     }

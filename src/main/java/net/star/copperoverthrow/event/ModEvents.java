@@ -1,5 +1,6 @@
 package net.star.copperoverthrow.event;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -7,10 +8,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.ItemInteractionResult;
+
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -19,18 +22,22 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
-import net.neoforged.neoforge.registries.datamaps.builtin.Waxable;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.attribute.ModAttributes;
 import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
 import net.star.copperoverthrow.block.custom.TamTamBlock;
 import net.star.copperoverthrow.enchantment.ModEnchantments;
+import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.item.custom.HammerItem;
 import net.star.copperoverthrow.sound.ModSounds;
 
@@ -38,9 +45,37 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-@EventBusSubscriber(modid = CopperOverthrow.MOD_ID)
+@Mod.EventBusSubscriber(modid = CopperOverthrow.MOD_ID)
 public class ModEvents {
     private static final Set<BlockPos> HARVESTED_BLOCKS = ConcurrentHashMap.newKeySet();
+
+    @SubscribeEvent
+    public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+        Player player = event.getEntity();
+
+        if (player.getItemBySlot(EquipmentSlot.CHEST).is(ModItems.COPPER_EXOSKELETON.get())) {
+
+            float originalSpeed = event.getOriginalSpeed();
+            float bonus = ServerConfig.EXOSKELETON_BLOCK_BREAK_SPEED.get().floatValue();
+
+            event.setNewSpeed(originalSpeed + bonus);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingFall(LivingFallEvent event) {
+        LivingEntity entity = event.getEntity();
+
+        if (entity.getItemBySlot(EquipmentSlot.FEET).is(ModItems.COPPER_STEPPER_BOOTS.get())) {
+
+            float currentFallDistance = event.getDistance();
+            float safeDistanceBonus = ServerConfig.STEPPER_BOOTS_SAFE_FALL_DISTANCE.get().floatValue();
+
+            float newFallDistance = Math.max(0.0F, currentFallDistance - safeDistanceBonus);
+
+            event.setDistance(newFallDistance);
+        }
+    }
 
     @SubscribeEvent
     public static void onHammerUsage(BlockEvent.BreakEvent event) {
@@ -69,11 +104,11 @@ public class ModEvents {
                         .lookupOrThrow(Registries.ENCHANTMENT)
                         .getOrThrow(ModEnchantments.TUNNELING);
 
-                if (mainHandItem.getEnchantmentLevel(arealHolder) != 0) {
+                if (mainHandItem.getEnchantmentLevel(arealHolder.get()) != 0) {
                     area = 2;
                 }
-                if (mainHandItem.getEnchantmentLevel(tunnelingHolder) != 0) {
-                    deep = mainHandItem.getEnchantmentLevel(tunnelingHolder);
+                if (mainHandItem.getEnchantmentLevel(tunnelingHolder.get()) != 0) {
+                    deep = mainHandItem.getEnchantmentLevel(tunnelingHolder.get());
                 }
 
                 for (BlockPos pos : HammerItem.getBlocksToBeDestroyed(area, deep, initialBlockPos, serverPlayer)) {
@@ -146,6 +181,7 @@ public class ModEvents {
                 Waxable waxable = state.getBlockHolder().getData(NeoForgeDataMaps.WAXABLES);
 
                 if (waxable != null) {
+                    //ffas
                     Player player = event.getEntity();
 
                     if (!level.isClientSide) {
@@ -175,37 +211,26 @@ public class ModEvents {
     }
 
     @SubscribeEvent
-    public static void onHeadHit(LivingDamageEvent.Pre event) {
-        if (event.getEntity() instanceof LivingEntity victim) {
+    public static void onHeadHit(LivingHurtEvent event) {
+        LivingEntity victim = event.getEntity();
+        ItemStack headStack = victim.getItemBySlot(EquipmentSlot.HEAD);
+        Multimap<Attribute, AttributeModifier> modifiers = headStack.getAttributeModifiers(EquipmentSlot.HEAD);
 
-            ItemStack headStack = victim.getItemBySlot(EquipmentSlot.HEAD);
-            for (var entry : headStack.getAttributeModifiers().modifiers()) {
-                if (entry.modifier().is(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "head_impact_resistance"))) {
+        if (modifiers.containsKey(ModAttributes.HEAD_IMPACT_RESISTANCE.get())) {
+            for (AttributeModifier modifier : modifiers.get(ModAttributes.HEAD_IMPACT_RESISTANCE.get())) {
 
-                    float originalDamage = event.getOriginalDamage();
-                    Vec3 sourcePos = event.getSource().getSourcePosition();
-                    double deductible = entry.modifier().amount();
+                float originalDamage = event.getAmount();
+                double deductible = modifier.getAmount();
 
-                    boolean isFallingBlockDamage = event.getSource().is(DamageTypes.FALLING_ANVIL)
-                            || event.getSource().is(DamageTypes.FALLING_STALACTITE)
-                            || event.getSource().is(DamageTypes.FALLING_BLOCK);
+                boolean isFallingBlockDamage = event.getSource().is(DamageTypes.FALLING_ANVIL)
+                        || event.getSource().is(DamageTypes.FALLING_STALACTITE)
+                        || event.getSource().is(DamageTypes.FALLING_BLOCK);
 
-                    boolean isElytraCrash = event.getSource().is(DamageTypes.FLY_INTO_WALL);
+                boolean isElytraCrash = event.getSource().is(DamageTypes.FLY_INTO_WALL);
 
-                    boolean isMaceSmashFromAbove = sourcePos != null
-                            && event.getSource().getWeaponItem() != null
-                            && event.getSource().getWeaponItem().is(Items.MACE)
-                            && sourcePos.y() >= victim.getY() + 1.11;
+                if (isFallingBlockDamage || isElytraCrash) {
+                    event.setAmount((float) (originalDamage * (1.0F - deductible)));
 
-                    if (isFallingBlockDamage || isMaceSmashFromAbove || isElytraCrash) {
-                        event.setNewDamage((float) (originalDamage * (1.0F - deductible)));
-                        if (isMaceSmashFromAbove){
-                            Level level = victim.level();
-                            if (!level.isClientSide){
-                                level.playSound(null, victim.getOnPos(), ModSounds.CRASH_HELMET_BONK.get(), SoundSource.PLAYERS);
-                            }
-                        }
-                    }
                 }
             }
         }

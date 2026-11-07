@@ -9,9 +9,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.custom.*;
 import net.star.copperoverthrow.item.ModItems;
@@ -20,163 +21,160 @@ import net.star.copperoverthrow.sound.ModSounds;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-    public static final DeferredRegister.Blocks BLOCKS =
-            DeferredRegister.createBlocks(CopperOverthrow.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS =
+            DeferredRegister.create(ForgeRegistries.BLOCKS, CopperOverthrow.MOD_ID);
 
-    public static final DeferredBlock<Block> RED_WIND_CHIME = registerBlock("red_wind_chime",
+    public static final RegistryObject<Block> RED_WIND_CHIME = registerBlock("red_wind_chime",
             () -> new RedWindChimeBlock(
                     BlockBehaviour
                             .Properties.of()
                             .strength(0.5f)
-                            .isValidSpawn(Blocks::never)
                             .noCollission()
                             .noOcclusion()
                             .instabreak()
-                            .noTerrainParticles(),
+                            .noParticlesOnBreak(),
                     ModSounds.RED_CHIME));
 
-    public static final DeferredBlock<Block> BAMBOO_WIND_CHIME = registerBlock("bamboo_wind_chime",
+    public static final RegistryObject<Block> BAMBOO_WIND_CHIME = registerBlock("bamboo_wind_chime",
             () -> new BambooWindChimeBlock(
                     BlockBehaviour
                             .Properties.of()
                             .strength(0.5f)
-                            .isValidSpawn(Blocks::never)
                             .noCollission()
                             .noOcclusion()
                             .instabreak()
-                            .noTerrainParticles(),
+                            .noParticlesOnBreak(),
                     ModSounds.BAMBOO_CHIME));
 
-    public static final DeferredBlock<Block> LUNAR_WIND_CHIME = registerBlock("lunar_wind_chime",
+    public static final RegistryObject<Block> LUNAR_WIND_CHIME = registerBlock("lunar_wind_chime",
             () -> new LunarWindChimeBlock(
                     BlockBehaviour
                             .Properties.of()
                             .strength(0.5f)
-                            .isValidSpawn(Blocks::never)
                             .noCollission()
                             .noOcclusion()
                             .instabreak()
-                            .noTerrainParticles(),
+                            .noParticlesOnBreak(),
                     ModSounds.LUNAR_CHIME));
 
 
-    public static final DeferredBlock<Block> LOG_STRIPPER = registerBlock("log_stripper",
+    public static final RegistryObject<Block> LOG_STRIPPER = registerBlock("log_stripper",
             () -> new LogStripperBlock(
-                    BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.GRAY),
+                    BlockBehaviour.Properties.of().strength(4f).mapColor(DyeColor.GRAY),
                     WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<Block> EXPOSED_LOG_STRIPPER = registerBlock("exposed_log_stripper",
+    public static final RegistryObject<Block> EXPOSED_LOG_STRIPPER = registerBlock("exposed_log_stripper",
             () -> new LogStripperBlock(
-                    BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.GRAY),
+                    BlockBehaviour.Properties.of().strength(4f).mapColor(DyeColor.GRAY),
                     WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<Block> WEATHERED_LOG_STRIPPER = registerBlock("weathered_log_stripper",
+    public static final RegistryObject<Block> WEATHERED_LOG_STRIPPER = registerBlock("weathered_log_stripper",
             () -> new LogStripperBlock(
-                    BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.GRAY),
+                    BlockBehaviour.Properties.of().strength(4f).mapColor(DyeColor.GRAY),
                     WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<Block> OXIDIZED_LOG_STRIPPER = registerBlock("oxidized_log_stripper",
+    public static final RegistryObject<Block> OXIDIZED_LOG_STRIPPER = registerBlock("oxidized_log_stripper",
             () -> new LogStripperBlock(
-                    BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.GRAY),
+                    BlockBehaviour.Properties.of().strength(4f).mapColor(DyeColor.GRAY),
                     WeatheringCopper.WeatherState.OXIDIZED));
-    public static final DeferredBlock<Block> WAXED_LOG_STRIPPER = registerBlock("waxed_log_stripper",
+    public static final RegistryObject<Block> WAXED_LOG_STRIPPER = registerBlock("waxed_log_stripper",
             () -> new LogStripperBlock(
-                    BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.GRAY),
+                    BlockBehaviour.Properties.of().strength(4f).mapColor(DyeColor.GRAY),
                     WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<Block> WAXED_EXPOSED_LOG_STRIPPER = registerBlock("waxed_exposed_log_stripper",
+    public static final RegistryObject<Block> WAXED_EXPOSED_LOG_STRIPPER = registerBlock("waxed_exposed_log_stripper",
             () -> new LogStripperBlock(
-                    BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.GRAY),
+                    BlockBehaviour.Properties.of().strength(4f).mapColor(DyeColor.GRAY),
                     WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<Block> WAXED_WEATHERED_LOG_STRIPPER = registerBlock("waxed_weathered_log_stripper",
+    public static final RegistryObject<Block> WAXED_WEATHERED_LOG_STRIPPER = registerBlock("waxed_weathered_log_stripper",
             () -> new LogStripperBlock(
-                    BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.GRAY),
+                    BlockBehaviour.Properties.of().strength(4f).mapColor(DyeColor.GRAY),
                     WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<Block> WAXED_OXIDIZED_LOG_STRIPPER = registerBlock("waxed_oxidized_log_stripper",
+    public static final RegistryObject<Block> WAXED_OXIDIZED_LOG_STRIPPER = registerBlock("waxed_oxidized_log_stripper",
             () -> new LogStripperBlock(
-                    BlockBehaviour.Properties.of().strength(4f).isValidSpawn(Blocks::never).mapColor(DyeColor.GRAY),
+                    BlockBehaviour.Properties.of().strength(4f).mapColor(DyeColor.GRAY),
                     WeatheringCopper.WeatherState.OXIDIZED));
 
 
-    public static final DeferredBlock<Block> COPPER_BEEOSPHERE = registerBlock("copper_beeosphere",
+    public static final RegistryObject<Block> COPPER_BEEOSPHERE = registerBlock("copper_beeosphere",
             () -> new CopperBeeosphereBlock(
                     BlockBehaviour.Properties.of()
                             .strength(2f)
                             .noOcclusion()
-                            .isValidSpawn(Blocks::never)
+                            
                             .mapColor(DyeColor.ORANGE)
                             .sound(SoundType.COPPER)));
 
-    public static final DeferredBlock<Block> COPPER_CHAIN = registerBlock("copper_chain",
+    public static final RegistryObject<Block> COPPER_CHAIN = registerBlock("copper_chain",
             () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
-                            .isValidSpawn(Blocks::never)
+                            
                             .sound(SoundType.CHAIN),
                     WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<Block> EXPOSED_COPPER_CHAIN = registerBlock("exposed_copper_chain",
+    public static final RegistryObject<Block> EXPOSED_COPPER_CHAIN = registerBlock("exposed_copper_chain",
             () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
-                            .isValidSpawn(Blocks::never)
+                            
                             .sound(SoundType.CHAIN),
                     WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<Block> WEATHERED_COPPER_CHAIN = registerBlock("weathered_copper_chain",
+    public static final RegistryObject<Block> WEATHERED_COPPER_CHAIN = registerBlock("weathered_copper_chain",
             () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
-                            .isValidSpawn(Blocks::never)
+                            
                             .sound(SoundType.CHAIN),
                     WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<Block> OXIDIZED_COPPER_CHAIN = registerBlock("oxidized_copper_chain",
+    public static final RegistryObject<Block> OXIDIZED_COPPER_CHAIN = registerBlock("oxidized_copper_chain",
             () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
-                            .isValidSpawn(Blocks::never)
+                            
                             .sound(SoundType.CHAIN),
                     WeatheringCopper.WeatherState.OXIDIZED));
-    public static final DeferredBlock<Block> WAXED_COPPER_CHAIN = registerBlock("waxed_copper_chain",
+    public static final RegistryObject<Block> WAXED_COPPER_CHAIN = registerBlock("waxed_copper_chain",
             () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
-                            .isValidSpawn(Blocks::never)
+                            
                             .sound(SoundType.CHAIN),
                     WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<Block> WAXED_EXPOSED_COPPER_CHAIN = registerBlock("waxed_exposed_copper_chain",
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_CHAIN = registerBlock("waxed_exposed_copper_chain",
             () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
-                            .isValidSpawn(Blocks::never)
+                            
                             .sound(SoundType.CHAIN),
                     WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<Block> WAXED_WEATHERED_COPPER_CHAIN = registerBlock("waxed_weathered_copper_chain",
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_CHAIN = registerBlock("waxed_weathered_copper_chain",
             () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
-                            .isValidSpawn(Blocks::never)
+                            
                             .sound(SoundType.CHAIN),
                     WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<Block> WAXED_OXIDIZED_COPPER_CHAIN = registerBlock("waxed_oxidized_copper_chain",
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_CHAIN = registerBlock("waxed_oxidized_copper_chain",
             () -> new CopperChainBlock(
                     BlockBehaviour.Properties.of()
                             .forceSolidOn()
                             .strength(2f)
                             .noOcclusion()
-                            .isValidSpawn(Blocks::never)
+                            
                             .sound(SoundType.CHAIN),
                     WeatheringCopper.WeatherState.OXIDIZED));
 
-    public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
+    public static final RegistryObject<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
         () -> new CopperScaffoldingBlock(
                 BlockBehaviour.Properties.of()
                 .strength(3f)
@@ -184,47 +182,47 @@ public class ModBlocks {
                 .noOcclusion()
                 .requiresCorrectToolForDrops()
                 .destroyTime(0.10f)
-                .isValidSpawn(Blocks::never)
+                
                 .mapColor(DyeColor.ORANGE)
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.COPPER)
                 .dynamicShape()
                 .randomTicks(), WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<CopperScaffoldingBlock> EXPOSED_COPPER_SCAFFOLDING = registerBlock("exposed_copper_scaffolding",
+    public static final RegistryObject<CopperScaffoldingBlock> EXPOSED_COPPER_SCAFFOLDING = registerBlock("exposed_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noCollission()
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
                     .destroyTime(0.20f)
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER)
                     .dynamicShape()
                     .randomTicks(), WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<CopperScaffoldingBlock> WEATHERED_COPPER_SCAFFOLDING = registerBlock("weathered_copper_scaffolding",
+    public static final RegistryObject<CopperScaffoldingBlock> WEATHERED_COPPER_SCAFFOLDING = registerBlock("weathered_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noCollission()
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
                     .destroyTime(0.40f)
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.GREEN)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER)
                     .dynamicShape()
                     .speedFactor(0.95f)
                     .randomTicks(), WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<CopperScaffoldingBlock> OXIDIZED_COPPER_SCAFFOLDING = registerBlock("oxidized_copper_scaffolding",
+    public static final RegistryObject<CopperScaffoldingBlock> OXIDIZED_COPPER_SCAFFOLDING = registerBlock("oxidized_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noCollission()
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
                     .destroyTime(0.60f)
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.GREEN)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER)
@@ -232,7 +230,7 @@ public class ModBlocks {
                     .speedFactor(0.90f)
                     .randomTicks(), WeatheringCopper.WeatherState.OXIDIZED));
 
-    public static final DeferredBlock<CopperScaffoldingBlock> WAXED_COPPER_SCAFFOLDING = registerBlock("waxed_copper_scaffolding",
+    public static final RegistryObject<CopperScaffoldingBlock> WAXED_COPPER_SCAFFOLDING = registerBlock("waxed_copper_scaffolding",
             () -> new CopperScaffoldingBlock(
                     BlockBehaviour.Properties.of()
                             .strength(3f)
@@ -240,47 +238,47 @@ public class ModBlocks {
                             .noOcclusion()
                             .requiresCorrectToolForDrops()
                             .destroyTime(0.10f)
-                            .isValidSpawn(Blocks::never)
+                            
                             .mapColor(DyeColor.ORANGE)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER)
                             .dynamicShape()
                             .randomTicks(), WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<CopperScaffoldingBlock> WAXED_EXPOSED_COPPER_SCAFFOLDING = registerBlock("waxed_exposed_copper_scaffolding",
+    public static final RegistryObject<CopperScaffoldingBlock> WAXED_EXPOSED_COPPER_SCAFFOLDING = registerBlock("waxed_exposed_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noCollission()
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
                     .destroyTime(0.20f)
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER)
                     .dynamicShape()
                     .randomTicks(), WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<CopperScaffoldingBlock> WAXED_WEATHERED_COPPER_SCAFFOLDING = registerBlock("waxed_weathered_copper_scaffolding",
+    public static final RegistryObject<CopperScaffoldingBlock> WAXED_WEATHERED_COPPER_SCAFFOLDING = registerBlock("waxed_weathered_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noCollission()
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
                     .destroyTime(0.40f)
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.GREEN)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER)
                     .dynamicShape()
                     .speedFactor(0.95f)
                     .randomTicks(), WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<CopperScaffoldingBlock> WAXED_OXIDIZED_COPPER_SCAFFOLDING = registerBlock("waxed_oxidized_copper_scaffolding",
+    public static final RegistryObject<CopperScaffoldingBlock> WAXED_OXIDIZED_COPPER_SCAFFOLDING = registerBlock("waxed_oxidized_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noCollission()
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
                     .destroyTime(0.60f)
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.GREEN)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER)
@@ -288,16 +286,16 @@ public class ModBlocks {
                     .speedFactor(0.90f)
                     .randomTicks(), WeatheringCopper.WeatherState.OXIDIZED));
 
-    public static final DeferredBlock<ConductBlock> CONDUCT_BLOCK = registerBlock("conduct_block",
+    public static final RegistryObject<ConductBlock> CONDUCT_BLOCK = registerBlock("conduct_block",
             () -> new ConductBlock(BlockBehaviour.Properties.of()
                     .replaceable()
                     .noCollission()
                     .noOcclusion()
                     .noLootTable()
-                    .noTerrainParticles()
+                    .noParticlesOnBreak()
                     .air()));
 
-    public static final DeferredBlock<TemporalLightBlock> TEMPORAL_LIGHT_BLOCK = registerBlock("temporal_light_block",
+    public static final RegistryObject<TemporalLightBlock> TEMPORAL_LIGHT_BLOCK = registerBlock("temporal_light_block",
             () -> new TemporalLightBlock(BlockBehaviour.Properties.of()
                     .replaceable()
                     .strength(-1.0F, 3600000.8F)
@@ -305,19 +303,19 @@ public class ModBlocks {
                     .noOcclusion()
                     .lightLevel(TemporalLightBlock.LIGHT_EMISSION)));
 
-    public static final DeferredBlock<HologramBlock> HOLOGRAM_BLOCK = registerBlock("hologram_block",
+    public static final RegistryObject<HologramBlock> HOLOGRAM_BLOCK = registerBlock("hologram_block",
             () -> new HologramBlock(BlockBehaviour.Properties.of()
-                    .replaceable().noCollission().noOcclusion().instabreak().noTerrainParticles()));
-    public static final DeferredBlock<HologramBlock> INVERTED_HOLOGRAM_BLOCK = registerBlock("inverted_hologram_block",
+                    .replaceable().noCollission().noOcclusion().instabreak().noParticlesOnBreak()));
+    public static final RegistryObject<HologramBlock> INVERTED_HOLOGRAM_BLOCK = registerBlock("inverted_hologram_block",
             () -> new HologramBlock(BlockBehaviour.Properties.of()
-                    .replaceable().noOcclusion().instabreak().noTerrainParticles()));
+                    .replaceable().noOcclusion().instabreak().noParticlesOnBreak()));
 
-    public static final DeferredBlock<Block> RAIN_DRUM = registerBlock("medium_note_rain_drum",
+    public static final RegistryObject<Block> RAIN_DRUM = registerBlock("medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
@@ -326,12 +324,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> EXPOSED_RAIN_DRUM = registerBlock("exposed_medium_note_rain_drum",
+    public static final RegistryObject<Block> EXPOSED_RAIN_DRUM = registerBlock("exposed_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -340,12 +338,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WEATHERED_RAIN_DRUM = registerBlock("weathered_medium_note_rain_drum",
+    public static final RegistryObject<Block> WEATHERED_RAIN_DRUM = registerBlock("weathered_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.GREEN)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -354,12 +352,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> OXIDIZED_RAIN_DRUM = registerBlock("oxidized_medium_note_rain_drum",
+    public static final RegistryObject<Block> OXIDIZED_RAIN_DRUM = registerBlock("oxidized_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
@@ -368,12 +366,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_RAIN_DRUM = registerBlock("waxed_medium_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_RAIN_DRUM = registerBlock("waxed_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
@@ -382,12 +380,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_EXPOSED_RAIN_DRUM = registerBlock("waxed_exposed_medium_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_EXPOSED_RAIN_DRUM = registerBlock("waxed_exposed_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -396,12 +394,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_WEATHERED_RAIN_DRUM = registerBlock("waxed_weathered_medium_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_WEATHERED_RAIN_DRUM = registerBlock("waxed_weathered_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.GREEN)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -410,12 +408,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_OXIDIZED_RAIN_DRUM = registerBlock("waxed_oxidized_medium_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_OXIDIZED_RAIN_DRUM = registerBlock("waxed_oxidized_medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
@@ -425,12 +423,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
 
-    public static final DeferredBlock<Block> LARGE_RAIN_DRUM = registerBlock("low_note_rain_drum",
+    public static final RegistryObject<Block> LARGE_RAIN_DRUM = registerBlock("low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
@@ -439,12 +437,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.low_pitch.tooltip",
                     "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> EXPOSED_LARGE_RAIN_DRUM = registerBlock("exposed_low_note_rain_drum",
+    public static final RegistryObject<Block> EXPOSED_LARGE_RAIN_DRUM = registerBlock("exposed_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -453,12 +451,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.low_pitch.tooltip",
                     "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WEATHERED_LARGE_RAIN_DRUM = registerBlock("weathered_low_note_rain_drum",
+    public static final RegistryObject<Block> WEATHERED_LARGE_RAIN_DRUM = registerBlock("weathered_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -467,12 +465,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.low_pitch.tooltip",
                     "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> OXIDIZED_LARGE_RAIN_DRUM = registerBlock("oxidized_low_note_rain_drum",
+    public static final RegistryObject<Block> OXIDIZED_LARGE_RAIN_DRUM = registerBlock("oxidized_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -481,12 +479,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.low_pitch.tooltip",
                     "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_LARGE_RAIN_DRUM = registerBlock("waxed_low_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_LARGE_RAIN_DRUM = registerBlock("waxed_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
@@ -495,12 +493,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.low_pitch.tooltip",
                     "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_EXPOSED_LARGE_RAIN_DRUM = registerBlock("waxed_exposed_low_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_EXPOSED_LARGE_RAIN_DRUM = registerBlock("waxed_exposed_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -509,12 +507,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.low_pitch.tooltip",
                     "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_WEATHERED_LARGE_RAIN_DRUM = registerBlock("waxed_weathered_low_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_WEATHERED_LARGE_RAIN_DRUM = registerBlock("waxed_weathered_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -523,12 +521,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.low_pitch.tooltip",
                     "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_OXIDIZED_LARGE_RAIN_DRUM = registerBlock("waxed_oxidized_low_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_OXIDIZED_LARGE_RAIN_DRUM = registerBlock("waxed_oxidized_low_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -538,12 +536,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
 
-    public static final DeferredBlock<Block> TINY_RAIN_DRUM = registerBlock("high_note_rain_drum",
+    public static final RegistryObject<Block> TINY_RAIN_DRUM = registerBlock("high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
@@ -552,12 +550,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.high_pitch.tooltip",
                     "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> EXPOSED_TINY_RAIN_DRUM = registerBlock("exposed_high_note_rain_drum",
+    public static final RegistryObject<Block> EXPOSED_TINY_RAIN_DRUM = registerBlock("exposed_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -566,12 +564,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.high_pitch.tooltip",
                     "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WEATHERED_TINY_RAIN_DRUM = registerBlock("weathered_high_note_rain_drum",
+    public static final RegistryObject<Block> WEATHERED_TINY_RAIN_DRUM = registerBlock("weathered_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -580,12 +578,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.high_pitch.tooltip",
                     "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> OXIDIZED_TINY_RAIN_DRUM = registerBlock("oxidized_high_note_rain_drum",
+    public static final RegistryObject<Block> OXIDIZED_TINY_RAIN_DRUM = registerBlock("oxidized_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -594,12 +592,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.high_pitch.tooltip",
                     "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_TINY_RAIN_DRUM = registerBlock("waxed_high_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_TINY_RAIN_DRUM = registerBlock("waxed_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE       )
                     .sound(SoundType.COPPER),
@@ -608,12 +606,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.high_pitch.tooltip",
                     "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_EXPOSED_TINY_RAIN_DRUM = registerBlock("waxed_exposed_high_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_EXPOSED_TINY_RAIN_DRUM = registerBlock("waxed_exposed_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -622,12 +620,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.high_pitch.tooltip",
                     "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_WEATHERED_TINY_RAIN_DRUM = registerBlock("waxed_weathered_high_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_WEATHERED_TINY_RAIN_DRUM = registerBlock("waxed_weathered_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -636,12 +634,12 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.high_pitch.tooltip",
                     "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
-    public static final DeferredBlock<Block> WAXED_OXIDIZED_TINY_RAIN_DRUM = registerBlock("waxed_oxidized_high_note_rain_drum",
+    public static final RegistryObject<Block> WAXED_OXIDIZED_TINY_RAIN_DRUM = registerBlock("waxed_oxidized_high_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
                     .strength(3f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .mapColor(DyeColor.ORANGE)
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
@@ -651,303 +649,302 @@ public class ModBlocks {
                     "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
 
-    public static final DeferredBlock<Block> EXPOSED_TAMTAM = registerBlock("exposed_tamtam",
+    public static final RegistryObject<Block> EXPOSED_TAMTAM = registerBlock("exposed_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<Block> WEATHERED_TAMTAM = registerBlock("weathered_tamtam",
+    public static final RegistryObject<Block> WEATHERED_TAMTAM = registerBlock("weathered_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<Block> OXIDIZED_TAMTAM = registerBlock("oxidized_tamtam",
+    public static final RegistryObject<Block> OXIDIZED_TAMTAM = registerBlock("oxidized_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.OXIDIZED));
-    public static final DeferredBlock<Block> TAMTAM = registerBlock("tamtam",
+    public static final RegistryObject<Block> TAMTAM = registerBlock("tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<Block> WAXED_TAMTAM = registerBlock("waxed_tamtam",
+    public static final RegistryObject<Block> WAXED_TAMTAM = registerBlock("waxed_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<Block> WAXED_EXPOSED_TAMTAM = registerBlock("waxed_exposed_tamtam",
+    public static final RegistryObject<Block> WAXED_EXPOSED_TAMTAM = registerBlock("waxed_exposed_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<Block> WAXED_WEATHERED_TAMTAM = registerBlock("waxed_weathered_tamtam",
+    public static final RegistryObject<Block> WAXED_WEATHERED_TAMTAM = registerBlock("waxed_weathered_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<Block> WAXED_OXIDIZED_TAMTAM = registerBlock("waxed_oxidized_tamtam",
+    public static final RegistryObject<Block> WAXED_OXIDIZED_TAMTAM = registerBlock("waxed_oxidized_tamtam",
             () -> new TamTamBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.OXIDIZED));
 
-    public static final DeferredBlock<Block> COPPER_LANTERN = registerBlock("copper_lantern",
+    public static final RegistryObject<Block> COPPER_LANTERN = registerBlock("copper_lantern",
             () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
                     .lightLevel(p_187433_ -> 13)
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<Block> EXPOSED_COPPER_LANTERN = registerBlock("exposed_copper_lantern",
+    public static final RegistryObject<Block> EXPOSED_COPPER_LANTERN = registerBlock("exposed_copper_lantern",
             () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
                     .lightLevel(p_187433_ -> 12)
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<Block> WEATHERED_COPPER_LANTERN = registerBlock("weathered_copper_lantern",
+    public static final RegistryObject<Block> WEATHERED_COPPER_LANTERN = registerBlock("weathered_copper_lantern",
             () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
                     .lightLevel(p_187433_ -> 10)
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<Block> OXIDIZED_COPPER_LANTERN = registerBlock("oxidized_copper_lantern",
+    public static final RegistryObject<Block> OXIDIZED_COPPER_LANTERN = registerBlock("oxidized_copper_lantern",
             () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
                     .lightLevel(p_187433_ -> 9)
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.OXIDIZED));
 
-    public static final DeferredBlock<Block> WAXED_COPPER_LANTERN = registerBlock("waxed_copper_lantern",
+    public static final RegistryObject<Block> WAXED_COPPER_LANTERN = registerBlock("waxed_copper_lantern",
             () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
                     .lightLevel(p_187433_ -> 13)
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED));
-    public static final DeferredBlock<Block> WAXED_EXPOSED_COPPER_LANTERN = registerBlock("waxed_exposed_copper_lantern",
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_LANTERN = registerBlock("waxed_exposed_copper_lantern",
             () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
                     .lightLevel(p_187433_ -> 12)
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.EXPOSED));
-    public static final DeferredBlock<Block> WAXED_WEATHERED_COPPER_LANTERN = registerBlock("waxed_weathered_copper_lantern",
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_LANTERN = registerBlock("waxed_weathered_copper_lantern",
             () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
                     .lightLevel(p_187433_ -> 10)
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.WEATHERED));
-    public static final DeferredBlock<Block> WAXED_OXIDIZED_COPPER_LANTERN = registerBlock("waxed_oxidized_copper_lantern",
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_LANTERN = registerBlock("waxed_oxidized_copper_lantern",
             () -> new CopperLanternBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .noOcclusion()
                     .forceSolidOn()
                     .lightLevel(p_187433_ -> 9)
                     .requiresCorrectToolForDrops()
-                    .isValidSpawn(Blocks::never)
+                    
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.OXIDIZED));
-    public static final DeferredBlock<Block> KITCHEN_BELL = registerBlock("kitchen_bell",
+    public static final RegistryObject<Block> KITCHEN_BELL = registerBlock("kitchen_bell",
             () -> new KitchenBellBlock(
-                    BlockSetType.COPPER,
+                    BlockSetType.IRON,
                     5,
                     BlockBehaviour.Properties.of()
                             .strength(2f)
                             .noOcclusion()
                             .forceSolidOn()
                             .requiresCorrectToolForDrops()
-                            .isValidSpawn(Blocks::never)
+                            
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
                     "tooltip.copperoverthrow.clean_dings_sounding.tooltip",
                     ModSounds.KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.UNAFFECTED));
 
-    public static final DeferredBlock<Block> EXPOSED_KITCHEN_BELL = registerBlock("exposed_kitchen_bell",
+    public static final RegistryObject<Block> EXPOSED_KITCHEN_BELL = registerBlock("exposed_kitchen_bell",
             () -> new KitchenBellBlock(
-                    BlockSetType.COPPER,
+                    BlockSetType.IRON,
                     10,
                     BlockBehaviour.Properties.of()
                             .strength(2f)
                             .noOcclusion()
                             .forceSolidOn()
                             .requiresCorrectToolForDrops()
-                            .isValidSpawn(Blocks::never)
+                            
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
                     "tooltip.copperoverthrow.harsh_dings_sounding.tooltip",
                     ModSounds.EXPOSED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.EXPOSED));
 
-    public static final DeferredBlock<Block> WEATHERED_KITCHEN_BELL = registerBlock("weathered_kitchen_bell",
+    public static final RegistryObject<Block> WEATHERED_KITCHEN_BELL = registerBlock("weathered_kitchen_bell",
             () -> new KitchenBellBlock(
-                    BlockSetType.COPPER,
+                    BlockSetType.IRON,
                     15,
                     BlockBehaviour.Properties.of()
                             .strength(2f)
                             .noOcclusion()
                             .forceSolidOn()
                             .requiresCorrectToolForDrops()
-                            .isValidSpawn(Blocks::never)
+                            
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
                     "tooltip.copperoverthrow.chiming_taps_sounding.tooltip",
                     ModSounds.WEATHERED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.WEATHERED));
 
-    public static final DeferredBlock<Block> OXIDIZED_KITCHEN_BELL = registerBlock("oxidized_kitchen_bell",
+    public static final RegistryObject<Block> OXIDIZED_KITCHEN_BELL = registerBlock("oxidized_kitchen_bell",
             () -> new KitchenBellBlock(
-                    BlockSetType.COPPER,
+                    BlockSetType.IRON,
                     20,
                     BlockBehaviour.Properties.of()
                             .strength(2f)
                             .noOcclusion()
                             .forceSolidOn()
                             .requiresCorrectToolForDrops()
-                            .isValidSpawn(Blocks::never)
+                            
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
                     "tooltip.copperoverthrow.dull_taps_sounding.tooltip",
                     ModSounds.OXIDIZED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.OXIDIZED));
 
-    public static final DeferredBlock<Block> WAXED_KITCHEN_BELL = registerBlock("waxed_kitchen_bell",
+    public static final RegistryObject<Block> WAXED_KITCHEN_BELL = registerBlock("waxed_kitchen_bell",
             () -> new KitchenBellBlock(
-                    BlockSetType.COPPER,
+                    BlockSetType.IRON,
                     5,
                     BlockBehaviour.Properties.of()
                             .strength(2f)
                             .noOcclusion()
                             .forceSolidOn()
                             .requiresCorrectToolForDrops()
-                            .isValidSpawn(Blocks::never)
+                            
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
                     "tooltip.copperoverthrow.clean_dings_sounding.tooltip",
                     ModSounds.KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.UNAFFECTED));
 
-    public static final DeferredBlock<Block> WAXED_EXPOSED_KITCHEN_BELL = registerBlock("waxed_exposed_kitchen_bell",
+    public static final RegistryObject<Block> WAXED_EXPOSED_KITCHEN_BELL = registerBlock("waxed_exposed_kitchen_bell",
             () -> new KitchenBellBlock(
-                    BlockSetType.COPPER,
+                    BlockSetType.IRON,
                     10,
                     BlockBehaviour.Properties.of()
                             .strength(2f)
                             .noOcclusion()
                             .forceSolidOn()
                             .requiresCorrectToolForDrops()
-                            .isValidSpawn(Blocks::never)
+                            
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
                     "tooltip.copperoverthrow.harsh_dings_sounding.tooltip",
                     ModSounds.EXPOSED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.EXPOSED));
 
-    public static final DeferredBlock<Block> WAXED_WEATHERED_KITCHEN_BELL = registerBlock("waxed_weathered_kitchen_bell",
+    public static final RegistryObject<Block> WAXED_WEATHERED_KITCHEN_BELL = registerBlock("waxed_weathered_kitchen_bell",
             () -> new KitchenBellBlock(
-                    BlockSetType.COPPER,
+                    BlockSetType.IRON,
                     15,
                     BlockBehaviour.Properties.of()
                             .strength(2f)
                             .noOcclusion()
                             .forceSolidOn()
                             .requiresCorrectToolForDrops()
-                            .isValidSpawn(Blocks::never)
+                            
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
                     "tooltip.copperoverthrow.chiming_taps_sounding.tooltip",
                     ModSounds.WEATHERED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.WEATHERED));
 
-    public static final DeferredBlock<Block> WAXED_OXIDIZED_KITCHEN_BELL = registerBlock("waxed_oxidized_kitchen_bell",
+    public static final RegistryObject<Block> WAXED_OXIDIZED_KITCHEN_BELL = registerBlock("waxed_oxidized_kitchen_bell",
             () -> new KitchenBellBlock(
-                    BlockSetType.COPPER,
+                    BlockSetType.IRON,
                     20,
                     BlockBehaviour.Properties.of()
                             .strength(2f)
                             .noOcclusion()
                             .forceSolidOn()
                             .requiresCorrectToolForDrops()
-                            .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .sound(SoundType.COPPER),
                     "tooltip.copperoverthrow.dull_taps_sounding.tooltip",
                     ModSounds.OXIDIZED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.OXIDIZED));
 
-    private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {
-        DeferredBlock<T> toReturn = BLOCKS.register(name, block);
+    private static <T extends Block> RegistryObject<T> registerBlock (String name, Supplier<T> block) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
         return toReturn;
     }
 
-    private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
+    private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block) {
         if (name.equals("copper_scaffolding") || name.equals("exposed_copper_scaffolding") || name.equals("weathered_copper_scaffolding")|| name.equals("oxidized_copper_scaffolding")
         || name.equals("waxed_copper_scaffolding") || name.equals("waxed_exposed_copper_scaffolding") || name.equals("waxed_weathered_copper_scaffolding")|| name.equals("waxed_oxidized_copper_scaffolding")) {
             ModItems.ITEMS.register(name, () -> new ScaffoldingBlockItem(block.get(), new Item.Properties()));

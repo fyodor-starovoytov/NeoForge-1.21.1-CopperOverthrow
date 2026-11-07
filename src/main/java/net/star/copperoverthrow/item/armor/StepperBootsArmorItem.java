@@ -1,51 +1,51 @@
 package net.star.copperoverthrow.item.armor;
 
-import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.LivingEntity;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import net.minecraft.world.entity.EquipmentSlot;
+
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.star.copperoverthrow.CopperOverthrow;
+
+import net.minecraftforge.common.ForgeMod;
 import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.attribute.ModAttributes;
 
 public class StepperBootsArmorItem extends ArmorItem {
-    public StepperBootsArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
+    public StepperBootsArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }
-
     @Override
-    public ItemAttributeModifiers getDefaultAttributeModifiers() {
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+        if (slot == EquipmentSlot.FEET) {
+            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 
-        ItemAttributeModifiers base = super.getDefaultAttributeModifiers();
+            builder.putAll(super.getDefaultAttributeModifiers(slot));
 
-        return base
-                .withModifierAdded(
-                Attributes.STEP_HEIGHT,
-                new AttributeModifier(
-                        ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_boots_step_height"),
-                        ServerConfig.STEPPER_BOOTS_STEP_HEIGHT.get(),
-                        AttributeModifier.Operation.ADD_VALUE
-                ),
-                EquipmentSlotGroup.FEET
-        )
-                .withModifierAdded(
-                Attributes.SAFE_FALL_DISTANCE,
-                new AttributeModifier(
-                        ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_boots_fall_distance"),
-                        ServerConfig.STEPPER_BOOTS_SAFE_FALL_DISTANCE.get(),
-                        AttributeModifier.Operation.ADD_VALUE
-                ),
-                EquipmentSlotGroup.FEET
-        );
+            builder.put(
+                    ForgeMod.STEP_HEIGHT_ADDITION.get(),
+                    new AttributeModifier(
+                            "Stepper step-height",
+                            ServerConfig.STEPPER_BOOTS_STEP_HEIGHT.get(),
+                            AttributeModifier.Operation.ADDITION
+                    )
+            );
+
+            builder.put(
+                    ModAttributes.SAFE_FALL_DISTANCE.get(),
+                    new AttributeModifier(
+                            "Stepper safe fall distance",
+                            ServerConfig.STEPPER_BOOTS_SAFE_FALL_DISTANCE.get(),
+                            AttributeModifier.Operation.ADDITION
+                    )
+            );
+
+            return builder.build();
+        }
+        return super.getDefaultAttributeModifiers(slot);
     }
 
-    @Override
-    public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer) {
-        return true;
-    }
+
 }

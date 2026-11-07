@@ -54,7 +54,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     public static final MapCodec<TamTamBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     propertiesCodec(),
-                    WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(TamTamBlock::getAge)
+                    WeatherState.CODEC.fieldOf("weather_state").forGetter(TamTamBlock::getAge)
             ).apply(instance, TamTamBlock::new)
     );
 
@@ -63,7 +63,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     private static final int BLOCK_HEIGHT = 2;
     private static final Property<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<WideThinDoubleBlock> PART = EnumProperty.create("part", WideThinDoubleBlock.class);
-    private final WeatheringCopper.WeatherState weatherState;
+    private final WeatherState weatherState;
 
     public TamTamBlock(Properties properties, WeatherState weatherState) {
 
@@ -261,7 +261,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    public WeatheringCopper.@NotNull WeatherState getAge() {
+    public @NotNull WeatherState getAge() {
         return this.weatherState;
     }
 

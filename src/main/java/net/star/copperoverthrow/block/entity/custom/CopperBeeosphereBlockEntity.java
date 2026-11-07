@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CopperBeeosphereBlockEntity extends BeehiveBlockEntity {
 
-    private final List<CopperBeeosphereBlockEntity.BeeData> stored = Lists.newArrayList();
+    private final List<BeeData> stored = Lists.newArrayList();
 
     public CopperBeeosphereBlockEntity(BlockPos pos, BlockState state) {super(pos, state);}
     @Override
@@ -24,7 +24,7 @@ public class CopperBeeosphereBlockEntity extends BeehiveBlockEntity {
     @Override
     public void addOccupant(Entity occupant) {
         if (this.stored.size() < 3) {
-            this.storeBee(CopperBeeosphereBlockEntity.Occupant.of(occupant));
+            this.storeBee(Occupant.of(occupant));
             if (this.level != null) {
                 BlockPos blockpos = this.getBlockPos();
                 this.level
@@ -45,9 +45,9 @@ public class CopperBeeosphereBlockEntity extends BeehiveBlockEntity {
     }
 
     static class BeeData {
-        private final CopperBeeosphereBlockEntity.Occupant occupant;
+        private final Occupant occupant;
 
-        BeeData(CopperBeeosphereBlockEntity.Occupant occupant) {
+        BeeData(Occupant occupant) {
             this.occupant = occupant;
         }
     }

@@ -61,10 +61,10 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
                     propertiesCodec(),
                     Codec.STRING.fieldOf("tooltip_sounding").forGetter(block -> block.TOOLTIP_SOUNDING),
                     BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("press_sound").forGetter(block -> block.PRESS_SOUND.get()),
-                    WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(KitchenBellBlock::getAge)
+                    WeatherState.CODEC.fieldOf("weather_state").forGetter(KitchenBellBlock::getAge)
             ).apply(instance, (ticks, props, tip, sound, weather) -> new KitchenBellBlock(BlockSetType.COPPER, ticks, props, tip, () -> sound, weather))
     );
-    public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, BlockBehaviour.Properties properties, String tooltip_sounding, Supplier<SoundEvent> pressSound, WeatherState weatherState) {
+    public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, Properties properties, String tooltip_sounding, Supplier<SoundEvent> pressSound, WeatherState weatherState) {
         super(properties.sound(type.soundType()));
         this.registerDefaultState(
                 this.stateDefinition.any().setValue(POWERED, Boolean.FALSE)

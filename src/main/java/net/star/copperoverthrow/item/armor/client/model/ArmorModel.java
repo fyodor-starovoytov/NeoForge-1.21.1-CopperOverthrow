@@ -13,7 +13,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.star.copperoverthrow.CopperOverthrow;
-import org.jetbrains.annotations.NotNull;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.function.Function;
 /**
@@ -21,7 +21,7 @@ import java.util.function.Function;
  * <br> extend to make custom armors models
  */
 public class ArmorModel extends HumanoidModel<LivingEntity> {
-    private static final ResourceLocation EMISSIVE_TEXTURE = ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/models/armor/glowing_goggles_emissive.png");
+    private static final ResourceLocation EMISSIVE_TEXTURE = ResourceLocation.tryBuild(CopperOverthrow.MOD_ID, "textures/models/armor/glowing_goggles_emissive.png");
 
     public final ModelPart leftBoot;
     public final ModelPart rightBoot;
@@ -102,18 +102,17 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
     }
 
     @Override
-    public void renderToBuffer(@NotNull PoseStack stack, @NotNull VertexConsumer consumer, int packedLight, int packedOverlay, int color) {
-        // 1. Render the base armor normally
-        super.renderToBuffer(stack, consumer, packedLight, packedOverlay, color);
-        this.leftBoot.render(stack, consumer, packedLight, packedOverlay, color);
-        this.rightBoot.render(stack, consumer, packedLight, packedOverlay, color);
+    public void renderToBuffer(@NotNull PoseStack stack, @NotNull VertexConsumer consumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
+        super.renderToBuffer(stack, consumer, packedLight, packedOverlay, r, g, b, a);
+        this.leftBoot.render(stack, consumer, packedLight, packedOverlay, r, g, b, a);
+        this.rightBoot.render(stack, consumer, packedLight, packedOverlay, r, g, b, a);
 
         if (this.head.visible) {
 
-            net.minecraft.client.renderer.MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-            VertexConsumer emissiveConsumer = bufferSource.getBuffer(RenderType.createArmorDecalCutoutNoCull(EMISSIVE_TEXTURE));
+            MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+            VertexConsumer emissiveConsumer = bufferSource.getBuffer(RenderType.armorCutoutNoCull(EMISSIVE_TEXTURE));
             //15728880 Max packed light
-            this.head.render(stack, emissiveConsumer, 15728880, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+            this.head.render(stack, emissiveConsumer, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         }
     }
 }

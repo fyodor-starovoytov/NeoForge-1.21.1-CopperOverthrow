@@ -1,51 +1,57 @@
 package net.star.copperoverthrow.item.armor;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.star.copperoverthrow.CopperOverthrow;
-import net.star.copperoverthrow.ServerConfig;
+
 import net.star.copperoverthrow.attribute.ModAttributes;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
-    private static final ResourceLocation TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "copper_glowing_goggles");
-    public GlowingGogglesArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
+    private static final String TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "copper_glowing_goggles");
+    public GlowingGogglesArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }
     @Override
-    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         return TEXTURE;
     }
 
 
     @Override
-    public ItemAttributeModifiers getDefaultAttributeModifiers() {
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+        if (slot == EquipmentSlot.HEAD) {
+            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 
-        ItemAttributeModifiers base = super.getDefaultAttributeModifiers();
+            builder.putAll(super.getDefaultAttributeModifiers(slot));
 
-        return base
-                .withModifierAdded(
-                        ModAttributes.NIGHT_VISION,
-                        new AttributeModifier(
-                                ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "night_vision"),
-                                1,
-                                AttributeModifier.Operation.ADD_VALUE
-                        ),
-                        EquipmentSlotGroup.HEAD
-                );
+            builder.put(
+                    ModAttributes.NIGHT_VISION.get(),
+                    new AttributeModifier(
+                            "Night vision modifier",
+                            1.0,
+                            AttributeModifier.Operation.ADDITION
+                    )
+            );
+
+            return builder.build();
+        }
+
+        return super.getDefaultAttributeModifiers(slot);
     }
 
     @Override

@@ -48,7 +48,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     private final float THUNDER_SOUND_PROBABILITY_ADDITION = 0.05f;
     private final float THUNDER_VOLUME_ADDITION = 0.5f;
     private final int MAX_DRIPSTONE_HEIGHT_CHECK = 11;
-    private final WeatheringCopper.WeatherState weatherState;
+    private final WeatherState weatherState;
     private final String TOOLTIP;
     private final String TOOLTIP_SOUNDING;
 
@@ -228,7 +228,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    public WeatheringCopper.@NotNull WeatherState getAge() {
+    public @NotNull WeatherState getAge() {
         return this.weatherState;
     }
 

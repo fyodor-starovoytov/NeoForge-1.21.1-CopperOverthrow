@@ -44,7 +44,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
     public static final MapCodec<LogStripperBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     propertiesCodec(),
-                    WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(LogStripperBlock::getAge)
+                    WeatherState.CODEC.fieldOf("weather_state").forGetter(LogStripperBlock::getAge)
             ).apply(instance, LogStripperBlock::new)
     );
 
