@@ -51,7 +51,7 @@ public class CopperBeeosphereBlock extends BeehiveBlock {
             if (stack.getItem() instanceof BeeCatcherItem beeCatcherItem) {
 
                 if (!beeCatcherItem.hasNoBees(stack)) {
-                    List<CustomData> bees = beeCatcherItem.getBees(stack);
+                    List<CompoundTag> bees = new ArrayList<>(getBees(stack));
                     List<CustomData> remaining = new ArrayList<>(bees);
 
 

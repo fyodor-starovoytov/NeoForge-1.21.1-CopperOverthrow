@@ -20,14 +20,17 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.Tags;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.ToolAction;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.sound.ModSounds;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -44,13 +47,13 @@ public class HandsawItem extends ShearsItem {
         return repairCandidate.is(Tags.Items.INGOTS_COPPER) || super.isValidRepairItem(stack, repairCandidate);
     }
 
-    @Override
+        @Override
     public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.CUSTOM;
     }
 
     @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    public int getUseDuration(ItemStack stack) {
         return ServerConfig.HANDSAW_USE_TIME.get();
     }
 
@@ -80,7 +83,7 @@ public class HandsawItem extends ShearsItem {
                 BlockPos pos = blockhitresult.getBlockPos();
                 BlockState state = level.getBlockState(pos);
 
-                int i = this.getUseDuration(stack, livingEntity) - remainingUseDuration + 1;
+                int i = this.getUseDuration(stack) - remainingUseDuration + 1;
 
                 //Defines which tick the action is performed
                 boolean flag = i % 5 == 0;
@@ -88,7 +91,7 @@ public class HandsawItem extends ShearsItem {
                 if (flag && level.isClientSide) {
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, true);
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, false);
-                    level.playLocalSound(player, ModSounds.HANDSAW_USE.get(), SoundSource.PLAYERS, 0.1F, (float) ServerConfig.HANDSAW_USE_TIME.get() / remainingUseDuration*2.2F + 0.1f);
+                    level.playLocalSound(pos, ModSounds.HANDSAW_USE.get(), SoundSource.PLAYERS, 0.1F, (float) ServerConfig.HANDSAW_USE_TIME.get() / remainingUseDuration*2.2F + 0.1f, false);
                     livingEntity.swing(player.getUsedItemHand(), false);
                 }
                 return;
@@ -156,7 +159,7 @@ public class HandsawItem extends ShearsItem {
                 EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
                         ? EquipmentSlot.OFFHAND
                         : EquipmentSlot.MAINHAND;
-                stack.hurtAndBreak(BlocksToBeDestroyed.size(), livingEntity, equipmentslot);
+                stack.hurtAndBreak(BlocksToBeDestroyed.size(), player, (entity) -> {entity.broadcastBreakEvent(equipmentslot);});
             }
         }
         return super.finishUsingItem(stack, level, livingEntity);
@@ -164,7 +167,7 @@ public class HandsawItem extends ShearsItem {
 
     private HitResult calculateHitResult(Player player) {
         return ProjectileUtil.getHitResultOnViewVector(
-                player, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), player.blockInteractionRange()
+                player, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), player.getBlockReach()
         );
     }
 
@@ -177,12 +180,12 @@ public class HandsawItem extends ShearsItem {
         Block targetBlock = level.getBlockState(initalBlockPos).getBlock();
 
         BlockPos initialImmutable = initalBlockPos.immutable();
-        toBeChecked.addFirst(initialImmutable);
-        toBeDestroyed.addFirst(initialImmutable);
+        toBeChecked.add(0, initialImmutable);
+        toBeDestroyed.add(0, initialImmutable);
         visited.add(initialImmutable);
 
         while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.HANDSAW_MAX_DESTROYED_BLOCKS.get()){
-            BlockPos comparable = toBeChecked.removeLast();
+            BlockPos comparable = toBeChecked.remove(toBeChecked.size() - 1);
             for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, 0, -r), comparable.offset(r, r, r))) {
                 BlockState state = level.getBlockState(pos);
                 BlockPos immutablePos = pos.immutable();
@@ -197,9 +200,8 @@ public class HandsawItem extends ShearsItem {
         return toBeDestroyed;
     }
 
-
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
@@ -209,7 +211,7 @@ public class HandsawItem extends ShearsItem {
         else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 
     @Override
@@ -218,8 +220,7 @@ public class HandsawItem extends ShearsItem {
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, net.neoforged.neoforge.common.ItemAbility itemAbility) {
+    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
         return false;
     }
-
 }

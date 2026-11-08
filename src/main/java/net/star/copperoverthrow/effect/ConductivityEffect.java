@@ -24,7 +24,7 @@ public class ConductivityEffect extends MobEffect{
     }
 
     @Override
-    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+    public void applyEffectTick(LivingEntity livingEntity, int amplifier) {
 
         int y = -2;
         int x = -1;
@@ -47,17 +47,16 @@ public class ConductivityEffect extends MobEffect{
 
         if (level.isThundering() && !level.isClientSide && pos.getY() == level.getHeight(Heightmap.Types.WORLD_SURFACE, pos.getX(), pos.getZ()) - 1) {
 
-            if (CHANCE_FOR_LIGHTNING_HIT() < 90){
+            if (CHANCE_FOR_LIGHTNING_HIT(level) < 90){
                 hitLightning(level, pos);
             }
 
         }
-
-        return super.applyEffectTick(livingEntity, amplifier);
     }
 
+
     @Override
-    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+    public boolean isDurationEffectTick(int duration, int amplifier) {
         return true;
     }
 
@@ -70,8 +69,7 @@ public class ConductivityEffect extends MobEffect{
         }
     }
 
-    public static int CHANCE_FOR_LIGHTNING_HIT() {
-        int random = (int) (Math.random() * (CHANCE - 1 + 1)) + 1;
-        return random;
+    public static int CHANCE_FOR_LIGHTNING_HIT(Level level) {
+        return level.random.nextInt(CHANCE) + 1;
     }
 }

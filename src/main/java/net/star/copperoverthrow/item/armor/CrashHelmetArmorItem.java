@@ -2,6 +2,7 @@ package net.star.copperoverthrow.item.armor;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -11,12 +12,17 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.ForgeMod;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
+import net.star.copperoverthrow.item.armor.client.model.CrashHelmetModel;
+import net.star.copperoverthrow.item.armor.client.provider.ArmorModelProvider;
+import net.star.copperoverthrow.item.armor.client.provider.SimpleModelProvider;
 
 import javax.annotation.Nullable;
+import java.util.function.Consumer;
 
 public class CrashHelmetArmorItem extends AbstractExtendedArmorItem {
     private static final String TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "crash_helmet");
@@ -52,5 +58,15 @@ public class CrashHelmetArmorItem extends AbstractExtendedArmorItem {
             return builder.build();
         }
         return super.getDefaultAttributeModifiers(slot);
+    }
+
+    @Override
+    protected boolean withCustomModel() {
+        return true;
+    }
+
+    @Override
+    protected ArmorModelProvider createModelProvider() {
+        return new SimpleModelProvider(CrashHelmetModel::createBodyLayer, CrashHelmetModel::new);
     }
 }

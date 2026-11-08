@@ -13,6 +13,10 @@ import net.minecraftforge.common.ForgeMod;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
+import net.star.copperoverthrow.item.armor.client.model.CopperExoskeletonModel;
+import net.star.copperoverthrow.item.armor.client.model.CrashHelmetModel;
+import net.star.copperoverthrow.item.armor.client.provider.ArmorModelProvider;
+import net.star.copperoverthrow.item.armor.client.provider.SimpleModelProvider;
 
 import javax.annotation.Nullable;
 
@@ -60,5 +64,15 @@ public class CopperExoskeletonArmorItem extends AbstractExtendedArmorItem {
             return builder.build();
         }
         return super.getDefaultAttributeModifiers(slot);
+    }
+
+    @Override
+    protected boolean withCustomModel() {
+        return true;
+    }
+
+    @Override
+    protected ArmorModelProvider createModelProvider() {
+        return new SimpleModelProvider(CopperExoskeletonModel::createBodyLayer, CopperExoskeletonModel::new);
     }
 }

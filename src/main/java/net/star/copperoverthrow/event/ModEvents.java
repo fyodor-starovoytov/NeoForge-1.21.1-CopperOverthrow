@@ -7,12 +7,14 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -90,13 +92,15 @@ public class ModEvents {
                 int area = 1;
                 int deep = 0;
 
+                assert ModEnchantments.AREAL.getKey() != null;
                 Holder<Enchantment> arealHolder = event.getLevel().registryAccess()
                         .lookupOrThrow(Registries.ENCHANTMENT)
-                        .getOrThrow(ModEnchantments.AREAL);
+                        .getOrThrow(ModEnchantments.AREAL.getKey());
 
+                assert ModEnchantments.TUNNELING.getKey() != null;
                 Holder<Enchantment> tunnelingHolder = event.getLevel().registryAccess()
                         .lookupOrThrow(Registries.ENCHANTMENT)
-                        .getOrThrow(ModEnchantments.TUNNELING);
+                        .getOrThrow(ModEnchantments.TUNNELING.getKey());
 
                 if (mainHandItem.getEnchantmentLevel(arealHolder.get()) != 0) {
                     area = 2;
@@ -130,56 +134,51 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-            Level level = event.getLevel();
-            BlockPos pos = event.getPos();
-            BlockState state = level.getBlockState(pos);
+        Level level = event.getLevel();
+        BlockPos pos = event.getPos();
+        BlockState state = level.getBlockState(pos);
 
-            if (state.getBlock() instanceof MultiBlockTallDecoration drum) {
-                ItemStack stack = event.getItemStack();
+        if (state.getBlock() instanceof MultiBlockTallDecoration drum) {
+            ItemStack stack = event.getItemStack();
 
-                if (stack.is(Items.HONEYCOMB)) {
-                    Waxable waxable = state.getBlockHolder().getData(NeoForgeDataMaps.WAXABLES);
+            if (stack.is(Items.HONEYCOMB)) {
+                HoneycombItem.getWaxed(state).ifPresent(waxedState -> {
+                    Player player = event.getEntity();
 
-                    if (waxable != null) {
-                        Player player = event.getEntity();
+                    if (!level.isClientSide) {
+                        Block waxedBlock = waxedState.getBlock();
 
-                        if (!level.isClientSide) {
-                            Block waxedBlock = waxable.waxed();
-
-                            if (player instanceof ServerPlayer serverPlayer) {
-                                CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
-                            }
-
-                            if (!player.isCreative()) {
-                                stack.shrink(1);
-                            }
-
-                            level.setBlock(pos, waxedBlock.defaultBlockState().setValue(MultiBlockTallDecoration.PART, state.getValue(MultiBlockTallDecoration.PART)), 3);
-                            drum.propagateBlockChange(level, pos, state, waxedBlock);
-
-                            level.levelEvent(null, 3003, pos, 0);
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
                         }
 
-                        player.swing(event.getHand());
+                        if (!player.isCreative()) {
+                            stack.shrink(1);
+                        }
 
-                        event.setCanceled(true);
-                        event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide).result());
+                        level.setBlock(pos, waxedBlock.defaultBlockState().setValue(MultiBlockTallDecoration.PART, state.getValue(MultiBlockTallDecoration.PART)), 3);
+                        drum.propagateBlockChange(level, pos, state, waxedBlock);
+
+                        level.levelEvent(null, 3003, pos, 0);
                     }
-                }
+
+                    player.swing(event.getHand());
+
+                    event.setCanceled(true);
+                    event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
+                });
             }
+        }
 
         if (state.getBlock() instanceof TamTamBlock plate) {
             ItemStack stack = event.getItemStack();
 
             if (stack.is(Items.HONEYCOMB)) {
-                Waxable waxable = state.getBlockHolder().getData(NeoForgeDataMaps.WAXABLES);
-
-                if (waxable != null) {
-                    //ffas
+                HoneycombItem.getWaxed(state).ifPresent(waxedState -> {
                     Player player = event.getEntity();
 
                     if (!level.isClientSide) {
-                        Block waxedBlock = waxable.waxed();
+                        Block waxedBlock = waxedState.getBlock();
 
                         if (player instanceof ServerPlayer serverPlayer) {
                             CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
@@ -198,8 +197,8 @@ public class ModEvents {
                     player.swing(event.getHand());
 
                     event.setCanceled(true);
-                    event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide).result());
-                }
+                    event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
+                });
             }
         }
     }

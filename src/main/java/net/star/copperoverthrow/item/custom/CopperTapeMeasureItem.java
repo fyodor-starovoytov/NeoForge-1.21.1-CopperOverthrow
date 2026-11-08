@@ -3,6 +3,10 @@ package net.star.copperoverthrow.item.custom;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.LongTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,13 +22,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec2;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.custom.HologramBlock;
-import net.star.copperoverthrow.component.ModDataComponents;
+import net.star.copperoverthrow.event.CustomSpyglassArmposeExtension;
 import net.star.copperoverthrow.item.ModItems;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
     private final Block hologramBlock;
@@ -40,51 +47,52 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
         Direction dir = context.getClickedFace();
         BlockPos pos = context.getClickedPos().relative(dir);
         ItemStack stack = context.getItemInHand();
+        CompoundTag tag = stack.getOrCreateTag();
 
         if (!level.isClientSide) {
-            if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == null
-                    && stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) == null
-                    && stack.get(ModDataComponents.IS_USED) == null) {
+            if (!tag.contains("temporal_direction")
+                    && !tag.contains("temporal_initial_blockpos")
+                    && !tag.contains("is_used")) {
 
-                stack.set(ModDataComponents.TEMPORAL_DIRECTION, dir);
-                stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, pos);
-                stack.set(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS, null);
-                stack.set(ModDataComponents.IS_USED, 1);
+                tag.putString("temporal_direction", dir.getName());
+                tag.putLong("temporal_initial_blockpos", pos.asLong());
+                tag.remove("temporal_secondary_blockpos");
+                tag.putInt("is_used", 1);
 
                 return InteractionResult.SUCCESS;
-            }
+            } else if (tag.contains("temporal_direction")
+                    && tag.contains("temporal_initial_blockpos")
+                    && !tag.contains("temporal_secondary_blockpos")
+                    && tag.contains("is_used")) {
 
-            else if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) != null
-                    && stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) != null
-                    && stack.get(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS) == null
-                    && stack.get(ModDataComponents.IS_USED) != null) {
-
-                stack.set(ModDataComponents.IS_USED, null);
-                stack.set(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS, pos);
+                tag.remove("is_used");
+                tag.putLong("temporal_secondary_blockpos", pos.asLong());
 
                 Player player = context.getPlayer();
                 if (player != null) {
                     EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
                             ? EquipmentSlot.OFFHAND
                             : EquipmentSlot.MAINHAND;
-                    stack.hurtAndBreak(1, player, equipmentslot);
+                    stack.hurtAndBreak(1, player, (entity) -> {
+                        entity.broadcastBreakEvent(equipmentslot);
+                    });
                 }
                 return InteractionResult.SUCCESS;
-            }
-            else if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown() && stack.is(ModItems.COPPER_SEXTANT)) {
-                stack.set(ModDataComponents.IS_USED, null);
-                stack.set(ModDataComponents.TEMPORAL_DIRECTION, null);
-                stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, null);
-                stack.set(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS, null);
+            } else if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown() && stack.is(ModItems.COPPER_SEXTANT.get())) {
+                tag.remove("is_used");
+                tag.remove("temporal_direction");
+                tag.remove("temporal_initial_blockpos");
+                tag.remove("temporal_secondary_blockpos");
 
-                if (stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST) != null) {
-                    List<BlockPos> toDelete = new ArrayList<>(stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST));
-
-                    for (var position : toDelete) {
+                if (tag.contains("temporal_blockpos_list", Tag.TAG_LIST)) {
+                    ListTag listTag = tag.getList("temporal_blockpos_list", Tag.TAG_LONG);
+                    for (int i = 0; i < listTag.size(); i++) {
+                        BlockPos position = BlockPos.of(((LongTag) listTag.get(i)).getAsLong());
                         if (level.getBlockState(position).is(hologramBlock)) {
                             level.destroyBlock(position, false);
                         }
                     }
+                    tag.remove("temporal_blockpos_list");
                 }
                 return InteractionResult.SUCCESS;
             }
@@ -95,44 +103,56 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack stack = player.getItemInHand(usedHand);
-        if (player.isShiftKeyDown()){
-            if (!level.isClientSide && stack.is(ModItems.COPPER_SEXTANT)){
-                stack.set(ModDataComponents.IS_USED, null);
-                stack.set(ModDataComponents.TEMPORAL_DIRECTION, null);
-                stack.set(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS, null);
-                stack.set(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS, null);
+        CompoundTag tag = stack.getOrCreateTag();
+        if (player.isShiftKeyDown()) {
+            if (!level.isClientSide && stack.is(ModItems.COPPER_SEXTANT.get())) {
+                tag.remove("is_used");
+                tag.remove("temporal_direction");
+                tag.remove("temporal_initial_blockpos");
+                tag.remove("temporal_secondary_blockpos");
 
-                if (stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST) != null) {
-                    List<BlockPos> toDelete = new ArrayList<>(stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST));
-
-                    for (var position : toDelete) {
+                if (tag.contains("temporal_blockpos_list", Tag.TAG_LIST)) {
+                    ListTag listTag = tag.getList("temporal_blockpos_list", Tag.TAG_LONG);
+                    for (int i = 0; i < listTag.size(); i++) {
+                        BlockPos position = BlockPos.of(((LongTag) listTag.get(i)).getAsLong());
                         if (level.getBlockState(position).is(hologramBlock)) {
                             level.destroyBlock(position, false);
                         }
                     }
+                    tag.remove("temporal_blockpos_list");
                 }
 
                 return InteractionResultHolder.success(stack);
             }
         }
-        return  InteractionResultHolder.pass(stack);
+        return InteractionResultHolder.pass(stack);
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (entity instanceof Player player && !level.isClientSide) {
-            if (stack.get(ModDataComponents.IS_USED) != null && isSelected) {
-                BlockPos initialPos = stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS);
-                BlockPos secondaryPos = getBlockLookedAt(player); // Current target look pos
+            CompoundTag tag = stack.getOrCreateTag();
+            if (tag.contains("is_used") && isSelected) {
+
+                if (!tag.contains("temporal_initial_blockpos")) return;
+
+                BlockPos initialPos = BlockPos.of(tag.getLong("temporal_initial_blockpos"));
+                BlockPos secondaryPos = getBlockLookedAt(player);
 
                 if (initialPos == null || secondaryPos == null) return;
 
-                BlockPos lastLookedAtPos = stack.get(ModDataComponents.TEMPORARY_LAST_REGISTERED_BLOCK);
+                BlockPos lastLookedAtPos = null;
+                if (tag.contains("last_registered_block")) {
+                    lastLookedAtPos = BlockPos.of(tag.getLong("last_registered_block"));
+                }
 
                 if (!secondaryPos.equals(lastLookedAtPos)) {
                     List<BlockPos> toDelete = new ArrayList<>();
-                    if (stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST) != null) {
-                        toDelete.addAll(stack.get(ModDataComponents.TEMPORAL_BLOCKPOS_LIST));
+                    if (tag.contains("temporal_blockpos_list", Tag.TAG_LIST)) {
+                        ListTag listTag = tag.getList("temporal_blockpos_list", Tag.TAG_LONG);
+                        for (int i = 0; i < listTag.size(); i++) {
+                            toDelete.add(BlockPos.of(((LongTag) listTag.get(i)).getAsLong()));
+                        }
                     }
 
                     for (var position : toDelete) {
@@ -144,14 +164,13 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
 
                     List<BlockPos> toMark = getFlatCircleBlocksY(initialPos, secondaryPos);
 
-                    if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.EAST
-                            || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.WEST) {
-                        toMark = getFlatCircleBlocksX(initialPos, secondaryPos);
-                    }
-
-                    if (stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.NORTH
-                            || stack.get(ModDataComponents.TEMPORAL_DIRECTION) == Direction.SOUTH) {
-                        toMark = getFlatCircleBlocksZ(initialPos, secondaryPos);
+                    if (tag.contains("temporal_direction")) {
+                        Direction savedDir = Direction.byName(tag.getString("temporal_direction"));
+                        if (savedDir == Direction.EAST || savedDir == Direction.WEST) {
+                            toMark = getFlatCircleBlocksX(initialPos, secondaryPos);
+                        } else if (savedDir == Direction.NORTH || savedDir == Direction.SOUTH) {
+                            toMark = getFlatCircleBlocksZ(initialPos, secondaryPos);
+                        }
                     }
 
                     for (var position : toMark) {
@@ -160,21 +179,23 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
                             toDelete.add(position);
                         }
                     }
-                    stack.set(ModDataComponents.TEMPORAL_BLOCKPOS_LIST, toDelete);
-                    stack.set(ModDataComponents.TEMPORARY_LAST_REGISTERED_BLOCK, secondaryPos);
+
+                    ListTag newListTag = new ListTag();
+                    for (BlockPos pos : toDelete) {
+                        newListTag.add(LongTag.valueOf(pos.asLong()));
+                    }
+                    tag.put("temporal_blockpos_list", newListTag);
+                    tag.putLong("last_registered_block", secondaryPos.asLong());
                 }
             }
         }
     }
 
-    private static BlockPos getBlockLookedAt(Player player){
-
+    private static BlockPos getBlockLookedAt(Player player) {
         BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
                 (player.getEyePosition(1f).add(player.getViewVector(1f).scale(3f))),
                 ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-
         BlockPos secondaryPos = traceResult.getBlockPos();
-
         return secondaryPos;
     }
 
@@ -183,8 +204,8 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
 
         Vec2 center = new Vec2(initial.getX(), initial.getZ());
         Vec2 target = new Vec2(secondary.getX(), secondary.getZ());
+        Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
 
-        Vec2 diff = new Vec2(secondary.getX() - initial.getX(), target.y - center.y);
         int r = Math.min(Math.round(diff.length()), ServerConfig.MEASURE_MAX_DISTANCE.get());
 
         int centerX = Math.round(center.x);
@@ -207,8 +228,8 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
 
         Vec2 center = new Vec2(initial.getX(), initial.getY());
         Vec2 target = new Vec2(secondary.getX(), secondary.getY());
-
         Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
+
         int r = Math.min(Math.round(diff.length()), ServerConfig.MEASURE_MAX_DISTANCE.get());
 
         int centerX = Math.round(center.x);
@@ -223,7 +244,6 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
                 }
             }
         }
-
         return circleBlocks;
     }
 
@@ -232,8 +252,8 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
 
         Vec2 center = new Vec2(initial.getY(), initial.getZ());
         Vec2 target = new Vec2(secondary.getY(), secondary.getZ());
-
         Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
+
         int r = Math.min(Math.round(diff.length()), ServerConfig.MEASURE_MAX_DISTANCE.get());
 
         int centerY = Math.round(center.x);
@@ -248,32 +268,41 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
                 }
             }
         }
-
         return circleBlocks;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_sextant.tooltip"));
         } else {
-            if (stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) != null) {
-                tooltipComponents.add(Component.literal("§7" + (stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS).toShortString())));
-            }
+            CompoundTag tag = stack.getTag();
+            if (tag != null) {
+                if (tag.contains("temporal_initial_blockpos")) {
+                    BlockPos pos = BlockPos.of(tag.getLong("temporal_initial_blockpos"));
+                    tooltipComponents.add(Component.literal("§7" + pos.toShortString()));
+                }
 
-            if (stack.get(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS) != null) {
-                tooltipComponents.add(Component.literal("§7" + (stack.get(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS).toShortString())));
-            }
+                if (tag.contains("temporal_secondary_blockpos")) {
+                    BlockPos pos = BlockPos.of(tag.getLong("temporal_secondary_blockpos"));
+                    tooltipComponents.add(Component.literal("§7" + pos.toShortString()));
+                }
 
-            if (stack.get(ModDataComponents.TEMPORAL_SECONDARY_BLOCKPOS) != null || stack.get(ModDataComponents.TEMPORAL_INITIAL_BLOCKPOS) != null) {
-                tooltipComponents.add(Component.empty());
+                if (tag.contains("temporal_secondary_blockpos") || tag.contains("temporal_initial_blockpos")) {
+                    tooltipComponents.add(Component.empty());
+                }
             }
 
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltipComponents, tooltipFlag);
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(CustomSpyglassArmposeExtension.INSTANCE);
     }
 }

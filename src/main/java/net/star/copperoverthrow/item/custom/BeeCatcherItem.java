@@ -3,6 +3,8 @@ package net.star.copperoverthrow.item.custom;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -16,12 +18,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.star.copperoverthrow.block.custom.CopperBeeosphereBlock;
 import net.star.copperoverthrow.component.ModDataComponents;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,19 +42,22 @@ public class BeeCatcherItem extends Item {
 
             if (!isClient) {
 
-            CompoundTag tag = new CompoundTag();
-            bee.saveWithoutId(tag);
-            tag.remove("Pos");
-            tag.remove("Motion");
-            tag.remove("Rotation");
+                CompoundTag tag = new CompoundTag();
+                bee.saveWithoutId(tag);
+                tag.remove("Pos");
+                tag.remove("Motion");
+                tag.remove("Rotation");
 
-            List<CustomData> bees = new ArrayList<>(getBees(stack));
-            bees.add(CustomData.of(tag));
+                List<CompoundTag> bees = new ArrayList<>(getBees(stack));
+                bees.add(tag);
+                ListTag listTag = new ListTag();
+                for (CompoundTag beeData : bees) {
+                    listTag.add(beeData);
+                }
+                stack.getOrCreateTag().put("caught_bees", listTag);
 
-            //DOESNT SAVE THE DATA IN CREATIVE
-            stack.set(ModDataComponents.CAUGHT_BEES, bees);
-            entity.level().playSound(null, pos, SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL);
-            entity.discard();
+                entity.level().playSound(null, pos, SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL);
+                entity.discard();
 
             }
             return InteractionResult.SUCCESS;
@@ -65,8 +70,8 @@ public class BeeCatcherItem extends Item {
         Level level = context.getLevel();
         ItemStack stack = context.getItemInHand();
 
-        List<CustomData> bees = getBees(stack);
-        List<CustomData> remaining = new ArrayList<>(bees);
+        List<CompoundTag> bees = new ArrayList<>(getBees(stack));
+        List<CompoundTag> remaining = new ArrayList<>(bees);
 
         if (level.getBlockState(context.getClickedPos()).getBlock() instanceof CopperBeeosphereBlock){
             return InteractionResult.SUCCESS;
@@ -75,11 +80,15 @@ public class BeeCatcherItem extends Item {
         if (!(bees.isEmpty()) && !level.isClientSide) {
 
             while (!remaining.isEmpty()) {
-                CompoundTag tag = remaining.removeLast().copyTag();
+                CompoundTag tag = remaining.remove(remaining.size() - 1).copy();
 
-            Bee bee = EntityType.BEE.create(
+            Bee bee = EntityType.BEE.spawn(
                     (ServerLevel) level,
-                    b -> b.load(tag),
+                    null,
+                    b -> {
+                        tag.remove("UUID");
+                        b.load(tag);
+                    },
                     context.getClickedPos(),
                     MobSpawnType.BUCKET,
                     true,
@@ -87,7 +96,6 @@ public class BeeCatcherItem extends Item {
             );
 
             if (bee != null) {
-
                 BlockPos spawnPos = context.getClickedPos().relative(context.getClickedFace());
                 bee.moveTo(
                         spawnPos.getX() + Math.random(),
@@ -96,17 +104,17 @@ public class BeeCatcherItem extends Item {
                         bee.getYRot(),
                         bee.getXRot()
                 );
-                level.addFreshEntity(bee);
             }}
-                stack.set(ModDataComponents.CAUGHT_BEES, null);
+                stack.removeTagKey("caught_bees");
                 level.playSound(null, context.getClickedPos(), SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL);
                 return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
 
+
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
@@ -119,11 +127,21 @@ public class BeeCatcherItem extends Item {
         else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 
-    public List<CustomData> getBees(ItemStack stack) {
-        return stack.getOrDefault(ModDataComponents.CAUGHT_BEES, List.of());
+    public static List<CompoundTag> getBees(ItemStack stack) {
+        List<CompoundTag> beeList = new ArrayList<>();
+
+        if (stack.hasTag() && stack.getTag().contains("caught_bees", Tag.TAG_LIST)) {
+            ListTag listTag = stack.getTag().getList("caught_bees", Tag.TAG_COMPOUND);
+
+            for (int i = 0; i < listTag.size(); i++) {
+                beeList.add(listTag.getCompound(i));
+            }
+        }
+
+        return beeList;
     }
 
     public boolean hasFreeSlot(ItemStack stack) {

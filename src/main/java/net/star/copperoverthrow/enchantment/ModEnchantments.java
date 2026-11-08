@@ -1,48 +1,22 @@
 package net.star.copperoverthrow.enchantment;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.star.copperoverthrow.CopperOverthrow;
-import net.star.copperoverthrow.util.ModTags;
+import net.star.copperoverthrow.enchantment.custom.ArealEnchantment;
+import net.star.copperoverthrow.enchantment.custom.TunnelingEnchantment;
 
 public class ModEnchantments {
-    public static final ResourceKey<Enchantment> AREAL = ResourceKey.create(Registries.ENCHANTMENT,
-            new ResourceLocation(CopperOverthrow.MOD_ID, "areal"));
+    public static final DeferredRegister<Enchantment> ENCHANTMENTS =
+            DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, CopperOverthrow.MOD_ID);
 
-    public static final ResourceKey<Enchantment> TUNNELING = ResourceKey.create(Registries.ENCHANTMENT,
-            new ResourceLocation(CopperOverthrow.MOD_ID, "tunneling"));
+    public static final RegistryObject<Enchantment> AREAL = ENCHANTMENTS.register("areal",
+            () -> new ArealEnchantment(Enchantment.Rarity.RARE, EnchantmentCategory.DIGGER, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 
-    public static void bootstrap(BootstrapContext<Enchantment> context) {
-        var enchantments = context.lookup(Registries.ENCHANTMENT);
-        var items = context.lookup(Registries.ITEM);
-
-        register(context, AREAL, Enchantment.enchantment(Enchantment.definition(
-                        items.getOrThrow(ModTags.Items.HAMMER_ENCHANTABLE),
-                        1,
-                        1,
-                        Enchantment.constantCost(20),
-                        Enchantment.constantCost(65),
-                        6,
-                        EquipmentSlotGroup.MAINHAND))
-                .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.MINING_EXCLUSIVE)));
-
-        register(context, TUNNELING, Enchantment.enchantment(Enchantment.definition(
-                        items.getOrThrow(ModTags.Items.HAMMER_ENCHANTABLE),
-                        1,
-                        2,
-                        Enchantment.dynamicCost(12, 9),
-                        Enchantment.dynamicCost(24, 18),
-                        4,
-                        EquipmentSlotGroup.MAINHAND))
-                .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.MINING_EXCLUSIVE)));
-    }
-
-
-
-    private static void register(BootstrapContext<Enchantment> registry, ResourceKey<Enchantment> key,
-                                 Enchantment.Builder builder) {
-        registry.register(key, builder.build(key.location()));
-    }
+    public static final RegistryObject<Enchantment> TUNNELING = ENCHANTMENTS.register("tunneling",
+            () -> new TunnelingEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentCategory.DIGGER, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 }

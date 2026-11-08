@@ -18,6 +18,10 @@ import net.minecraft.world.level.LightLayer;
 import net.star.copperoverthrow.CopperOverthrow;
 
 import net.star.copperoverthrow.attribute.ModAttributes;
+import net.star.copperoverthrow.item.armor.client.model.CrashHelmetModel;
+import net.star.copperoverthrow.item.armor.client.model.GlowingGogglesModel;
+import net.star.copperoverthrow.item.armor.client.provider.ArmorModelProvider;
+import net.star.copperoverthrow.item.armor.client.provider.SimpleModelProvider;
 
 import javax.annotation.Nullable;
 
@@ -93,6 +97,16 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
         int actualSkyLight = Math.max(0, rawSkyLight - skySubtract);
 
         return Math.max(blockLight, actualSkyLight);
+    }
+
+    @Override
+    protected boolean withCustomModel() {
+        return true;
+    }
+
+    @Override
+    protected ArmorModelProvider createModelProvider() {
+        return new SimpleModelProvider(GlowingGogglesModel::createBodyLayer, GlowingGogglesModel::new);
     }
 }
 

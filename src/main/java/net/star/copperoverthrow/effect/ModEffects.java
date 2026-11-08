@@ -4,17 +4,19 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.star.copperoverthrow.CopperOverthrow;
 
 public class ModEffects {
 
     public static final DeferredRegister<MobEffect> MOB_EFFECTS =
-            DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, CopperOverthrow.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, CopperOverthrow.MOD_ID);
 
 
-    public static final Holder<MobEffect> CONDUCTIVITY_EFFECT = MOB_EFFECTS.register("conductivity",
+    public static final RegistryObject<MobEffect> CONDUCTIVITY_EFFECT = MOB_EFFECTS.register("conductivity",
             ()-> new ConductivityEffect(MobEffectCategory.NEUTRAL));
 
     public static void register(IEventBus eventBus){

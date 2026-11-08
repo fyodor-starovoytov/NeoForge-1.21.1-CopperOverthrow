@@ -56,5 +56,7 @@ public class ModAttributes{
             ).setSyncable(true)
     );
 
-
+    public static void register(IEventBus eventBus) {
+        ATTRIBUTES.register(eventBus);
+    }
 }
