@@ -13,7 +13,7 @@ public class CustomSpyglassArmposeExtension implements IClientItemExtensions {
 
     @Override
     public HumanoidModel.ArmPose getArmPose(LivingEntity entity, InteractionHand hand, ItemStack stack) {
-        if (stack.get(ModDataComponents.IS_USED) != null && entity.getUsedItemHand() == hand) {
+        if (stack.hasTag() && stack.getTag().contains("is_used") && entity.getUsedItemHand() == hand) {
             return HumanoidModel.ArmPose.SPYGLASS;
         }
         return HumanoidModel.ArmPose.ITEM;

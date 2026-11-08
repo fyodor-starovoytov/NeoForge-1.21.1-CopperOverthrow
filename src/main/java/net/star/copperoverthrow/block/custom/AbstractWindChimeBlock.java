@@ -1,10 +1,7 @@
 package net.star.copperoverthrow.block.custom;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,17 +23,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.custom.LunarWindChimeBlockEntity;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
 public class AbstractWindChimeBlock extends BaseEntityBlock {
-    public static final MapCodec<AbstractWindChimeBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            instance.group(
-                    propertiesCodec(),
-                    BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("press_sound").forGetter(block -> block.CHIME_SOUND.get())
-            ).apply(instance, (properties, sound) -> new AbstractWindChimeBlock(properties, () -> sound))
-    );
+
     private final Supplier<SoundEvent> CHIME_SOUND;
     public static final BooleanProperty UPPER = BooleanProperty.create("upper");
 
@@ -51,24 +42,19 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
 
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         
-        if (state.is(ModBlocks.LUNAR_WIND_CHIME)) {
+        if (state.is(ModBlocks.LUNAR_WIND_CHIME.get())) {
             return state.getValue(UPPER) ? new LunarWindChimeBlockEntity(pos, state) : null;
         }
-        if (state.is(ModBlocks.RED_WIND_CHIME)) {
+        if (state.is(ModBlocks.RED_WIND_CHIME.get())) {
             return state.getValue(UPPER) ? new RedWindChimeBlockEntity(pos, state) : null;
         }
         return null;
     }
-    
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return state.getValue(UPPER) ? TOP_SHAPE : BOTTOM_SHAPE;
     }
 
@@ -78,7 +64,6 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
     }
 
 
-    @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockPos blockpos = context.getClickedPos();
@@ -91,7 +76,7 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state,  LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
         if (!level.isClientSide()) {
             BlockPos belowPos = pos.below();
@@ -101,7 +86,7 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         if (state.getValue(UPPER)) {
             BlockPos abovePos = pos.above();
             return level.getBlockState(abovePos).isFaceSturdy(level, abovePos, Direction.DOWN);
@@ -112,7 +97,7 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
         if (!state.canSurvive(level, currentPos)) {
             return Blocks.AIR.defaultBlockState();
         }
@@ -120,7 +105,7 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         level.playSound(null, pos, CHIME_SOUND.get(), SoundSource.RECORDS,1, 1);
     }
 
