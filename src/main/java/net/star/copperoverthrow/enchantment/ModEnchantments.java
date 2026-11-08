@@ -1,21 +1,18 @@
 package net.star.copperoverthrow.enchantment;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.EnchantmentTags;
-import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.util.ModTags;
 
 public class ModEnchantments {
     public static final ResourceKey<Enchantment> AREAL = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "areal"));
+            new ResourceLocation(CopperOverthrow.MOD_ID, "areal"));
 
     public static final ResourceKey<Enchantment> TUNNELING = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "tunneling"));
+            new ResourceLocation(CopperOverthrow.MOD_ID, "tunneling"));
 
     public static void bootstrap(BootstrapContext<Enchantment> context) {
         var enchantments = context.lookup(Registries.ENCHANTMENT);

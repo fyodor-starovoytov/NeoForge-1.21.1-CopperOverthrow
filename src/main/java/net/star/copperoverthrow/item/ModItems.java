@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.ShearsItem;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -18,6 +19,7 @@ import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.armor.*;
 import net.star.copperoverthrow.item.custom.*;
+import net.star.copperoverthrow.util.ModTags;
 
 public class ModItems {
 
@@ -73,9 +75,8 @@ public class ModItems {
             () -> new GlowingGogglesArmorItem(ModArmorMaterials.STEPPER, ArmorItem.Type.HELMET,
                     new Properties()));
 
-    public static final RegistryObject<HammerItem> COPPER_HAMMER = ITEMS.register("copper_hammer",
-            () -> new HammerItem(ModToolTiers.COPPER, new Properties()
-                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 6f, -3.6f))));
+    public static final RegistryObject<Item> COPPER_HAMMER = ITEMS.register("copper_hammer",
+            () -> new HammerItem( 4f, 2f, ModToolTiers.COPPER,new Item.Properties()));
 
     public static final RegistryObject<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
             () -> new HandsawItem(new Properties().durability(727).stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));

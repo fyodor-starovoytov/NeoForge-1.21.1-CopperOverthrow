@@ -24,6 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.custom.HologramBlock;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -97,7 +98,8 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
                 );
 
                 EquipmentSlot slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-                context.getItemInHand().hurtAndBreak(1, serverLevel, player, tool -> player.onEquippedItemBroken(tool, slot));
+                context.getItemInHand().hurtAndBreak(1, player, (entity) -> {entity.broadcastBreakEvent(slot);
+                });
             }
         }
         return InteractionResult.SUCCESS;
@@ -112,12 +114,12 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         int r = 1;
 
         BlockPos initialImmutable = initalBlockPos.immutable();
-        toBeChecked.addFirst(initialImmutable);
-        toBeDestroyed.addFirst(initialImmutable);
+        toBeChecked.add(0, initialImmutable);
+        toBeDestroyed.add(0, initialImmutable);
         visited.add(initialImmutable);
 
         while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.MEASURE_MAX_DISTANCE.get()){
-            BlockPos comparable = toBeChecked.removeLast();
+            BlockPos comparable = toBeChecked.remove(toBeChecked.size() - 1);
             for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, -r, -r), comparable.offset(r, r, r))) {
                 BlockState state = level.getBlockState(pos);
                 BlockPos immutablePos = pos.immutable();
@@ -132,9 +134,8 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         return toBeDestroyed;
     }
 
-
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
@@ -144,6 +145,6 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 }

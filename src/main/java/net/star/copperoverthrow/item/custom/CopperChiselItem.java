@@ -7,16 +7,16 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.inventory.RecipeHolder;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class CopperChiselItem extends AbstractRepairableCopperItem {
@@ -37,11 +38,9 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
     public InteractionResult useOn(UseOnContext context) {
 
         Level level = context.getLevel();
-        Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
-
 
         Player player = context.getPlayer();
-        if (player != null && clickedBlock instanceof Block) {
+        if (player != null) {
 
                     BlockPos blockpos = context.getClickedPos();
                     BlockState blockstate = level.getBlockState(blockpos);
@@ -51,7 +50,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
                     if (doesResultExist(level, blockstate)) {
                         soundevent = SoundEvents.COPPER_BREAK;
                     } else {
-                        soundevent = SoundEvents.COPPER_BULB_PLACE;
+                        soundevent = SoundEvents.COPPER_PLACE;
                     }
                     level.playSound(player, blockpos, soundevent, SoundSource.BLOCKS);
 
@@ -108,7 +107,9 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
                                 EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
                                         ? EquipmentSlot.OFFHAND
                                         : EquipmentSlot.MAINHAND;
-                                stack.hurtAndBreak(1, player, equipmentslot);
+                                stack.hurtAndBreak(1, player, (entity) ->
+                                {entity.broadcastBreakEvent(equipmentslot);
+                                });
 
                                 return InteractionResult.SUCCESS;
                             }
@@ -123,28 +124,28 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
         return true;
     }
 
-    private SingleRecipeInput getSingleRecipeInput(Block block) {
-      return new SingleRecipeInput (new ItemStack (block.asItem()));
+    private SimpleContainer getSingleRecipeInput(Block block) {
+        return new SimpleContainer(new ItemStack(block.asItem()));
     }
 
     private HitResult calculateHitResult(Player player) {
         return ProjectileUtil.getHitResultOnViewVector(
-                player, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), player.blockInteractionRange()
+                player, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), player.getBlockReach()
         );
     }
 
     private Block getBlockToPlace(Level level, BlockState blockstate){
 
-    List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
+    List<StonecutterRecipe> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
 
     int recipeListLength = recipeList.size();
 
-    return (((BlockItem)(recipeList.get(randomIntGenerator(0, recipeListLength-1)).value().getResultItem(level.registryAccess()).getItem())).getBlock());
+    return (((BlockItem)(recipeList.get(randomIntGenerator(0, recipeListLength-1)).getResultItem(level.registryAccess()).getItem())).getBlock());
     }
 
     private Boolean NoAvailableFullBlock(Level level, BlockState blockstate) {
 
-        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
+        List<StonecutterRecipe> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
 
         int recipeListLength = recipeList.size();
 
@@ -152,7 +153,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
 
         for (int i = 0; i < recipeListLength; i++) {
 
-            Block block = ((BlockItem) (recipeList.get(i).value().getResultItem(level.registryAccess()).getItem())).getBlock();
+            Block block = ((BlockItem) (recipeList.get(i).getResultItem(level.registryAccess()).getItem())).getBlock();
 
             if (!(block instanceof SlabBlock || block instanceof StairBlock || block instanceof WallBlock)) {
                 fullBlocks++;
@@ -163,7 +164,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
 
     private Boolean NoAvailableSlabBlock(Level level, BlockState blockstate) {
 
-        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
+        List<StonecutterRecipe> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
 
         int recipeListLength = recipeList.size();
 
@@ -171,7 +172,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
 
         for (int i = 0; i < recipeListLength; i++) {
 
-            Block block = ((BlockItem) (recipeList.get(i).value().getResultItem(level.registryAccess()).getItem())).getBlock();
+            Block block = ((BlockItem) (recipeList.get(i).getResultItem(level.registryAccess()).getItem())).getBlock();
 
             if (block instanceof SlabBlock) {
                 blocks++;
@@ -182,7 +183,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
 
     private Boolean NoAvailableStairBlock(Level level, BlockState blockstate) {
 
-        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
+        List<StonecutterRecipe> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
 
         int recipeListLength = recipeList.size();
 
@@ -190,7 +191,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
 
         for (int i = 0; i < recipeListLength; i++) {
 
-            Block block = ((BlockItem) (recipeList.get(i).value().getResultItem(level.registryAccess()).getItem())).getBlock();
+            Block block = ((BlockItem) (recipeList.get(i).getResultItem(level.registryAccess()).getItem())).getBlock();
 
             if (block instanceof StairBlock) {
                 blocks++;
@@ -201,7 +202,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
 
     private Boolean NoAvailableWallBlock(Level level, BlockState blockstate) {
 
-        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
+        List<StonecutterRecipe> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
 
         int recipeListLength = recipeList.size();
 
@@ -209,7 +210,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
 
         for (int i = 0; i < recipeListLength; i++) {
 
-            Block block = ((BlockItem) (recipeList.get(i).value().getResultItem(level.registryAccess()).getItem())).getBlock();
+            Block block = ((BlockItem) (recipeList.get(i).getResultItem(level.registryAccess()).getItem())).getBlock();
 
             if (block instanceof StairBlock) {
                 blocks++;
@@ -220,10 +221,9 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
 
 
     private Boolean doesResultExist (Level level, BlockState blockstate){
-        List<RecipeHolder<StonecutterRecipe>> recipeList =
+        List<StonecutterRecipe> recipeList =
                 (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
 
-        //Returns false or true
         return !recipeList.isEmpty();
     }
 
@@ -232,7 +232,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
@@ -242,6 +242,6 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
         else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 }

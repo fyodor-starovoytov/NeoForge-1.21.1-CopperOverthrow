@@ -55,7 +55,7 @@ public class ModCreativeModeTabs {
 
                     .icon(() -> new ItemStack(ModBlocks.TAMTAM.get()))
 
-                    .withTabsBefore(ResourceLocation.tryBuild(CopperOverthrow.MOD_ID, "copperoverthrow_items_tab"))
+                    .withTabsBefore(new ResourceLocation(CopperOverthrow.MOD_ID, "copperoverthrow_items_tab"))
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_blocks"))
                     .displayItems((itemDisplayParameters, output) -> {
 

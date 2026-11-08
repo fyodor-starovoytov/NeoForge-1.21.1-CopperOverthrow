@@ -3,17 +3,18 @@ package net.star.copperoverthrow.sound;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.star.copperoverthrow.CopperOverthrow;
 
 import java.util.function.Supplier;
 
 public class ModSounds {
 
-
         public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
-                DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, CopperOverthrow.MOD_ID);
+                DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CopperOverthrow.MOD_ID);
         public static final Supplier<SoundEvent> RED_CHIME = registerSoundEvent("red_chime");
         public static final Supplier<SoundEvent> LUNAR_CHIME = registerSoundEvent("lunar_chime");
         public static final Supplier<SoundEvent> BAMBOO_CHIME = registerSoundEvent("bamboo_chime");
@@ -45,7 +46,7 @@ public class ModSounds {
         public static final Supplier<SoundEvent> CRASH_HELMET_BONK = registerSoundEvent("crash_helmet_bonk");
 
         private static Supplier<SoundEvent> registerSoundEvent(String name) {
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, name);
+            ResourceLocation id = new ResourceLocation(CopperOverthrow.MOD_ID, name);
             return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
         }
 

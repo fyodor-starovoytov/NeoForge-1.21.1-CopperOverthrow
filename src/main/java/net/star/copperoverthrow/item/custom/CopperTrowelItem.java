@@ -15,6 +15,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,47 +31,49 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
         Player player = context.getPlayer();
 
         if (!level.isClientSide) {
-        if (player == null) {
-            return InteractionResult.PASS;
-        }
+            if (player == null) {
+                return InteractionResult.PASS;
+            }
 
-        List<ItemStack> validBlocks = getHotbarBlockItems(player);
-        if (validBlocks.isEmpty()) {
-            return InteractionResult.PASS;
-        }
-        ItemStack placableStack = validBlocks.get(level.random.nextInt(validBlocks.size()));
-        BlockItem blockItem = (BlockItem) placableStack.getItem();
+            List<ItemStack> validBlocks = getHotbarBlockItems(player);
+            if (validBlocks.isEmpty()) {
+                return InteractionResult.PASS;
+            }
+            ItemStack placableStack = validBlocks.get(level.random.nextInt(validBlocks.size()));
+            BlockItem blockItem = (BlockItem) placableStack.getItem();
 
-        BlockHitResult hitResult = new BlockHitResult(
-                context.getClickLocation(),
-                context.getClickedFace(),
-                context.getClickedPos(),
-                context.isInside()
-        );
+            BlockHitResult hitResult = new BlockHitResult(
+                    context.getClickLocation(),
+                    context.getClickedFace(),
+                    context.getClickedPos(),
+                    context.isInside()
+            );
 
-        BlockPlaceContext placeContext = new BlockPlaceContext(
-                level,
-                player,
-                context.getHand(),
-                placableStack,
-                hitResult
-        );
+            BlockPlaceContext placeContext = new BlockPlaceContext(
+                    level,
+                    player,
+                    context.getHand(),
+                    placableStack,
+                    hitResult
+            );
 
-        if (!placeContext.canPlace()) {
-            return InteractionResult.FAIL;}
+            if (!placeContext.canPlace()) {
+                return InteractionResult.FAIL;
+            }
             InteractionResult result = blockItem.place(placeContext);
 
             if (result.consumesAction()) {
                 if (level instanceof ServerLevel serverLevel) {
                     EquipmentSlot slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-                    context.getItemInHand().hurtAndBreak(1, serverLevel, player, tool -> player.onEquippedItemBroken(tool, slot));
+                    context.getItemInHand().hurtAndBreak(1, player, (entity) -> {
+                        entity.broadcastBreakEvent(slot);
+                    });
+                    return InteractionResult.SUCCESS;
                 }
+            } else {
                 return InteractionResult.SUCCESS;
             }
-        } else {
-            return InteractionResult.SUCCESS;
         }
-
         return InteractionResult.PASS;
     }
 
@@ -86,7 +89,7 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
             tooltipComponents.add(Component.empty());
@@ -95,6 +98,6 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
         } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 }

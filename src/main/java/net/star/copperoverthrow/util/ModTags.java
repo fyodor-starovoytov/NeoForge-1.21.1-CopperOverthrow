@@ -12,7 +12,6 @@ public class ModTags {
 
      public static class Blocks{
         public static final TagKey<Block> NEEDS_COPPER_TOOL = createTag(CopperOverthrow.MOD_ID ,"needs_copper_tool");
-        public static final TagKey<Block> INCORRECT_FOR_COPPER_TOOL = createTag(CopperOverthrow.MOD_ID ,"incorrect_for_copper_tool");
         public static final TagKey<Block> MINEABLE_WITH_HAMMER = createTag(CopperOverthrow.MOD_ID ,"mineable_with_hammer");
 
         public static final TagKey<Block> RAIN_DRUMS = createTag("c", "musical_blocks/rain_drums");
@@ -28,7 +27,7 @@ public class ModTags {
         public static final TagKey<Block> LOG_STRIPPING_STATION = createTag(CopperOverthrow.MOD_ID, "log_stripping_stations");
 
          private static TagKey<Block> createTag(String namespace, String path){
-            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(namespace, path));
+            return BlockTags.create(ResourceLocation.tryBuild(namespace, path));
         }
     }
 
@@ -44,7 +43,7 @@ public class ModTags {
 
 
         private static TagKey<Item> createTag(String namespace, String path){
-            return ItemTags.create(ResourceLocation.fromNamespaceAndPath(namespace, path));
+            return ItemTags.create(new ResourceLocation(namespace, path));
         }
     }
 }

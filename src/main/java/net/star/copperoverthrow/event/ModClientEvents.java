@@ -1,18 +1,16 @@
 package net.star.copperoverthrow.event;
 
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.item.ModItems;
-import net.star.copperoverthrow.item.armor.client.ArmorClientExtension;
 import net.star.copperoverthrow.item.armor.client.model.CopperExoskeletonModel;
 import net.star.copperoverthrow.item.armor.client.model.CrashHelmetModel;
 import net.star.copperoverthrow.item.armor.client.model.GlowingGogglesModel;
 import net.star.copperoverthrow.item.armor.client.provider.SimpleModelProvider;
 
-@EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
 public class ModClientEvents {
 
         @SubscribeEvent

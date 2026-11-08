@@ -3,9 +3,12 @@ package net.star.copperoverthrow.item.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.star.copperoverthrow.util.ModTags;
@@ -14,8 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HammerItem extends DiggerItem {
-    public HammerItem(Tier tier, Properties properties) {
-        super(tier, ModTags.Blocks.MINEABLE_WITH_HAMMER, properties);
+
+    public HammerItem(float attackDamageModifier, float attackSpeedModifier, Tier tier, Properties properties) {
+        super(attackDamageModifier, attackSpeedModifier, tier, ModTags.Blocks.MINEABLE_WITH_HAMMER, properties);
     }
 
     public static List<BlockPos> getBlocksToBeDestroyed(int range, int deep, BlockPos initalBlockPos, ServerPlayer player) {

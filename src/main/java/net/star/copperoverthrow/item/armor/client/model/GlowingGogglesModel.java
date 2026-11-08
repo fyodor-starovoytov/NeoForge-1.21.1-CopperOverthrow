@@ -13,7 +13,7 @@ public class GlowingGogglesModel extends ArmorModel {
 		super(root);
 	}
 
-	private static final ResourceLocation EMISSIVE_TEXTURE = ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/models/armor/glowing_goggles_emissive.png");
+	private static final ResourceLocation EMISSIVE_TEXTURE = new ResourceLocation(CopperOverthrow.MOD_ID, "textures/models/armor/glowing_goggles_emissive.png");
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();

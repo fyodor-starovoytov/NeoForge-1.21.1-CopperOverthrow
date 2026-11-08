@@ -21,7 +21,7 @@ import java.util.function.Function;
  * <br> extend to make custom armors models
  */
 public class ArmorModel extends HumanoidModel<LivingEntity> {
-    private static final ResourceLocation EMISSIVE_TEXTURE = ResourceLocation.tryBuild(CopperOverthrow.MOD_ID, "textures/models/armor/glowing_goggles_emissive.png");
+    private static final ResourceLocation EMISSIVE_TEXTURE = new  ResourceLocation(CopperOverthrow.MOD_ID, "textures/models/armor/glowing_goggles_emissive.png");
 
     public final ModelPart leftBoot;
     public final ModelPart rightBoot;

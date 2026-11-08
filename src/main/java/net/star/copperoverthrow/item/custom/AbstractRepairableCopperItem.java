@@ -2,7 +2,8 @@ package net.star.copperoverthrow.item.custom;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.Tags;
+import net.minecraftforge.common.Tags;
+
 
 public abstract class AbstractRepairableCopperItem extends Item {
     public AbstractRepairableCopperItem(Properties properties) {
