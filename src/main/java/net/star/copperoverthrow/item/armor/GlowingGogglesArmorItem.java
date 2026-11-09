@@ -3,7 +3,6 @@ package net.star.copperoverthrow.item.armor;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -13,12 +12,12 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.star.copperoverthrow.CopperOverthrow;
-
 import net.star.copperoverthrow.attribute.ModAttributes;
-import net.star.copperoverthrow.item.armor.client.model.CrashHelmetModel;
 import net.star.copperoverthrow.item.armor.client.model.GlowingGogglesModel;
 import net.star.copperoverthrow.item.armor.client.provider.ArmorModelProvider;
 import net.star.copperoverthrow.item.armor.client.provider.SimpleModelProvider;
@@ -107,6 +106,17 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
     @Override
     protected ArmorModelProvider createModelProvider() {
         return new SimpleModelProvider(GlowingGogglesModel::createBodyLayer, GlowingGogglesModel::new);
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        if (enchantment.category == EnchantmentCategory.BREAKABLE) {
+            return true;
+        }
+        if (enchantment.category == EnchantmentCategory.ARMOR_HEAD) {
+            return true;
+        }
+        return super.canApplyAtEnchantingTable(stack, enchantment);
     }
 }
 

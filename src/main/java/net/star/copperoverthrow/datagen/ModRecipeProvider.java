@@ -1,26 +1,29 @@
 package net.star.copperoverthrow.datagen;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.conditions.IConditionBuilder;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModTags;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
-    public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries);
+    public ModRecipeProvider(PackOutput output) {
+        super(output);
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput recipeOutput) {
+    protected void buildRecipes(Consumer<FinishedRecipe> writer) {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.COPPER_INGOT, 1)
                 .pattern("AAA")
@@ -28,7 +31,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("AAA")
                 .define('A', ModTags.Items.C_COPPER_NUGGETS)
                 .unlockedBy("has_copper_nugget", has(ModItems.COPPER_NUGGET.get()))
-                .save(recipeOutput, "copperoverthrow:copper_ingot_from_nuggets");
+                .save(writer, "copperoverthrow:copper_ingot_from_nuggets");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CHISEL.get())
                 .pattern("  A")
@@ -37,7 +40,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 //EXTREMELY IMPORTANT TO HAVE '' NOT ""
                 .define('B', Items.STICK)
                 .define('A', Tags.Items.INGOTS_COPPER)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CHISEL.get())
                 .pattern("A  ")
@@ -46,7 +49,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.STICK)
                 .define('A', Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
-                .save(recipeOutput, "copperoverthrow:copper_chisel_alt");
+                .save(writer, "copperoverthrow:copper_chisel_alt");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TROWEL.get())
                 .pattern("AB ")
@@ -54,7 +57,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 //EXTREMELY IMPORTANT TO HAVE '' NOT ""
                 .define('B', Items.STICK)
                 .define('A', Tags.Items.INGOTS_COPPER)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_TROWEL.get())
                 .pattern(" BA")
@@ -62,7 +65,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.STICK)
                 .define('A', Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
-                .save(recipeOutput, "copperoverthrow:copper_trowel_alt");
+                .save(writer, "copperoverthrow:copper_trowel_alt");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BEE_CATCHER.get())
                 .pattern("  C")
@@ -72,7 +75,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.STICK)
                 .define('A', Items.STRING)
                 .unlockedBy("has_string", has(Items.STRING))
-                .save(recipeOutput);
+                .save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BEE_CATCHER.get())
                 .pattern("C  ")
@@ -83,14 +86,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.STICK)
                 .define('A', Items.STRING)
                 .unlockedBy("has_string", has(Items.STRING))
-                .save(recipeOutput, "copperoverthrow:bee_catcher_alt");
+                .save(writer, "copperoverthrow:bee_catcher_alt");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_HAMMER.get(), 1)
                 .pattern("B")
                 .pattern("C")
                 .define('B', Items.COPPER_BLOCK)
                 .define('C', Tags.Items.RODS_BLAZE)
-                .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD)).save(recipeOutput);
+                .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_HANDSAW.get(), 1)
                 .pattern("  B")
@@ -99,7 +102,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Tags.Items.INGOTS_COPPER)
                 .define('A', ModTags.Items.C_COPPER_NUGGETS)
                 .define('C', Tags.Items.RODS_BLAZE)
-                .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD)).save(recipeOutput);
+                .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD)).save(writer);
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_HANDSAW.get(), 1)
@@ -110,7 +113,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', ModTags.Items.C_COPPER_NUGGETS)
                 .define('C', Tags.Items.RODS_BLAZE)
                 .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD))
-                .save(recipeOutput, "copperoverthrow:copper_handsaw_alt");
+                .save(writer, "copperoverthrow:copper_handsaw_alt");
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_SEXTANT.get(), 1)
@@ -120,9 +123,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Tags.Items.INGOTS_COPPER)
                 .define('A', Items.SPYGLASS)
                 .define('C', Tags.Items.GEMS_AMETHYST)
-                .define('D', ModBlocks.HOLOGRAM_BLOCK)
+                .define('D', ModBlocks.HOLOGRAM_BLOCK.get())
                 .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
-                .save(recipeOutput, "copperoverthrow:copper_tape_measure_alt");
+                .save(writer, "copperoverthrow:copper_tape_measure_alt");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_SEXTANT.get(), 1)
                 .pattern("AB ")
@@ -131,9 +134,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Tags.Items.INGOTS_COPPER)
                 .define('A', Items.SPYGLASS)
                 .define('C', Tags.Items.GEMS_AMETHYST)
-                .define('D', ModBlocks.HOLOGRAM_BLOCK)
+                .define('D', ModBlocks.HOLOGRAM_BLOCK.get())
                 .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
-                .save(recipeOutput);
+                .save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_LONG_RULER.get(), 1)
                 .pattern("BD ")
@@ -141,9 +144,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" CB")
                 .define('B', Tags.Items.INGOTS_COPPER)
                 .define('C', Tags.Items.GEMS_AMETHYST)
-                .define('D', ModBlocks.HOLOGRAM_BLOCK)
+                .define('D', ModBlocks.HOLOGRAM_BLOCK.get())
                 .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
-                .save(recipeOutput, "copperoverthrow:copper_long_ruler_alt");
+                .save(writer, "copperoverthrow:copper_long_ruler_alt");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_LONG_RULER.get(), 1)
                 .pattern(" DB")
@@ -151,9 +154,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("BC ")
                 .define('B', Tags.Items.INGOTS_COPPER)
                 .define('C', Tags.Items.GEMS_AMETHYST)
-                .define('D', ModBlocks.HOLOGRAM_BLOCK)
+                .define('D', ModBlocks.HOLOGRAM_BLOCK.get())
                 .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
-                .save(recipeOutput);
+                .save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_FILL_BUCKET.get(), 1)
                 .pattern("D")
@@ -161,9 +164,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("C")
                 .define('B', Tags.Items.INGOTS_COPPER)
                 .define('C', Tags.Items.GEMS_AMETHYST)
-                .define('D', Tags.Items.STRINGS)
+                .define('D', Tags.Items.STRING)
                 .unlockedBy("has_amethyst", has(Tags.Items.GEMS_AMETHYST))
-                .save(recipeOutput);
+                .save(writer);
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BAMBOO_WIND_CHIME.get(), 2)
@@ -172,7 +175,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" A ")
                 .define('C', ItemTags.LOGS)
                 .define('A', Items.BAMBOO)
-                .unlockedBy("has_bamboo", has(Items.BAMBOO)).save(recipeOutput);
+                .unlockedBy("has_bamboo", has(Items.BAMBOO)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RED_WIND_CHIME.get(), 2)
                 .pattern("BCB")
@@ -181,7 +184,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Tags.Items.INGOTS_GOLD)
                 .define('B', Items.GOLD_NUGGET)
                 .define('C', Items.RED_WOOL)
-                .unlockedBy("has_gold", has(Items.GOLD_INGOT)).save(recipeOutput);
+                .unlockedBy("has_gold", has(Items.GOLD_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LUNAR_WIND_CHIME.get(), 2)
                 .pattern(" B ")
@@ -189,7 +192,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" A ")
                 .define('A', Tags.Items.INGOTS_IRON)
                 .define('B', Tags.Items.GEMS_AMETHYST)
-                .unlockedBy("has_amethyst", has(Items.AMETHYST_SHARD)).save(recipeOutput);
+                .unlockedBy("has_amethyst", has(Items.AMETHYST_SHARD)).save(writer);
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAIN_DRUM.get(), 2)
@@ -198,7 +201,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Tags.Items.INGOTS_IRON)
                 .define('B', Items.NOTE_BLOCK)
                 .define('C', Items.COPPER_BLOCK)
-                .unlockedBy("has_note_block", has(Items.NOTE_BLOCK)).save(recipeOutput);
+                .unlockedBy("has_note_block", has(Items.NOTE_BLOCK)).save(writer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.TINY_RAIN_DRUM.get(), 2)
                 .pattern("C")
                 .pattern("B")
@@ -206,14 +210,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Tags.Items.INGOTS_IRON)
                 .define('B', Items.NOTE_BLOCK)
                 .define('C', Items.COPPER_BLOCK)
-                .unlockedBy("has_note_block", has(Items.NOTE_BLOCK)).save(recipeOutput);
+                .unlockedBy("has_note_block", has(Items.NOTE_BLOCK)).save(writer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LARGE_RAIN_DRUM.get(), 2)
                 .pattern("CBC")
                 .pattern("AAA")
                 .define('A', Items.IRON_INGOT)
                 .define('B', Items.NOTE_BLOCK)
                 .define('C', Items.COPPER_BLOCK)
-                .unlockedBy("has_note_block", has(Items.NOTE_BLOCK)).save(recipeOutput);
+                .unlockedBy("has_note_block", has(Items.NOTE_BLOCK)).save(writer);
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_SCAFFOLDING.get(), 6)
@@ -221,8 +226,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("A A")
                 .pattern("A A")
                 .define('A', Tags.Items.INGOTS_COPPER)
-                .define('B', Items.COPPER_TRAPDOOR)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .define('B', Items.CUT_COPPER_SLAB)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_CHAIN.get(), 1)
                 .pattern("B")
@@ -230,7 +235,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("B")
                 .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', ModTags.Items.C_COPPER_NUGGETS)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.TAMTAM.get(), 1)
                 .pattern("AA")
@@ -238,7 +243,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("BB")
                 .define('A', ModBlocks.COPPER_CHAIN.get())
                 .define('B', Items.COPPER_BLOCK)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_LANTERN.get(), 1)
                 .pattern("AAA")
@@ -246,15 +251,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("AAA")
                 .define('A', ModTags.Items.C_COPPER_NUGGETS)
                 .define('B', Items.TORCH)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.LOG_STRIPPER.get(), 1)
                 .pattern("BCB")
                 .pattern("AAA")
                 .define('A', Items.COPPER_BLOCK)
-                .define('B', Tags.Items.STONES)
+                .define('B', Tags.Items.STONE)
                 .define('C', ItemTags.PLANKS)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.KITCHEN_BELL.get(), 1)
                 .pattern(" D ")
@@ -264,44 +269,32 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', ModTags.Items.C_COPPER_NUGGETS)
                 .define('C', Tags.Items.INGOTS_COPPER)
                 .define('D', Tags.Items.NUGGETS_IRON)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
-/*
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COPPER_BEEOSPHERE.get(), 1)
-                .pattern("CAC")
-                .pattern("DBD")
-                .pattern("CAC")
-                .define('A', Items.COPPER_BLOCK)
-                .define('B', Items.BEEHIVE)
-                .define('C', Tags.Items.DUSTS_REDSTONE)
-                .define('D', Tags.Items.GLASS_BLOCKS_COLORLESS)
-                .unlockedBy("has_honeycomb", has(Items.HONEYCOMB)).save(recipeOutput);
-*/
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_COOKIE.get(), 1)
                 .pattern("AAA")
                 .pattern("ABA")
                 .pattern("AAA")
                 .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', Items.COOKIE)
-                .unlockedBy("has_cookie", has(Items.COOKIE)).save(recipeOutput);
+                .unlockedBy("has_cookie", has(Items.COOKIE)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CRASH_HELMET.get(), 1)
                 .pattern("BAB")
                 .pattern("A A")
                 .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', Tags.Items.STORAGE_BLOCKS_COPPER)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_GLOWING_GOGGLES.get(), 1)
                 .pattern("BBB")
                 .pattern("A A")
                 .pattern("CDC")
                 .define('A', ModTags.Items.C_COPPER_NUGGETS)
-                .define('B', Tags.Items.LEATHERS)
+                .define('B', Items.LEATHER)
                 .define('C', Items.GLOW_INK_SAC)
                 .define('D', Tags.Items.INGOTS_COPPER)
-
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_EXOSKELETON.get(), 1)
                 .pattern("A A")
@@ -312,7 +305,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Tags.Items.STORAGE_BLOCKS_REDSTONE)
                 .define('D', Tags.Items.GEMS_QUARTZ)
                 .define('E', Tags.Items.STORAGE_BLOCKS_IRON)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_STEPPER_BOOTS.get(), 1)
                 .pattern("A A")
@@ -321,7 +314,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', Items.STICKY_PISTON)
                 .define('C', Tags.Items.DUSTS_REDSTONE)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_STEPPER_LEGGINGS.get(), 1)
                 .pattern("BCB")
@@ -330,82 +323,77 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Tags.Items.INGOTS_COPPER)
                 .define('B', Items.PISTON)
                 .define('C', Tags.Items.DUSTS_REDSTONE)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
 
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.COPPER_NUGGET.get(), 9)
-                        .requires(Tags.Items.INGOTS_COPPER)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .requires(Tags.Items.INGOTS_COPPER)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.HOLOGRAM_BLOCK.get(), 24)
-                .requires(Items.COPPER_GRATE)
+                .requires(Items.CUT_COPPER_SLAB)
                 .requires(Tags.Items.DYES_BLACK)
                 .requires(Tags.Items.DYES_YELLOW)
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.INVERTED_HOLOGRAM_BLOCK.get(), 1)
-                .requires(ModBlocks.HOLOGRAM_BLOCK)
-                .unlockedBy("has_hologram", has(ModBlocks.HOLOGRAM_BLOCK)).save(recipeOutput);
+                .requires(ModBlocks.HOLOGRAM_BLOCK.get())
+                .unlockedBy("has_hologram", has(ModBlocks.HOLOGRAM_BLOCK.get())).save(writer);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.HOLOGRAM_BLOCK.get(), 1)
-                .requires(ModBlocks.INVERTED_HOLOGRAM_BLOCK)
-                .unlockedBy("has_hologram", has(ModBlocks.HOLOGRAM_BLOCK))
-                .save(recipeOutput, "copperoverthrow:hologram_from_inverted");
+                .requires(ModBlocks.INVERTED_HOLOGRAM_BLOCK.get())
+                .unlockedBy("has_hologram", has(ModBlocks.HOLOGRAM_BLOCK.get()))
+                .save(writer, "copperoverthrow:hologram_from_inverted");
 
 
-//        addWaxingRecipe(recipeOutput, ModBlocks.LOG_STRIPPER.get(), ModBlocks.WAXED_LOG_STRIPPER.get(), "log_stripper");
-//        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_LOG_STRIPPER.get(), ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get(), "exposed_log_stripper");
-//        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_LOG_STRIPPER.get(), ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get(), "weathered_log_stripper");
-//        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_LOG_STRIPPER.get(), ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get(), "oxidized_log_stripper");
+        addWaxingRecipe(writer, ModBlocks.COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_COPPER_SCAFFOLDING.get(), "copper_scaffolding");
+        addWaxingRecipe(writer, ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get(), "exposed_copper_scaffolding");
+        addWaxingRecipe(writer, ModBlocks.WEATHERED_COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get(), "weathered_copper_scaffolding");
+        addWaxingRecipe(writer, ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get(), "oxidized_copper_scaffolding");
 
-        addWaxingRecipe(recipeOutput, ModBlocks.COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_COPPER_SCAFFOLDING.get(), "copper_scaffolding");
-        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_EXPOSED_COPPER_SCAFFOLDING.get(), "exposed_copper_scaffolding");
-        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get(), "weathered_copper_scaffolding");
-        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_COPPER_SCAFFOLDING.get(), ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get(), "oxidized_copper_scaffolding");
+        addWaxingRecipe(writer, ModBlocks.RAIN_DRUM.get(), ModBlocks.WAXED_RAIN_DRUM.get(), "rain_drum");
+        addWaxingRecipe(writer, ModBlocks.EXPOSED_RAIN_DRUM.get(), ModBlocks.WAXED_EXPOSED_RAIN_DRUM.get(), "exposed_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.WEATHERED_RAIN_DRUM.get(), ModBlocks.WAXED_WEATHERED_RAIN_DRUM.get(), "weathered_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.OXIDIZED_RAIN_DRUM.get(), ModBlocks.WAXED_OXIDIZED_RAIN_DRUM.get(), "oxidized_rain_drum");
 
-        addWaxingRecipe(recipeOutput, ModBlocks.RAIN_DRUM.get(), ModBlocks.WAXED_RAIN_DRUM.get(), "rain_drum");
-        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_RAIN_DRUM.get(), ModBlocks.WAXED_EXPOSED_RAIN_DRUM.get(), "exposed_rain_drum");
-        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_RAIN_DRUM.get(), ModBlocks.WAXED_WEATHERED_RAIN_DRUM.get(), "weathered_rain_drum");
-        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_RAIN_DRUM.get(), ModBlocks.WAXED_OXIDIZED_RAIN_DRUM.get(), "oxidized_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.TINY_RAIN_DRUM.get(), ModBlocks.WAXED_TINY_RAIN_DRUM.get(), "tiny_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.EXPOSED_TINY_RAIN_DRUM.get(), ModBlocks.WAXED_EXPOSED_TINY_RAIN_DRUM.get(), "exposed_tiny_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.WEATHERED_TINY_RAIN_DRUM.get(), ModBlocks.WAXED_WEATHERED_TINY_RAIN_DRUM.get(), "weathered_tiny_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.OXIDIZED_TINY_RAIN_DRUM.get(), ModBlocks.WAXED_OXIDIZED_TINY_RAIN_DRUM.get(), "oxidized_tiny_rain_drum");
 
-        addWaxingRecipe(recipeOutput, ModBlocks.TINY_RAIN_DRUM.get(), ModBlocks.WAXED_TINY_RAIN_DRUM.get(), "tiny_rain_drum");
-        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_TINY_RAIN_DRUM.get(), ModBlocks.WAXED_EXPOSED_TINY_RAIN_DRUM.get(), "exposed_tiny_rain_drum");
-        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_TINY_RAIN_DRUM.get(), ModBlocks.WAXED_WEATHERED_TINY_RAIN_DRUM.get(), "weathered_tiny_rain_drum");
-        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_TINY_RAIN_DRUM.get(), ModBlocks.WAXED_OXIDIZED_TINY_RAIN_DRUM.get(), "oxidized_tiny_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_LARGE_RAIN_DRUM.get(), "large_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.EXPOSED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_EXPOSED_LARGE_RAIN_DRUM.get(), "exposed_large_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.WEATHERED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM.get(), "weathered_large_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get(), "oxidized_large_rain_drum");
 
-        addWaxingRecipe(recipeOutput, ModBlocks.LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_LARGE_RAIN_DRUM.get(), "large_rain_drum");
-        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_EXPOSED_LARGE_RAIN_DRUM.get(), "exposed_large_rain_drum");
-        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM.get(), "weathered_large_rain_drum");
-        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_LARGE_RAIN_DRUM.get(), ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get(), "oxidized_large_rain_drum");
+        addWaxingRecipe(writer, ModBlocks.TAMTAM.get(), ModBlocks.WAXED_TAMTAM.get(), "tamtam");
+        addWaxingRecipe(writer, ModBlocks.EXPOSED_TAMTAM.get(), ModBlocks.WAXED_EXPOSED_TAMTAM.get(), "exposed_tamtam");
+        addWaxingRecipe(writer, ModBlocks.WEATHERED_TAMTAM.get(), ModBlocks.WAXED_WEATHERED_TAMTAM.get(), "weathered_tamtam");
+        addWaxingRecipe(writer, ModBlocks.OXIDIZED_TAMTAM.get(), ModBlocks.WAXED_OXIDIZED_TAMTAM.get(), "oxidized_tamtam");
 
-        addWaxingRecipe(recipeOutput, ModBlocks.TAMTAM.get(), ModBlocks.WAXED_TAMTAM.get(), "tamtam");
-        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_TAMTAM.get(), ModBlocks.WAXED_EXPOSED_TAMTAM.get(), "exposed_tamtam");
-        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_TAMTAM.get(), ModBlocks.WAXED_WEATHERED_TAMTAM.get(), "weathered_tamtam");
-        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_TAMTAM.get(), ModBlocks.WAXED_OXIDIZED_TAMTAM.get(), "oxidized_tamtam");
+        addWaxingRecipe(writer, ModBlocks.COPPER_CHAIN.get(), ModBlocks.WAXED_COPPER_CHAIN.get(), "copper_chain");
+        addWaxingRecipe(writer, ModBlocks.EXPOSED_COPPER_CHAIN.get(), ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get(), "exposed_copper_chain");
+        addWaxingRecipe(writer, ModBlocks.WEATHERED_COPPER_CHAIN.get(), ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get(), "weathered_copper_chain");
+        addWaxingRecipe(writer, ModBlocks.OXIDIZED_COPPER_CHAIN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get(), "oxidized_copper_chain");
 
-        addWaxingRecipe(recipeOutput, ModBlocks.COPPER_CHAIN.get(), ModBlocks.WAXED_COPPER_CHAIN.get(), "copper_chain");
-        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_COPPER_CHAIN.get(), ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get(), "exposed_copper_chain");
-        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_COPPER_CHAIN.get(), ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get(), "weathered_copper_chain");
-        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_COPPER_CHAIN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get(), "oxidized_copper_chain");
+        addWaxingRecipe(writer, ModBlocks.COPPER_LANTERN.get(), ModBlocks.WAXED_COPPER_LANTERN.get(), "copper_lantern");
+        addWaxingRecipe(writer, ModBlocks.EXPOSED_COPPER_LANTERN.get(), ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get(), "exposed_copper_lantern");
+        addWaxingRecipe(writer, ModBlocks.WEATHERED_COPPER_LANTERN.get(), ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get(), "weathered_copper_lantern");
+        addWaxingRecipe(writer, ModBlocks.OXIDIZED_COPPER_LANTERN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get(), "oxidized_copper_lantern");
 
-        addWaxingRecipe(recipeOutput, ModBlocks.COPPER_LANTERN.get(), ModBlocks.WAXED_COPPER_LANTERN.get(), "copper_lantern");
-        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_COPPER_LANTERN.get(), ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get(), "exposed_copper_lantern");
-        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_COPPER_LANTERN.get(), ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get(), "weathered_copper_lantern");
-        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_COPPER_LANTERN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get(), "oxidized_copper_lantern");
-
-        addWaxingRecipe(recipeOutput, ModBlocks.KITCHEN_BELL.get(), ModBlocks.WAXED_KITCHEN_BELL.get(), "kitchen_bell");
-        addWaxingRecipe(recipeOutput, ModBlocks.EXPOSED_KITCHEN_BELL.get(), ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get(), "exposed_kitchen_bell");
-        addWaxingRecipe(recipeOutput, ModBlocks.WEATHERED_KITCHEN_BELL.get(), ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get(), "weathered_kitchen_bell");
-        addWaxingRecipe(recipeOutput, ModBlocks.OXIDIZED_KITCHEN_BELL.get(), ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get(), "oxidized_kitchen_bell");
-
+        addWaxingRecipe(writer, ModBlocks.KITCHEN_BELL.get(), ModBlocks.WAXED_KITCHEN_BELL.get(), "kitchen_bell");
+        addWaxingRecipe(writer, ModBlocks.EXPOSED_KITCHEN_BELL.get(), ModBlocks.WAXED_EXPOSED_KITCHEN_BELL.get(), "exposed_kitchen_bell");
+        addWaxingRecipe(writer, ModBlocks.WEATHERED_KITCHEN_BELL.get(), ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get(), "weathered_kitchen_bell");
+        addWaxingRecipe(writer, ModBlocks.OXIDIZED_KITCHEN_BELL.get(), ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get(), "oxidized_kitchen_bell");
 
     }
 
-
-    protected void addWaxingRecipe(RecipeOutput recipeOutput, ItemLike unwaxed, ItemLike waxed, String unwaxedName) {
+    protected void addWaxingRecipe(Consumer<FinishedRecipe> writer, ItemLike unwaxed, ItemLike waxed, String unwaxedName) {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, waxed)
                 .requires(unwaxed)
                 .requires(Items.HONEYCOMB)
                 .unlockedBy("has_" + unwaxedName, has(unwaxed))
-                .save(recipeOutput);
+                .save(writer);
     }
 }

@@ -11,8 +11,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
@@ -21,13 +21,13 @@ import net.star.copperoverthrow.client.KitchenBellModel;
 @OnlyIn(Dist.CLIENT)
 public class KitchenBellRenderer implements BlockEntityRenderer<KitchenBellBlockEntity> {
     private static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/kitchen_bell_hat_entity.png");
+            new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/kitchen_bell_hat_entity.png");
     private static final ResourceLocation EXPOSED_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/exposed_kitchen_bell_hat_entity.png");
+            new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/exposed_kitchen_bell_hat_entity.png");
     private static final ResourceLocation WEATHERED_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/weathered_kitchen_bell_hat_entity.png");
+            new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/weathered_kitchen_bell_hat_entity.png");
     private static final ResourceLocation OXIDIZED_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/oxidized_kitchen_bell_hat_entity.png");
+            new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/oxidized_kitchen_bell_hat_entity.png");
 
 
     private final ModelPart root;
@@ -72,7 +72,7 @@ public class KitchenBellRenderer implements BlockEntityRenderer<KitchenBellBlock
         }
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(getTextureForBell(blockEntity)));
-        this.root.render(poseStack, consumer, packedLight, packedOverlay, -1);
+        this.root.render(poseStack, consumer, packedLight, packedOverlay);
         poseStack.popPose();
     }
 

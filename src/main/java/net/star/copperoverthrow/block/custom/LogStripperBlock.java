@@ -1,10 +1,7 @@
 package net.star.copperoverthrow.block.custom;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -16,37 +13,34 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
-import net.neoforged.neoforge.registries.datamaps.builtin.Strippable;
+import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
+import net.star.copperoverthrow.util.ModBlockModifiers;
 import net.star.copperoverthrow.util.ModTags;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class LogStripperBlock extends BaseEntityBlock implements WeatheringCopper{
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
-
-    public static final MapCodec<LogStripperBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            instance.group(
-                    propertiesCodec(),
-                    WeatherState.CODEC.fieldOf("weather_state").forGetter(LogStripperBlock::getAge)
-            ).apply(instance, LogStripperBlock::new)
-    );
 
     private final WeatherState weatherState;
 
@@ -56,28 +50,23 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
     }
 
     @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+    public VoxelShape getShape( BlockState state,  BlockGetter level,  BlockPos pos,  CollisionContext context) {
         return SHAPE;
     }
 
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+    public BlockEntity newBlockEntity( BlockPos pos,  BlockState state) {
         return new LogStripperBlockEntity(pos, state);
     }
 
     @Override
-    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
+    public  RenderShape getRenderShape( BlockState state) {
         return RenderShape.MODEL;
     }
 
     @Override
-    protected void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState newState, boolean movedByPiston) {
+    public void onRemove(BlockState state,  Level level,  BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (state.getBlock() != newState.getBlock()){
             if (level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity){
                 Containers.dropContents(level, pos, logStripperBlockEntity);
@@ -88,11 +77,12 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
     @Override
-    protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!(level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity)) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return InteractionResult.PASS;
         }
 
+        ItemStack stack = player.getItemInHand(hand);
         ItemStack heldMain = player.getMainHandItem();
         ItemStack heldOff = player.getOffhandItem();
 
@@ -107,6 +97,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
             slot = EquipmentSlot.OFFHAND;
             axeStack = heldOff;
         }
+
         if (heldMain.is(ModTags.Items.C_TOOLS_SAWS)) {
             slot = EquipmentSlot.MAINHAND;
             sawStack = heldMain;
@@ -121,40 +112,45 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         if (!inputStack.isEmpty() && isBlockStrippable(inputStack) && !axeStack.isEmpty()) {
             int toDamage = (int) (inputStack.getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
             if (slot != null) {
-                axeStack.hurtAndBreak(Math.max(1, toDamage), player, slot);
+                EquipmentSlot finalSlot = slot;
+                axeStack.hurtAndBreak(Math.max(1, toDamage), player, (p) -> p.broadcastBreakEvent(finalSlot));
             }
 
             ItemStack resultStack = getStrippedBlock(inputStack);
             logStripperBlockEntity.setItem(0, resultStack);
             if (resultStack.getItem() instanceof BlockItem blockItem) {
                 BlockState particleState = blockItem.getBlock().defaultBlockState();
-                level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(particleState));
+                level.levelEvent(2001, pos, Block.getId(particleState));
             }
 
             level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         // SAW SAWING
         if (!inputStack.isEmpty() && isBlockPlank(inputStack) && !sawStack.isEmpty()) {
             int toDamage = (int) (inputStack.getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
             if (slot != null) {
-                sawStack.hurtAndBreak(Math.max(1, toDamage), player, slot);
+                EquipmentSlot finalSlot = slot;
+                sawStack.hurtAndBreak(Math.max(1, toDamage), player, (p) -> p.broadcastBreakEvent(finalSlot));
             }
 
             ItemStack resultStack = getFromPlankBlock(inputStack);
             int totalCount = resultStack.getCount();
-            int maxStack = resultStack.getMaxStackSize(); // 64
+            int maxStack = resultStack.getMaxStackSize();
 
             if (totalCount > maxStack) {
-                logStripperBlockEntity.setItem(0, resultStack.copyWithCount(maxStack));
+                ItemStack setStack = resultStack.copy();
+                setStack.setCount(maxStack);
+                logStripperBlockEntity.setItem(0, setStack);
 
-                if (!level.isClientSide()) {
+                if (!level.isClientSide) {
                     int remaining = totalCount - maxStack;
 
                     while (remaining > 0) {
                         int dropCount = Math.min(remaining, maxStack);
-                        ItemStack dropStack = resultStack.copyWithCount(dropCount);
+                        ItemStack dropStack = resultStack.copy();
+                        dropStack.setCount(dropCount);
                         Block.popResource(level, pos.above(), dropStack);
                         remaining -= dropCount;
 
@@ -167,10 +163,10 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
             if (resultStack.getItem() instanceof BlockItem blockItem) {
                 BlockState particleState = blockItem.getBlock().defaultBlockState();
-                level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(particleState));
+                level.levelEvent(2001, pos, Block.getId(particleState));
             }
 
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         // INSERT ITEM INTO EMPTY STRIPPER
@@ -180,11 +176,11 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
             level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 2.0f);
 
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         // REMOVE ITEM FROM STRIPPER
-        if ((player.getInventory().getFreeSlot() != -1)) {
+        if (player.getInventory().getFreeSlot() != -1) {
             if (!logStripperBlockEntity.isEmpty()) {
                 ItemStack stackInside = logStripperBlockEntity.getItem(0);
 
@@ -196,10 +192,10 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
                 level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.PASS;
     }
 
     public ItemStack getFromPlankBlock(ItemStack stack) {
@@ -221,7 +217,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         }
 
         if (resultPath != null) {
-            ResourceLocation blockId = ResourceLocation.fromNamespaceAndPath(plankId.getNamespace(), resultPath);
+            ResourceLocation blockId = new ResourceLocation(plankId.getNamespace(), resultPath);
             Item resultBlock = BuiltInRegistries.ITEM.get(blockId);
 
             if (resultBlock != Items.AIR) {
@@ -231,56 +227,59 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
         return stack;
     }
-
     public ItemStack getStrippedBlock(ItemStack stack) {
         if (stack.getItem() instanceof BlockItem blockItem) {
             int count = stack.getCount();
 
             BlockState state = blockItem.getBlock().defaultBlockState();
-            Holder<Block> blockHolder = state.getBlockHolder();
-            Strippable strippableData = blockHolder.getData(NeoForgeDataMaps.STRIPPABLES);
+            BlockState strippedState = state.getToolModifiedState(null, ToolActions.AXE_STRIP, true);
 
-            if (strippableData != null) {
-                return new ItemStack(strippableData.strippedBlock().asItem(), count);
+            if (strippedState != null) {
+                return new ItemStack(strippedState.getBlock().asItem(), count);
             }
 
-            ResourceLocation plankId = BuiltInRegistries.ITEM.getKey(stack.getItem());
-            String path = plankId.getPath();
+            ResourceLocation plankId = ForgeRegistries.ITEMS.getKey(stack.getItem());
+            if (plankId != null) {
+                String path = plankId.getPath();
 
-            if (path.contains("_log") && !path.startsWith("stripped_")) {
-                ResourceLocation blockId = ResourceLocation.fromNamespaceAndPath(
-                        plankId.getNamespace(),
-                        "stripped_" + path
-                );
-                Item resultBlock = BuiltInRegistries.ITEM.get(blockId);
+                if (path.contains("_log") && !path.startsWith("stripped_")) {
+                    ResourceLocation blockId = new ResourceLocation(
+                            plankId.getNamespace(),
+                            "stripped_" + path
+                    );
 
-                if (resultBlock != Items.AIR) {
-                    return new ItemStack(resultBlock, count);
+                    if (ForgeRegistries.ITEMS.containsKey(blockId)) {
+                        Item resultBlock = ForgeRegistries.ITEMS.getValue(blockId);
+                        if (resultBlock != null && resultBlock != Items.AIR) {
+                            return new ItemStack(resultBlock, count);
+                        }
+                    }
                 }
             }
         }
-
         return stack;
     }
 
     public boolean isBlockStrippable(ItemStack stack) {
         if (stack.getItem() instanceof BlockItem blockItem) {
             BlockState state = blockItem.getBlock().defaultBlockState();
-            Holder<Block> blockHolder = state.getBlockHolder();
-            Strippable strippableData = blockHolder.getData(NeoForgeDataMaps.STRIPPABLES);
 
-            if (strippableData != null) {
+            BlockState strippedState = state.getToolModifiedState(null, ToolActions.AXE_STRIP, true);
+
+            if (strippedState != null) {
                 return true;
             }
 
-            ResourceLocation plankId = BuiltInRegistries.ITEM.getKey(stack.getItem());
-            String path = plankId.getPath();
-            if (path.contains("_log")) {
-                ResourceLocation blockId = ResourceLocation.fromNamespaceAndPath(
-                        plankId.getNamespace(),
-                        "stripped_" + path
-                );
-                return BuiltInRegistries.ITEM.get(blockId) != Items.AIR;
+            ResourceLocation plankId = ForgeRegistries.ITEMS.getKey(stack.getItem());
+            if (plankId != null) {
+                String path = plankId.getPath();
+                if (path.contains("_log")) {
+                    ResourceLocation blockId = new ResourceLocation(
+                            plankId.getNamespace(),
+                            "stripped_" + path
+                    );
+                    return ForgeRegistries.ITEMS.containsKey(blockId);
+                }
             }
         }
 
@@ -296,32 +295,38 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
     }
 
     @Override
-    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        this.changeOverTime(state, level, pos, random);
+    public void randomTick( BlockState state,  ServerLevel level,  BlockPos pos,  RandomSource random) {
+        this.randomTick(state, level, pos, random);
     }
 
     @Override
-    public @NotNull WeatherState getAge() {
+    public  WeatherState getAge() {
         return this.weatherState;
     }
 
     @Override
-    protected boolean isRandomlyTicking(BlockState state) {
+    public boolean isRandomlyTicking(BlockState state) {
         return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
         if (Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
-            tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_placed.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.log_stripper_block.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.empty());
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.when_placed.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.log_stripper_block.tooltip"));
         }
         else {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltip, flag);
+    }
+
+    @Override
+    public Optional<BlockState> getNext(BlockState state) {
+        return java.util.Optional.ofNullable(ModBlockModifiers.OXIDIZABLES.get(state.getBlock()))
+                .map(block -> block.withPropertiesOf(state));
     }
 }
 

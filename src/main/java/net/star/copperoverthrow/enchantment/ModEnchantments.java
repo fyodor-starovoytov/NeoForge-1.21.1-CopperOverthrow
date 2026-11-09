@@ -15,8 +15,16 @@ public class ModEnchantments {
             DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, CopperOverthrow.MOD_ID);
 
     public static final RegistryObject<Enchantment> AREAL = ENCHANTMENTS.register("areal",
-            () -> new ArealEnchantment(Enchantment.Rarity.RARE, EnchantmentCategory.DIGGER, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+            () -> new TunnelingEnchantment(
+                    Enchantment.Rarity.UNCOMMON,
+                    ModEnchantmentCategories.HAMMER,
+                    new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+            ));
 
     public static final RegistryObject<Enchantment> TUNNELING = ENCHANTMENTS.register("tunneling",
-            () -> new TunnelingEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentCategory.DIGGER, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+            () -> new TunnelingEnchantment(
+                    Enchantment.Rarity.UNCOMMON,
+                    ModEnchantmentCategories.HAMMER,
+                    new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+            ));
 }

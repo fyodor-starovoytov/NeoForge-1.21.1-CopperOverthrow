@@ -1,7 +1,5 @@
 package net.star.copperoverthrow.block.custom;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -10,11 +8,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -31,32 +29,26 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.ItemAbility;
+import net.minecraftforge.common.ToolAction;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
 import net.star.copperoverthrow.sound.ModSounds;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.star.copperoverthrow.util.ModBlockModifiers;
+import org.antlr.v4.runtime.misc.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
-
-    public static final MapCodec<TamTamBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            instance.group(
-                    propertiesCodec(),
-                    WeatherState.CODEC.fieldOf("weather_state").forGetter(TamTamBlock::getAge)
-            ).apply(instance, TamTamBlock::new)
-    );
 
     private static final VoxelShape SHAPE_NORTH_SOUTH = Block.box(0.0, 1.0, 7, 16.0, 16.0, 9);
     private static final VoxelShape SHAPE_EAST_WEST = Block.box(7.0, 1.0, 0, 9.0, 16.0, 16);
@@ -98,17 +90,12 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new TamTamBlockEntity(pos, state);
     }
 
     @Override
-    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
+    public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
@@ -122,7 +109,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected boolean canSurvive(BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
+    public boolean canSurvive(BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
         WideThinDoubleBlock part = state.getValue(PART);
         Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
         Direction sideDir = facing.getCounterClockWise();
@@ -153,7 +140,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected @NotNull BlockState updateShape(BlockState state, @NotNull Direction direction, @NotNull BlockState neighborState, @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos neighborPos) {
+    public @NotNull BlockState updateShape(BlockState state, @NotNull Direction direction, @NotNull BlockState neighborState, @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos neighborPos) {
         WideThinDoubleBlock part = state.getValue(PART);
         Direction facing = state.getValue(FACING);
         Direction sideDir = facing.getClockWise();
@@ -200,9 +187,10 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
+
     @Override
-    public BlockState getToolModifiedState(@NotNull BlockState state, @NotNull UseOnContext context, @NotNull ItemAbility itemAbility, boolean simulate) {
-        BlockState modifiedState = super.getToolModifiedState(state, context, itemAbility, simulate);
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+        BlockState modifiedState = super.getToolModifiedState(state, context, toolAction, simulate);
 
         if (modifiedState != null && !simulate) {
             Level level = context.getLevel();
@@ -253,11 +241,11 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+    public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         if (Math.random()<ServerConfig.TAMTAM_FULL_MOON_VOLUME_CHANCE.get() && level.getMoonPhase() == 0 && level.isNight()){
             level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, ServerConfig.TAMTAM_FULL_MOON_VOLUME_RADIUS.get(), 1F);
         }
-        this.changeOverTime(state, level, pos, random);
+        this.randomTick(state, level, pos, random);
     }
 
     @Override
@@ -266,13 +254,13 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected boolean isRandomlyTicking(BlockState state) {
+    public boolean isRandomlyTicking(BlockState state) {
         return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, BlockHitResult hitResult) {
-        Direction direction = hitResult.getDirection();
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        Direction direction = hit.getDirection();
         Direction facing = state.getValue(FACING);
         Direction counterSideDir = facing.getCounterClockWise();
         WideThinDoubleBlock part = state.getValue(PART);
@@ -283,7 +271,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
             case BOTTOM_CLOCKWISE -> pos.relative(counterSideDir).above();
         };
         if (!level.isClientSide && level.getBlockEntity(mainTopPos) instanceof TamTamBlockEntity blockEntity && !blockEntity.swinging && isProperHit(state, direction) && player.getMainHandItem().isEmpty()) {
-            blockEntity.startSwing(hitResult.getDirection());
+            blockEntity.startSwing(hit.getDirection());
             playSound(level, pos, ServerConfig.TAMTAM_BASIC_VOLUME_RADIUS.get().floatValue());
             return InteractionResult.SUCCESS;
         }
@@ -291,13 +279,13 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected void onProjectileHit(Level level, @NotNull BlockState state, BlockHitResult hit, @NotNull Projectile projectile) {
+    public void onProjectileHit(Level level, @NotNull BlockState state, BlockHitResult hit, @NotNull Projectile projectile) {
         Direction direction = hit.getDirection();
         BlockPos pos = hit.getBlockPos();
         BlockState blockState = level.getBlockState(pos);
         if (!level.isClientSide && level.getBlockEntity(hit.getBlockPos()) instanceof TamTamBlockEntity blockEntity && !blockEntity.swinging && isProperHit(blockState, direction)) {
             if (projectile.mayInteract(level, pos)
-                    && projectile.mayBreak(level)
+                    && projectile.mayInteract(level, pos)
                     && projectile.getDeltaMovement().length() > 0.9) {
                 float finalVolume = (float) (ServerConfig.TAMTAM_BASIC_VOLUME_RADIUS.get() * 0.2 * projectile.getDeltaMovement().length());
                 blockEntity.startSwing(hit.getDirection());
@@ -307,7 +295,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    public @NotNull List<ItemStack> getDrops(BlockState state, LootParams.@NotNull Builder builder) {
+    public @NotNull List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         if (state.getValue(PART) != WideThinDoubleBlock.MAIN_TOP) {
             return Collections.emptyList();
         }
@@ -315,7 +303,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    public @NotNull BlockState playerWillDestroy(Level level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Player player) {
+    public @NotNull void playerWillDestroy(Level level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Player player) {
         if (!level.isClientSide) {
             WideThinDoubleBlock part = state.getValue(PART);
             Direction facing = state.getValue(FACING);
@@ -370,9 +358,8 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
                 }
             }
         }
-        return super.playerWillDestroy(level, pos, state, player);
     }
-    @Nullable
+
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return createTickerHelper(type, ModBlockEntities.TAMTAM_BE.get(), TamTamBlockEntity::tick);
@@ -406,19 +393,14 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected @NotNull BlockState rotate(BlockState state, Rotation rotation) {
+    public @NotNull BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    protected @NotNull BlockState mirror(BlockState state, Mirror mirror) {
+    public @NotNull BlockState mirror(BlockState state, Mirror mirror) {
         Rotation rotation = mirror.getRotation(state.getValue(FACING));
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-    }
-
-    @Override
-    protected boolean isPathfindable(@NotNull BlockState state, @NotNull PathComputationType pathComputationType) {
-        return false;
     }
 
     @Override
@@ -427,7 +409,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
     }
 
     @Override
-    protected @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         if (state.getValue(HorizontalDirectionalBlock.FACING).getAxis() == Direction.Axis.Z) {
             //The not default texture
             return SHAPE_NORTH_SOUTH;
@@ -455,23 +437,27 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         }
     }
 
-
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
         if (Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
-            tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.long_crash_sounding.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.empty());
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.long_crash_sounding.tooltip"));
 
 
         }
         else {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltip, flag);
     }
 
+    @Override
+    public Optional<BlockState> getNext(BlockState state) {
+        return java.util.Optional.ofNullable(ModBlockModifiers.OXIDIZABLES.get(state.getBlock()))
+                .map(block -> block.withPropertiesOf(state));
+    }
 }

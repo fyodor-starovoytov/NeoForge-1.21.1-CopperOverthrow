@@ -13,7 +13,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 
 
 public class KitchenBellModel<T extends Entity> extends EntityModel<T> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "kitchen_bell_model"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(CopperOverthrow.MOD_ID, "kitchen_bell_model"), "main");
 	private final ModelPart root;
 
 	public KitchenBellModel(ModelPart root) {
@@ -39,7 +39,7 @@ public class KitchenBellModel<T extends Entity> extends EntityModel<T> {
 
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        root.render(poseStack, buffer, packedLight, packedOverlay);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        root.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

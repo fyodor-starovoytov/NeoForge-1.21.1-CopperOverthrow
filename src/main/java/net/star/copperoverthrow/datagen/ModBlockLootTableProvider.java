@@ -5,16 +5,16 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.RegistryObject;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
 
 import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
-    protected ModBlockLootTableProvider(HolderLookup.Provider registries) {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+    protected ModBlockLootTableProvider() {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
-
     @Override
     protected void generate() {
         dropSelf(ModBlocks.COPPER_SCAFFOLDING.get());
@@ -86,7 +86,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get());
         dropSelf(ModBlocks.WAXED_LOG_STRIPPER.get());
         dropSelf(ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get());
-        dropSelf(ModBlocks.COPPER_BEEOSPHERE.get());
 
         dropSelf(ModBlocks.TAMTAM.get());
         dropSelf(ModBlocks.EXPOSED_TAMTAM.get());
@@ -114,12 +113,11 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         dropSelf(ModBlocks.HOLOGRAM_BLOCK.get());
         dropSelf(ModBlocks.INVERTED_HOLOGRAM_BLOCK.get());
-
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return ModBlocks.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
+        return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
     }
 
     protected void dropForBottomPartOnly(Block block) {

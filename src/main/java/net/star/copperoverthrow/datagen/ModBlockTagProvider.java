@@ -4,18 +4,17 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.BlockTagsProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.util.ModTags;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagProvider extends BlockTagsProvider {
-    public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+    public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, CopperOverthrow.MOD_ID, existingFileHelper);
     }
 
@@ -107,11 +106,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE);
 
-        tag(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL)
-                .addTag(BlockTags.INCORRECT_FOR_STONE_TOOL)
-                .remove(ModTags.Blocks.NEEDS_COPPER_TOOL);
-
-
 
         tag(ModTags.Blocks.MUSICAL_BLOCKS)
                 .add(Blocks.NOTE_BLOCK)
@@ -178,16 +172,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_EXPOSED_LARGE_RAIN_DRUM.get())
                 .add(ModBlocks.WAXED_WEATHERED_LARGE_RAIN_DRUM.get())
                 .add(ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get());
-
-        tag(Tags.Blocks.CHAINS)
-                .add(ModBlocks.COPPER_CHAIN.get())
-                .add(ModBlocks.WEATHERED_COPPER_CHAIN.get())
-                .add(ModBlocks.EXPOSED_COPPER_CHAIN.get())
-                .add(ModBlocks.OXIDIZED_COPPER_CHAIN.get())
-                .add(ModBlocks.WAXED_COPPER_CHAIN.get())
-                .add(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get())
-                .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
-                .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get());
 
         tag(ModTags.Blocks.COPPER_LANTERNS)
                 .add(ModBlocks.COPPER_LANTERN.get())

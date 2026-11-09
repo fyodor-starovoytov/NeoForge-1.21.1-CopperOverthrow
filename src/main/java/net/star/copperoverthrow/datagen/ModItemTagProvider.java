@@ -5,17 +5,17 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModTags;
-import org.jetbrains.annotations.Nullable;
+
 
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagProvider extends ItemTagsProvider {
-    public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
+    public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTags, CopperOverthrow.MOD_ID, existingFileHelper);
     }
 
@@ -28,48 +28,19 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ModTags.Items.C_COPPER_NUGGETS)
                 .add(ModItems.COPPER_NUGGET.get());
 
-        tag(ItemTags.DURABILITY_ENCHANTABLE)
-                .addTag(ModTags.Items.C_TOOLS_BUILDERS)
-                .addTag(ModTags.Items.C_TOOLS_HAMMERS)
-                .addTag(ModTags.Items.C_TOOLS_SAWS)
-                .add(ModItems.CRASH_HELMET.get())
-                .add(ModItems.COPPER_GLOWING_GOGGLES.get())
-                .add(ModItems.COPPER_EXOSKELETON.get())
-                .add(ModItems.COPPER_STEPPER_BOOTS.get())
-                .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
-
-        tag(ItemTags.MINING_ENCHANTABLE)
-                .addTag(ModTags.Items.C_TOOLS_HAMMERS);
-        tag(ModTags.Items.HAMMER_ENCHANTABLE)
-                .addTag(ModTags.Items.C_TOOLS_HAMMERS);
-
-        tag(ItemTags.FOOT_ARMOR_ENCHANTABLE)
-                .add(ModItems.COPPER_STEPPER_BOOTS.get());
-        tag(ItemTags.LEG_ARMOR_ENCHANTABLE)
-                .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
-        tag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
-                .add(ModItems.COPPER_EXOSKELETON.get());
-        tag(ItemTags.HEAD_ARMOR_ENCHANTABLE)
+        tag(Tags.Items.ARMORS_HELMETS)
                 .add(ModItems.CRASH_HELMET.get())
                 .add(ModItems.COPPER_GLOWING_GOGGLES.get());
 
-        tag(ItemTags.FOOT_ARMOR)
+        tag(Tags.Items.ARMORS_BOOTS)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get());
-        tag(ItemTags.LEG_ARMOR)
+
+        tag(Tags.Items.ARMORS_LEGGINGS)
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
 
-        tag(ItemTags.EQUIPPABLE_ENCHANTABLE)
-                .add(ModItems.COPPER_STEPPER_BOOTS.get())
-                .add(ModItems.COPPER_STEPPER_LEGGINGS.get())
-                .add(ModItems.COPPER_EXOSKELETON.get())
-                .add(ModItems.COPPER_GLOWING_GOGGLES.get())
-                .add(ModItems.CRASH_HELMET.get());
+        tag(Tags.Items.ARMORS_CHESTPLATES)
+                .add(ModItems.COPPER_EXOSKELETON.get());
 
-        tag(Tags.Items.FOODS)
-                .add(ModItems.COPPER_COOKIE.get());
-
-        tag(Tags.Items.FOODS_COOKIE)
-                .add(ModItems.COPPER_COOKIE.get());
 
         tag(Tags.Items.TOOLS)
                 .addTag(ModTags.Items.C_TOOLS_CATCHERS)

@@ -16,10 +16,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.neoforged.neoforge.common.ItemAbility;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraftforge.common.ToolAction;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class MultiBlockTallDecoration extends Block {
     public static final EnumProperty<TripleBlockPart> PART = EnumProperty.create("part", TripleBlockPart.class);
@@ -69,7 +71,7 @@ public class MultiBlockTallDecoration extends Block {
         }
     }
     @Override
-    protected boolean canSurvive(BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
+    public boolean canSurvive(BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
         TripleBlockPart part = state.getValue(PART);
 
         if (this.blockHeight == 2) {
@@ -90,7 +92,7 @@ public class MultiBlockTallDecoration extends Block {
     }
 
     @Override
-    protected @NotNull BlockState updateShape(BlockState state, Direction direction, @NotNull BlockState neighborState, @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos neighborPos) {
+    public @NotNull BlockState updateShape(BlockState state, Direction direction, @NotNull BlockState neighborState, @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos neighborPos) {
         TripleBlockPart part = state.getValue(PART);
 
         if (direction.getAxis() == Direction.Axis.Y) {
@@ -127,8 +129,8 @@ public class MultiBlockTallDecoration extends Block {
     }
 
     @Override
-    public BlockState getToolModifiedState(@NotNull BlockState state, @NotNull UseOnContext context, @NotNull ItemAbility itemAbility, boolean simulate) {
-        BlockState modifiedState = super.getToolModifiedState(state, context, itemAbility, simulate);
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+        BlockState modifiedState = super.getToolModifiedState(state, context, toolAction, simulate);
 
         if (modifiedState != null && !simulate) {
             Level level = context.getLevel();
@@ -163,8 +165,10 @@ public class MultiBlockTallDecoration extends Block {
         }
     }
 
+
+
     @Override
-    public @NotNull BlockState playerWillDestroy(Level level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Player player) {
+    public @NotNull void playerWillDestroy(Level level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Player player) {
         if (!level.isClientSide && player.isCreative()) {
             TripleBlockPart part = state.getValue(PART);
 
@@ -184,12 +188,11 @@ public class MultiBlockTallDecoration extends Block {
                 }
             }
         }
-        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override
-    public java.util.@NotNull List<ItemStack> getDrops(@NotNull BlockState state, net.minecraft.world.level.storage.loot.LootParams.Builder builder) {
-        net.minecraft.world.entity.Entity entity = builder.getOptionalParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY);
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+        net.minecraft.world.entity.Entity entity = params.getOptionalParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY);
         if (entity instanceof Player player && player.isCreative()) {
             return java.util.Collections.emptyList();
         }
@@ -198,7 +201,7 @@ public class MultiBlockTallDecoration extends Block {
             return java.util.Collections.emptyList();
         }
 
-        return super.getDrops(state, builder);
+        return super.getDrops(state, params);
     }
 
     public enum TripleBlockPart implements StringRepresentable {
@@ -221,4 +224,6 @@ public class MultiBlockTallDecoration extends Block {
     private boolean isSameStructure(BlockState state) {
         return state.getBlock() instanceof MultiBlockTallDecoration;
     }
+
+
 }

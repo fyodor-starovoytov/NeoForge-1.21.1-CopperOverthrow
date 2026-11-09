@@ -7,9 +7,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.ShearsItem;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,7 +16,6 @@ import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.effect.ModEffects;
 import net.star.copperoverthrow.item.armor.*;
 import net.star.copperoverthrow.item.custom.*;
-import net.star.copperoverthrow.util.ModTags;
 
 public class ModItems {
 
@@ -33,19 +29,19 @@ public class ModItems {
                     new Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> COPPER_SEXTANT = ITEMS.register("copper_sextant",
-            () -> new CopperTapeMeasureItem(new Properties().durability(256).stacksTo(1), ModBlocks.HOLOGRAM_BLOCK.get()));
+            () -> new CopperTapeMeasureItem(new Properties().durability(256), ModBlocks.HOLOGRAM_BLOCK.get()));
 
     public static final RegistryObject<Item> COPPER_FILL_BUCKET = ITEMS.register("copper_fill_bucket",
-            () -> new CopperFillBucketItem(new Properties().durability(727).stacksTo(1)));
+            () -> new CopperFillBucketItem(new Properties().durability(727)));
 
     public static final RegistryObject<Item> COPPER_LONG_RULER = ITEMS.register("copper_long_ruler",
-            () -> new CopperLongRuler(new Properties().durability(256).stacksTo(1), ModBlocks.HOLOGRAM_BLOCK.get()));
+            () -> new CopperLongRuler(new Properties().durability(256), ModBlocks.HOLOGRAM_BLOCK.get()));
 
     public static final RegistryObject<Item> COPPER_CHISEL = ITEMS.register("copper_chisel",
-            () -> new CopperChiselItem(new Properties().durability(256).stacksTo(1)));
+            () -> new CopperChiselItem(new Properties().durability(256)));
 
     public static final RegistryObject<Item> COPPER_TROWEL = ITEMS.register("copper_trowel",
-            () -> new CopperTrowelItem(new Properties().durability(256).stacksTo(1)));
+            () -> new CopperTrowelItem(new Properties().durability(256)));
 
     public static final RegistryObject<Item> COPPER_COOKIE = ITEMS.register("copper_cookie",
             () -> new Item(new Properties().food(new FoodProperties.Builder()
@@ -79,7 +75,7 @@ public class ModItems {
             () -> new HammerItem( 4f, 2f, ModToolTiers.COPPER,new Item.Properties()));
 
     public static final RegistryObject<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
-            () -> new HandsawItem(new Properties().durability(727).stacksTo(1)));
+            () -> new HandsawItem(new Properties().durability(727)));
 
 
     public static void register(IEventBus eventBus) {

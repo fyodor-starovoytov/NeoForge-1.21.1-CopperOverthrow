@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.custom.BambooWindChimeBlockEntity;
@@ -19,7 +19,7 @@ import net.star.copperoverthrow.client.BambooWindChimeModel;
 @OnlyIn(Dist.CLIENT)
 public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindChimeBlockEntity> {
     private static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/bamboo_wind_chime.png");
+           new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/bamboo_wind_chime.png");
 
     private final ModelPart root;
     private final ModelPart cup;
@@ -88,7 +88,7 @@ public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindCh
         }
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE));
-        this.root.render(poseStack, consumer, packedLight, packedOverlay, -1);
+        this.root.render(poseStack, consumer, packedLight, packedOverlay);
         poseStack.popPose();
     }
 

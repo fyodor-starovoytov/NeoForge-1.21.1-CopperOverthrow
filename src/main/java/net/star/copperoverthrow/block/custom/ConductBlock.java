@@ -3,7 +3,6 @@ package net.star.copperoverthrow.block.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -14,7 +13,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import org.antlr.v4.runtime.misc.NotNull;
+
 
 public class ConductBlock extends PoweredBlock {
 
@@ -25,25 +25,28 @@ public class ConductBlock extends PoweredBlock {
         super(properties);
     }
 
+
     @Override
-    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.INVISIBLE;
     }
 
     @Override
-    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Shapes.empty();
     }
 
     @Override
-    protected void onPlace(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean movedByPiston) {
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if (!level.isClientSide && !oldState.is(state.getBlock())) {
             level.scheduleTick(pos, this, RANDOM_LIFESPAN_TICKS());
         }
     }
 
+
+
     @Override
-    protected void tick(@NotNull BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+    public void tick(@NotNull BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
     }
 
@@ -52,11 +55,13 @@ public class ConductBlock extends PoweredBlock {
     }
 
     @Override
-    public void animateTick(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (level.isClientSide) {
-            ParticleUtils.spawnParticleInBlock(
-                    level, pos, 1, ParticleTypes.ELECTRIC_SPARK
-            );
+            double d0 = pos.getX() + random.nextDouble();
+            double d1 = pos.getY() + random.nextDouble();
+            double d2 = pos.getZ() + random.nextDouble();
+
+            level.addParticle(ParticleTypes.ELECTRIC_SPARK, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
     }
 }

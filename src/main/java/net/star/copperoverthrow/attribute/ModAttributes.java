@@ -1,8 +1,5 @@
 package net.star.copperoverthrow.attribute;
 
-import com.ibm.icu.text.DateFormat;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.eventbus.api.IEventBus;

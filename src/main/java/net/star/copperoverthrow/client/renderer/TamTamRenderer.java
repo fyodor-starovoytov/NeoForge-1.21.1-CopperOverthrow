@@ -12,8 +12,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.custom.TamTamBlock;
@@ -23,13 +23,13 @@ import net.star.copperoverthrow.client.TamTamModel;
 @OnlyIn(Dist.CLIENT)
 public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
     private static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/tamtambodytexture.png");
+            new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/tamtambodytexture.png");
     private static final ResourceLocation EXPOSED_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/exposed_tamtambodytexture.png");
+            new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/exposed_tamtambodytexture.png");
     private static final ResourceLocation WEATHERED_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/weathered_tamtambodytexture.png");
+            new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/weathered_tamtambodytexture.png");
     private static final ResourceLocation OXIDIZED_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/oxidized_tamtambodytexture.png");
+            new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/oxidized_tamtambodytexture.png");
 
 
     private final ModelPart root;
@@ -99,7 +99,7 @@ public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
             if (blockEntity.getBlockState().getBlock().equals(ModBlocks.OXIDIZED_TAMTAM.get()) || blockEntity.getBlockState().getBlock().equals(ModBlocks.WAXED_OXIDIZED_TAMTAM.get())){
                 consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(OXIDIZED_TEXTURE));
             }
-            this.root.render(poseStack, consumer, packedLight, packedOverlay, -1);
+            this.root.render(poseStack, consumer, packedLight, packedOverlay);
 
             poseStack.popPose();
         }

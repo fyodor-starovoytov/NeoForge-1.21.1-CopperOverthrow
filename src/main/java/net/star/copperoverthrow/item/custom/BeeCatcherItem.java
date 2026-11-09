@@ -19,9 +19,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
-import net.star.copperoverthrow.block.custom.CopperBeeosphereBlock;
-import net.star.copperoverthrow.component.ModDataComponents;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -72,10 +72,6 @@ public class BeeCatcherItem extends Item {
 
         List<CompoundTag> bees = new ArrayList<>(getBees(stack));
         List<CompoundTag> remaining = new ArrayList<>(bees);
-
-        if (level.getBlockState(context.getClickedPos()).getBlock() instanceof CopperBeeosphereBlock){
-            return InteractionResult.SUCCESS;
-        }
 
         if (!(bees.isEmpty()) && !level.isClientSide) {
 
@@ -148,7 +144,11 @@ public class BeeCatcherItem extends Item {
         return getBees(stack).size() < 3;
     }
 
-    public boolean hasNoBees(ItemStack stack) {
-        return getBees(stack).isEmpty();
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        if (enchantment.category == EnchantmentCategory.BREAKABLE) {
+            return true;
+        }
+        return super.canApplyAtEnchantingTable(stack, enchantment);
     }
 }

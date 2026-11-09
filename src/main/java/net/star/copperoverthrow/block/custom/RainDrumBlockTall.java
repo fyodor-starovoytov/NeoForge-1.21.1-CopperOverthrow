@@ -9,12 +9,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.ParticleUtils;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
@@ -32,9 +32,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.ClientConfig;
 import net.star.copperoverthrow.sound.ModSounds;
-import org.jetbrains.annotations.NotNull;
+import net.star.copperoverthrow.util.ModBlockModifiers;
+import org.antlr.v4.runtime.misc.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class RainDrumBlockTall extends MultiBlockTallDecoration implements WeatheringCopper {
     private final float PITCH;
@@ -69,7 +72,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE;
     }
 
@@ -85,12 +88,13 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
             }
 
             if (random.nextFloat() < finalSoundProbability) {
-                float finalPitch = Math.clamp(random.nextFloat() * randomFloat() + PITCH, 0.85f, 10);
-                  soundToBePlayedRaining(level, pos, finalVolume, finalPitch);
+                float finalPitch = Mth.clamp(random.nextFloat() * randomFloat() + PITCH, 0.85f, 10f);
+                soundToBePlayedRaining(level, pos, finalVolume, finalPitch);
                 if (random.nextFloat() < PARTICLE_PROBABILITY && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()) {
-                    ParticleUtils.spawnParticleInBlock(
-                            level, pos.above(), 1, ParticleTypes.NOTE
-                    );
+                    double d0 = pos.above().getX() + random.nextDouble();
+                    double d1 = pos.above().getY() + random.nextDouble();
+                    double d2 = pos.above().getZ() + random.nextDouble();
+                    level.addParticle(ParticleTypes.NOTE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
                 }
             }
         }
@@ -104,7 +108,12 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
         if (SPAWN_PARTICLES_AT_FULLMOON && isFullMoon && isNightTime && isClearSky && ClientConfig.RAIN_DRUMS_SPARK_PARTICLES.get()) {
             if (random.nextFloat() < PARTICLE_PROBABILITY) {
                 int particleCount = random.nextInt(3) + 1;
-                ParticleUtils.spawnParticleInBlock(level, pos, particleCount, ParticleTypes.ELECTRIC_SPARK);
+                for (int i = 0; i < particleCount; i++) {
+                    double d0 = pos.getX() + random.nextDouble();
+                    double d1 = pos.getY() + random.nextDouble();
+                    double d2 = pos.getZ() + random.nextDouble();
+                    level.addParticle(ParticleTypes.ELECTRIC_SPARK, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+                }
             }
         }
 
@@ -124,7 +133,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
 
                     if (fluid != Fluids.EMPTY) {
                         if (random.nextFloat() < 0.05f) {
-                            float finalPitch = Math.clamp(PITCH + (random.nextFloat() - 0.5f) * 0.2f, 0.85f, 2.0f);
+                            float finalPitch = Mth.clamp(PITCH + (random.nextFloat() - 0.5f) * 0.2f, 0.85f, 2.0f);
                             soundToBePlayedPlaying(level, pos, VOLUME, finalPitch, true);
                             if (isLava) {
                                 level.playLocalSound(
@@ -174,11 +183,11 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    protected void onProjectileHit(Level level, @NotNull BlockState state, @NotNull BlockHitResult hit, @NotNull Projectile projectile) {
+    public void onProjectileHit(Level level, @NotNull BlockState state, @NotNull BlockHitResult hit, @NotNull Projectile projectile) {
         if (!level.isClientSide) {
             BlockPos pos = hit.getBlockPos();
             if (projectile.mayInteract(level, pos)
-                    && projectile.mayBreak(level)
+                    && projectile.mayInteract(level, pos)
                     && projectile.getDeltaMovement().length() > 0.6) {
 
                 float finalVolume = 0.5f * (float) projectile.getDeltaMovement().length();
@@ -186,22 +195,24 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
             }
         }
         if (level.isClientSide && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()) {
-            ParticleUtils.spawnParticleInBlock(
-                    level, hit.getBlockPos().above(), 1, ParticleTypes.NOTE
-            );
+            BlockPos pos = hit.getBlockPos().above();
+            double d0 = pos.getX() + level.random.nextDouble();
+            double d1 = pos.getY() + level.random.nextDouble();
+            double d2 = pos.getZ() + level.random.nextDouble();
+            level.addParticle(ParticleTypes.NOTE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
-
-        if (!level.isClientSide){
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide) {
             soundToBePlayedPlaying(level, pos, VOLUME, PITCH, false);
         }
-        if (level.isClientSide && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()){
-        ParticleUtils.spawnParticleInBlock(
-                level, pos.above(), 1, ParticleTypes.NOTE
-        );
+        if (level.isClientSide && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()) {
+            double d0 = pos.above().getX() + level.random.nextDouble();
+            double d1 = pos.above().getY() + level.random.nextDouble();
+            double d2 = pos.above().getZ() + level.random.nextDouble();
+            level.addParticle(ParticleTypes.NOTE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
         return InteractionResult.SUCCESS;
     }
@@ -214,14 +225,14 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    protected void onRemove(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean movedByPiston) {
+    public void onRemove(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean movedByPiston) {
         if (!level.isClientSide){
             soundToBePlayedPlaying(level, pos, VOLUME - 0.5f, PITCH, false);
         }
     }
 
     @Override
-    protected void onPlace(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean movedByPiston) {
+    public void onPlace(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean movedByPiston) {
         if (!level.isClientSide){
             soundToBePlayedPlaying(level, pos, VOLUME  - 0.5f, PITCH, false);
         }
@@ -233,12 +244,12 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        this.changeOverTime(state, level, pos, random);
+    public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+        this.randomTick(state, level, pos, random);
     }
 
     @Override
-    protected boolean isRandomlyTicking(BlockState state) {
+    public boolean isRandomlyTicking(BlockState state) {
         return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
@@ -270,27 +281,29 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
         if (Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.translatable(TOOLTIP));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
-            tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
-            tooltipComponents.add(Component.translatable(TOOLTIP_SOUNDING));
-            tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_placed.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.rain_drum_block.tooltip"));
+            tooltip.add(Component.translatable(TOOLTIP));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.empty());
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
+            tooltip.add(Component.translatable(TOOLTIP_SOUNDING));
+            tooltip.add(Component.empty());
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.when_placed.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.rain_drum_block.tooltip"));
 
 
         }
         else {
-            tooltipComponents.add(Component.translatable(TOOLTIP));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.translatable(TOOLTIP));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltip, flag);
     }
 
-    public int getBLOCK_HEIGHT() {
-        return BLOCK_HEIGHT;
+    @Override
+    public Optional<BlockState> getNext(BlockState state) {
+        return java.util.Optional.ofNullable(ModBlockModifiers.OXIDIZABLES.get(state.getBlock()))
+                .map(block -> block.withPropertiesOf(state));
     }
 }

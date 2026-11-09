@@ -1,30 +1,28 @@
 package net.star.copperoverthrow.block.custom;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.HoneycombItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -38,11 +36,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
-import org.jetbrains.annotations.NotNull;
+import net.star.copperoverthrow.util.ModBlockModifiers;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.BiConsumer;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, WeatheringCopper {
@@ -55,15 +54,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     private final String TOOLTIP_SOUNDING;
     private final WeatherState weatherState;
 
-    public static final MapCodec<KitchenBellBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            instance.group(
-                    Codec.INT.fieldOf("ticks_to_stay_pressed").forGetter(block -> block.TICKS_TO_STAY_PRESSED),
-                    propertiesCodec(),
-                    Codec.STRING.fieldOf("tooltip_sounding").forGetter(block -> block.TOOLTIP_SOUNDING),
-                    BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("press_sound").forGetter(block -> block.PRESS_SOUND.get()),
-                    WeatherState.CODEC.fieldOf("weather_state").forGetter(KitchenBellBlock::getAge)
-            ).apply(instance, (ticks, props, tip, sound, weather) -> new KitchenBellBlock(BlockSetType.COPPER, ticks, props, tip, () -> sound, weather))
-    );
+
     public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, Properties properties, String tooltip_sounding, Supplier<SoundEvent> pressSound, WeatherState weatherState) {
         super(properties.sound(type.soundType()));
         this.registerDefaultState(
@@ -76,17 +67,12 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return Shapes.or(SHAPE_BASE, SHAPE_HAT);
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (state.getValue(POWERED)) {
             return InteractionResult.CONSUME;
         }
@@ -96,7 +82,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
                 && !(player.getMainHandItem().getItem() instanceof HoneycombItem)
                 && !(player.getOffhandItem().getItem() instanceof AxeItem)
                 && !(player.getOffhandItem().getItem() instanceof HoneycombItem)) {
-            blockEntity.startSwing(hitResult.getDirection());
+            blockEntity.startSwing(hit.getDirection());
 
             float finalVolume = (float) (ServerConfig.DESK_BELL_VOLUME_RAIDUS.get() * 1);
             level.playSound(null,
@@ -113,20 +99,11 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    protected void onExplosionHit(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Explosion explosion, @NotNull BiConsumer<ItemStack, BlockPos> dropConsumer) {
-        if (explosion.canTriggerBlocks() && !state.getValue(POWERED)) {
-            this.press(state, level, pos, null);
-        }
-
-        super.onExplosionHit(state, level, pos, explosion, dropConsumer);
-    }
-
-    @Override
-    protected void onProjectileHit(Level level, @NotNull BlockState state, @NotNull BlockHitResult hit, @NotNull Projectile projectile) {
+    public void onProjectileHit(Level level, @NotNull BlockState state, @NotNull BlockHitResult hit, @NotNull Projectile projectile) {
         if (!level.isClientSide) {
             BlockPos pos = hit.getBlockPos();
             if (projectile.mayInteract(level, pos)
-                    && projectile.mayBreak(level)
+                    && projectile.mayInteract(level, pos)
                     && projectile.getDeltaMovement().length() > 0.3
                     && level.getBlockEntity(pos) instanceof KitchenBellBlockEntity blockEntity
             ) {
@@ -163,7 +140,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    protected void onRemove(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
+    public void onRemove(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!isMoving && !state.is(newState.getBlock())) {
             if (state.getValue(POWERED)) {
                 this.updateNeighbours(level, pos);
@@ -174,22 +151,22 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    protected int getSignal(BlockState blockState, @NotNull BlockGetter blockAccess, @NotNull BlockPos pos, @NotNull Direction side) {
+    public int getSignal(BlockState blockState, @NotNull BlockGetter blockAccess, @NotNull BlockPos pos, @NotNull Direction side) {
         return blockState.getValue(POWERED) ? 15 : 0;
     }
 
     @Override
-    protected int getDirectSignal(BlockState blockState, @NotNull BlockGetter blockAccess, @NotNull BlockPos pos, @NotNull Direction side) {
+    public int getDirectSignal(BlockState blockState, @NotNull BlockGetter blockAccess, @NotNull BlockPos pos, @NotNull Direction side) {
         return blockState.getValue(POWERED) && Direction.DOWN == side ? 15 : 0;
     }
 
     @Override
-    protected boolean isSignalSource(@NotNull BlockState state) {
+    public boolean isSignalSource(@NotNull BlockState state) {
         return true;
     }
 
     @Override
-    protected void tick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+    public void tick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         if (state.getValue(POWERED)) {
             this.checkPressed(state, level, pos);
         }
@@ -220,19 +197,21 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
         builder.add(POWERED);
     }
 
+
+    @Nullable
     @Override
-    public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return new KitchenBellBlockEntity(pos, state);
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new KitchenBellBlockEntity(blockPos, blockState);
     }
 
     @Override
-    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
+    public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.MODEL;
     }
 
     @Override
-    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        this.changeOverTime(state, level, pos, random);
+    public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+        this.randomTick(state, level, pos, random);
     }
 
     @Override
@@ -241,24 +220,30 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     @Override
-    protected boolean isRandomlyTicking(BlockState state) {
+    public boolean isRandomlyTicking(BlockState state) {
         return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
         if (Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
-            tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
-            tooltipComponents.add(Component.translatable(TOOLTIP_SOUNDING));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.empty());
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
+            tooltip.add(Component.translatable(TOOLTIP_SOUNDING));
 
         }
         else {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltip, flag);
+    }
+
+    @Override
+    public Optional<BlockState> getNext(BlockState state) {
+        return java.util.Optional.ofNullable(ModBlockModifiers.OXIDIZABLES.get(state.getBlock()))
+                .map(block -> block.withPropertiesOf(state));
     }
 }

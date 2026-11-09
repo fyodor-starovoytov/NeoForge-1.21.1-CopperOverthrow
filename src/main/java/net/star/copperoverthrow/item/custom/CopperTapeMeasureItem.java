@@ -17,6 +17,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -305,4 +307,5 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(CustomSpyglassArmposeExtension.INSTANCE);
     }
+
 }

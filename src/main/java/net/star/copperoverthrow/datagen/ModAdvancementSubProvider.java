@@ -1,202 +1,196 @@
 package net.star.copperoverthrow.datagen;
 
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.item.ModItems;
 
 import java.util.function.Consumer;
 
-public class ModAdvancementSubProvider implements AdvancementProvider.AdvancementGenerator {
+public class ModAdvancementSubProvider implements AdvancementSubProvider {
 
     @Override
-    public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
-        AdvancementHolder copperIngotAdv = Advancement.Builder.advancement()
-                .parent(AdvancementSubProvider.createPlaceholder("story/upgrade_tools"))
+    public void generate(HolderLookup.Provider provider, Consumer<Advancement> consumer) {
+        Advancement copperIngotAdv = Advancement.Builder.advancement()
+                .parent(new ResourceLocation("story/upgrade_tools"))
                 .display(
                         Items.COPPER_INGOT,
                         Component.translatable("advancements.copperoverthrow.copper_ingot.title"),
                         Component.translatable("advancements.copperoverthrow.copper_ingot.description"),
-                        null, // Background is null since it's attached to an existing parent tab
-                        AdvancementType.TASK,
+                        null, // Background texture if root, otherwise null
+                        FrameType.TASK,
                         true,
                         true,
                         false
                 )
                 .addCriterion("has_copper_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copper_ingot"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_ingot").toString());
 
-        AdvancementHolder copperScaffolding = Advancement.Builder.advancement()
+
+        Advancement copperScaffolding = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
                 .display(
                         ModBlocks.COPPER_SCAFFOLDING.get(),
                         Component.translatable("advancements.copperoverthrow.copper_scaffolding.title"),
                         Component.translatable("advancements.copperoverthrow.copper_scaffolding.description"),
                         null,
-                        AdvancementType.TASK,
-                        true,
+FrameType.TASK,                        true,
                         true,
                         false
                 )
                 .addCriterion("has_scaffolding", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.COPPER_SCAFFOLDING.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copper_scaffolding"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_scaffolding").toString());
 
-        AdvancementHolder copperChisel = Advancement.Builder.advancement()
+        Advancement copperChisel = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
                 .display(
                         ModItems.COPPER_CHISEL.get(),
                         Component.translatable("advancements.copperoverthrow.copper_chisel.title"),
                         Component.translatable("advancements.copperoverthrow.copper_chisel.description"),
                         null,
-                        AdvancementType.TASK,
-                        true,
+FrameType.TASK,                        true,
                         true,
                         false
                 )
                 .addCriterion("has_chisel", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_CHISEL.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copper_chisel"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_chisel").toString());
 
-        AdvancementHolder artist = Advancement.Builder.advancement()
+        Advancement artist = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
                 .display(
                         ModItems.COPPER_FILL_BUCKET.get(),
                         Component.translatable("advancements.copperoverthrow.artist.title"),
                         Component.translatable("advancements.copperoverthrow.artist.description"),
                         null,
-                        AdvancementType.GOAL,
+                        FrameType.GOAL,
                         true,
                         true,
                         false
                 )
                 .addCriterion("has_artist", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_FILL_BUCKET.get(), ModItems.COPPER_SEXTANT.get(), ModItems.COPPER_LONG_RULER.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "artist"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "artist").toString());
 
 
-        AdvancementHolder copperTrowel = Advancement.Builder.advancement()
+        Advancement copperTrowel = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
                 .display(
                         ModItems.COPPER_TROWEL.get(),
                         Component.translatable("advancements.copperoverthrow.copper_trowel.title"),
                         Component.translatable("advancements.copperoverthrow.copper_trowel.description"),
                         null,
-                        AdvancementType.TASK,
-                        true,
+FrameType.TASK,                        true,
                         true,
                         false
                 )
                 .addCriterion("has_trowel", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_TROWEL.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copper_trowel"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_trowel").toString());
 
-        AdvancementHolder logStripper = Advancement.Builder.advancement()
+        Advancement logStripper = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
                 .display(
                         ModBlocks.LOG_STRIPPER.get(),
                         Component.translatable("advancements.copperoverthrow.log_stripper.title"),
                         Component.translatable("advancements.copperoverthrow.log_stripper.description"),
                         null,
-                        AdvancementType.TASK,
-                        true,
+FrameType.TASK,                        true,
                         true,
                         false
                 )
                 .addCriterion("has_stripper", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.LOG_STRIPPER.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "log_stripper"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "log_stripper").toString());
 
-        AdvancementHolder copperHandsaw = Advancement.Builder.advancement()
+        Advancement copperHandsaw = Advancement.Builder.advancement()
                 .parent(logStripper)
                 .display(
                         ModItems.COPPER_HANDSAW.get(),
                         Component.translatable("advancements.copperoverthrow.copper_handsaw.title"),
                         Component.translatable("advancements.copperoverthrow.copper_handsaw.description"),
                         null,
-                        AdvancementType.GOAL,
+                        FrameType.GOAL,
                         true,
                         true,
                         false
                 )
                 .addCriterion("has_handsaw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_HANDSAW.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copper_handsaw"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_handsaw").toString());
 
-        AdvancementHolder stepperSet = Advancement.Builder.advancement()
+        Advancement stepperSet = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
                 .display(
                         ModItems.COPPER_STEPPER_BOOTS.get(),
                         Component.translatable("advancements.copperoverthrow.stepper_set.title"),
                         Component.translatable("advancements.copperoverthrow.stepper_set.description"),
                         null,
-                        AdvancementType.GOAL,
+                        FrameType.GOAL,
                         true,
                         true,
                         false
                 )
                 .addCriterion("has_stepper", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_STEPPER_BOOTS.get(), ModItems.COPPER_STEPPER_LEGGINGS.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "stepper_set"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "stepper_set").toString());
 
-        AdvancementHolder miningSet = Advancement.Builder.advancement()
+        Advancement miningSet = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
                 .display(
                         ModItems.COPPER_GLOWING_GOGGLES.get(),
                         Component.translatable("advancements.copperoverthrow.mining_set.title"),
                         Component.translatable("advancements.copperoverthrow.mining_set.description"),
                         null,
-                        AdvancementType.TASK,
-                        true,
+FrameType.TASK,                        true,
                         true,
                         false
                 )
                 .addCriterion("has_mining", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_GLOWING_GOGGLES.get(), ModItems.COPPER_EXOSKELETON.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "mining_set"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "mining_set").toString());
 
 
-        AdvancementHolder crashHelmet = Advancement.Builder.advancement()
+        Advancement crashHelmet = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
                 .display(
                         ModItems.CRASH_HELMET.get(),
                         Component.translatable("advancements.copperoverthrow.crash_helmet.title"),
                         Component.translatable("advancements.copperoverthrow.crash_helmet.description"),
                         null,
-                        AdvancementType.TASK,
-                        true,
+FrameType.TASK,                        true,
                         true,
                         false
                 )
                 .addCriterion("has_crash", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CRASH_HELMET.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "crash_helmet"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "crash_helmet").toString());
 
 
-        AdvancementHolder copperHammer = Advancement.Builder.advancement()
+        Advancement copperHammer = Advancement.Builder.advancement()
                 .parent(miningSet)
                 .display(
                         ModItems.COPPER_HAMMER.get(),
                         Component.translatable("advancements.copperoverthrow.copper_hammer.title"),
                         Component.translatable("advancements.copperoverthrow.copper_hammer.description"),
                         null,
-                        AdvancementType.GOAL,
+                        FrameType.GOAL,
                         true,
                         true,
                         false
                 )
                 .addCriterion("has_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_HAMMER.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copper_hammer"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_hammer").toString());
 
-        AdvancementHolder musical = Advancement.Builder.advancement()
+        Advancement musical = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
                 .display(
-                        ModBlocks.LARGE_RAIN_DRUM,
+                        ModBlocks.LARGE_RAIN_DRUM.get(),
                         Component.translatable("advancements.copperoverthrow.musical.title"),
                         Component.translatable("advancements.copperoverthrow.musical.description"),
                         null,
-                        AdvancementType.GOAL,
+                        FrameType.GOAL,
                         true,
                         true,
                         false
@@ -206,16 +200,16 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
                         ModBlocks.TINY_RAIN_DRUM.get(),
                         ModBlocks.LARGE_RAIN_DRUM.get(),
                         ModBlocks.TAMTAM.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "musical"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "musical").toString());
 
-        AdvancementHolder avatar = Advancement.Builder.advancement()
+        Advancement avatar = Advancement.Builder.advancement()
                 .parent(musical)
                 .display(
-                        ModBlocks.BAMBOO_WIND_CHIME,
+                        ModBlocks.BAMBOO_WIND_CHIME.get(),
                         Component.translatable("advancements.copperoverthrow.avatar.title"),
                         Component.translatable("advancements.copperoverthrow.avatar.description"),
                         null,
-                        AdvancementType.GOAL,
+                        FrameType.GOAL,
                         true,
                         true,
                         false
@@ -224,16 +218,16 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
                         ModBlocks.BAMBOO_WIND_CHIME.get(),
                         ModBlocks.LUNAR_WIND_CHIME.get(),
                         ModBlocks.RED_WIND_CHIME.get()))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "avatar"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "avatar").toString());
 
-        AdvancementHolder orchestra = Advancement.Builder.advancement()
+        Advancement orchestra = Advancement.Builder.advancement()
                 .parent(musical)
                 .display(
-                        ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM,
+                        ModBlocks.WAXED_OXIDIZED_LARGE_RAIN_DRUM.get(),
                         Component.translatable("advancements.copperoverthrow.orchestra.title"),
                         Component.translatable("advancements.copperoverthrow.orchestra.description"),
                         null,
-                        AdvancementType.CHALLENGE,
+                        FrameType.CHALLENGE,
                         true,
                         true,
                         true
@@ -276,8 +270,9 @@ public class ModAdvancementSubProvider implements AdvancementProvider.Advancemen
                         ModBlocks.WAXED_WEATHERED_TAMTAM.get(),
                         ModBlocks.WAXED_OXIDIZED_TAMTAM.get()
                 ))
-                .rewards(AdvancementRewards.Builder.recipe(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "experience"))
+                .rewards(AdvancementRewards.Builder.recipe(new ResourceLocation(CopperOverthrow.MOD_ID, "experience"))
                         .addExperience(300))
-                .save(saver, ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "orchestra"), existingFileHelper);
+                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "orchestra").toString());
     }
+
 }

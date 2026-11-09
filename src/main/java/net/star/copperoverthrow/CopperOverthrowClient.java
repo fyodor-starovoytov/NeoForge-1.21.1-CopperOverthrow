@@ -27,8 +27,11 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterItemDecorationsEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
@@ -46,7 +49,6 @@ import java.util.List;
 public class CopperOverthrowClient {
 
     public CopperOverthrowClient(ModContainer container) {
-        container.registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, ConfigurationScreen::new);
     }
 
     @SubscribeEvent
@@ -209,13 +211,7 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
                         poseStack.translate(0,  pushPull, 0.161);
                     }
-/*
-                    case  -> {
-                        poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
-                        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-                        poseStack.translate(0,  pushPull, 0.165);
-                    }
-*/
+
                 }
             }
             case WEST -> {

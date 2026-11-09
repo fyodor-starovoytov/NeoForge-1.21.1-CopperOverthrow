@@ -9,12 +9,13 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.common.ForgeMod;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
 import net.star.copperoverthrow.item.armor.client.model.CopperExoskeletonModel;
-import net.star.copperoverthrow.item.armor.client.model.CrashHelmetModel;
 import net.star.copperoverthrow.item.armor.client.provider.ArmorModelProvider;
 import net.star.copperoverthrow.item.armor.client.provider.SimpleModelProvider;
 
@@ -74,5 +75,16 @@ public class CopperExoskeletonArmorItem extends AbstractExtendedArmorItem {
     @Override
     protected ArmorModelProvider createModelProvider() {
         return new SimpleModelProvider(CopperExoskeletonModel::createBodyLayer, CopperExoskeletonModel::new);
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        if (enchantment.category == EnchantmentCategory.BREAKABLE) {
+            return true;
+        }
+        if (enchantment.category == EnchantmentCategory.ARMOR_CHEST) {
+            return true;
+        }
+        return super.canApplyAtEnchantingTable(stack, enchantment);
     }
 }

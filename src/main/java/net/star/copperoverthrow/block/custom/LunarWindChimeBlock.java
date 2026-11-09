@@ -5,11 +5,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -18,15 +17,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.LunarWindChimeBlockEntity;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.antlr.v4.runtime.misc.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class LunarWindChimeBlock extends AbstractWindChimeBlock{
@@ -70,23 +67,6 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
         }
     }
 
-    @Override
-    protected void onExplosionHit(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Explosion explosion, @NotNull BiConsumer<ItemStack, BlockPos> dropConsumer) {
-        if (level.isClientSide()) return;
-
-        BlockPos targetPos = state.getValue(UPPER) ? pos : pos.above();
-
-        if (level.getBlockEntity(targetPos) instanceof LunarWindChimeBlockEntity blockEntity) {
-            if (!blockEntity.swinging) {
-                blockEntity.startSwing(explosion.radius()/10, explosion.radius()/10);
-                int chimeCount = level.random.nextInt(3, 6);
-                blockEntity.triggerChimeSequence(chimeCount, explosion.radius()/4);
-            }
-
-            blockEntity.onOpenAir(isBlockObstructed(pos, level));
-        }
-    }
-
     private boolean isBlockObstructed(BlockPos pos, Level level){
 
         Vec3 vec = Vec3.atCenterOf(pos);
@@ -99,25 +79,25 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
                 vec, vecEast,
                 ClipContext.Block.COLLIDER,
                 ClipContext.Fluid.NONE,
-                CollisionContext.empty()
+                null
         );
         ClipContext contextSouth = new ClipContext(
                 vec, vecSouth,
                 ClipContext.Block.COLLIDER,
                 ClipContext.Fluid.NONE,
-                CollisionContext.empty()
+                null
         );
         ClipContext contextNorth = new ClipContext(
                 vec, vecNorth,
                 ClipContext.Block.COLLIDER,
                 ClipContext.Fluid.NONE,
-                CollisionContext.empty()
+                null
         );
         ClipContext contextWest = new ClipContext(
                 vec, vecWest,
                 ClipContext.Block.COLLIDER,
                 ClipContext.Fluid.NONE,
-                CollisionContext.empty()
+                null
         );
 
         BlockHitResult hitSouth = level.clip(contextSouth);
@@ -130,18 +110,18 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
         if (Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.low_pitch.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
-            tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.eerie_lunar_rumble.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.low_pitch.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.empty());
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.eerie_lunar_rumble.tooltip"));
         }
         else {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.low_pitch.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.low_pitch.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltip, flag);
     }
 }

@@ -16,7 +16,10 @@ import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import org.jetbrains.annotations.NotNull;
+import net.star.copperoverthrow.util.ModBlockModifiers;
+import org.antlr.v4.runtime.misc.NotNull;
+
+import java.util.Optional;
 
 
 public class CopperScaffoldingBlock extends ScaffoldingBlock implements WeatheringCopper, SimpleWaterloggedBlock{
@@ -30,8 +33,8 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
 
 
     @Override
-    protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        this.changeOverTime(state, level, pos, random);
+    public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+        this.randomTick(state, level, pos, random);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
     }
 
     @Override
-    protected void tick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+    public void tick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         int i = getDistance(level, pos);
         BlockState blockstate = state.setValue(DISTANCE, i).setValue(BOTTOM, this.isBottom(level, pos, i));
         if (blockstate.getValue(DISTANCE) == 7) {
@@ -71,7 +74,7 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
     }
 
     @Override
-    protected boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
+    public boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
         return getDistance(level, pos) < 7;
     }
 
@@ -101,5 +104,9 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
 
         return i;
     }
-
+    @Override
+    public Optional<BlockState> getNext(BlockState state) {
+        return java.util.Optional.ofNullable(ModBlockModifiers.OXIDIZABLES.get(state.getBlock()))
+                .map(block -> block.withPropertiesOf(state));
+    }
 }

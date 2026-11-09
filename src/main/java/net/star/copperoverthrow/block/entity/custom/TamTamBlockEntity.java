@@ -2,9 +2,7 @@ package net.star.copperoverthrow.block.entity.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,17 +49,18 @@ public class TamTamBlockEntity extends BlockEntity {
         }
     }
 
+
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putInt("ticks", ticks);
         tag.putBoolean("swinging", swinging);
         tag.putInt("clickDirection", clickDirection.get3DDataValue());
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         ticks = tag.getInt("ticks");
         swinging = tag.getBoolean("swinging");
         clickDirection = Direction.from3DDataValue(tag.getInt("clickDirection"));

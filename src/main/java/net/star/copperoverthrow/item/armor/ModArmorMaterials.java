@@ -1,17 +1,13 @@
 package net.star.copperoverthrow.item.armor;
 
-import net.minecraft.Util;
-import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
 import net.star.copperoverthrow.CopperOverthrow;
 
-import java.util.EnumMap;
 import java.util.function.Supplier;
 
 

@@ -4,10 +4,11 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ScaffoldingBlockItem;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -91,15 +92,6 @@ public class ModBlocks {
                     BlockBehaviour.Properties.of().strength(4f).mapColor(DyeColor.GRAY),
                     WeatheringCopper.WeatherState.OXIDIZED));
 
-
-    public static final RegistryObject<Block> COPPER_BEEOSPHERE = registerBlock("copper_beeosphere",
-            () -> new CopperBeeosphereBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(2f)
-                            .noOcclusion()
-                            
-                            .mapColor(DyeColor.ORANGE)
-                            .sound(SoundType.COPPER)));
 
     public static final RegistryObject<Block> COPPER_CHAIN = registerBlock("copper_chain",
             () -> new CopperChainBlock(

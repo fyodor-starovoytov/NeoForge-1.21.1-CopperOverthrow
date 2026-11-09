@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.block.entity.custom.RedWindChimeBlockEntity;
@@ -19,7 +19,7 @@ import net.star.copperoverthrow.client.RedWindChimeModel;
 @OnlyIn(Dist.CLIENT)
 public class RedWindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlockEntity> {
     private static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/entity/red_wind_chime.png");
+            new ResourceLocation(CopperOverthrow.MOD_ID, "textures/entity/red_wind_chime.png");
 
     private final ModelPart root;
     private final ModelPart cup;
@@ -80,7 +80,7 @@ public class RedWindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlo
         }
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutout(TEXTURE));
-        this.root.render(poseStack, consumer, packedLight, packedOverlay, -1);
+        this.root.render(poseStack, consumer, packedLight, packedOverlay);
         poseStack.popPose();
     }
 
