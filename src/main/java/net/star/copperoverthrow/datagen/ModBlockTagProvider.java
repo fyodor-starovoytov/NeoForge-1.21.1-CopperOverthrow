@@ -117,8 +117,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(BlockTags.INCORRECT_FOR_STONE_TOOL)
                 .remove(ModTags.Blocks.NEEDS_COPPER_TOOL);
 
-
-
         tag(ModTags.Blocks.MUSICAL_BLOCKS)
                 .add(Blocks.NOTE_BLOCK)
                 .add(Blocks.JUKEBOX)
