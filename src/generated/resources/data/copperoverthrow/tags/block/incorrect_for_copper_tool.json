@@ -1,8 +1,0 @@
-{
-  "remove": [
-    "#copperoverthrow:needs_copper_tool"
-  ],
-  "values": [
-    "#minecraft:incorrect_for_stone_tool"
-  ]
-}

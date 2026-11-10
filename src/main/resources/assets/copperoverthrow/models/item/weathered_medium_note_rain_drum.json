@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
-  "loader": "neoforge:separate_transforms",
+  "loader": "forge:separate_transforms",
 
   "base": {
     "parent": "copperoverthrow:item/weathered_medium_note_rain_drum_3d"
