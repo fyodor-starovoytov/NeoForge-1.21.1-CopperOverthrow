@@ -92,6 +92,22 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Tags.Items.RODS_BLAZE)
                 .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CROWBAR.get(), 1)
+                .pattern(" BB")
+                .pattern(" B ")
+                .pattern("CC ")
+                .define('B', Tags.Items.INGOTS_COPPER)
+                .define('C', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CROWBAR.get(), 1)
+                .pattern("BB ")
+                .pattern(" B ")
+                .pattern(" CC")
+                .define('B', Tags.Items.INGOTS_COPPER)
+                .define('C', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput, "copperoverthrow:copper_crowbar_alt");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_HANDSAW.get(), 1)
                 .pattern("  B")
                 .pattern(" BA")

@@ -17,6 +17,7 @@
   "item.copperoverthrow.copper_fill_bucket": "Brocha de relleno",
   "item.copperoverthrow.copper_glowing_goggles": "Gafas luminosas",
   "item.copperoverthrow.copper_exoskeleton": "Exoesqueleto de cobre",
+  "item.copperoverthrow.copper_crowbar": "Palanca de cobre",
 
   "block.copperoverthrow.hologram_block": "Bloque holográfico",
 
@@ -127,6 +128,7 @@
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Crea un§r §6círculo§r§e alrededor del primer punto que bordea el segundo§r",
   "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Crea una§r §6línea§r§e de bloques holográficos de un punto a otro§r",
   "tooltip.copperoverthrow.copper_fill_bucket.tooltip": "§e Rellena todos los§r §6Bloques holográficos§r§e conectados con bloques en la mano secundaria.\n Si el bloque en la mano secundaria es un bloque holográfico, el pincel§r §6ampliará§r§e los bloques holográficos en su lugar",
+  "tooltip.copperoverthrow.crowbar_item.tooltip": "§6 Multherramienta§r §e, ideal para romper cualquier bloque al construir§r",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Resonancia:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Tono:§r §bAgudo§r",
@@ -171,6 +173,8 @@
   "advancements.copperoverthrow.artist.description": "Conviértete en un artista constructor",
   "advancements.copperoverthrow.mining_set.title": "Hacia abajo",
   "advancements.copperoverthrow.mining_set.description": "Consigue lo esencial para minar en las profundidades.",
+  "advancements.copperoverthrow.builder_ready.title": "¡Construcción a punto!",
+  "advancements.copperoverthrow.builder_ready.description": "Consigue lo esencial para construir",
 
   "copperoverthrow.config.rain_drum_enable_notes": "Notas al tocar",
   "copperoverthrow.config.rain_drum_enable_notes.tooltip": "Determina si los tambores de lluvia emiten partículas al tocar una nota.\n§7Por defecto: Verdadero§r",

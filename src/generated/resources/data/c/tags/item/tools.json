@@ -2,6 +2,7 @@
   "values": [
     "#c:tools/catchers",
     "#c:tools/hammers",
+    "#c:tools/paxels",
     "#c:tools/builders"
   ]
 }

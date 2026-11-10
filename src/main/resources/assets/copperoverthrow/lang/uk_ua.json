@@ -17,6 +17,7 @@
   "item.copperoverthrow.copper_fill_bucket": "Пензель для заповнення",
   "item.copperoverthrow.copper_glowing_goggles": "Сяючі окуляри",
   "item.copperoverthrow.copper_exoskeleton": "Мідний екзоскелет",
+  "item.copperoverthrow.copper_crowbar": "Мідний лом",
 
   "block.copperoverthrow.hologram_block": "Голографічний блок",
 
@@ -114,6 +115,7 @@
   "copperoverthrow.attribute.night_vision": "Нічне бачення",
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7При розміщенні:§r",
+  "tooltip.copperoverthrow.crowbar_item.tooltip": "§6 Мультиінструмент§r §e, чудово підходить для руйнування будь-яких блоків під час будівництва§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7При використанні на блоці:§r",
   "tooltip.copperoverthrow.when_used_on_bee.tooltip": "§7При використанні на бджолі:§r",
   "tooltip.copperoverthrow.log_stripper_block.tooltip": "§e Знімає кору з колод зверху за допомогою§r §6Сокири§r\n§e Розпилює дошки на сходи та плити за допомогою§r §6Ножівки§r",
@@ -149,10 +151,8 @@
   "advancements.copperoverthrow.copper_ingot.description": "Виплав свій перший мідний злиток",
   "advancements.copperoverthrow.copper_scaffolding.title": "До самих небес",
   "advancements.copperoverthrow.copper_scaffolding.description": "Створи перші мідні риштовання",
-  "advancements.copperoverthrow.copper_chisel.title": "Каменяр?",
-  "advancements.copperoverthrow.copper_chisel.description": "З'єднай 2 мідні злитки з палицею",
-  "advancements.copperoverthrow.copper_trowel.title": "Хай живе рандом",
-  "advancements.copperoverthrow.copper_trowel.description": "Змайструй мідну кельму",
+  "advancements.copperoverthrow.builder_ready.title": "Будівельник готовий!",
+  "advancements.copperoverthrow.builder_ready.description": "Отримайте все необхідне для будівництва",
   "advancements.copperoverthrow.log_stripper.title": "Обожнюю обдирати...",
   "advancements.copperoverthrow.log_stripper.description": "Збережи верстат для обкорування колод",
   "advancements.copperoverthrow.copper_handsaw.title": "Дітям не іграшка",

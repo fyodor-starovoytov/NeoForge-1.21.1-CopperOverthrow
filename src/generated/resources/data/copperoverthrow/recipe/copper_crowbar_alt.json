@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "tag": "c:ingots/copper"
+    },
+    "C": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "BB ",
+    " B ",
+    " CC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "copperoverthrow:copper_crowbar"
+  }
+}

@@ -32,6 +32,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .addTag(ModTags.Items.C_TOOLS_BUILDERS)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS)
                 .addTag(ModTags.Items.C_TOOLS_SAWS)
+                .addTag(ModTags.Items.C_TOOLS_PAXELS)
                 .add(ModItems.CRASH_HELMET.get())
                 .add(ModItems.COPPER_GLOWING_GOGGLES.get())
                 .add(ModItems.COPPER_EXOSKELETON.get())
@@ -39,7 +40,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
 
         tag(ItemTags.MINING_ENCHANTABLE)
-                .addTag(ModTags.Items.C_TOOLS_HAMMERS);
+                .addTag(ModTags.Items.C_TOOLS_HAMMERS)
+                .addTag(ModTags.Items.C_TOOLS_PAXELS);
         tag(ModTags.Items.HAMMER_ENCHANTABLE)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS);
 
@@ -70,10 +72,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(Tags.Items.FOODS_COOKIE)
                 .add(ModItems.COPPER_COOKIE.get());
-
         tag(Tags.Items.TOOLS)
                 .addTag(ModTags.Items.C_TOOLS_CATCHERS)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS)
+                .addTag(ModTags.Items.C_TOOLS_PAXELS)
                 .addTag(ModTags.Items.C_TOOLS_BUILDERS);
 
         tag(ItemTags.BREAKS_DECORATED_POTS)
@@ -85,6 +87,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.BEE_CATCHER.get());
         tag(ModTags.Items.C_TOOLS_SAWS)
                 .add(ModItems.COPPER_HANDSAW.get());
+        tag(ModTags.Items.C_TOOLS_PAXELS)
+                .add(ModItems.COPPER_CROWBAR.get());
         tag(ModTags.Items.C_TOOLS_BUILDERS)
                 .add(ModItems.COPPER_TROWEL.get())
                 .add(ModItems.COPPER_CHISEL.get())

@@ -17,6 +17,7 @@
   "item.copperoverthrow.copper_fill_bucket": "Кисть для заполнения",
   "item.copperoverthrow.copper_glowing_goggles": "Светящиеся очки",
   "item.copperoverthrow.copper_exoskeleton": "Медный экзоскелет",
+  "item.copperoverthrow.copper_crowbar": "Медный лом",
 
   "block.copperoverthrow.hologram_block": "Голографический блок",
 
@@ -127,6 +128,7 @@
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Создаёт§r §6окружность§r§e вокруг первой точки, граничащую со второй§r",
   "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Создаёт§r §6линию§r§e из голографических блоков от одной точки до другой§r",
   "tooltip.copperoverthrow.copper_fill_bucket.tooltip": "§e Заполняет все соединенные§r §6Голографические блоки§r§e блоками из вспомогательной руки.\n Если блок во вспомогательной руке является голографическим блоком, кисть§r §6расширит§r§e голографические блоки",
+  "tooltip.copperoverthrow.crowbar_item.tooltip": "§6 Мультиинструмент§r §e, отлично подходит для разрушения любых блоков при строительстве§r",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Звучание:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Высота тона:§r §bВысокий§r",
@@ -149,10 +151,8 @@
   "advancements.copperoverthrow.copper_ingot.description": "Выплави свой первый медный слиток",
   "advancements.copperoverthrow.copper_scaffolding.title": "Дойти до небес",
   "advancements.copperoverthrow.copper_scaffolding.description": "Скрафти первые медные подмости",
-  "advancements.copperoverthrow.copper_chisel.title": "Камнерез?",
-  "advancements.copperoverthrow.copper_chisel.description": "Соедини 2 медных слитка с палкой",
-  "advancements.copperoverthrow.copper_trowel.title": "Да здравствует рандом",
-  "advancements.copperoverthrow.copper_trowel.description": "Скрафти медный мастерок",
+  "advancements.copperoverthrow.builder_ready.title": "Строитель готов!",
+  "advancements.copperoverthrow.builder_ready.description": "Получите всё необходимое для строительства",
   "advancements.copperoverthrow.log_stripper.title": "Люблю обдирать...",
   "advancements.copperoverthrow.log_stripper.description": "Собери станок для обдирки бревен",
   "advancements.copperoverthrow.copper_handsaw.title": "Детям не игрушка",

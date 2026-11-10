@@ -17,6 +17,7 @@
   "item.copperoverthrow.copper_fill_bucket": "Täyttösivellin",
   "item.copperoverthrow.copper_glowing_goggles": "Hohtavat suojalasit",
   "item.copperoverthrow.copper_exoskeleton": "Kuparinen eksoluuranko",
+  "item.copperoverthrow.copper_crowbar": "Kuparinen sorkkarauta",
 
   "block.copperoverthrow.hologram_block": "Hologrammikuutio",
 
@@ -127,6 +128,7 @@
   "tooltip.copperoverthrow.copper_sextant.tooltip": "§e Luo§r §6ympyrän§r§e ensimmäisen pisteen ympärille rajautuen toiseen§r",
   "tooltip.copperoverthrow.copper_long_ruler.tooltip": "§e Luo§r §6viivan§r§e hologrammikuutioita pisteestä toiseen§r",
   "tooltip.copperoverthrow.copper_fill_bucket.tooltip": "§e Täyttää kaikki yhdistetyt§r §6Hologrammikuutiot§r§e toisessa kädessä olevilla kuutioilla.\n Jos toisen käden kuutio on hologrammikuutio, harja§r §6laajentaa§r§e hologrammikuutioita",
+  "tooltip.copperoverthrow.crowbar_item.tooltip": "§6 Monitoimintatyökalu§r §e, sopii kaikkien mahdollisten kuutioiden rikkomiseen rakennettaessa§r",
 
   "tooltip.copperoverthrow.sounding.tooltip": "§7Kaiku:§r",
   "tooltip.copperoverthrow.high_pitch.tooltip": "§7Sävelkorkeus:§r §bKorkea§r",
@@ -149,10 +151,8 @@
   "advancements.copperoverthrow.copper_ingot.description": "Sulata itsellesi kupariharkko",
   "advancements.copperoverthrow.copper_scaffolding.title": "Kiipeä taivaisiin",
   "advancements.copperoverthrow.copper_scaffolding.description": "Rakenna ensimmäiset kuparitelineet",
-  "advancements.copperoverthrow.copper_chisel.title": "Kivenhakkaaja?",
-  "advancements.copperoverthrow.copper_chisel.description": "Yhdistä 2 kupariharkkoa keppiin",
-  "advancements.copperoverthrow.copper_trowel.title": "Sattuman varassa",
-  "advancements.copperoverthrow.copper_trowel.description": "Valmista kuparinen muurauskauha",
+  "advancements.copperoverthrow.builder_ready.title": "Rakentaja valmiina!",
+  "advancements.copperoverthrow.builder_ready.description": "Hanki oleelliset tarvikkeet rakentamiseen",
   "advancements.copperoverthrow.log_stripper.title": "Strippaaminen on kivaa...",
   "advancements.copperoverthrow.log_stripper.description": "Nikkaroi tukkikuorin",
   "advancements.copperoverthrow.copper_handsaw.title": "Ei perheen pienimmille",

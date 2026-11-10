@@ -38,6 +38,7 @@ public class ModTags {
         public static final TagKey<Item> C_TOOLS_SAWS = createTag("c", "tools/saws");
         public static final TagKey<Item> C_TOOLS_CATCHERS = createTag("c", "tools/catchers");
         public static final TagKey<Item> C_TOOLS_BUILDERS = createTag("c", "tools/builders");
+        public static final TagKey<Item> C_TOOLS_PAXELS = createTag("c", "tools/paxels");
 
         public static final TagKey<Item> C_COPPER_NUGGETS = createTag("c", "nuggets/copper");
 

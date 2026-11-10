@@ -76,9 +76,12 @@ public class ModItems {
             () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
                     .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 6f, -3.6f))));
 
+    public static final DeferredItem<CrowbarItem> COPPER_CROWBAR = ITEMS.register("copper_crowbar",
+            () -> new CrowbarItem(ModToolTiers.COPPER, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER_CROWBAR, 0f, -2.8f))));
+
     public static final DeferredItem<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
             () -> new HandsawItem(new Properties().durability(727).stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
-
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

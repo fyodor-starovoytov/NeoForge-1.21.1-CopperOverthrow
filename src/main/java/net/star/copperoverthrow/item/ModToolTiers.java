@@ -11,4 +11,7 @@ public class ModToolTiers {
     public static final Tier COPPER = new SimpleTier(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL,
             999, 4f, 3f, 12, () -> Ingredient.of(Items.COPPER_INGOT));
 
+    public static final Tier COPPER_CROWBAR = new SimpleTier(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL,
+            472, 3f, 3f, 12, () -> Ingredient.of(Items.COPPER_INGOT));
+
 }

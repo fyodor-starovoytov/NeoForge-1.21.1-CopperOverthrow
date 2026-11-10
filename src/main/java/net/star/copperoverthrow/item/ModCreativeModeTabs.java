@@ -34,6 +34,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COPPER_FILL_BUCKET);
 
                         output.accept(ModItems.COPPER_HAMMER);
+                        output.accept(ModItems.COPPER_CROWBAR);
                         output.accept(ModItems.COPPER_HANDSAW);
 
                         output.accept(ModItems.COPPER_GLOWING_GOGGLES);
