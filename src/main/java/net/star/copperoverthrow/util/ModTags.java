@@ -14,6 +14,7 @@ public class ModTags {
         public static final TagKey<Block> NEEDS_COPPER_TOOL = createTag(CopperOverthrow.MOD_ID ,"needs_copper_tool");
         public static final TagKey<Block> INCORRECT_FOR_COPPER_TOOL = createTag(CopperOverthrow.MOD_ID ,"incorrect_for_copper_tool");
         public static final TagKey<Block> MINEABLE_WITH_HAMMER = createTag(CopperOverthrow.MOD_ID ,"mineable_with_hammer");
+        public static final TagKey<Block> MINEABLE_WITH_CROWBAR = createTag(CopperOverthrow.MOD_ID ,"mineable_with_crowbar");
 
         public static final TagKey<Block> RAIN_DRUMS = createTag("c", "musical_blocks/rain_drums");
         public static final TagKey<Block> PLATES = createTag("c", "musical_blocks/plates");

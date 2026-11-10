@@ -107,6 +107,12 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE);
 
+        tag(ModTags.Blocks.MINEABLE_WITH_CROWBAR)
+                .addTag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .addTag(BlockTags.MINEABLE_WITH_AXE)
+                .addTag(BlockTags.MINEABLE_WITH_HOE)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE);
+
         tag(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL)
                 .addTag(BlockTags.INCORRECT_FOR_STONE_TOOL)
                 .remove(ModTags.Blocks.NEEDS_COPPER_TOOL);
