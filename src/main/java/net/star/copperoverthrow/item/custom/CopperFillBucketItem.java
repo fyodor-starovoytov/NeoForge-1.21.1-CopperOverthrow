@@ -127,7 +127,7 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         toBeDestroyed.addFirst(initialImmutable);
         visited.add(initialImmutable);
 
-        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.MEASURE_MAX_DISTANCE.get() && isHologramBlock){
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.MEASURE_MAX_DISTANCE.get() && isHologramBlock) {
             BlockPos comparable = toBeChecked.removeLast();
             for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, -r, -r), comparable.offset(r, r, r))) {
                 BlockState state = level.getBlockState(pos);
@@ -141,17 +141,35 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
             }
         }
 
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.MEASURE_MAX_DISTANCE.get() && !isHologramBlock) {
+            BlockPos comparable = toBeChecked.removeFirst();
 
-        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.MEASURE_MAX_DISTANCE.get() && !isHologramBlock){
-            BlockPos comparable = toBeChecked.removeLast();
-            for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, -r, -r), comparable.offset(r, 0, r))) {
-                BlockState state = level.getBlockState(pos);
-                BlockPos immutablePos = pos.immutable();
+            BlockPos below = comparable.below();
+            BlockState stateBelow = level.getBlockState(below);
 
-                if (state.canBeReplaced() && !visited.contains(immutablePos)) {
-                    toBeChecked.add(immutablePos);
-                    toBeDestroyed.add(immutablePos);
-                    visited.add(immutablePos);
+            if (stateBelow.canBeReplaced() && !visited.contains(below)) {
+                toBeChecked.addFirst(below);
+                toBeDestroyed.add(below);
+                visited.add(below);
+            } else {
+                BlockPos[] horizontalNeighbors = {
+                        comparable.north(),
+                        comparable.south(),
+                        comparable.east(),
+                        comparable.west()
+                };
+
+                for (BlockPos neighbor : horizontalNeighbors) {
+                    if (toBeDestroyed.size() >= ServerConfig.MEASURE_MAX_DISTANCE.get()) {
+                        break;
+                    }
+
+                    BlockState stateNeighbor = level.getBlockState(neighbor);
+                    if (stateNeighbor.canBeReplaced() && !visited.contains(neighbor)) {
+                        toBeChecked.add(neighbor);
+                        toBeDestroyed.add(neighbor);
+                        visited.add(neighbor);
+                    }
                 }
             }
         }
