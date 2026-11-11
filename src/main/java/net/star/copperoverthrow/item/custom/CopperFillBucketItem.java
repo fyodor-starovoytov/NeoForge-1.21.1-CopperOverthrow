@@ -2,6 +2,7 @@ package net.star.copperoverthrow.item.custom;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -41,7 +42,7 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         BlockState clickedBlock = level.getBlockState(pos);
         Player player = context.getPlayer();
 
-        if (player == null || !(clickedBlock.getBlock() instanceof HologramBlock)) {
+        if (player == null) {
             return InteractionResult.FAIL;
         }
 
@@ -60,7 +61,17 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
             return InteractionResult.SUCCESS;
         }
 
-        List<BlockPos> blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(pos, level));
+        List<BlockPos> blocksToBeFilled = new ArrayList<>();
+        if (!(clickedBlock.getBlock() instanceof HologramBlock)){
+            Direction dir = context.getClickedFace();
+            BlockPos newPos = pos.relative(dir);
+            blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(newPos, level, true));
+        }
+
+        if (clickedBlock.getBlock() instanceof HologramBlock){
+        blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(pos, level, true));
+        }
+
         ServerLevel serverLevel = (ServerLevel) level;
 
         for (BlockPos fillPos : blocksToBeFilled) {
@@ -103,7 +114,7 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         return InteractionResult.SUCCESS;
     }
 
-    public static List<BlockPos> getBlocksToBeFilled(BlockPos initalBlockPos, Level level) {
+    public static List<BlockPos> getBlocksToBeFilled(BlockPos initalBlockPos, Level level, boolean isHologramBlock) {
         List<BlockPos> toBeChecked = new ArrayList<>();
         List<BlockPos> toBeDestroyed = new ArrayList<>();
         Set<BlockPos> visited = new HashSet<>();
@@ -116,13 +127,28 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         toBeDestroyed.addFirst(initialImmutable);
         visited.add(initialImmutable);
 
-        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.MEASURE_MAX_DISTANCE.get()){
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.MEASURE_MAX_DISTANCE.get() && isHologramBlock){
             BlockPos comparable = toBeChecked.removeLast();
             for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, -r, -r), comparable.offset(r, r, r))) {
                 BlockState state = level.getBlockState(pos);
                 BlockPos immutablePos = pos.immutable();
 
                 if (state.is(targetBlock) && !visited.contains(immutablePos)) {
+                    toBeChecked.add(immutablePos);
+                    toBeDestroyed.add(immutablePos);
+                    visited.add(immutablePos);
+                }
+            }
+        }
+
+
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.MEASURE_MAX_DISTANCE.get() && !isHologramBlock){
+            BlockPos comparable = toBeChecked.removeLast();
+            for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, -r, -r), comparable.offset(r, 0, r))) {
+                BlockState state = level.getBlockState(pos);
+                BlockPos immutablePos = pos.immutable();
+
+                if (state.canBeReplaced() && !visited.contains(immutablePos)) {
                     toBeChecked.add(immutablePos);
                     toBeDestroyed.add(immutablePos);
                     visited.add(immutablePos);
