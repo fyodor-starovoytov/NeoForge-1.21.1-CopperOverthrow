@@ -949,7 +949,8 @@ public class ModBlocks {
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
         if (name.equals("copper_scaffolding") || name.equals("exposed_copper_scaffolding") || name.equals("weathered_copper_scaffolding")|| name.equals("oxidized_copper_scaffolding")
-        || name.equals("waxed_copper_scaffolding") || name.equals("waxed_exposed_copper_scaffolding") || name.equals("waxed_weathered_copper_scaffolding")|| name.equals("waxed_oxidized_copper_scaffolding")) {
+        || name.equals("waxed_copper_scaffolding") || name.equals("waxed_exposed_copper_scaffolding") || name.equals("waxed_weathered_copper_scaffolding")|| name.equals("waxed_oxidized_copper_scaffolding")
+        || name.equals("hologram_block") || name.equals("inverted_hologram_block")) {
             ModItems.ITEMS.register(name, () -> new ScaffoldingBlockItem(block.get(), new Item.Properties()));
         }
         else {
