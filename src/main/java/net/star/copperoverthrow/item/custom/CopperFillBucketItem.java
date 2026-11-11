@@ -65,7 +65,7 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         if (!(clickedBlock.getBlock() instanceof HologramBlock)){
             Direction dir = context.getClickedFace();
             BlockPos newPos = pos.relative(dir);
-            blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(newPos, level, true));
+            blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(newPos, level, false));
         }
 
         if (clickedBlock.getBlock() instanceof HologramBlock){
