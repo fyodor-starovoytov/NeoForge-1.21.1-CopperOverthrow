@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.Tags;
+import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModTags;
 
@@ -30,10 +31,10 @@ public class DoublePickaxesItem extends DiggerItem {
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
-        if (state.is(Tags.Blocks.STONES)) {
+        if (state.is(Tags.Blocks.STONES) && stack.get(ModDataComponents.IS_USED) != null) {
             return super.getDestroySpeed(stack, state) + 50.0f;
         }
-        return super.getDestroySpeed(stack, state) + -2.0f;
+        return super.getDestroySpeed(stack, state) + -1.3f;
     }
 
     @Override
@@ -41,12 +42,19 @@ public class DoublePickaxesItem extends DiggerItem {
         if (entity instanceof Player player) {
             ItemStack offhandStack = player.getItemInHand(InteractionHand.OFF_HAND);
 
+            if (isSelected && !offhandStack.isEmpty() && !offhandStack.is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT)) {
+                player.getInventory().setItem(Inventory.SLOT_OFFHAND, new ItemStack(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get()));
+                stack.set(ModDataComponents.IS_USED, null);
+            }
+
             if (isSelected && offhandStack.isEmpty()) {
                 player.getInventory().setItem(Inventory.SLOT_OFFHAND, new ItemStack(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get()));
+                stack.set(ModDataComponents.IS_USED, 1);
             }
 
             if (!isSelected && offhandStack.is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT)) {
                 player.getInventory().setItem(Inventory.SLOT_OFFHAND, ItemStack.EMPTY);
+                stack.set(ModDataComponents.IS_USED, null);
             }
         }
 
