@@ -25,7 +25,7 @@ public class ModItemProperties {
                 (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1f : 0f);
 
         ItemProperties.register(ModItems.COPPER_DOUBLE_PICKAXES.get(), ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "using_double_pickaxe"),
-                (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1f : 0f);
+                (stack, level, entity, seed) -> stack.get(ModDataComponents.IS_USED) != null ? 1f : 0f);
 
 
         ItemProperties.register(ModItems.COPPER_SEXTANT.get(), ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "using_tape"),
