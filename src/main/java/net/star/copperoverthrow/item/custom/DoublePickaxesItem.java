@@ -42,19 +42,20 @@ public class DoublePickaxesItem extends DiggerItem {
         if (entity instanceof Player player) {
             ItemStack offhandStack = player.getItemInHand(InteractionHand.OFF_HAND);
 
-            if (isSelected && !offhandStack.isEmpty() && !offhandStack.is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT)) {
-                player.getInventory().setItem(Inventory.SLOT_OFFHAND, new ItemStack(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get()));
+            if (isSelected && offhandStack.is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT)){
+                stack.set(ModDataComponents.IS_USED, 1);
+            }
+
+            if (!isSelected || !offhandStack.is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT)){
                 stack.set(ModDataComponents.IS_USED, null);
             }
 
             if (isSelected && offhandStack.isEmpty()) {
                 player.getInventory().setItem(Inventory.SLOT_OFFHAND, new ItemStack(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get()));
-                stack.set(ModDataComponents.IS_USED, 1);
             }
 
             if (!isSelected && offhandStack.is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT)) {
                 player.getInventory().setItem(Inventory.SLOT_OFFHAND, ItemStack.EMPTY);
-                stack.set(ModDataComponents.IS_USED, null);
             }
         }
 
