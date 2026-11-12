@@ -48,7 +48,7 @@ public class CopperOverthrow {
         modEventBus.addListener(this::addCreative);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
-        modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, ServerConfig.SPEC);
     }
 
 
