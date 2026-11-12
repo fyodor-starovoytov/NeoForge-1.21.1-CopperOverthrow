@@ -76,8 +76,15 @@ public class ModItems {
             () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
                     .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 6f, -3.6f))));
 
+    public static final DeferredItem<DoublePickaxesItem> COPPER_DOUBLE_PICKAXES = ITEMS.register("copper_double_pickaxes",
+            () -> new DoublePickaxesItem(ModToolTiers.COPPER, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 0f, -3.2f))));
+
+    public static final DeferredItem<Item> COPPER_DOUBLE_PICKAXES_LEFT = ITEMS.register("copper_double_pickaxes_left",
+            () -> new DoublePickaxesLeftItem(new Item.Properties().stacksTo(1)));
+
     public static final DeferredItem<CrowbarItem> COPPER_CROWBAR = ITEMS.register("copper_crowbar",
-            () -> new CrowbarItem(ModToolTiers.COPPER, new Item.Properties()
+            () -> new CrowbarItem(ModToolTiers.COPPER_CROWBAR, new Item.Properties()
                     .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER_CROWBAR, 0f, -2.8f))));
 
     public static final DeferredItem<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
