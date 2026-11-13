@@ -66,7 +66,7 @@ public class ModClientEvents {
     private static void applyVanillaSwingTransform(PoseStack poseStack, HumanoidArm arm, float swingProgress) {
         int side = (arm == HumanoidArm.RIGHT) ? 1 : -1;
 
-        float f = Mth.sin(swingProgress * swingProgress / 1.5f * (float) Math.PI);
+        float f = Mth.sin(swingProgress * swingProgress * (float) Math.PI);
         poseStack.mulPose(Axis.YP.rotationDegrees((float) side * (45.0F + f * -20.0F)));
 
         float f1 = Mth.sin(Mth.sqrt(swingProgress) * (float) Math.PI);
