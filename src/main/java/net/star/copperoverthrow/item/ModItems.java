@@ -81,7 +81,8 @@ public class ModItems {
                     .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 0f, -3.2f))));
 
     public static final DeferredItem<Item> COPPER_DOUBLE_PICKAXES_LEFT = ITEMS.register("copper_double_pickaxes_left",
-            () -> new DoublePickaxesLeftItem(new Item.Properties().stacksTo(1)));
+            () -> new DoublePickaxesLeftItem(ModToolTiers.COPPER, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 0f, -3.2f))));
 
     public static final DeferredItem<CrowbarItem> COPPER_CROWBAR = ITEMS.register("copper_crowbar",
             () -> new CrowbarItem(ModToolTiers.COPPER_CROWBAR, new Item.Properties()
