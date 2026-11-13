@@ -211,13 +211,6 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
                         poseStack.translate(0,  pushPull, 0.161);
                     }
-/*
-                    case  -> {
-                        poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
-                        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-                        poseStack.translate(0,  pushPull, 0.165);
-                    }
-*/
                 }
             }
             case WEST -> {

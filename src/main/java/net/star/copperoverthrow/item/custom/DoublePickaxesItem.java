@@ -6,6 +6,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
@@ -58,8 +59,6 @@ public class DoublePickaxesItem extends DiggerItem {
                 player.getInventory().setItem(Inventory.SLOT_OFFHAND, ItemStack.EMPTY);
             }
         }
-
-
     }
 
     @Override
