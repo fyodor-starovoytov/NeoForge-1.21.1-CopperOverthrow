@@ -33,45 +33,4 @@ public class ModClientEvents {
             event.registerItem(CustomSpyglassArmposeExtension.INSTANCE, ModItems.COPPER_SEXTANT.get());
             event.registerItem(CustomSpyglassArmposeExtension.INSTANCE, ModItems.COPPER_LONG_RULER.get());
         }
-
-    @SubscribeEvent
-    public static void onRenderHand(RenderHandEvent event) {
-        if (event.getHand() != InteractionHand.OFF_HAND) {
-            return;
-        }
-
-        LocalPlayer player = Minecraft.getInstance().player;
-        if (player == null) {
-            return;
-        }
-
-        if (player.swinging && player.swingingArm == InteractionHand.MAIN_HAND) {
-            ItemStack mainHandStack = player.getMainHandItem();
-            ItemStack offHandStack = event.getItemStack();
-
-            if (shouldDualSwing(mainHandStack, offHandStack)) {
-                float swingProgress = player.getAttackAnim(event.getPartialTick());
-
-                HumanoidArm offHandArm = player.getMainArm().getOpposite();
-
-                applyVanillaSwingTransform(event.getPoseStack(), offHandArm, swingProgress);
-            }
-        }
-    }
-
-    private static boolean shouldDualSwing(ItemStack mainHand, ItemStack offHand) {
-        return mainHand.is(ModItems.COPPER_DOUBLE_PICKAXES.get()) && offHand.is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get());
-    }
-
-    private static void applyVanillaSwingTransform(PoseStack poseStack, HumanoidArm arm, float swingProgress) {
-        int side = (arm == HumanoidArm.RIGHT) ? 1 : -1;
-
-        float f = Mth.sin(swingProgress * swingProgress * (float) Math.PI);
-        poseStack.mulPose(Axis.YP.rotationDegrees((float) side * (45.0F + f * -20.0F)));
-
-        float f1 = Mth.sin(Mth.sqrt(swingProgress) * (float) Math.PI);
-        poseStack.mulPose(Axis.ZP.rotationDegrees((float) side * f1 * -10));
-        poseStack.mulPose(Axis.XP.rotationDegrees(f1 * -60.0F));
-        poseStack.mulPose(Axis.YP.rotationDegrees((float) side * 10.0F));
-    }
 }

@@ -1,5 +1,6 @@
 package net.star.copperoverthrow.item.custom;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
@@ -61,6 +62,26 @@ public class DoublePickaxesItem extends DiggerItem {
         }
     }
 
+
+    @Override
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity, InteractionHand hand) {
+        if (hand == InteractionHand.MAIN_HAND) {
+            Boolean swungMainLast = stack.get(ModDataComponents.LAST_RIGHT_SWUNG);
+            Minecraft.getInstance().gui.getChat().addMessage(net.minecraft.network.chat.Component.literal(String.valueOf(swungMainLast)));
+
+            if (Boolean.TRUE.equals(swungMainLast)) {
+                stack.remove(ModDataComponents.LAST_RIGHT_SWUNG);
+
+                if (!entity.level().isClientSide()) {
+                    entity.swing(InteractionHand.OFF_HAND, true);
+                }
+                return true;
+            } else {
+                stack.set(ModDataComponents.LAST_RIGHT_SWUNG, true);
+            }
+        }
+        return super.onEntitySwing(stack, entity, hand);
+    }
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
@@ -73,4 +94,5 @@ public class DoublePickaxesItem extends DiggerItem {
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
+
 }

@@ -34,11 +34,11 @@ public class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<BlockPos>>> TEMPORAL_BLOCKPOS_LIST =
             register("temporal_blockpos_list",builder -> builder.persistent(BlockPos.CODEC.listOf()));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<BlockPos>>> TEMPORAL_SKETCH_BLOCKPOS_LIST =
-            register("temporal_sketch_blockpos_list",builder -> builder.persistent(BlockPos.CODEC.listOf()));
-
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> IS_USED =
             register("is_used",builder -> builder.persistent(Codec.INT));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> LAST_RIGHT_SWUNG =
+            register("last_right_swung",builder -> builder.persistent(Codec.BOOL));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> TEMPORARY_LAST_REGISTERED_BLOCK =
             register("last_registered_block",builder -> builder.persistent(BlockPos.CODEC));
