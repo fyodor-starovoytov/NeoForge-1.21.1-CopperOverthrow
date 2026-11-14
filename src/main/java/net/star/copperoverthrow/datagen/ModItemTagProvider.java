@@ -59,11 +59,15 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.COPPER_GLOWING_GOGGLES.get())
                 .add(ModItems.COPPER_EXOSKELETON.get())
                 .add(ModItems.COPPER_STEPPER_BOOTS.get())
-                .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
+                .add(ModItems.COPPER_STEPPER_LEGGINGS.get())
+                .add(ModItems.COPPER_DOUBLE_PICKAXES.get())
+                .add(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get());
 
         tag(ItemTags.MINING_ENCHANTABLE)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS)
-                .addTag(ModTags.Items.C_TOOLS_PAXELS);
+                .addTag(ModTags.Items.C_TOOLS_PAXELS)
+                .add(ModItems.COPPER_DOUBLE_PICKAXES.get())
+                .add(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get());
         tag(ModTags.Items.HAMMER_ENCHANTABLE)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS);
 
@@ -111,6 +115,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.COPPER_HANDSAW.get());
         tag(ModTags.Items.C_TOOLS_PAXELS)
                 .add(ModItems.COPPER_CROWBAR.get());
+        tag(ItemTags.PICKAXES)
+                .add(ModItems.COPPER_DOUBLE_PICKAXES.get())
+                .add(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get());
         tag(ModTags.Items.C_TOOLS_BUILDERS)
                 .add(ModItems.COPPER_TROWEL.get())
                 .add(ModItems.COPPER_CHISEL.get())

@@ -7,11 +7,15 @@
     },
     "B": {
       "item": "minecraft:stick"
+    },
+    "C": {
+      "tag": "c:storage_blocks/copper"
     }
   },
   "pattern": [
-    "AB ",
-    "AAB"
+    "CAC",
+    "B B",
+    "B B"
   ],
   "result": {
     "count": 1,

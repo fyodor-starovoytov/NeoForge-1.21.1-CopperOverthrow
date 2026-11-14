@@ -95,7 +95,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.WAXED_WEATHERED_COPPER_SCAFFOLDING.get())
                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_SCAFFOLDING.get());
 
-
         tag(ModTags.Blocks.NEEDS_COPPER_TOOL)
                 .addTag(BlockTags.NEEDS_STONE_TOOL)
                 .addTag(BlockTags.STONE_BRICKS)

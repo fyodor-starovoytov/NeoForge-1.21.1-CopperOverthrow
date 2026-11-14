@@ -29,19 +29,19 @@ public class ModItems {
                     new Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> COPPER_SEXTANT = ITEMS.register("copper_sextant",
-            () -> new CopperTapeMeasureItem(new Properties().durability(256).stacksTo(1), ModBlocks.HOLOGRAM_BLOCK.get()));
+            () -> new CopperTapeMeasureItem(new Properties().durability(472).stacksTo(1), ModBlocks.HOLOGRAM_BLOCK.get()));
 
     public static final DeferredItem<Item> COPPER_FILL_BUCKET = ITEMS.register("copper_fill_bucket",
             () -> new CopperFillBucketItem(new Properties().durability(727).stacksTo(1)));
 
     public static final DeferredItem<Item> COPPER_LONG_RULER = ITEMS.register("copper_long_ruler",
-            () -> new CopperLongRuler(new Properties().durability(256).stacksTo(1), ModBlocks.HOLOGRAM_BLOCK.get()));
+            () -> new CopperLongRuler(new Properties().durability(472).stacksTo(1), ModBlocks.HOLOGRAM_BLOCK.get()));
 
     public static final DeferredItem<Item> COPPER_CHISEL = ITEMS.register("copper_chisel",
-            () -> new CopperChiselItem(new Properties().durability(256).stacksTo(1)));
+            () -> new CopperChiselItem(new Properties().durability(472).stacksTo(1)));
 
     public static final DeferredItem<Item> COPPER_TROWEL = ITEMS.register("copper_trowel",
-            () -> new CopperTrowelItem(new Properties().durability(256).stacksTo(1)));
+            () -> new CopperTrowelItem(new Properties().durability(472).stacksTo(1)));
 
     public static final DeferredItem<Item> COPPER_COOKIE = ITEMS.register("copper_cookie",
             () -> new Item(new Properties().food(new FoodProperties.Builder()
@@ -73,20 +73,20 @@ public class ModItems {
                     new Properties().durability(ArmorItem.Type.HELMET.getDurability(10))));
 
     public static final DeferredItem<HammerItem> COPPER_HAMMER = ITEMS.register("copper_hammer",
-            () -> new HammerItem(ModToolTiers.COPPER, new Item.Properties()
-                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 6f, -3.6f))));
+            () -> new HammerItem(ModToolTiers.COPPER_REINFORCED, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER_REINFORCED, 6f, -3.6f))));
 
     public static final DeferredItem<DoublePickaxesItem> COPPER_DOUBLE_PICKAXES = ITEMS.register("copper_double_pickaxes",
-            () -> new DoublePickaxesItem(ModToolTiers.COPPER, new Item.Properties()
-                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 0f, -3.2f))));
+            () -> new DoublePickaxesItem(ModToolTiers.COPPER_MEDIUM, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER_MEDIUM, 0f, -3.2f))));
 
     public static final DeferredItem<Item> COPPER_DOUBLE_PICKAXES_LEFT = ITEMS.register("copper_double_pickaxes_left",
-            () -> new DoublePickaxesLeftItem(ModToolTiers.COPPER, new Item.Properties()
-                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER, 0f, -3.2f))));
+            () -> new DoublePickaxesLeftItem(ModToolTiers.COPPER_MEDIUM, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER_MEDIUM, 0f, -3.2f))));
 
     public static final DeferredItem<CrowbarItem> COPPER_CROWBAR = ITEMS.register("copper_crowbar",
-            () -> new CrowbarItem(ModToolTiers.COPPER_CROWBAR, new Item.Properties()
-                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER_CROWBAR, 0f, -2.8f))));
+            () -> new CrowbarItem(ModToolTiers.COPPER_WEAK, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.COPPER_WEAK, 0f, -2.8f))));
 
     public static final DeferredItem<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
             () -> new HandsawItem(new Properties().durability(727).stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
