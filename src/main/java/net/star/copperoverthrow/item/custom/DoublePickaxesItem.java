@@ -34,7 +34,11 @@ public class DoublePickaxesItem extends DiggerItem {
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
-        if ((state.is(Tags.Blocks.STONES) || (state.is(Tags.Blocks.COBBLESTONES))) && stack.get(ModDataComponents.IS_USED) != null) {
+        if ((state.is(Tags.Blocks.STONES)
+                || (state.is(Tags.Blocks.COBBLESTONES)
+                || (state.is(Tags.Blocks.END_STONES)
+                || (state.is(Tags.Blocks.NETHERRACKS)))))
+                && stack.get(ModDataComponents.IS_USED) != null) {
             return super.getDestroySpeed(stack, state) * 16;
         }
         return super.getDestroySpeed(stack, state) / 2;
