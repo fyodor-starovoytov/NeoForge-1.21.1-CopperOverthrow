@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class DoublePickaxesItem extends DiggerItem {
+
     public DoublePickaxesItem(Tier tier, Properties properties) {
         super(tier, BlockTags.MINEABLE_WITH_PICKAXE, properties);
     }
@@ -62,26 +63,11 @@ public class DoublePickaxesItem extends DiggerItem {
         }
     }
 
-
     @Override
-    public boolean onEntitySwing(ItemStack stack, LivingEntity entity, InteractionHand hand) {
-        if (hand == InteractionHand.MAIN_HAND) {
-            Boolean swungMainLast = stack.get(ModDataComponents.LAST_RIGHT_SWUNG);
-            Minecraft.getInstance().gui.getChat().addMessage(net.minecraft.network.chat.Component.literal(String.valueOf(swungMainLast)));
-
-            if (Boolean.TRUE.equals(swungMainLast)) {
-                stack.remove(ModDataComponents.LAST_RIGHT_SWUNG);
-
-                if (!entity.level().isClientSide()) {
-                    entity.swing(InteractionHand.OFF_HAND, true);
-                }
-                return true;
-            } else {
-                stack.set(ModDataComponents.LAST_RIGHT_SWUNG, true);
-            }
-        }
-        return super.onEntitySwing(stack, entity, hand);
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return oldStack.get(ModDataComponents.IS_USED) != null ? false : super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
     }
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
