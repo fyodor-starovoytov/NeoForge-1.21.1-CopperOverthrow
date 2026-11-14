@@ -44,6 +44,9 @@ public class ModTags {
 
         public static final TagKey<Item> HAMMER_ENCHANTABLE = createTag("c", "hammer/enchantable");
 
+        //COMPAT TAGS
+        public static final TagKey<Item> CONNECTIBLE_CHAINS_HANGABLE_ITEMS = createTag("connectiblechains", "hangable_items");
+
 
         private static TagKey<Item> createTag(String namespace, String path){
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(namespace, path));

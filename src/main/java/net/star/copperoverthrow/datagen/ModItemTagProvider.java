@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModTags;
 import org.jetbrains.annotations.Nullable;
@@ -27,6 +28,27 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(ModTags.Items.C_COPPER_NUGGETS)
                 .add(ModItems.COPPER_NUGGET.get());
+
+        tag(ModTags.Items.CONNECTIBLE_CHAINS_HANGABLE_ITEMS)
+                 .add(ModBlocks.COPPER_LANTERN.get().asItem())
+                 .add(ModBlocks.EXPOSED_COPPER_LANTERN.get().asItem())
+                 .add(ModBlocks.WEATHERED_COPPER_LANTERN.get().asItem())
+                 .add(ModBlocks.OXIDIZED_COPPER_LANTERN.get().asItem())
+                 .add(ModBlocks.WAXED_COPPER_LANTERN.get().asItem())
+                 .add(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get().asItem())
+                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get().asItem())
+                 .add(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get().asItem());
+
+        tag(Tags.Items.CHAINS)
+                .add(ModBlocks.COPPER_CHAIN.get().asItem())
+                .add(ModBlocks.WEATHERED_COPPER_CHAIN.get().asItem())
+                .add(ModBlocks.EXPOSED_COPPER_CHAIN.get().asItem())
+                .add(ModBlocks.OXIDIZED_COPPER_CHAIN.get().asItem())
+                .add(ModBlocks.WAXED_COPPER_CHAIN.get().asItem())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get().asItem())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get().asItem())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get().asItem());
+
 
         tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .addTag(ModTags.Items.C_TOOLS_BUILDERS)
