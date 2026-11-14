@@ -21,7 +21,7 @@ public class ModCreativeModeTabs {
     public static final Supplier<CreativeModeTab> COPPEROVERTHROW_ITEMS_TAB = CREATIVE_MODE_TAB.register("copperoverthrow_items_tab",
             () -> CreativeModeTab.builder()
 
-                    .icon(() -> new ItemStack(ModItems.COPPER_HAMMER.get()))
+                    .icon(() -> new ItemStack(ModItems.COPPER_SEXTANT.get()))
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_items"))
                     .displayItems((itemDisplayParameters, output) -> {
 
@@ -55,7 +55,7 @@ public class ModCreativeModeTabs {
     public static final Supplier<CreativeModeTab> COPPEROVERTHROW_BLOCK_TAB = CREATIVE_MODE_TAB.register("copperoverthrow_blocks_tab",
             () -> CreativeModeTab.builder()
 
-                    .icon(() -> new ItemStack(ModBlocks.TAMTAM.get()))
+                    .icon(() -> new ItemStack(ModBlocks.COPPER_SCAFFOLDING.get()))
 
                     .withTabsBefore(ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "copperoverthrow_items_tab"))
                     .title(Component.translatable("creativetab.copperoverthrow.copperoverthrow_blocks"))
