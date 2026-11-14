@@ -15,6 +15,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModTags;
 
@@ -34,7 +35,7 @@ public class DoublePickaxesLeftItem extends DiggerItem {
                 boolean isOffhand = (slotId == Inventory.SLOT_OFFHAND);
                 ItemStack mainHandStack = player.getItemInHand(InteractionHand.MAIN_HAND);
 
-                if (!mainHandStack.is(ModItems.COPPER_DOUBLE_PICKAXES.get())){
+                if (!mainHandStack.is(ModItems.COPPER_DOUBLE_PICKAXES.get()) || player.getMainHandItem().get(ModDataComponents.IS_USED) == null){
                     stack.setCount(0);
                 }
 
