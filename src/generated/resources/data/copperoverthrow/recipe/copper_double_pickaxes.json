@@ -13,9 +13,9 @@
     }
   },
   "pattern": [
-    "CAC",
-    "B B",
-    "B B"
+    "ACA",
+    " B ",
+    " B "
   ],
   "result": {
     "count": 1,

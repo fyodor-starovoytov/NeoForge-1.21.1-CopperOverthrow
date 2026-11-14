@@ -1,6 +1,8 @@
 {
   "values": [
     "#c:tools/hammers",
-    "#c:tools/paxels"
+    "#c:tools/paxels",
+    "copperoverthrow:copper_double_pickaxes",
+    "copperoverthrow:copper_double_pickaxes_left"
   ]
 }
