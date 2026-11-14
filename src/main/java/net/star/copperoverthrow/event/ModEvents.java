@@ -13,6 +13,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -24,6 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -198,6 +200,18 @@ public class ModEvents {
                     event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide).result());
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onDoublePickaxeLeftDrop(EntityJoinLevelEvent event){
+        if (event.getLevel().isClientSide() || !(event.getEntity() instanceof ItemEntity itemEntity)) {
+            return;
+        }
+
+        if (itemEntity.getItem().is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get())){
+            event.setCanceled(true);
+            itemEntity.discard();
         }
     }
 
