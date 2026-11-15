@@ -70,18 +70,4 @@ public class DoublePickaxesItem extends DiggerItem {
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return oldStack.get(ModDataComponents.IS_USED) != null ? false : super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
     }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        if (Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
-            tooltipComponents.add(Component.empty());
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.crowbar_item.tooltip"));
-        } else {
-            tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
-        }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-    }
-
 }
