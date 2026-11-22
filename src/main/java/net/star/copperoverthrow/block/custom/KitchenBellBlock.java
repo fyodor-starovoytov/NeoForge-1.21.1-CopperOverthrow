@@ -33,7 +33,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.KitchenBellBlockEntity;
 import net.star.copperoverthrow.util.ModBlockModifiers;
@@ -84,7 +84,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
                 && !(player.getOffhandItem().getItem() instanceof HoneycombItem)) {
             blockEntity.startSwing(hit.getDirection());
 
-            float finalVolume = (float) (ServerConfig.DESK_BELL_VOLUME_RAIDUS.get() * 1);
+            float finalVolume = (float) (CommonConfig.DESK_BELL_VOLUME_RAIDUS.get() * 1);
             level.playSound(null,
                     pos,
                     PRESS_SOUND.get(),
@@ -128,7 +128,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
 
     private float jammed(int press_ticks){
         float chanceToBeJammed = ((float) press_ticks) / 100 / 5;
-        if (Math.random() < chanceToBeJammed && ServerConfig.JAMMING.get()){
+        if (Math.random() < chanceToBeJammed && CommonConfig.JAMMING.get()){
             return (float) 200 / press_ticks;
         }
         return 0;

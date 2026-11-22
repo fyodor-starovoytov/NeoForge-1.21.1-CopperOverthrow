@@ -3,7 +3,6 @@ package net.star.copperoverthrow.item.armor;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -13,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.common.ForgeMod;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 
 public class StepperLeggingsArmorItem extends ArmorItem {
     public StepperLeggingsArmorItem(ArmorMaterial material, Type type, Properties properties) {
@@ -31,7 +30,7 @@ public class StepperLeggingsArmorItem extends ArmorItem {
                     Attributes.MOVEMENT_SPEED,
                     new AttributeModifier(
                             "Stepper movement speed",
-                            ServerConfig.STEPPER_LEGGINGS_SPEED_BOOST.get(),
+                            CommonConfig.STEPPER_LEGGINGS_SPEED_BOOST.get(),
                             AttributeModifier.Operation.ADDITION
                     )
             );
@@ -40,7 +39,7 @@ public class StepperLeggingsArmorItem extends ArmorItem {
                     ForgeMod.SWIM_SPEED.get(),
                     new AttributeModifier(
                             "Stepper swim boost",
-                            ServerConfig.STEPPER_LEGGINGS_WATER_MOBILITY.get(),
+                            CommonConfig.STEPPER_LEGGINGS_WATER_MOBILITY.get(),
                             AttributeModifier.Operation.ADDITION
                     )
             );

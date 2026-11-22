@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.common.ForgeMod;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
 
 public class StepperBootsArmorItem extends ArmorItem {
@@ -30,7 +30,7 @@ public class StepperBootsArmorItem extends ArmorItem {
                     ForgeMod.STEP_HEIGHT_ADDITION.get(),
                     new AttributeModifier(
                             "Stepper step-height",
-                            ServerConfig.STEPPER_BOOTS_STEP_HEIGHT.get(),
+                            CommonConfig.STEPPER_BOOTS_STEP_HEIGHT.get(),
                             AttributeModifier.Operation.ADDITION
                     )
             );
@@ -39,7 +39,7 @@ public class StepperBootsArmorItem extends ArmorItem {
                     ModAttributes.SAFE_FALL_DISTANCE.get(),
                     new AttributeModifier(
                             "Stepper safe fall distance",
-                            ServerConfig.STEPPER_BOOTS_SAFE_FALL_DISTANCE.get(),
+                            CommonConfig.STEPPER_BOOTS_SAFE_FALL_DISTANCE.get(),
                             AttributeModifier.Operation.ADDITION
                     )
             );

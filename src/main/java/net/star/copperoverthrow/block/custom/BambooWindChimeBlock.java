@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.BambooWindChimeBlockEntity;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -72,10 +72,10 @@ public class BambooWindChimeBlock extends AbstractWindChimeBlock {
     private boolean isBlockObstructed(BlockPos pos, Level level){
 
         Vec3 vec = Vec3.atCenterOf(pos);
-        Vec3 vecEast = Vec3.atCenterOf(pos.east(ServerConfig.CHIME_CHECK_RANGE.get()));
-        Vec3 vecSouth = Vec3.atCenterOf(pos.east(ServerConfig.CHIME_CHECK_RANGE.get()));
-        Vec3 vecWest = Vec3.atCenterOf(pos.east(ServerConfig.CHIME_CHECK_RANGE.get()));
-        Vec3 vecNorth = Vec3.atCenterOf(pos.east(ServerConfig.CHIME_CHECK_RANGE.get()));
+        Vec3 vecEast = Vec3.atCenterOf(pos.east(CommonConfig.CHIME_CHECK_RANGE.get()));
+        Vec3 vecSouth = Vec3.atCenterOf(pos.east(CommonConfig.CHIME_CHECK_RANGE.get()));
+        Vec3 vecWest = Vec3.atCenterOf(pos.east(CommonConfig.CHIME_CHECK_RANGE.get()));
+        Vec3 vecNorth = Vec3.atCenterOf(pos.east(CommonConfig.CHIME_CHECK_RANGE.get()));
 
         ClipContext contextEast = new ClipContext(
                 vec, vecEast,

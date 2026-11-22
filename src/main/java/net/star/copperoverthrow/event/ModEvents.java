@@ -28,8 +28,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.CopperOverthrow;
-import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
 import net.star.copperoverthrow.block.custom.MultiBlockTallDecoration;
 import net.star.copperoverthrow.block.custom.TamTamBlock;
@@ -51,7 +51,7 @@ public class ModEvents {
         if (player.getItemBySlot(EquipmentSlot.CHEST).is(ModItems.COPPER_EXOSKELETON.get())) {
 
             float originalSpeed = event.getOriginalSpeed();
-            float bonus = ServerConfig.EXOSKELETON_BLOCK_BREAK_SPEED.get().floatValue();
+            float bonus = CommonConfig.EXOSKELETON_BLOCK_BREAK_SPEED.get().floatValue();
 
             event.setNewSpeed(originalSpeed + bonus);
         }
@@ -64,7 +64,7 @@ public class ModEvents {
         if (entity.getItemBySlot(EquipmentSlot.FEET).is(ModItems.COPPER_STEPPER_BOOTS.get())) {
 
             float currentFallDistance = event.getDistance();
-            float safeDistanceBonus = ServerConfig.STEPPER_BOOTS_SAFE_FALL_DISTANCE.get().floatValue();
+            float safeDistanceBonus = CommonConfig.STEPPER_BOOTS_SAFE_FALL_DISTANCE.get().floatValue();
 
             float newFallDistance = Math.max(0.0F, currentFallDistance - safeDistanceBonus);
 

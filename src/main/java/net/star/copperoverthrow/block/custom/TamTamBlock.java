@@ -35,7 +35,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ToolAction;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.block.entity.custom.TamTamBlockEntity;
@@ -242,8 +242,8 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
 
     @Override
     public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        if (Math.random()<ServerConfig.TAMTAM_FULL_MOON_VOLUME_CHANCE.get() && level.getMoonPhase() == 0 && level.isNight()){
-            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, ServerConfig.TAMTAM_FULL_MOON_VOLUME_RADIUS.get(), 1F);
+        if (Math.random()< CommonConfig.TAMTAM_FULL_MOON_VOLUME_CHANCE.get() && level.getMoonPhase() == 0 && level.isNight()){
+            level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, CommonConfig.TAMTAM_FULL_MOON_VOLUME_RADIUS.get(), 1F);
         }
         this.randomTick(state, level, pos, random);
     }
@@ -272,7 +272,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         };
         if (!level.isClientSide && level.getBlockEntity(mainTopPos) instanceof TamTamBlockEntity blockEntity && !blockEntity.swinging && isProperHit(state, direction) && player.getMainHandItem().isEmpty()) {
             blockEntity.startSwing(hit.getDirection());
-            playSound(level, pos, ServerConfig.TAMTAM_BASIC_VOLUME_RADIUS.get().floatValue());
+            playSound(level, pos, CommonConfig.TAMTAM_BASIC_VOLUME_RADIUS.get().floatValue());
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
@@ -287,7 +287,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
             if (projectile.mayInteract(level, pos)
                     && projectile.mayInteract(level, pos)
                     && projectile.getDeltaMovement().length() > 0.9) {
-                float finalVolume = (float) (ServerConfig.TAMTAM_BASIC_VOLUME_RADIUS.get() * 0.2 * projectile.getDeltaMovement().length());
+                float finalVolume = (float) (CommonConfig.TAMTAM_BASIC_VOLUME_RADIUS.get() * 0.2 * projectile.getDeltaMovement().length());
                 blockEntity.startSwing(hit.getDirection());
                 playSound(level, pos, finalVolume);
             }

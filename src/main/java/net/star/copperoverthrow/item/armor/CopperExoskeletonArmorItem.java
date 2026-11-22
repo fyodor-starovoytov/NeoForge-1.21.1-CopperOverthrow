@@ -13,7 +13,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.common.ForgeMod;
 import net.star.copperoverthrow.CopperOverthrow;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
 import net.star.copperoverthrow.item.armor.client.model.CopperExoskeletonModel;
 import net.star.copperoverthrow.item.armor.client.provider.ArmorModelProvider;
@@ -48,7 +48,7 @@ public class CopperExoskeletonArmorItem extends AbstractExtendedArmorItem {
                     ForgeMod.BLOCK_REACH.get(),
                     new AttributeModifier(
                             "Exoskeleton reach",
-                            ServerConfig.EXOSKELETON_REACH.get(),
+                            CommonConfig.EXOSKELETON_REACH.get(),
                             AttributeModifier.Operation.ADDITION
                     )
             );
@@ -57,7 +57,7 @@ public class CopperExoskeletonArmorItem extends AbstractExtendedArmorItem {
                     ModAttributes.BREAK_SPEED.get(),
                     new AttributeModifier(
                             "Exoskeleton breaking speed",
-                            ServerConfig.EXOSKELETON_BLOCK_BREAK_SPEED.get(),
+                            CommonConfig.EXOSKELETON_BLOCK_BREAK_SPEED.get(),
                             AttributeModifier.Operation.ADDITION
                     )
             );

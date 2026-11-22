@@ -28,7 +28,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolAction;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -55,7 +55,7 @@ public class HandsawItem extends ShearsItem {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return ServerConfig.HANDSAW_USE_TIME.get();
+        return CommonConfig.HANDSAW_USE_TIME.get();
     }
 
     @Override
@@ -90,9 +90,9 @@ public class HandsawItem extends ShearsItem {
                 boolean flag = i % 5 == 0;
 
                 if (flag && level.isClientSide) {
-                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, true);
-                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, false);
-                    level.playLocalSound(pos, ModSounds.HANDSAW_USE.get(), SoundSource.PLAYERS, 0.1F, (float) ServerConfig.HANDSAW_USE_TIME.get() / remainingUseDuration*2.2F + 0.1f, false);
+                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), CommonConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, true);
+                    this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), CommonConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, false);
+                    level.playLocalSound(pos, ModSounds.HANDSAW_USE.get(), SoundSource.PLAYERS, 0.1F, (float) CommonConfig.HANDSAW_USE_TIME.get() / remainingUseDuration*2.2F + 0.1f, false);
                     livingEntity.swing(player.getUsedItemHand(), false);
                 }
                 return;
@@ -185,7 +185,7 @@ public class HandsawItem extends ShearsItem {
         toBeDestroyed.add(0, initialImmutable);
         visited.add(initialImmutable);
 
-        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.HANDSAW_MAX_DESTROYED_BLOCKS.get()){
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < CommonConfig.HANDSAW_MAX_DESTROYED_BLOCKS.get()){
             BlockPos comparable = toBeChecked.remove(toBeChecked.size() - 1);
             for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, 0, -r), comparable.offset(r, r, r))) {
                 BlockState state = level.getBlockState(pos);

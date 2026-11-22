@@ -17,14 +17,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.block.custom.HologramBlock;
 import net.star.copperoverthrow.event.CustomSpyglassArmposeExtension;
 import net.star.copperoverthrow.item.ModItems;
@@ -188,7 +186,7 @@ public class CopperLongRuler extends AbstractRepairableCopperItem {
     public static List<BlockPos> getVector(BlockPos initial, BlockPos secondary) {
         List<BlockPos> vectorBlocks = new ArrayList<>();
 
-        if (initial.distSqr(secondary) > ServerConfig.MEASURE_MAX_DISTANCE.get() * ServerConfig.MEASURE_MAX_DISTANCE.get()) {
+        if (initial.distSqr(secondary) > CommonConfig.MEASURE_MAX_DISTANCE.get() * CommonConfig.MEASURE_MAX_DISTANCE.get()) {
             return vectorBlocks;
         }
 

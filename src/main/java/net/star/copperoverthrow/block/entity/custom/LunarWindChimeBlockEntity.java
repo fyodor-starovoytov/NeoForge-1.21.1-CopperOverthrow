@@ -10,7 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 import net.star.copperoverthrow.sound.ModSounds;
 
@@ -126,8 +126,8 @@ public class LunarWindChimeBlockEntity extends BlockEntity {
         if (!level.isClientSide) {
 
             if (blockEntity.willDoIdleSounds &&
-                    (level.random.nextFloat() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() / 2
-                            || (level.getMoonPhase() == 0 && level.random.nextFloat() < ServerConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get()))) {
+                    (level.random.nextFloat() < CommonConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get() / 2
+                            || (level.getMoonPhase() == 0 && level.random.nextFloat() < CommonConfig.WIND_CHIME_IDLE_SOUND_CHANCE.get()))) {
                 level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, (float) blockEntity.volume, 1);
             }
 

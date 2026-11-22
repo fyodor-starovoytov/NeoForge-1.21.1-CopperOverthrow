@@ -12,7 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.star.copperoverthrow.CopperOverthrow;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.block.entity.custom.BambooWindChimeBlockEntity;
 import net.star.copperoverthrow.client.BambooWindChimeModel;
 
@@ -75,8 +75,8 @@ public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindCh
         if (blockEntity.swinging) {
             float swingTime = (float) blockEntity.ticks + partialTick;
 
-            float xSign = Math.max(Math.min((float) blockEntity.xMotion, (float) Math.toRadians(ServerConfig.WIND_CHIME_MAX_ROTATION.get())), (float) -Math.toRadians(ServerConfig.WIND_CHIME_MAX_ROTATION.get()));
-            float zSign = Math.max(Math.min((float) blockEntity.zMotion, (float) Math.toRadians(ServerConfig.WIND_CHIME_MAX_ROTATION.get())), (float) -Math.toRadians(ServerConfig.WIND_CHIME_MAX_ROTATION.get()));
+            float xSign = Math.max(Math.min((float) blockEntity.xMotion, (float) Math.toRadians(CommonConfig.WIND_CHIME_MAX_ROTATION.get())), (float) -Math.toRadians(CommonConfig.WIND_CHIME_MAX_ROTATION.get()));
+            float zSign = Math.max(Math.min((float) blockEntity.zMotion, (float) Math.toRadians(CommonConfig.WIND_CHIME_MAX_ROTATION.get())), (float) -Math.toRadians(CommonConfig.WIND_CHIME_MAX_ROTATION.get()));
 
             rotateTubesActive(swingTime, zSign, xSign,
                     (float) blockEntity.randomX,

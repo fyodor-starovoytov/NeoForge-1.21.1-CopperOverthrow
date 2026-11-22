@@ -11,8 +11,8 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.CopperOverthrow;
-import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
 import net.star.copperoverthrow.item.armor.client.model.CrashHelmetModel;
 import net.star.copperoverthrow.item.armor.client.provider.ArmorModelProvider;
@@ -47,7 +47,7 @@ public class CrashHelmetArmorItem extends AbstractExtendedArmorItem {
                     ModAttributes.HEAD_IMPACT_RESISTANCE.get(),
                     new AttributeModifier(
                             "Head impact resistance",
-                            ServerConfig.CRASH_HELMET_HEAD_IMPACT_RESISTANCE.get(),
+                            CommonConfig.CRASH_HELMET_HEAD_IMPACT_RESISTANCE.get(),
                             AttributeModifier.Operation.ADDITION
                     )
             );

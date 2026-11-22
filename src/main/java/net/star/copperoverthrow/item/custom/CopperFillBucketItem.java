@@ -17,13 +17,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.block.custom.HologramBlock;
 
 import javax.annotation.Nullable;
@@ -120,7 +118,7 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         toBeDestroyed.add(0, initialImmutable);
         visited.add(initialImmutable);
 
-        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.MEASURE_MAX_DISTANCE.get()){
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < CommonConfig.MEASURE_MAX_DISTANCE.get()){
             BlockPos comparable = toBeChecked.remove(toBeChecked.size() - 1);
             for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, -r, -r), comparable.offset(r, r, r))) {
                 BlockState state = level.getBlockState(pos);

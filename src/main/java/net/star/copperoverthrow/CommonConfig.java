@@ -2,7 +2,7 @@ package net.star.copperoverthrow;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class ServerConfig {
+public class CommonConfig {
         private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
         public static final ForgeConfigSpec.IntValue HANDSAW_USE_TIME = BUILDER

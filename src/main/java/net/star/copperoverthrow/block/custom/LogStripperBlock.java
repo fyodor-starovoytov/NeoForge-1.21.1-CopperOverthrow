@@ -30,7 +30,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.star.copperoverthrow.ServerConfig;
+import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 import net.star.copperoverthrow.util.ModBlockModifiers;
 import net.star.copperoverthrow.util.ModTags;
@@ -110,7 +110,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
         // AXE STRIPPING
         if (!inputStack.isEmpty() && isBlockStrippable(inputStack) && !axeStack.isEmpty()) {
-            int toDamage = (int) (inputStack.getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
+            int toDamage = (int) (inputStack.getCount() * CommonConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
             if (slot != null) {
                 EquipmentSlot finalSlot = slot;
                 axeStack.hurtAndBreak(Math.max(1, toDamage), player, (p) -> p.broadcastBreakEvent(finalSlot));
@@ -129,7 +129,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
         // SAW SAWING
         if (!inputStack.isEmpty() && isBlockPlank(inputStack) && !sawStack.isEmpty()) {
-            int toDamage = (int) (inputStack.getCount() * ServerConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
+            int toDamage = (int) (inputStack.getCount() * CommonConfig.LOG_STRIPPER_TOOL_DAMAGE.get());
             if (slot != null) {
                 EquipmentSlot finalSlot = slot;
                 sawStack.hurtAndBreak(Math.max(1, toDamage), player, (p) -> p.broadcastBreakEvent(finalSlot));

@@ -113,7 +113,7 @@ public abstract class AbstractExtendedArmorItem extends ArmorItem {
      * <br>{@code <nameSpace>:textures/models/armor/custom/<id>.png}
      */
     public static String makeCustomTextureLocation(String nameSpace, String id) {
-        return new ResourceLocation(nameSpace, "textures/models/armor/custom/" + id + ".png").toString();
+        return new ResourceLocation(nameSpace, "textures/models/armor/" + id + ".png").toString();
     }
 
     //endregion
