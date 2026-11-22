@@ -2,6 +2,7 @@ package net.star.copperoverthrow.item.custom;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -42,7 +43,7 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         BlockState clickedBlock = level.getBlockState(pos);
         Player player = context.getPlayer();
 
-        if (player == null || !(clickedBlock.getBlock() instanceof HologramBlock)) {
+        if (player == null) {
             return InteractionResult.FAIL;
         }
 
@@ -61,7 +62,18 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
             return InteractionResult.SUCCESS;
         }
 
-        List<BlockPos> blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(pos, level));
+        List<BlockPos> blocksToBeFilled = new ArrayList<>();
+
+        if (!(clickedBlock.getBlock() instanceof HologramBlock)){
+            Direction dir = context.getClickedFace();
+            BlockPos newPos = pos.relative(dir);
+            blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(newPos, level, false));
+        }
+
+        if (clickedBlock.getBlock() instanceof HologramBlock){
+            blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(pos, level, true));
+        }
+
         ServerLevel serverLevel = (ServerLevel) level;
 
         for (BlockPos fillPos : blocksToBeFilled) {
@@ -104,8 +116,7 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         }
         return InteractionResult.SUCCESS;
     }
-
-    public static List<BlockPos> getBlocksToBeFilled(BlockPos initalBlockPos, Level level) {
+    public static List<BlockPos> getBlocksToBeFilled(BlockPos initalBlockPos, Level level, boolean isHologramBlock) {
         List<BlockPos> toBeChecked = new ArrayList<>();
         List<BlockPos> toBeDestroyed = new ArrayList<>();
         Set<BlockPos> visited = new HashSet<>();
@@ -118,7 +129,7 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         toBeDestroyed.add(0, initialImmutable);
         visited.add(initialImmutable);
 
-        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < CommonConfig.MEASURE_MAX_DISTANCE.get()){
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < CommonConfig.MEASURE_MAX_DISTANCE.get() && isHologramBlock) {
             BlockPos comparable = toBeChecked.remove(toBeChecked.size() - 1);
             for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, -r, -r), comparable.offset(r, r, r))) {
                 BlockState state = level.getBlockState(pos);
@@ -128,6 +139,39 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
                     toBeChecked.add(immutablePos);
                     toBeDestroyed.add(immutablePos);
                     visited.add(immutablePos);
+                }
+            }
+        }
+
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < CommonConfig.MEASURE_MAX_DISTANCE.get() && !isHologramBlock) {
+            BlockPos comparable = toBeChecked.remove(0);
+
+            BlockPos below = comparable.below();
+            BlockState stateBelow = level.getBlockState(below);
+
+            if (stateBelow.canBeReplaced() && !visited.contains(below)) {
+                toBeChecked.add(0, below);
+                toBeDestroyed.add(below);
+                visited.add(below);
+            } else {
+                BlockPos[] horizontalNeighbors = {
+                        comparable.north(),
+                        comparable.south(),
+                        comparable.east(),
+                        comparable.west()
+                };
+
+                for (BlockPos neighbor : horizontalNeighbors) {
+                    if (toBeDestroyed.size() >= CommonConfig.MEASURE_MAX_DISTANCE.get()) {
+                        break;
+                    }
+
+                    BlockState stateNeighbor = level.getBlockState(neighbor);
+                    if (stateNeighbor.canBeReplaced() && !visited.contains(neighbor)) {
+                        toBeChecked.add(neighbor);
+                        toBeDestroyed.add(neighbor);
+                        visited.add(neighbor);
+                    }
                 }
             }
         }

@@ -18,6 +18,11 @@ public abstract class AbstractRepairableCopperItem extends Item {
     }
 
     @Override
+    public int getEnchantmentValue() {
+        return 14;
+    }
+
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         if (enchantment.category == EnchantmentCategory.BREAKABLE) {
             return true;
