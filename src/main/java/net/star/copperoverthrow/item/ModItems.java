@@ -72,7 +72,7 @@ public class ModItems {
                     new Properties()));
 
     public static final RegistryObject<Item> COPPER_HAMMER = ITEMS.register("copper_hammer",
-            () -> new HammerItem( 4f, 2f, ModToolTiers.COPPER,new Item.Properties()));
+            () -> new HammerItem( 5f, -3.2f, ModToolTiers.COPPER,new Item.Properties()));
 
     public static final RegistryObject<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
             () -> new HandsawItem(new Properties().durability(727)));
