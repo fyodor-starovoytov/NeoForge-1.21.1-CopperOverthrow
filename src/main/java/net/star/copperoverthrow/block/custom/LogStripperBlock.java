@@ -227,13 +227,30 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
         return stack;
     }
+    public boolean isBlockStrippable(ItemStack stack) {
+        if (stack.getItem() instanceof BlockItem blockItem) {
+            Block block = blockItem.getBlock();
+            if (AxeItem.getAxeStrippingState(blockItem.getBlock().defaultBlockState()) != null) {
+                return true;
+            }
+
+            ResourceLocation plankId = ForgeRegistries.ITEMS.getKey(stack.getItem());
+            if (plankId != null) {
+                String path = plankId.getPath();
+                if ((path.contains("_log") || path.contains("_wood") || path.contains("_stem") || path.contains("_hyphae"))
+                        && !path.startsWith("stripped_")) {
+                    ResourceLocation blockId = new ResourceLocation(plankId.getNamespace(), "stripped_" + path);
+                    return ForgeRegistries.BLOCKS.containsKey(blockId);
+                }
+            }
+        }
+        return false;
+    }
+
     public ItemStack getStrippedBlock(ItemStack stack) {
         if (stack.getItem() instanceof BlockItem blockItem) {
             int count = stack.getCount();
-
-            BlockState state = blockItem.getBlock().defaultBlockState();
-            BlockState strippedState = state.getToolModifiedState(null, ToolActions.AXE_STRIP, true);
-
+            BlockState strippedState = AxeItem.getAxeStrippingState(blockItem.getBlock().defaultBlockState());
             if (strippedState != null) {
                 return new ItemStack(strippedState.getBlock().asItem(), count);
             }
@@ -241,18 +258,12 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
             ResourceLocation plankId = ForgeRegistries.ITEMS.getKey(stack.getItem());
             if (plankId != null) {
                 String path = plankId.getPath();
-
-                if (path.contains("_log") && !path.startsWith("stripped_")) {
-                    ResourceLocation blockId = new ResourceLocation(
-                            plankId.getNamespace(),
-                            "stripped_" + path
-                    );
-
-                    if (ForgeRegistries.ITEMS.containsKey(blockId)) {
-                        Item resultBlock = ForgeRegistries.ITEMS.getValue(blockId);
-                        if (resultBlock != null && resultBlock != Items.AIR) {
-                            return new ItemStack(resultBlock, count);
-                        }
+                if ((path.contains("_log") || path.contains("_wood") || path.contains("_stem") || path.contains("_hyphae"))
+                        && !path.startsWith("stripped_")) {
+                    ResourceLocation blockId = new ResourceLocation(plankId.getNamespace(), "stripped_" + path);
+                    Block resultBlock = ForgeRegistries.BLOCKS.getValue(blockId);
+                    if (resultBlock != null && resultBlock != net.minecraft.world.level.block.Blocks.AIR) {
+                        return new ItemStack(resultBlock.asItem(), count);
                     }
                 }
             }
@@ -260,31 +271,6 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
         return stack;
     }
 
-    public boolean isBlockStrippable(ItemStack stack) {
-        if (stack.getItem() instanceof BlockItem blockItem) {
-            BlockState state = blockItem.getBlock().defaultBlockState();
-
-            BlockState strippedState = state.getToolModifiedState(null, ToolActions.AXE_STRIP, true);
-
-            if (strippedState != null) {
-                return true;
-            }
-
-            ResourceLocation plankId = ForgeRegistries.ITEMS.getKey(stack.getItem());
-            if (plankId != null) {
-                String path = plankId.getPath();
-                if (path.contains("_log")) {
-                    ResourceLocation blockId = new ResourceLocation(
-                            plankId.getNamespace(),
-                            "stripped_" + path
-                    );
-                    return ForgeRegistries.ITEMS.containsKey(blockId);
-                }
-            }
-        }
-
-        return false;
-    }
 
     public boolean isBlockPlank(ItemStack stack) {
         if (stack.getItem() instanceof BlockItem blockItem) {

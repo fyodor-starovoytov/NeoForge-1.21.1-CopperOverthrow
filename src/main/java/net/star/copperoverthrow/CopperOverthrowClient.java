@@ -1,6 +1,5 @@
 package net.star.copperoverthrow;
 
-
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -22,16 +21,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterItemDecorationsEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
@@ -44,68 +38,60 @@ import net.star.copperoverthrow.util.ModItemProperties;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod(value = CopperOverthrow.MOD_ID)
-@Mod.EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CopperOverthrowClient {
 
-    public CopperOverthrowClient(ModContainer container) {
-    }
+    private static final ResourceLocation OVERLAY_TEXTURE =
+            ResourceLocation.tryBuild(CopperOverthrow.MOD_ID, "textures/gui/waxed_overlay.png");
 
-    @SubscribeEvent
-    static void onClientSetup(FMLClientSetupEvent event) {
+    @Mod.EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ClientModEvents {
 
-        ModItemProperties.addCustomItemProperties();
-    }
-
-    @SubscribeEvent
-    public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.TAMTAM_BE.get(), TamTamRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.RED_WIND_CHIME_BE.get(), RedWindChimeRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.LUNAR_WIND_CHIME_BE.get(), LunarWindChimeRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_WIND_CHIME_BE.get(), BambooWindChimeRenderer::new);
-    }
-
-    @SubscribeEvent
-    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(TamTamModel.LAYER_LOCATION, TamTamModel::createBodyLayer);
-        event.registerLayerDefinition(KitchenBellModel.LAYER_LOCATION, KitchenBellModel::createBodyLayer);
-        event.registerLayerDefinition(RedWindChimeModel.LAYER_LOCATION, RedWindChimeModel::createBodyLayer);
-        event.registerLayerDefinition(LunarWindChimeModel.LAYER_LOCATION, LunarWindChimeModel::createBodyLayer);
-        event.registerLayerDefinition(BambooWindChimeModel.LAYER_LOCATION, BambooWindChimeModel::createBodyLayer);
-    }
-
-            private static final ResourceLocation OVERLAY_TEXTURE =
-                    ResourceLocation.tryBuild(CopperOverthrow.MOD_ID, "textures/gui/waxed_overlay.png");
-
-    @SubscribeEvent
-    public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
-        for (Item item : BuiltInRegistries.ITEM) {
-            event.register(item, (guiGraphics, font, stack, x, y) -> {
-                if (isWaxedByName(stack)) {
-                    RenderSystem.enableBlend();
-                    RenderSystem.defaultBlendFunc();
-
-                    guiGraphics.pose().pushPose();
-                    guiGraphics.pose().translate(0, 0, 200.0F);
-
-                    guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, 16, 16, 16, 16);
-
-                    guiGraphics.pose().popPose();
-                    RenderSystem.disableBlend();
-                }
-
-                return false;
-            });
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            ModItemProperties.addCustomItemProperties();
         }
-    }
 
-    public static boolean isWaxedByName(ItemStack stack) {
-        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
-        String path = id.getPath();
+        @SubscribeEvent
+        public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.TAMTAM_BE.get(), TamTamRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.RED_WIND_CHIME_BE.get(), RedWindChimeRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.LUNAR_WIND_CHIME_BE.get(), LunarWindChimeRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_WIND_CHIME_BE.get(), BambooWindChimeRenderer::new);
+        }
 
-        return path.startsWith("waxed_") || path.contains("_waxed_") || path.contains("_waxed");
+        @SubscribeEvent
+        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(TamTamModel.LAYER_LOCATION, TamTamModel::createBodyLayer);
+            event.registerLayerDefinition(KitchenBellModel.LAYER_LOCATION, KitchenBellModel::createBodyLayer);
+            event.registerLayerDefinition(RedWindChimeModel.LAYER_LOCATION, RedWindChimeModel::createBodyLayer);
+            event.registerLayerDefinition(LunarWindChimeModel.LAYER_LOCATION, LunarWindChimeModel::createBodyLayer);
+            event.registerLayerDefinition(BambooWindChimeModel.LAYER_LOCATION, BambooWindChimeModel::createBodyLayer);
+        }
+
+        @SubscribeEvent
+        public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
+            for (Item item : BuiltInRegistries.ITEM) {
+                event.register(item, (guiGraphics, font, stack, x, y) -> {
+                    if (isWaxedByName(stack)) {
+                        RenderSystem.enableBlend();
+                        RenderSystem.defaultBlendFunc();
+
+                        guiGraphics.pose().pushPose();
+                        guiGraphics.pose().translate(0, 0, 200.0F);
+
+                        guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, 16, 16, 16, 16);
+
+                        guiGraphics.pose().popPose();
+                        RenderSystem.disableBlend();
+                    }
+
+                    return false;
+                });
+            }
+        }
     }
 
     @SubscribeEvent
@@ -118,8 +104,8 @@ public class CopperOverthrowClient {
         if (stack.is(ModItems.COPPER_HANDSAW.get())) {
             event.setCanceled(true);
         }
-
     }
+
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_ENTITIES) return;
@@ -179,6 +165,13 @@ public class CopperOverthrowClient {
         }
     }
 
+    public static boolean isWaxedByName(ItemStack stack) {
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        String path = id.getPath();
+
+        return path.startsWith("waxed_") || path.contains("_waxed_") || path.contains("_waxed");
+    }
+
     private static void applyFaceTransforms(PoseStack poseStack, Direction face, Direction playerFace, float pushPull) {
         switch (face) {
             case NORTH -> {
@@ -187,13 +180,13 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0, pushPull,0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }
@@ -203,15 +196,14 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0, pushPull,0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case WEST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
-
                 }
             }
             case WEST -> {
@@ -220,12 +212,12 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(180));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case NORTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }
@@ -235,12 +227,12 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-180));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }
@@ -248,22 +240,22 @@ public class CopperOverthrowClient {
                 switch (playerFace) {
                     case NORTH -> {
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case WEST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }
@@ -272,25 +264,25 @@ public class CopperOverthrowClient {
                     case NORTH -> {
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case WEST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }

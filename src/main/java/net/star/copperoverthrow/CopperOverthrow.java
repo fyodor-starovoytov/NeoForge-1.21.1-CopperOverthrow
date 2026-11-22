@@ -19,6 +19,7 @@ import net.star.copperoverthrow.enchantment.ModEnchantments;
 import net.star.copperoverthrow.item.ModCreativeModeTabs;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.sound.ModSounds;
+import net.star.copperoverthrow.util.ModBlockModifiers;
 import org.slf4j.Logger;
 
 @Mod(CopperOverthrow.MOD_ID)
@@ -42,7 +43,7 @@ public class CopperOverthrow {
 
         ModEnchantments.ENCHANTMENTS.register(modEventBus);
 
-        modEventBus.register(ModSounds.SOUND_EVENTS);
+        ModSounds.register(modEventBus);
 
         ModAttributes.register(modEventBus);
         ModEffects.register(modEventBus);
@@ -55,7 +56,7 @@ public class CopperOverthrow {
 
 
     private void commonSetup(FMLCommonSetupEvent event) {
-
+        event.enqueueWork(ModBlockModifiers::registerModifiers);
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
