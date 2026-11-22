@@ -2,6 +2,7 @@
   "values": [
     "#forge:tools/catchers",
     "#forge:tools/hammers",
+    "#forge:tools/paxels",
     "#forge:tools/builders"
   ]
 }

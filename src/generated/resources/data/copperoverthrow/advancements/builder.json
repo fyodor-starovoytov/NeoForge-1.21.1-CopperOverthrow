@@ -1,12 +1,22 @@
 {
   "parent": "copperoverthrow:copper_scaffolding",
   "criteria": {
-    "has_trowel": {
+    "has_builder": {
       "conditions": {
         "items": [
           {
             "items": [
               "copperoverthrow:copper_trowel"
+            ]
+          },
+          {
+            "items": [
+              "copperoverthrow:copper_chisel"
+            ]
+          },
+          {
+            "items": [
+              "copperoverthrow:copper_crowbar"
             ]
           }
         ]
@@ -17,22 +27,22 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.copperoverthrow.copper_trowel.description"
+      "translate": "advancements.copperoverthrow.builder_ready.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "copperoverthrow:copper_trowel",
+      "item": "copperoverthrow:copper_crowbar",
       "nbt": "{Damage:0}"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.copperoverthrow.copper_trowel.title"
+      "translate": "advancements.copperoverthrow.builder_ready.title"
     }
   },
   "requirements": [
     [
-      "has_trowel"
+      "has_builder"
     ]
   ],
   "sends_telemetry_event": true
