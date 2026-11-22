@@ -28,14 +28,14 @@ public class ModAdvancementSubProvider implements ForgeAdvancementProvider.Advan
                         Items.COPPER_INGOT,
                         Component.translatable("advancements.copperoverthrow.copper_ingot.title"),
                         Component.translatable("advancements.copperoverthrow.copper_ingot.description"),
-                        null, // Background texture if root, otherwise null
+                        null,
                         FrameType.TASK,
                         true,
                         true,
                         false
                 )
                 .addCriterion("has_copper_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
-                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_ingot").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_ingot"), existingFileHelper);
 
 
         Advancement copperScaffolding = Advancement.Builder.advancement()
