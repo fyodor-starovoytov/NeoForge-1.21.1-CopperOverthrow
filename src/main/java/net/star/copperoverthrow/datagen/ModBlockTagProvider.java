@@ -97,7 +97,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.NEEDS_COPPER_TOOL)
                 .addTag(BlockTags.NEEDS_STONE_TOOL)
                 .addTag(BlockTags.STONE_BRICKS)
-                .addTag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .addTag(BlockTags.STONE_ORE_REPLACEABLES)
                 .addTag(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 
@@ -108,7 +107,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.MINEABLE_WITH_CROWBAR)
                 .addTag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .addTag(BlockTags.MINEABLE_WITH_AXE)
-                .addTag(BlockTags.MINEABLE_WITH_HOE)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE);
 
 

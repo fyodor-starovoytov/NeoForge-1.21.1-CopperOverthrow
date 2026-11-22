@@ -71,7 +71,6 @@ public class ModEvents {
             event.setDistance(newFallDistance);
         }
     }
-
     @SubscribeEvent
     public static void onHammerUsage(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
@@ -88,28 +87,16 @@ public class ModEvents {
             }
 
             try {
-                int area = 1;
-                int deep = 0;
-
-                assert ModEnchantments.AREAL.getKey() != null;
-                Holder<Enchantment> arealHolder = event.getLevel().registryAccess()
-                        .lookupOrThrow(Registries.ENCHANTMENT)
-                        .getOrThrow(ModEnchantments.AREAL.getKey());
-
-                assert ModEnchantments.TUNNELING.getKey() != null;
-                Holder<Enchantment> tunnelingHolder = event.getLevel().registryAccess()
-                        .lookupOrThrow(Registries.ENCHANTMENT)
-                        .getOrThrow(ModEnchantments.TUNNELING.getKey());
-
-                if (mainHandItem.getEnchantmentLevel(arealHolder.get()) != 0) {
-                    area = 2;
-                }
-                if (mainHandItem.getEnchantmentLevel(tunnelingHolder.get()) != 0) {
-                    deep = mainHandItem.getEnchantmentLevel(tunnelingHolder.get());
-                }
+                int area = mainHandItem.getEnchantmentLevel(ModEnchantments.AREAL.get()) > 0 ? 2 : 1;
+                int deep = mainHandItem.getEnchantmentLevel(ModEnchantments.TUNNELING.get());
 
                 for (BlockPos pos : HammerItem.getBlocksToBeDestroyed(area, deep, initialBlockPos, serverPlayer)) {
-                    if (pos.equals(initialBlockPos) || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos)) || hasOreTag(event, pos)) {
+                    BlockState targetState = event.getLevel().getBlockState(pos);
+
+                    if (pos.equals(initialBlockPos)
+                            || targetState.isAir()
+                            || !hammer.isCorrectToolForDrops(mainHandItem, targetState)
+                            || targetState.is(Tags.Blocks.ORES)) {
                         continue;
                     }
 

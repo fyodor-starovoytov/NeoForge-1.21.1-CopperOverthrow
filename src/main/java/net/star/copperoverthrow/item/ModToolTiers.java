@@ -11,24 +11,29 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.util.ModTags;
 
 import java.util.List;
-
 public class ModToolTiers {
 
-    public static final Tier COPPER_REINFORCED = TierSortingRegistry.registerTier(
-            new ForgeTier(1,
-                    999, 4f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
-                    () -> Ingredient.of(Items.COPPER_INGOT)),
-            new ResourceLocation(CopperOverthrow.MOD_ID, "copper_reinforced"), List.of(Tiers.STONE), List.of());
-
     public static final Tier COPPER_WEAK = TierSortingRegistry.registerTier(
-            new ForgeTier(1,
-                    472, 3f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
+            new ForgeTier(1, 472, 3f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
                     () -> Ingredient.of(Items.COPPER_INGOT)),
-            new ResourceLocation(CopperOverthrow.MOD_ID, "copper_weak"), List.of(Tiers.STONE), List.of());
+            new ResourceLocation(CopperOverthrow.MOD_ID, "copper_weak"),
+            List.of(Tiers.STONE),
+            List.of(Tiers.IRON)
+    );
 
     public static final Tier COPPER_MEDIUM = TierSortingRegistry.registerTier(
-            new ForgeTier(1,
-                    727, 4f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
+            new ForgeTier(1, 727, 4f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
                     () -> Ingredient.of(Items.COPPER_INGOT)),
-            new ResourceLocation(CopperOverthrow.MOD_ID, "copper_medium"), List.of(Tiers.STONE), List.of());
+            new ResourceLocation(CopperOverthrow.MOD_ID, "copper_medium"),
+            List.of(COPPER_WEAK),
+            List.of(Tiers.IRON)
+    );
+
+    public static final Tier COPPER_REINFORCED = TierSortingRegistry.registerTier(
+            new ForgeTier(1, 999, 4f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
+                    () -> Ingredient.of(Items.COPPER_INGOT)),
+            new ResourceLocation(CopperOverthrow.MOD_ID, "copper_reinforced"),
+            List.of(COPPER_MEDIUM),
+            List.of(Tiers.IRON)
+    );
 }

@@ -77,7 +77,6 @@ public class ModItems {
     public static final RegistryObject<Item> COPPER_CROWBAR = ITEMS.register("copper_crowbar",
             () -> new CrowbarItem(0f, -2.8f, ModToolTiers.COPPER_WEAK, new Item.Properties()));
 
-
     public static final RegistryObject<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
             () -> new HandsawItem(new Properties().durability(727)));
 
