@@ -18,7 +18,8 @@ public class CrowbarItem extends DiggerItem {
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
-        return super.getDestroySpeed(stack, state) - 0.5f;
+        float speed = super.getDestroySpeed(stack, state);
+        return state.is(ModTags.Blocks.MINEABLE_WITH_CROWBAR) ? Math.max(1.0F, speed - 0.3F) : speed;
     }
 
     @Override
