@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 
 public class CrashHelmetArmorItem extends AbstractExtendedArmorItem {
     private static final String TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "crash_helmet");
+
     public CrashHelmetArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }

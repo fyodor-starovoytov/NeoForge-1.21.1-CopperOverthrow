@@ -62,6 +62,7 @@ public class CopperOverthrow {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
     }
+
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
     }

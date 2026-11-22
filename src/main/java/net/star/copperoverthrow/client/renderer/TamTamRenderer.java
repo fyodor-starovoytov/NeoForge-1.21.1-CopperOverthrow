@@ -90,13 +90,13 @@ public class TamTamRenderer implements BlockEntityRenderer<TamTamBlockEntity> {
 
             VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
 
-            if (blockEntity.getBlockState().getBlock().equals(ModBlocks.EXPOSED_TAMTAM.get()) || blockEntity.getBlockState().getBlock().equals(ModBlocks.WAXED_EXPOSED_TAMTAM.get())){
+            if (blockEntity.getBlockState().getBlock().equals(ModBlocks.EXPOSED_TAMTAM.get()) || blockEntity.getBlockState().getBlock().equals(ModBlocks.WAXED_EXPOSED_TAMTAM.get())) {
                 consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(EXPOSED_TEXTURE));
             }
-            if (blockEntity.getBlockState().getBlock().equals(ModBlocks.WEATHERED_TAMTAM.get()) || blockEntity.getBlockState().getBlock().equals(ModBlocks.WAXED_WEATHERED_TAMTAM.get())){
+            if (blockEntity.getBlockState().getBlock().equals(ModBlocks.WEATHERED_TAMTAM.get()) || blockEntity.getBlockState().getBlock().equals(ModBlocks.WAXED_WEATHERED_TAMTAM.get())) {
                 consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(WEATHERED_TEXTURE));
             }
-            if (blockEntity.getBlockState().getBlock().equals(ModBlocks.OXIDIZED_TAMTAM.get()) || blockEntity.getBlockState().getBlock().equals(ModBlocks.WAXED_OXIDIZED_TAMTAM.get())){
+            if (blockEntity.getBlockState().getBlock().equals(ModBlocks.OXIDIZED_TAMTAM.get()) || blockEntity.getBlockState().getBlock().equals(ModBlocks.WAXED_OXIDIZED_TAMTAM.get())) {
                 consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(OXIDIZED_TEXTURE));
             }
             this.root.render(poseStack, consumer, packedLight, packedOverlay);

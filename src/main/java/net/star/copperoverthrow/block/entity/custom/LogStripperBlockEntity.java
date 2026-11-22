@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.star.copperoverthrow.block.entity.ModBlockEntities;
 
 public class LogStripperBlockEntity extends BlockEntity implements Container {
-    private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
 
     public LogStripperBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.LOG_STRIPPER_BE.get(), pos, blockState);
@@ -27,13 +27,11 @@ public class LogStripperBlockEntity extends BlockEntity implements Container {
     }
 
 
-
-
     @Override
     public boolean isEmpty() {
         for (int i = 0; i < getContainerSize(); i++) {
             ItemStack stack = getItem(i);
-            if (!stack.isEmpty()){
+            if (!stack.isEmpty()) {
                 return false;
             }
         }
@@ -59,20 +57,20 @@ public class LogStripperBlockEntity extends BlockEntity implements Container {
 
     @Override
     public void setItem(int slot, ItemStack stack) {
-        if (getItem(0).getItem().equals(stack.getItem())){
+        if (getItem(0).getItem().equals(stack.getItem())) {
             int itemCount = getItem(0).getCount();
-            if (itemCount >= 64){
+            if (itemCount >= 64) {
                 return;
             }
-            if (itemCount + stack.getCount() >= 64){
+            if (itemCount + stack.getCount() >= 64) {
                 inventory.set(slot, stack.copyWithCount(64));
-            }
-            else {
+            } else {
                 inventory.set(slot, stack.copyWithCount(stack.getCount()
                         + getItem(0).getCount()));
             }
+        } else {
+            inventory.set(slot, stack.copyWithCount(stack.getCount()));
         }
-        else {inventory.set(slot, stack.copyWithCount(stack.getCount()));}
 
         setChanged();
         if (level != null && !level.isClientSide()) {

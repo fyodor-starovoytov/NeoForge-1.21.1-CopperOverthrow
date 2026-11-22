@@ -5,8 +5,6 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.advancements.AdvancementProvider;
-import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -18,7 +16,7 @@ import net.star.copperoverthrow.item.ModItems;
 
 import java.util.function.Consumer;
 
-public class ModAdvancementSubProvider implements ForgeAdvancementProvider.AdvancementGenerator{
+public class ModAdvancementSubProvider implements ForgeAdvancementProvider.AdvancementGenerator {
 
     @Override
     public void generate(HolderLookup.Provider registries, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper) {
@@ -45,7 +43,7 @@ public class ModAdvancementSubProvider implements ForgeAdvancementProvider.Advan
                         Component.translatable("advancements.copperoverthrow.copper_scaffolding.title"),
                         Component.translatable("advancements.copperoverthrow.copper_scaffolding.description"),
                         null,
-FrameType.TASK,                        true,
+                        FrameType.TASK, true,
                         true,
                         false
                 )
@@ -59,7 +57,8 @@ FrameType.TASK,                        true,
                         Component.translatable("advancements.copperoverthrow.copper_chisel.title"),
                         Component.translatable("advancements.copperoverthrow.copper_chisel.description"),
                         null,
-FrameType.TASK,                        true,
+                        FrameType.TASK,
+                        true,
                         true,
                         false
                 )
@@ -89,7 +88,7 @@ FrameType.TASK,                        true,
                         Component.translatable("advancements.copperoverthrow.copper_trowel.title"),
                         Component.translatable("advancements.copperoverthrow.copper_trowel.description"),
                         null,
-FrameType.TASK,                        true,
+                        FrameType.TASK, true,
                         true,
                         false
                 )
@@ -103,7 +102,7 @@ FrameType.TASK,                        true,
                         Component.translatable("advancements.copperoverthrow.log_stripper.title"),
                         Component.translatable("advancements.copperoverthrow.log_stripper.description"),
                         null,
-FrameType.TASK,                        true,
+                        FrameType.TASK, true,
                         true,
                         false
                 )
@@ -147,7 +146,7 @@ FrameType.TASK,                        true,
                         Component.translatable("advancements.copperoverthrow.mining_set.title"),
                         Component.translatable("advancements.copperoverthrow.mining_set.description"),
                         null,
-FrameType.TASK,                        true,
+                        FrameType.TASK, true,
                         true,
                         false
                 )
@@ -162,7 +161,7 @@ FrameType.TASK,                        true,
                         Component.translatable("advancements.copperoverthrow.crash_helmet.title"),
                         Component.translatable("advancements.copperoverthrow.crash_helmet.description"),
                         null,
-FrameType.TASK,                        true,
+                        FrameType.TASK, true,
                         true,
                         false
                 )

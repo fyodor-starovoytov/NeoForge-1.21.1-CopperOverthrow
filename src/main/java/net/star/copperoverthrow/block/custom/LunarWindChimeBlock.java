@@ -26,14 +26,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class LunarWindChimeBlock extends AbstractWindChimeBlock{
+public class LunarWindChimeBlock extends AbstractWindChimeBlock {
     public LunarWindChimeBlock(Properties properties, Supplier<SoundEvent> chimeSound) {
         super(properties, chimeSound);
     }
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return state.getValue(UPPER) ?  new LunarWindChimeBlockEntity(pos, state) : null;
+        return state.getValue(UPPER) ? new LunarWindChimeBlockEntity(pos, state) : null;
     }
 
 
@@ -67,7 +67,7 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
         }
     }
 
-    private boolean isBlockObstructed(BlockPos pos, Level level){
+    private boolean isBlockObstructed(BlockPos pos, Level level) {
 
         Vec3 vec = Vec3.atCenterOf(pos);
         Vec3 vecEast = Vec3.atCenterOf(pos.east(CommonConfig.CHIME_CHECK_RANGE.get()));
@@ -117,8 +117,7 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
             tooltip.add(Component.empty());
             tooltip.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
             tooltip.add(Component.translatable("tooltip.copperoverthrow.eerie_lunar_rumble.tooltip"));
-        }
-        else {
+        } else {
             tooltip.add(Component.translatable("tooltip.copperoverthrow.low_pitch.tooltip"));
             tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }

@@ -26,9 +26,11 @@ import javax.annotation.Nullable;
 
 public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
     private static final String TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "copper_glowing_goggles");
+
     public GlowingGogglesArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }
+
     @Override
     public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         return TEXTURE;
@@ -63,7 +65,7 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
             return;
         }
 
-        if (entity instanceof LivingEntity livingEntity ) {
+        if (entity instanceof LivingEntity livingEntity) {
             ItemStack headItem = livingEntity.getItemBySlot(EquipmentSlot.HEAD);
             if (ItemStack.matches(headItem, stack)) {
 

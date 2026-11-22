@@ -34,6 +34,20 @@ public class BeeCatcherItem extends Item {
 
     }
 
+    public static List<CompoundTag> getBees(ItemStack stack) {
+        List<CompoundTag> beeList = new ArrayList<>();
+
+        if (stack.hasTag() && stack.getTag().contains("caught_bees", Tag.TAG_LIST)) {
+            ListTag listTag = stack.getTag().getList("caught_bees", Tag.TAG_COMPOUND);
+
+            for (int i = 0; i < listTag.size(); i++) {
+                beeList.add(listTag.getCompound(i));
+            }
+        }
+
+        return beeList;
+    }
+
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, net.minecraft.world.InteractionHand hand) {
         if (entity instanceof Bee bee && hasFreeSlot(stack)) {
@@ -78,36 +92,36 @@ public class BeeCatcherItem extends Item {
             while (!remaining.isEmpty()) {
                 CompoundTag tag = remaining.remove(remaining.size() - 1).copy();
 
-            Bee bee = EntityType.BEE.spawn(
-                    (ServerLevel) level,
-                    null,
-                    b -> {
-                        tag.remove("UUID");
-                        b.load(tag);
-                    },
-                    context.getClickedPos(),
-                    MobSpawnType.BUCKET,
-                    true,
-                    false
-            );
-
-            if (bee != null) {
-                BlockPos spawnPos = context.getClickedPos().relative(context.getClickedFace());
-                bee.moveTo(
-                        spawnPos.getX() + Math.random(),
-                        spawnPos.getY(),
-                        spawnPos.getZ() + Math.random(),
-                        bee.getYRot(),
-                        bee.getXRot()
+                Bee bee = EntityType.BEE.spawn(
+                        (ServerLevel) level,
+                        null,
+                        b -> {
+                            tag.remove("UUID");
+                            b.load(tag);
+                        },
+                        context.getClickedPos(),
+                        MobSpawnType.BUCKET,
+                        true,
+                        false
                 );
-            }}
-                stack.removeTagKey("caught_bees");
-                level.playSound(null, context.getClickedPos(), SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL);
-                return InteractionResult.SUCCESS;
+
+                if (bee != null) {
+                    BlockPos spawnPos = context.getClickedPos().relative(context.getClickedFace());
+                    bee.moveTo(
+                            spawnPos.getX() + Math.random(),
+                            spawnPos.getY(),
+                            spawnPos.getZ() + Math.random(),
+                            bee.getYRot(),
+                            bee.getXRot()
+                    );
+                }
+            }
+            stack.removeTagKey("caught_bees");
+            level.playSound(null, context.getClickedPos(), SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL);
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
-
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
@@ -119,25 +133,10 @@ public class BeeCatcherItem extends Item {
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.bee_catcher_free_item.tooltip"));
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
-    }
-
-    public static List<CompoundTag> getBees(ItemStack stack) {
-        List<CompoundTag> beeList = new ArrayList<>();
-
-        if (stack.hasTag() && stack.getTag().contains("caught_bees", Tag.TAG_LIST)) {
-            ListTag listTag = stack.getTag().getList("caught_bees", Tag.TAG_COMPOUND);
-
-            for (int i = 0; i < listTag.size(); i++) {
-                beeList.add(listTag.getCompound(i));
-            }
-        }
-
-        return beeList;
     }
 
     public boolean hasFreeSlot(ItemStack stack) {

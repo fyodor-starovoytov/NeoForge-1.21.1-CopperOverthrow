@@ -28,13 +28,13 @@ public class HammerItem extends DiggerItem {
         BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
                 (player.getEyePosition(1f).add(player.getViewVector(1f).scale(8f))),
                 ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-        if(traceResult.getType() == HitResult.Type.MISS) {
+        if (traceResult.getType() == HitResult.Type.MISS) {
             return positions;
         }
 
-        if(traceResult.getDirection() == Direction.UP) {
-            for(int x = -range; x <= range; x++) {
-                for(int y = -range; y <= range; y++) {
+        if (traceResult.getDirection() == Direction.UP) {
+            for (int x = -range; x <= range; x++) {
+                for (int y = -range; y <= range; y++) {
                     for (int z = -deep; z <= 0; z++) {
                         positions.add(new BlockPos(initalBlockPos.getX() + x, initalBlockPos.getY() + z, initalBlockPos.getZ() + y));
 
@@ -43,9 +43,9 @@ public class HammerItem extends DiggerItem {
             }
         }
 
-        if(traceResult.getDirection() == Direction.DOWN) {
-            for(int x = -range; x <= range; x++) {
-                for(int y = -range; y <= range; y++) {
+        if (traceResult.getDirection() == Direction.DOWN) {
+            for (int x = -range; x <= range; x++) {
+                for (int y = -range; y <= range; y++) {
                     for (int z = 0; z <= deep; z++) {
                         positions.add(new BlockPos(initalBlockPos.getX() + x, initalBlockPos.getY() + z, initalBlockPos.getZ() + y));
 
@@ -54,9 +54,9 @@ public class HammerItem extends DiggerItem {
             }
         }
 
-        if(traceResult.getDirection() == Direction.SOUTH) {
-            for(int x = -range; x <= range; x++) {
-                for(int y = -range; y <= range; y++) {
+        if (traceResult.getDirection() == Direction.SOUTH) {
+            for (int x = -range; x <= range; x++) {
+                for (int y = -range; y <= range; y++) {
                     for (int z = -deep; z <= 0; z++) {
                         positions.add(new BlockPos(initalBlockPos.getX() + x, initalBlockPos.getY() + y, initalBlockPos.getZ() + z));
                     }
@@ -64,9 +64,9 @@ public class HammerItem extends DiggerItem {
             }
         }
 
-        if(traceResult.getDirection() == Direction.NORTH) {
-            for(int x = -range; x <= range; x++) {
-                for(int y = -range; y <= range; y++) {
+        if (traceResult.getDirection() == Direction.NORTH) {
+            for (int x = -range; x <= range; x++) {
+                for (int y = -range; y <= range; y++) {
                     for (int z = 0; z <= deep; z++) {
                         positions.add(new BlockPos(initalBlockPos.getX() + x, initalBlockPos.getY() + y, initalBlockPos.getZ() + z));
                     }
@@ -74,19 +74,19 @@ public class HammerItem extends DiggerItem {
             }
         }
 
-        if(traceResult.getDirection() == Direction.EAST) {
-            for(int x = -range; x <= range; x++) {
-                for(int y = -range; y <= range; y++) {
+        if (traceResult.getDirection() == Direction.EAST) {
+            for (int x = -range; x <= range; x++) {
+                for (int y = -range; y <= range; y++) {
                     for (int z = -deep; z <= 0; z++) {
-                    positions.add(new BlockPos(initalBlockPos.getX() + z, initalBlockPos.getY() + y, initalBlockPos.getZ() + x));
+                        positions.add(new BlockPos(initalBlockPos.getX() + z, initalBlockPos.getY() + y, initalBlockPos.getZ() + x));
                     }
                 }
             }
         }
 
-        if(traceResult.getDirection() == Direction.WEST) {
-            for(int x = -range; x <= range; x++) {
-                for(int y = -range; y <= range; y++) {
+        if (traceResult.getDirection() == Direction.WEST) {
+            for (int x = -range; x <= range; x++) {
+                for (int y = -range; y <= range; y++) {
                     for (int z = 0; z <= deep; z++) {
                         positions.add(new BlockPos(initalBlockPos.getX() + z, initalBlockPos.getY() + y, initalBlockPos.getZ() + x));
                     }

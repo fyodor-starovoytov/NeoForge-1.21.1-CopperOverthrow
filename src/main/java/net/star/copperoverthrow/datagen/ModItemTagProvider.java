@@ -11,7 +11,6 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.util.ModTags;
 
-
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagProvider extends ItemTagsProvider {
@@ -45,6 +44,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(Tags.Items.TOOLS)
                 .addTag(ModTags.Items.C_TOOLS_CATCHERS)
                 .addTag(ModTags.Items.C_TOOLS_HAMMERS)
+                .addTag(ModTags.Items.C_TOOLS_PAXELS)
                 .addTag(ModTags.Items.C_TOOLS_BUILDERS);
 
         tag(ItemTags.BREAKS_DECORATED_POTS)
@@ -62,11 +62,12 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.COPPER_SEXTANT.get())
                 .add(ModItems.COPPER_LONG_RULER.get())
                 .add(ModItems.COPPER_FILL_BUCKET.get());
+        tag(ModTags.Items.C_TOOLS_PAXELS)
+                .add(ModItems.COPPER_CROWBAR.get());
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get())
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
-
 
 
     }

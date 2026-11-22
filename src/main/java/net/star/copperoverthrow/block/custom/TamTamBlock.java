@@ -50,11 +50,11 @@ import java.util.Optional;
 
 public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
 
+    public static final EnumProperty<WideThinDoubleBlock> PART = EnumProperty.create("part", WideThinDoubleBlock.class);
     private static final VoxelShape SHAPE_NORTH_SOUTH = Block.box(0.0, 1.0, 7, 16.0, 16.0, 9);
     private static final VoxelShape SHAPE_EAST_WEST = Block.box(7.0, 1.0, 0, 9.0, 16.0, 16);
     private static final int BLOCK_HEIGHT = 2;
     private static final Property<Direction> FACING = HorizontalDirectionalBlock.FACING;
-    public static final EnumProperty<WideThinDoubleBlock> PART = EnumProperty.create("part", WideThinDoubleBlock.class);
     private final WeatherState weatherState;
 
     public TamTamBlock(Properties properties, WeatherState weatherState) {
@@ -114,7 +114,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
         Direction sideDir = facing.getCounterClockWise();
 
-        if (part == WideThinDoubleBlock.MAIN_TOP){
+        if (part == WideThinDoubleBlock.MAIN_TOP) {
             return Block.canSupportCenter(level, pos.above(), Direction.DOWN);
         }
 
@@ -242,7 +242,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
 
     @Override
     public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        if (Math.random()< CommonConfig.TAMTAM_FULL_MOON_VOLUME_CHANCE.get() && level.getMoonPhase() == 0 && level.isNight()){
+        if (Math.random() < CommonConfig.TAMTAM_FULL_MOON_VOLUME_CHANCE.get() && level.getMoonPhase() == 0 && level.isNight()) {
             level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, CommonConfig.TAMTAM_FULL_MOON_VOLUME_RADIUS.get(), 1F);
         }
         this.applyChangeOverTime(state, level, pos, random);
@@ -365,20 +365,16 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         return createTickerHelper(type, ModBlockEntities.TAMTAM_BE.get(), TamTamBlockEntity::tick);
     }
 
-    private void playSound(Level level, BlockPos pos, float volume){
+    private void playSound(Level level, BlockPos pos, float volume) {
         if (level.getBlockState(pos).getBlock().equals(ModBlocks.EXPOSED_TAMTAM.get()) || level.getBlockState(pos).getBlock().equals(ModBlocks.WAXED_EXPOSED_TAMTAM.get())) {
             level.playSound(null, pos, ModSounds.EXPOSED_TAM_TAM_PLAYING.get(), SoundSource.RECORDS, volume, 1F);
-        }
-        else if (level.getBlockState(pos).getBlock().equals(ModBlocks.WEATHERED_TAMTAM.get()) || level.getBlockState(pos).getBlock().equals(ModBlocks.WAXED_WEATHERED_TAMTAM.get())) {
+        } else if (level.getBlockState(pos).getBlock().equals(ModBlocks.WEATHERED_TAMTAM.get()) || level.getBlockState(pos).getBlock().equals(ModBlocks.WAXED_WEATHERED_TAMTAM.get())) {
             level.playSound(null, pos, ModSounds.WEATHERED_TAM_TAM_PLAYING.get(), SoundSource.RECORDS, volume, 1F);
-        }
-        else if (level.getBlockState(pos).getBlock().equals(ModBlocks.OXIDIZED_TAMTAM.get()) || level.getBlockState(pos).getBlock().equals(ModBlocks.WAXED_OXIDIZED_TAMTAM.get())) {
+        } else if (level.getBlockState(pos).getBlock().equals(ModBlocks.OXIDIZED_TAMTAM.get()) || level.getBlockState(pos).getBlock().equals(ModBlocks.WAXED_OXIDIZED_TAMTAM.get())) {
             level.playSound(null, pos, ModSounds.OXIDIZED_TAM_TAM_PLAYING.get(), SoundSource.RECORDS, volume - 1, 1F);
-        }
-        else if (Math.random()<0.07) {
+        } else if (Math.random() < 0.07) {
             level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_RARE.get(), SoundSource.RECORDS, volume, 1F);
-        }
-        else {
+        } else {
             level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING.get(), SoundSource.RECORDS, volume, 1F);
         }
     }
@@ -413,10 +409,32 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         if (state.getValue(HorizontalDirectionalBlock.FACING).getAxis() == Direction.Axis.Z) {
             //The not default texture
             return SHAPE_NORTH_SOUTH;
-        }
-        else{
+        } else {
             return SHAPE_EAST_WEST;
         }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
+        if (Screen.hasShiftDown()) {
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+            tooltip.add(Component.empty());
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.long_crash_sounding.tooltip"));
+
+
+        } else {
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
+            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
+        }
+        super.appendHoverText(stack, level, tooltip, flag);
+    }
+
+    @Override
+    public Optional<BlockState> getNext(BlockState state) {
+        return java.util.Optional.ofNullable(ModBlockModifiers.OXIDIZABLES.get(state.getBlock()))
+                .map(block -> block.withPropertiesOf(state));
     }
 
     public enum WideThinDoubleBlock implements StringRepresentable {
@@ -435,29 +453,5 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         public @NotNull String getSerializedName() {
             return this.name;
         }
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
-        if (Screen.hasShiftDown()) {
-            tooltip.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
-            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
-            tooltip.add(Component.empty());
-            tooltip.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
-            tooltip.add(Component.translatable("tooltip.copperoverthrow.long_crash_sounding.tooltip"));
-
-
-        }
-        else {
-            tooltip.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
-            tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
-        }
-        super.appendHoverText(stack, level, tooltip, flag);
-    }
-
-    @Override
-    public Optional<BlockState> getNext(BlockState state) {
-        return java.util.Optional.ofNullable(ModBlockModifiers.OXIDIZABLES.get(state.getBlock()))
-                .map(block -> block.withPropertiesOf(state));
     }
 }

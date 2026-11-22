@@ -19,6 +19,7 @@ public class StepperBootsArmorItem extends ArmorItem {
     public StepperBootsArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }
+
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
         if (slot == EquipmentSlot.FEET) {

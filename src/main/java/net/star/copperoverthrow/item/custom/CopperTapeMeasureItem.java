@@ -41,6 +41,86 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
         this.hologramBlock = block;
     }
 
+    private static BlockPos getBlockLookedAt(Player player) {
+        BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
+                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(3f))),
+                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+        BlockPos secondaryPos = traceResult.getBlockPos();
+        return secondaryPos;
+    }
+
+    public static List<BlockPos> getFlatCircleBlocksY(BlockPos initial, BlockPos secondary) {
+        List<BlockPos> circleBlocks = new ArrayList<>();
+
+        Vec2 center = new Vec2(initial.getX(), initial.getZ());
+        Vec2 target = new Vec2(secondary.getX(), secondary.getZ());
+        Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
+
+        int r = Math.min(Math.round(diff.length()), CommonConfig.MEASURE_MAX_DISTANCE.get());
+
+        int centerX = Math.round(center.x);
+        int centerZ = Math.round(center.y);
+
+        for (int x = -r; x <= r; x++) {
+            for (int z = -r; z <= r; z++) {
+                float distanceSq = (x * x) + (z * z);
+
+                if (distanceSq >= Math.pow(r - 0.5f, 2) && distanceSq <= Math.pow(r + 0.5f, 2)) {
+                    circleBlocks.add(new BlockPos(centerX + x, initial.getY(), centerZ + z));
+                }
+            }
+        }
+        return circleBlocks;
+    }
+
+    public static List<BlockPos> getFlatCircleBlocksZ(BlockPos initial, BlockPos secondary) {
+        List<BlockPos> circleBlocks = new ArrayList<>();
+
+        Vec2 center = new Vec2(initial.getX(), initial.getY());
+        Vec2 target = new Vec2(secondary.getX(), secondary.getY());
+        Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
+
+        int r = Math.min(Math.round(diff.length()), CommonConfig.MEASURE_MAX_DISTANCE.get());
+
+        int centerX = Math.round(center.x);
+        int centerY = Math.round(center.y);
+
+        for (int x = -r; x <= r; x++) {
+            for (int y = -r; y <= r; y++) {
+                float distanceSq = (x * x) + (y * y);
+
+                if (distanceSq >= Math.pow(r - 0.5f, 2) && distanceSq <= Math.pow(r + 0.5f, 2)) {
+                    circleBlocks.add(new BlockPos(centerX + x, centerY + y, initial.getZ()));
+                }
+            }
+        }
+        return circleBlocks;
+    }
+
+    public static List<BlockPos> getFlatCircleBlocksX(BlockPos initial, BlockPos secondary) {
+        List<BlockPos> circleBlocks = new ArrayList<>();
+
+        Vec2 center = new Vec2(initial.getY(), initial.getZ());
+        Vec2 target = new Vec2(secondary.getY(), secondary.getZ());
+        Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
+
+        int r = Math.min(Math.round(diff.length()), CommonConfig.MEASURE_MAX_DISTANCE.get());
+
+        int centerY = Math.round(center.x);
+        int centerZ = Math.round(center.y);
+
+        for (int y = -r; y <= r; y++) {
+            for (int z = -r; z <= r; z++) {
+                float distanceSq = (y * y) + (z * z);
+
+                if (distanceSq >= Math.pow(r - 0.5f, 2) && distanceSq <= Math.pow(r + 0.5f, 2)) {
+                    circleBlocks.add(new BlockPos(initial.getX(), centerY + y, centerZ + z));
+                }
+            }
+        }
+        return circleBlocks;
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
@@ -189,86 +269,6 @@ public class CopperTapeMeasureItem extends AbstractRepairableCopperItem {
                 }
             }
         }
-    }
-
-    private static BlockPos getBlockLookedAt(Player player) {
-        BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
-                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(3f))),
-                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-        BlockPos secondaryPos = traceResult.getBlockPos();
-        return secondaryPos;
-    }
-
-    public static List<BlockPos> getFlatCircleBlocksY(BlockPos initial, BlockPos secondary) {
-        List<BlockPos> circleBlocks = new ArrayList<>();
-
-        Vec2 center = new Vec2(initial.getX(), initial.getZ());
-        Vec2 target = new Vec2(secondary.getX(), secondary.getZ());
-        Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
-
-        int r = Math.min(Math.round(diff.length()), CommonConfig.MEASURE_MAX_DISTANCE.get());
-
-        int centerX = Math.round(center.x);
-        int centerZ = Math.round(center.y);
-
-        for (int x = -r; x <= r; x++) {
-            for (int z = -r; z <= r; z++) {
-                float distanceSq = (x * x) + (z * z);
-
-                if (distanceSq >= Math.pow(r - 0.5f, 2) && distanceSq <= Math.pow(r + 0.5f, 2)) {
-                    circleBlocks.add(new BlockPos(centerX + x, initial.getY(), centerZ + z));
-                }
-            }
-        }
-        return circleBlocks;
-    }
-
-    public static List<BlockPos> getFlatCircleBlocksZ(BlockPos initial, BlockPos secondary) {
-        List<BlockPos> circleBlocks = new ArrayList<>();
-
-        Vec2 center = new Vec2(initial.getX(), initial.getY());
-        Vec2 target = new Vec2(secondary.getX(), secondary.getY());
-        Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
-
-        int r = Math.min(Math.round(diff.length()), CommonConfig.MEASURE_MAX_DISTANCE.get());
-
-        int centerX = Math.round(center.x);
-        int centerY = Math.round(center.y);
-
-        for (int x = -r; x <= r; x++) {
-            for (int y = -r; y <= r; y++) {
-                float distanceSq = (x * x) + (y * y);
-
-                if (distanceSq >= Math.pow(r - 0.5f, 2) && distanceSq <= Math.pow(r + 0.5f, 2)) {
-                    circleBlocks.add(new BlockPos(centerX + x, centerY + y, initial.getZ()));
-                }
-            }
-        }
-        return circleBlocks;
-    }
-
-    public static List<BlockPos> getFlatCircleBlocksX(BlockPos initial, BlockPos secondary) {
-        List<BlockPos> circleBlocks = new ArrayList<>();
-
-        Vec2 center = new Vec2(initial.getY(), initial.getZ());
-        Vec2 target = new Vec2(secondary.getY(), secondary.getZ());
-        Vec2 diff = new Vec2(target.x - center.x, target.y - center.y);
-
-        int r = Math.min(Math.round(diff.length()), CommonConfig.MEASURE_MAX_DISTANCE.get());
-
-        int centerY = Math.round(center.x);
-        int centerZ = Math.round(center.y);
-
-        for (int y = -r; y <= r; y++) {
-            for (int z = -r; z <= r; z++) {
-                float distanceSq = (y * y) + (z * z);
-
-                if (distanceSq >= Math.pow(r - 0.5f, 2) && distanceSq <= Math.pow(r + 0.5f, 2)) {
-                    circleBlocks.add(new BlockPos(initial.getX(), centerY + y, centerZ + z));
-                }
-            }
-        }
-        return circleBlocks;
     }
 
     @Override

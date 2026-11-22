@@ -28,11 +28,10 @@ import java.util.function.Supplier;
 
 public class AbstractWindChimeBlock extends BaseEntityBlock {
 
-    private final Supplier<SoundEvent> CHIME_SOUND;
     public static final BooleanProperty UPPER = BooleanProperty.create("upper");
-
     protected static final VoxelShape TOP_SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 16.0, 12.0);
     protected static final VoxelShape BOTTOM_SHAPE = Block.box(4.0, 10.0, 4.0, 12.0, 16.0, 12.0);
+    private final Supplier<SoundEvent> CHIME_SOUND;
 
     public AbstractWindChimeBlock(Properties properties, Supplier<SoundEvent> chimeSound) {
         super(properties);
@@ -43,7 +42,7 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        
+
         if (state.is(ModBlocks.LUNAR_WIND_CHIME.get())) {
             return state.getValue(UPPER) ? new LunarWindChimeBlockEntity(pos, state) : null;
         }
@@ -76,7 +75,7 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state,  LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
         if (!level.isClientSide()) {
             BlockPos belowPos = pos.below();
@@ -106,7 +105,7 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        level.playSound(null, pos, CHIME_SOUND.get(), SoundSource.RECORDS,1, 1);
+        level.playSound(null, pos, CHIME_SOUND.get(), SoundSource.RECORDS, 1, 1);
     }
 
     @Override
@@ -120,9 +119,10 @@ public class AbstractWindChimeBlock extends BaseEntityBlock {
                 if (otherState.is(this)) {
                     level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
                     level.levelEvent(null, 2001, otherPos, Block.getId(otherState));
-                    level.playSound(null, otherPos, CHIME_SOUND.get(), SoundSource.RECORDS,1, 1);
+                    level.playSound(null, otherPos, CHIME_SOUND.get(), SoundSource.RECORDS, 1, 1);
                 }
-            }}
+            }
+        }
         super.onRemove(state, level, pos, newState, isMoving);
     }
 

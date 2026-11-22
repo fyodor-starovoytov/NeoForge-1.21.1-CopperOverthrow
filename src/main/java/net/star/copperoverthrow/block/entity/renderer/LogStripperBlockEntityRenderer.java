@@ -16,7 +16,7 @@ import net.minecraft.world.level.LightLayer;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
 
 public class LogStripperBlockEntityRenderer implements BlockEntityRenderer<LogStripperBlockEntity> {
-    public LogStripperBlockEntityRenderer(BlockEntityRendererProvider.Context context){
+    public LogStripperBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     }
 
     @Override
@@ -44,7 +44,7 @@ public class LogStripperBlockEntityRenderer implements BlockEntityRenderer<LogSt
         poseStack.popPose();
     }
 
-    private int getLightLevel(Level level, BlockPos pos){
+    private int getLightLevel(Level level, BlockPos pos) {
         int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
         int skyLight = level.getBrightness(LightLayer.SKY, pos);
         return LightTexture.pack(blockLight, skyLight);

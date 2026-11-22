@@ -12,8 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.common.ForgeMod;
-import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.CommonConfig;
+import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.attribute.ModAttributes;
 import net.star.copperoverthrow.item.armor.client.model.CopperExoskeletonModel;
 import net.star.copperoverthrow.item.armor.client.provider.ArmorModelProvider;
@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 
 public class CopperExoskeletonArmorItem extends AbstractExtendedArmorItem {
     private static final String TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "copper_exoskeleton");
+
     public CopperExoskeletonArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }

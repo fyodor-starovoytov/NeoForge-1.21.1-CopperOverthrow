@@ -32,10 +32,6 @@ public abstract class AbstractExtendedArmorItem extends ArmorItem {
         super(pMaterial, pType, pProperties);
     }
 
-    public boolean isFullSetActive(LivingEntity living) {
-        return isFullSetActive(living, this.getMaterial());
-    }
-
     public static boolean isFullSetActive(LivingEntity living, ArmorMaterial materials) {
         if (living == null) {
             return false;
@@ -53,7 +49,37 @@ public abstract class AbstractExtendedArmorItem extends ArmorItem {
         return (head != null && legs != null && feet != null) && (head.getMaterial() == materials && chest.getMaterial() == materials && legs.getMaterial() == materials && feet.getMaterial() == materials);
     }
 
-    public Multimap<Attribute, AttributeModifier> getAttributeMods(EquipmentSlot slot) {return null;}
+    /**
+     * creates a custom texture for your armor in
+     * <br>{@code <nameSpace>:textures/models/armor/custom/<id>.png}
+     */
+    public static String makeCustomTextureLocation(String nameSpace, String id) {
+        return new ResourceLocation(nameSpace, "textures/models/armor/" + id + ".png").toString();
+    }
+
+    /**
+     * @param registry the Register to add to
+     * @param baseName the base name of the armor
+     * @param creator  a lambda function to create an instance of the armor, mostly a method reference to the constructor
+     * @return a Map mapping the ArmorType to the RegObj for the slot
+     */
+    public static <T extends AbstractExtendedArmorItem> Map<Type, RegistryObject<T>> createRegistry(DeferredRegister<Item> registry, String baseName, Function<Type, T> creator) {
+        return Util.make(new EnumMap<>(Type.class), map -> {
+            for (Type type : Type.values()) {
+                map.put(type, registry.register(baseName + "_" + type.getName(), () -> creator.apply(type)));
+            }
+        });
+    }
+
+    public boolean isFullSetActive(LivingEntity living) {
+        return isFullSetActive(living, this.getMaterial());
+    }
+
+    //region display / model
+
+    public Multimap<Attribute, AttributeModifier> getAttributeMods(EquipmentSlot slot) {
+        return null;
+    }
 
     @Override
     public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot slot) {
@@ -65,15 +91,19 @@ public abstract class AbstractExtendedArmorItem extends ArmorItem {
         return builder;
     }
 
-    //region display / model
-
-    protected boolean withCustomModel() { return false; }
+    protected boolean withCustomModel() {
+        return false;
+    }
 
     /**
      * @return the model provider to use
      * no need to cache, this implementation does that already
      */
-    protected ArmorModelProvider createModelProvider() { return null;}
+    protected ArmorModelProvider createModelProvider() {
+        return null;
+    }
+
+    //endregion
 
     @Override
     public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
@@ -104,30 +134,6 @@ public abstract class AbstractExtendedArmorItem extends ArmorItem {
                 original.copyPropertiesTo((HumanoidModel<T>) replacement);
                 replacement.rightBoot.copyFrom(original.rightLeg);
                 replacement.leftBoot.copyFrom(original.leftLeg);
-            }
-        });
-    }
-
-    /**
-     * creates a custom texture for your armor in
-     * <br>{@code <nameSpace>:textures/models/armor/custom/<id>.png}
-     */
-    public static String makeCustomTextureLocation(String nameSpace, String id) {
-        return new ResourceLocation(nameSpace, "textures/models/armor/" + id + ".png").toString();
-    }
-
-    //endregion
-
-    /**
-     * @param registry the Register to add to
-     * @param baseName the base name of the armor
-     * @param creator a lambda function to create an instance of the armor, mostly a method reference to the constructor
-     * @return a Map mapping the ArmorType to the RegObj for the slot
-     */
-    public static <T extends AbstractExtendedArmorItem> Map<Type, RegistryObject<T>> createRegistry(DeferredRegister<Item> registry, String baseName, Function<Type, T> creator) {
-        return Util.make(new EnumMap<>(Type.class), map -> {
-            for (Type type : Type.values()) {
-                map.put(type, registry.register(baseName + "_" + type.getName(), () -> creator.apply(type)));
             }
         });
     }

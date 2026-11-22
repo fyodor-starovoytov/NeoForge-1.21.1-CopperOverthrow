@@ -1,7 +1,5 @@
 package net.star.copperoverthrow.datagen;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
@@ -15,6 +13,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected ModBlockLootTableProvider() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
+
     @Override
     protected void generate() {
         dropSelf(ModBlocks.COPPER_SCAFFOLDING.get());

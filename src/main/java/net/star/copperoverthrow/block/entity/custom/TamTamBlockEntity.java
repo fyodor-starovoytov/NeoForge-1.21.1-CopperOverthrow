@@ -17,6 +17,17 @@ public class TamTamBlockEntity extends BlockEntity {
         super(ModBlockEntities.TAMTAM_BE.get(), pos, state);
     }
 
+    public static void tick(Level level, BlockPos pos, BlockState state, TamTamBlockEntity blockEntity) {
+        if (blockEntity.swinging) {
+            blockEntity.ticks++;
+        }
+
+        if (blockEntity.ticks >= 400) { //Duration in Ticks
+            blockEntity.swinging = false;
+            blockEntity.ticks = 0;
+        }
+    }
+
     public void startSwing(Direction direction) {
         this.clickDirection = direction;
         this.ticks = 0;
@@ -37,18 +48,6 @@ public class TamTamBlockEntity extends BlockEntity {
         }
         return super.triggerEvent(id, type);
     }
-
-    public static void tick(Level level, BlockPos pos, BlockState state, TamTamBlockEntity blockEntity) {
-        if (blockEntity.swinging) {
-            blockEntity.ticks++;
-        }
-
-        if (blockEntity.ticks >= 400) { //Duration in Ticks
-            blockEntity.swinging = false;
-            blockEntity.ticks = 0;
-        }
-    }
-
 
     @Override
     protected void saveAdditional(CompoundTag tag) {

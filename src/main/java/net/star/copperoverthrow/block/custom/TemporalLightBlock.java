@@ -23,6 +23,10 @@ public class TemporalLightBlock extends LightBlock {
         super(properties);
     }
 
+    public static int RANDOM_LIFESPAN_TICKS() {
+        return (int) (Math.random() * (MAX_LIFESPAN_TICKS - MIN_LIFESPAN_TICKS + 1)) + MIN_LIFESPAN_TICKS;
+    }
+
     @Override
     public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.INVISIBLE;
@@ -43,9 +47,5 @@ public class TemporalLightBlock extends LightBlock {
     @Override
     public void tick(@NotNull BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-    }
-
-    public static int RANDOM_LIFESPAN_TICKS() {
-        return (int) (Math.random() * (MAX_LIFESPAN_TICKS - MIN_LIFESPAN_TICKS + 1)) + MIN_LIFESPAN_TICKS;
     }
 }

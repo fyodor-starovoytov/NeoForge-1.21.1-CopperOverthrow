@@ -12,8 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -25,6 +23,17 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
 
     public CopperTrowelItem(Properties properties) {
         super(properties);
+    }
+
+    private static List<ItemStack> getHotbarBlockItems(Player player) {
+        List<ItemStack> list = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
+                list.add(stack);
+            }
+        }
+        return list;
     }
 
     @Override
@@ -77,17 +86,6 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
             }
         }
         return InteractionResult.PASS;
-    }
-
-    private static List<ItemStack> getHotbarBlockItems(Player player) {
-        List<ItemStack> list = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            ItemStack stack = player.getInventory().getItem(i);
-            if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
-                list.add(stack);
-            }
-        }
-        return list;
     }
 
     @Override

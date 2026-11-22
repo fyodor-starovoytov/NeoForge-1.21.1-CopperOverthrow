@@ -22,7 +22,7 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CopperOverthrow.MOD_ID);
 
     public static final RegistryObject<Item> COPPER_NUGGET = ITEMS.register("copper_nugget",
-            ()-> new Item(new Properties()));
+            () -> new Item(new Properties()));
 
     public static final RegistryObject<Item> BEE_CATCHER = ITEMS.register("bee_catcher",
             () -> new BeeCatcherItem(
@@ -72,7 +72,11 @@ public class ModItems {
                     new Properties()));
 
     public static final RegistryObject<Item> COPPER_HAMMER = ITEMS.register("copper_hammer",
-            () -> new HammerItem( 5f, -3.2f, ModToolTiers.COPPER,new Item.Properties()));
+            () -> new HammerItem(5f, -3.2f, ModToolTiers.COPPER_REINFORCED, new Item.Properties()));
+
+    public static final RegistryObject<Item> COPPER_CROWBAR = ITEMS.register("copper_crowbar",
+            () -> new CrowbarItem(0f, -2.8f, ModToolTiers.COPPER_WEAK, new Item.Properties()));
+
 
     public static final RegistryObject<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
             () -> new HandsawItem(new Properties().durability(727)));

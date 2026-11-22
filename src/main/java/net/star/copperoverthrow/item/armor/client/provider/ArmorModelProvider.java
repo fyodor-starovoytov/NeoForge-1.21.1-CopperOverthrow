@@ -13,9 +13,10 @@ public interface ArmorModelProvider {
     /**
      * provides a custom armor model.
      * cache the model if possible as it's needed each <i>rendering</i> tick
+     *
      * @param living the entity for the model
-     * @param stack the stack for the model
-     * @param slot the slot for the model
+     * @param stack  the stack for the model
+     * @param slot   the slot for the model
      * @return the model
      */
     ArmorModel getModel(LivingEntity living, ItemStack stack, EquipmentSlot slot);

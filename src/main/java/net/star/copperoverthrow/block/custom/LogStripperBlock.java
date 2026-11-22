@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.star.copperoverthrow.CommonConfig;
 import net.star.copperoverthrow.block.entity.custom.LogStripperBlockEntity;
@@ -39,7 +38,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class LogStripperBlock extends BaseEntityBlock implements WeatheringCopper{
+public class LogStripperBlock extends BaseEntityBlock implements WeatheringCopper {
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
 
     private final WeatherState weatherState;
@@ -50,25 +49,25 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
     }
 
     @Override
-    public VoxelShape getShape( BlockState state,  BlockGetter level,  BlockPos pos,  CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
 
     @Override
-    public BlockEntity newBlockEntity( BlockPos pos,  BlockState state) {
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new LogStripperBlockEntity(pos, state);
     }
 
     @Override
-    public  RenderShape getRenderShape( BlockState state) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
     @Override
-    public void onRemove(BlockState state,  Level level,  BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (state.getBlock() != newState.getBlock()){
-            if (level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity){
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (state.getBlock() != newState.getBlock()) {
+            if (level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity) {
                 Containers.dropContents(level, pos, logStripperBlockEntity);
                 level.updateNeighbourForOutputSignal(pos, this);
             }
@@ -76,6 +75,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
+
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!(level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity)) {
@@ -227,6 +227,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
         return stack;
     }
+
     public boolean isBlockStrippable(ItemStack stack) {
         if (stack.getItem() instanceof BlockItem blockItem) {
             Block block = blockItem.getBlock();
@@ -281,12 +282,12 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
     }
 
     @Override
-    public void randomTick( BlockState state,  ServerLevel level,  BlockPos pos,  RandomSource random) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         this.applyChangeOverTime(state, level, pos, random);
     }
 
     @Override
-    public  WeatherState getAge() {
+    public WeatherState getAge() {
         return this.weatherState;
     }
 
@@ -302,8 +303,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
             tooltip.add(Component.empty());
             tooltip.add(Component.translatable("tooltip.copperoverthrow.when_placed.tooltip"));
             tooltip.add(Component.translatable("tooltip.copperoverthrow.log_stripper_block.tooltip"));
-        }
-        else {
+        } else {
             tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, level, tooltip, flag);

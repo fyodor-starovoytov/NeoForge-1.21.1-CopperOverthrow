@@ -10,9 +10,11 @@ import net.star.copperoverthrow.CopperOverthrow;
 
 public class ModTags {
 
-     public static class Blocks{
-        public static final TagKey<Block> NEEDS_COPPER_TOOL = createTag(CopperOverthrow.MOD_ID ,"needs_copper_tool");
-        public static final TagKey<Block> MINEABLE_WITH_HAMMER = createTag(CopperOverthrow.MOD_ID ,"mineable_with_hammer");
+    public static class Blocks {
+        public static final TagKey<Block> NEEDS_COPPER_TOOL = createTag(CopperOverthrow.MOD_ID, "needs_copper_tool");
+        public static final TagKey<Block> MINEABLE_WITH_HAMMER = createTag(CopperOverthrow.MOD_ID, "mineable_with_hammer");
+        public static final TagKey<Block> MINEABLE_WITH_CROWBAR = createTag(CopperOverthrow.MOD_ID, "mineable_with_crowbar");
+
 
         public static final TagKey<Block> RAIN_DRUMS = createTag("forge", "musical_blocks/rain_drums");
         public static final TagKey<Block> PLATES = createTag("forge", "musical_blocks/plates");
@@ -26,23 +28,24 @@ public class ModTags {
 
         public static final TagKey<Block> LOG_STRIPPING_STATION = createTag(CopperOverthrow.MOD_ID, "log_stripping_stations");
 
-         private static TagKey<Block> createTag(String namespace, String path){
+        private static TagKey<Block> createTag(String namespace, String path) {
             return BlockTags.create(ResourceLocation.tryBuild(namespace, path));
         }
     }
 
-    public static class Items{
+    public static class Items {
         public static final TagKey<Item> C_TOOLS_HAMMERS = createTag("forge", "tools/hammers");
         public static final TagKey<Item> C_TOOLS_SAWS = createTag("forge", "tools/saws");
         public static final TagKey<Item> C_TOOLS_CATCHERS = createTag("forge", "tools/catchers");
         public static final TagKey<Item> C_TOOLS_BUILDERS = createTag("forge", "tools/builders");
+        public static final TagKey<Item> C_TOOLS_PAXELS = createTag("forge", "tools/paxels");
 
         public static final TagKey<Item> C_COPPER_NUGGETS = createTag("forge", "nuggets/copper");
 
         public static final TagKey<Item> HAMMER_ENCHANTABLE = createTag("forge", "hammer/enchantable");
 
 
-        private static TagKey<Item> createTag(String namespace, String path){
+        private static TagKey<Item> createTag(String namespace, String path) {
             return ItemTags.create(new ResourceLocation(namespace, path));
         }
     }

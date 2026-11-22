@@ -40,6 +40,97 @@ public class CopperLongRuler extends AbstractRepairableCopperItem {
         this.hologramBlock = block;
     }
 
+    public static List<BlockPos> getVector(BlockPos initial, BlockPos secondary) {
+        List<BlockPos> vectorBlocks = new ArrayList<>();
+
+        if (initial.distSqr(secondary) > CommonConfig.MEASURE_MAX_DISTANCE.get() * CommonConfig.MEASURE_MAX_DISTANCE.get()) {
+            return vectorBlocks;
+        }
+
+        int x1 = initial.getX();
+        int y1 = initial.getY();
+        int z1 = initial.getZ();
+
+        int x2 = secondary.getX();
+        int y2 = secondary.getY();
+        int z2 = secondary.getZ();
+
+        int dx = Math.abs(x2 - x1);
+        int dy = Math.abs(y2 - y1);
+        int dz = Math.abs(z2 - z1);
+
+        int xs = (x2 > x1) ? 1 : -1;
+        int ys = (y2 > y1) ? 1 : -1;
+        int zs = (z2 > z1) ? 1 : -1;
+
+        if (dx >= dy && dx >= dz) {
+            int p1 = 2 * dy - dx;
+            int p2 = 2 * dz - dx;
+
+            while (x1 != x2) {
+                vectorBlocks.add(new BlockPos(x1, y1, z1));
+                if (p1 >= 0) {
+                    y1 += ys;
+                    p1 -= 2 * dx;
+                }
+                if (p2 >= 0) {
+                    z1 += zs;
+                    p2 -= 2 * dx;
+                }
+                p1 += 2 * dy;
+                p2 += 2 * dz;
+                x1 += xs;
+            }
+        } else if (dy >= dx && dy >= dz) {
+            int p1 = 2 * dx - dy;
+            int p2 = 2 * dz - dy;
+
+            while (y1 != y2) {
+                vectorBlocks.add(new BlockPos(x1, y1, z1));
+                if (p1 >= 0) {
+                    x1 += xs;
+                    p1 -= 2 * dy;
+                }
+                if (p2 >= 0) {
+                    z1 += zs;
+                    p2 -= 2 * dy;
+                }
+                p1 += 2 * dx;
+                p2 += 2 * dz;
+                y1 += ys;
+            }
+        } else {
+            int p1 = 2 * dy - dz;
+            int p2 = 2 * dx - dz;
+
+            while (z1 != z2) {
+                vectorBlocks.add(new BlockPos(x1, y1, z1));
+                if (p1 >= 0) {
+                    y1 += ys;
+                    p1 -= 2 * dz;
+                }
+                if (p2 >= 0) {
+                    x1 += xs;
+                    p2 -= 2 * dz;
+                }
+                p1 += 2 * dy;
+                p2 += 2 * dx;
+                z1 += zs;
+            }
+        }
+        vectorBlocks.add(new BlockPos(x2, y2, z2));
+
+        return vectorBlocks;
+    }
+
+    private static BlockPos getBlockLookedAt(Player player) {
+        BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
+                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(3f))),
+                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+        BlockPos secondaryPos = traceResult.getBlockPos();
+        return secondaryPos;
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext context) {
 
@@ -104,8 +195,8 @@ public class CopperLongRuler extends AbstractRepairableCopperItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack stack = player.getItemInHand(usedHand);
         CompoundTag tag = stack.getOrCreateTag();
-        if (player.isShiftKeyDown()){
-            if (!level.isClientSide && stack.is(ModItems.COPPER_LONG_RULER.get())){
+        if (player.isShiftKeyDown()) {
+            if (!level.isClientSide && stack.is(ModItems.COPPER_LONG_RULER.get())) {
                 tag.remove("is_used");
                 tag.remove("temporal_direction");
                 tag.remove("temporal_initial_blockpos");
@@ -181,99 +272,6 @@ public class CopperLongRuler extends AbstractRepairableCopperItem {
                 }
             }
         }
-    }
-
-    public static List<BlockPos> getVector(BlockPos initial, BlockPos secondary) {
-        List<BlockPos> vectorBlocks = new ArrayList<>();
-
-        if (initial.distSqr(secondary) > CommonConfig.MEASURE_MAX_DISTANCE.get() * CommonConfig.MEASURE_MAX_DISTANCE.get()) {
-            return vectorBlocks;
-        }
-
-        int x1 = initial.getX();
-        int y1 = initial.getY();
-        int z1 = initial.getZ();
-
-        int x2 = secondary.getX();
-        int y2 = secondary.getY();
-        int z2 = secondary.getZ();
-
-        int dx = Math.abs(x2 - x1);
-        int dy = Math.abs(y2 - y1);
-        int dz = Math.abs(z2 - z1);
-
-        int xs = (x2 > x1) ? 1 : -1;
-        int ys = (y2 > y1) ? 1 : -1;
-        int zs = (z2 > z1) ? 1 : -1;
-
-        if (dx >= dy && dx >= dz) {
-            int p1 = 2 * dy - dx;
-            int p2 = 2 * dz - dx;
-
-            while (x1 != x2) {
-                vectorBlocks.add(new BlockPos(x1, y1, z1));
-                if (p1 >= 0) {
-                    y1 += ys;
-                    p1 -= 2 * dx;
-                }
-                if (p2 >= 0) {
-                    z1 += zs;
-                    p2 -= 2 * dx;
-                }
-                p1 += 2 * dy;
-                p2 += 2 * dz;
-                x1 += xs;
-            }
-        }
-        else if (dy >= dx && dy >= dz) {
-            int p1 = 2 * dx - dy;
-            int p2 = 2 * dz - dy;
-
-            while (y1 != y2) {
-                vectorBlocks.add(new BlockPos(x1, y1, z1));
-                if (p1 >= 0) {
-                    x1 += xs;
-                    p1 -= 2 * dy;
-                }
-                if (p2 >= 0) {
-                    z1 += zs;
-                    p2 -= 2 * dy;
-                }
-                p1 += 2 * dx;
-                p2 += 2 * dz;
-                y1 += ys;
-            }
-        }
-        else {
-            int p1 = 2 * dy - dz;
-            int p2 = 2 * dx - dz;
-
-            while (z1 != z2) {
-                vectorBlocks.add(new BlockPos(x1, y1, z1));
-                if (p1 >= 0) {
-                    y1 += ys;
-                    p1 -= 2 * dz;
-                }
-                if (p2 >= 0) {
-                    x1 += xs;
-                    p2 -= 2 * dz;
-                }
-                p1 += 2 * dy;
-                p2 += 2 * dx;
-                z1 += zs;
-            }
-        }
-        vectorBlocks.add(new BlockPos(x2, y2, z2));
-
-        return vectorBlocks;
-    }
-
-    private static BlockPos getBlockLookedAt(Player player){
-        BlockHitResult traceResult = player.level().clip(new ClipContext(player.getEyePosition(1f),
-                (player.getEyePosition(1f).add(player.getViewVector(1f).scale(3f))),
-                ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-        BlockPos secondaryPos = traceResult.getBlockPos();
-        return secondaryPos;
     }
 
     @Override

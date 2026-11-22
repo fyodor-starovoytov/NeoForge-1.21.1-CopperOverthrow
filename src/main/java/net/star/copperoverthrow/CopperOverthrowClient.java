@@ -44,56 +44,6 @@ public class CopperOverthrowClient {
     private static final ResourceLocation OVERLAY_TEXTURE =
             ResourceLocation.tryBuild(CopperOverthrow.MOD_ID, "textures/gui/waxed_overlay.png");
 
-    @Mod.EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ClientModEvents {
-
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            ModItemProperties.addCustomItemProperties();
-        }
-
-        @SubscribeEvent
-        public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
-            event.registerBlockEntityRenderer(ModBlockEntities.TAMTAM_BE.get(), TamTamRenderer::new);
-            event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellRenderer::new);
-            event.registerBlockEntityRenderer(ModBlockEntities.RED_WIND_CHIME_BE.get(), RedWindChimeRenderer::new);
-            event.registerBlockEntityRenderer(ModBlockEntities.LUNAR_WIND_CHIME_BE.get(), LunarWindChimeRenderer::new);
-            event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_WIND_CHIME_BE.get(), BambooWindChimeRenderer::new);
-        }
-
-        @SubscribeEvent
-        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(TamTamModel.LAYER_LOCATION, TamTamModel::createBodyLayer);
-            event.registerLayerDefinition(KitchenBellModel.LAYER_LOCATION, KitchenBellModel::createBodyLayer);
-            event.registerLayerDefinition(RedWindChimeModel.LAYER_LOCATION, RedWindChimeModel::createBodyLayer);
-            event.registerLayerDefinition(LunarWindChimeModel.LAYER_LOCATION, LunarWindChimeModel::createBodyLayer);
-            event.registerLayerDefinition(BambooWindChimeModel.LAYER_LOCATION, BambooWindChimeModel::createBodyLayer);
-        }
-
-        @SubscribeEvent
-        public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
-            for (Item item : BuiltInRegistries.ITEM) {
-                event.register(item, (guiGraphics, font, stack, x, y) -> {
-                    if (isWaxedByName(stack)) {
-                        RenderSystem.enableBlend();
-                        RenderSystem.defaultBlendFunc();
-
-                        guiGraphics.pose().pushPose();
-                        guiGraphics.pose().translate(0, 0, 200.0F);
-
-                        guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, 16, 16, 16, 16);
-
-                        guiGraphics.pose().popPose();
-                        RenderSystem.disableBlend();
-                    }
-
-                    return false;
-                });
-            }
-        }
-    }
-
     @SubscribeEvent
     public static void onRenderHand(RenderHandEvent event) {
         LocalPlayer player = Minecraft.getInstance().player;
@@ -330,5 +280,55 @@ public class CopperOverthrowClient {
             }
         }
         return light;
+    }
+
+    @Mod.EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ClientModEvents {
+
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            ModItemProperties.addCustomItemProperties();
+        }
+
+        @SubscribeEvent
+        public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(ModBlockEntities.LOG_STRIPPER_BE.get(), LogStripperBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.TAMTAM_BE.get(), TamTamRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.KITCHEN_BELL_BE.get(), KitchenBellRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.RED_WIND_CHIME_BE.get(), RedWindChimeRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.LUNAR_WIND_CHIME_BE.get(), LunarWindChimeRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_WIND_CHIME_BE.get(), BambooWindChimeRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(TamTamModel.LAYER_LOCATION, TamTamModel::createBodyLayer);
+            event.registerLayerDefinition(KitchenBellModel.LAYER_LOCATION, KitchenBellModel::createBodyLayer);
+            event.registerLayerDefinition(RedWindChimeModel.LAYER_LOCATION, RedWindChimeModel::createBodyLayer);
+            event.registerLayerDefinition(LunarWindChimeModel.LAYER_LOCATION, LunarWindChimeModel::createBodyLayer);
+            event.registerLayerDefinition(BambooWindChimeModel.LAYER_LOCATION, BambooWindChimeModel::createBodyLayer);
+        }
+
+        @SubscribeEvent
+        public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
+            for (Item item : BuiltInRegistries.ITEM) {
+                event.register(item, (guiGraphics, font, stack, x, y) -> {
+                    if (isWaxedByName(stack)) {
+                        RenderSystem.enableBlend();
+                        RenderSystem.defaultBlendFunc();
+
+                        guiGraphics.pose().pushPose();
+                        guiGraphics.pose().translate(0, 0, 200.0F);
+
+                        guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, 16, 16, 16, 16);
+
+                        guiGraphics.pose().popPose();
+                        RenderSystem.disableBlend();
+                    }
+
+                    return false;
+                });
+            }
+        }
     }
 }

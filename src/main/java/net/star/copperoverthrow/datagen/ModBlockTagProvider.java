@@ -4,7 +4,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.star.copperoverthrow.CopperOverthrow;
@@ -71,7 +70,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .addTag(ModTags.Blocks.COPPER_LANTERNS)
                 .addTag(ModTags.Blocks.KITCHEN_BELLS)
-                 .addTag(ModTags.Blocks.LOG_STRIPPING_STATION)
+                .addTag(ModTags.Blocks.LOG_STRIPPING_STATION)
         ;
 
         tag(BlockTags.CLIMBABLE)
@@ -104,6 +103,12 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
         tag(ModTags.Blocks.MINEABLE_WITH_HAMMER)
                 .addTag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE);
+
+        tag(ModTags.Blocks.MINEABLE_WITH_CROWBAR)
+                .addTag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .addTag(BlockTags.MINEABLE_WITH_AXE)
+                .addTag(BlockTags.MINEABLE_WITH_HOE)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE);
 
 

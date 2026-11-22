@@ -14,9 +14,11 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CopperOverthrow.MOD_ID);
 
-    public static final Supplier<BlockEntityType<LogStripperBlockEntity>> LOG_STRIPPER_BE =
-            BLOCK_ENTITIES.register("log_stripper_be", ()-> BlockEntityType.Builder.of(
-                    LogStripperBlockEntity::new,
+    public static void register(IEventBus eventBus) {
+        BLOCK_ENTITIES.register(eventBus);
+    }    public static final Supplier<BlockEntityType<LogStripperBlockEntity>> LOG_STRIPPER_BE =
+            BLOCK_ENTITIES.register("log_stripper_be", () -> BlockEntityType.Builder.of(
+                            LogStripperBlockEntity::new,
                             ModBlocks.LOG_STRIPPER.get(),
                             ModBlocks.EXPOSED_LOG_STRIPPER.get(),
                             ModBlocks.WEATHERED_LOG_STRIPPER.get(),
@@ -29,7 +31,7 @@ public class ModBlockEntities {
                     .build(null));
 
     public static final Supplier<BlockEntityType<TamTamBlockEntity>> TAMTAM_BE =
-            BLOCK_ENTITIES.register("tamtam_be", ()-> BlockEntityType.Builder.of(
+            BLOCK_ENTITIES.register("tamtam_be", () -> BlockEntityType.Builder.of(
                             TamTamBlockEntity::new,
                             ModBlocks.TAMTAM.get(),
                             ModBlocks.EXPOSED_TAMTAM.get(),
@@ -42,17 +44,17 @@ public class ModBlockEntities {
                     .build(null));
 
     public static final Supplier<BlockEntityType<RedWindChimeBlockEntity>> RED_WIND_CHIME_BE =
-            BLOCK_ENTITIES.register("red_wind_chime_be", ()-> BlockEntityType.Builder.of(
+            BLOCK_ENTITIES.register("red_wind_chime_be", () -> BlockEntityType.Builder.of(
                             RedWindChimeBlockEntity::new,
                             ModBlocks.RED_WIND_CHIME.get())
                     .build(null));
     public static final Supplier<BlockEntityType<BambooWindChimeBlockEntity>> BAMBOO_WIND_CHIME_BE =
-            BLOCK_ENTITIES.register("bamboo_wind_chime_be", ()-> BlockEntityType.Builder.of(
+            BLOCK_ENTITIES.register("bamboo_wind_chime_be", () -> BlockEntityType.Builder.of(
                             BambooWindChimeBlockEntity::new,
                             ModBlocks.BAMBOO_WIND_CHIME.get())
                     .build(null));
     public static final Supplier<BlockEntityType<LunarWindChimeBlockEntity>> LUNAR_WIND_CHIME_BE =
-            BLOCK_ENTITIES.register("lunar_wind_chime_be", ()-> BlockEntityType.Builder.of(
+            BLOCK_ENTITIES.register("lunar_wind_chime_be", () -> BlockEntityType.Builder.of(
                             LunarWindChimeBlockEntity::new,
                             ModBlocks.LUNAR_WIND_CHIME.get())
                     .build(null));
@@ -71,7 +73,5 @@ public class ModBlockEntities {
                             ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get())
                     .build(null));
 
-    public static void register(IEventBus eventBus){
-        BLOCK_ENTITIES.register(eventBus);
-    }
+
 }

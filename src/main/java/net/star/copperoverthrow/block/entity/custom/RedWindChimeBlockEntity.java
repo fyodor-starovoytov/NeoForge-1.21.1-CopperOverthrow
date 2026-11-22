@@ -36,90 +36,8 @@ public class RedWindChimeBlockEntity extends BlockEntity {
     private boolean willDoIdleSounds = true;
 
 
-
     public RedWindChimeBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.RED_WIND_CHIME_BE.get(), pos, state);
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        tag.putDouble("xMotion", xMotion);
-        tag.putDouble("zMotion", zMotion);
-        tag.putDouble("randomX", randomX);
-        tag.putDouble("randomZ", randomZ);
-        tag.putDouble("randomX2", randomX2);
-        tag.putDouble("randomZ2", randomZ2);
-        tag.putDouble("randomX3", randomX3);
-        tag.putDouble("randomZ3", randomZ3);
-        tag.putBoolean("swinging", swinging);
-        tag.putInt("ticks", ticks);
-    }
-
-    @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        xMotion = tag.getDouble("xMotion");
-        zMotion = tag.getDouble("zMotion");
-        randomX = tag.getDouble("randomX");
-        randomZ = tag.getDouble("randomZ");
-        randomX2 = tag.getDouble("randomX2");
-        randomZ2 = tag.getDouble("randomZ2");
-        randomX3 = tag.getDouble("randomX3");
-        randomZ3 = tag.getDouble("randomZ3");
-        swinging = tag.getBoolean("swinging");
-        ticks = tag.getInt("ticks");
-    }
-
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag() {
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag);
-        return tag;
-    }
-
-    public void onOpenAir(boolean isOnOpenAir){
-        this.willDoIdleSounds = isOnOpenAir;
-    }
-
-    public void startSwing(double xMotion, double zMotion) {
-        this.ticks = 0;
-        this.swinging = true;
-        this.xMotion = xMotion * 10;
-        this.zMotion = zMotion * 10;
-        this.randomX = Math.random() + zMotion * 2;
-        this.randomZ = Math.random() + xMotion * 2;
-        this.randomX2 = Math.random() + zMotion * 2;
-        this.randomZ2 = Math.random() + xMotion * 2;
-        this.randomX3 = Math.random() + zMotion * 2;
-        this.randomZ3 = Math.random() + xMotion * 2;
-
-
-        if (this.level != null && !this.level.isClientSide) {
-            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
-        }
-    }
-
-    public void triggerChimeSequence(int chimesCount, double volume) {
-        this.chimesRemaining = chimesCount;
-        this.chimeDelayTicks = 0;
-        this.volume = volume;
-    }
-
-    @Override
-    public boolean triggerEvent(int id, int type) {
-        if (id == 1) {
-            this.ticks = 0;
-            this.swinging = true;
-            return true;
-        }
-        return super.triggerEvent(id, type);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, RedWindChimeBlockEntity blockEntity) {
@@ -165,5 +83,86 @@ public class RedWindChimeBlockEntity extends BlockEntity {
             blockEntity.randomZ3 = 0;
             blockEntity.volume = 0.2;
         }
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putDouble("xMotion", xMotion);
+        tag.putDouble("zMotion", zMotion);
+        tag.putDouble("randomX", randomX);
+        tag.putDouble("randomZ", randomZ);
+        tag.putDouble("randomX2", randomX2);
+        tag.putDouble("randomZ2", randomZ2);
+        tag.putDouble("randomX3", randomX3);
+        tag.putDouble("randomZ3", randomZ3);
+        tag.putBoolean("swinging", swinging);
+        tag.putInt("ticks", ticks);
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        xMotion = tag.getDouble("xMotion");
+        zMotion = tag.getDouble("zMotion");
+        randomX = tag.getDouble("randomX");
+        randomZ = tag.getDouble("randomZ");
+        randomX2 = tag.getDouble("randomX2");
+        randomZ2 = tag.getDouble("randomZ2");
+        randomX3 = tag.getDouble("randomX3");
+        randomZ3 = tag.getDouble("randomZ3");
+        swinging = tag.getBoolean("swinging");
+        ticks = tag.getInt("ticks");
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
+
+    public void onOpenAir(boolean isOnOpenAir) {
+        this.willDoIdleSounds = isOnOpenAir;
+    }
+
+    public void startSwing(double xMotion, double zMotion) {
+        this.ticks = 0;
+        this.swinging = true;
+        this.xMotion = xMotion * 10;
+        this.zMotion = zMotion * 10;
+        this.randomX = Math.random() + zMotion * 2;
+        this.randomZ = Math.random() + xMotion * 2;
+        this.randomX2 = Math.random() + zMotion * 2;
+        this.randomZ2 = Math.random() + xMotion * 2;
+        this.randomX3 = Math.random() + zMotion * 2;
+        this.randomZ3 = Math.random() + xMotion * 2;
+
+
+        if (this.level != null && !this.level.isClientSide) {
+            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+        }
+    }
+
+    public void triggerChimeSequence(int chimesCount, double volume) {
+        this.chimesRemaining = chimesCount;
+        this.chimeDelayTicks = 0;
+        this.volume = volume;
+    }
+
+    @Override
+    public boolean triggerEvent(int id, int type) {
+        if (id == 1) {
+            this.ticks = 0;
+            this.swinging = true;
+            return true;
+        }
+        return super.triggerEvent(id, type);
     }
 }

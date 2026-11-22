@@ -1,11 +1,7 @@
 package net.star.copperoverthrow.datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -66,6 +62,22 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
                 .save(writer, "copperoverthrow:copper_trowel_alt");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CROWBAR.get(), 1)
+                .pattern(" BB")
+                .pattern(" B ")
+                .pattern("CC ")
+                .define('B', Tags.Items.INGOTS_COPPER)
+                .define('C', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_CROWBAR.get(), 1)
+                .pattern("BB ")
+                .pattern(" B ")
+                .pattern(" CC")
+                .define('B', Tags.Items.INGOTS_COPPER)
+                .define('C', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer, "copperoverthrow:copper_crowbar_alt");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BEE_CATCHER.get())
                 .pattern("  C")
@@ -324,7 +336,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.PISTON)
                 .define('C', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
-
 
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.COPPER_NUGGET.get(), 9)

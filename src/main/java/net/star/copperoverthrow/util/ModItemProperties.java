@@ -7,7 +7,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.item.ModItems;
 
 public class ModItemProperties {
-    public static void addCustomItemProperties(){
+    public static void addCustomItemProperties() {
 
         ItemProperties.register(ModItems.BEE_CATCHER.get(), new ResourceLocation(CopperOverthrow.MOD_ID, "1bee"),
                 (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("caught_bees", Tag.TAG_LIST) && stack.getTag().getList("caught_bees", Tag.TAG_COMPOUND).size() == 1 ? 1f : 0f);

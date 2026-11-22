@@ -126,9 +126,9 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
         level.gameEvent(player, GameEvent.BLOCK_ACTIVATE, pos);
     }
 
-    private float jammed(int press_ticks){
+    private float jammed(int press_ticks) {
         float chanceToBeJammed = ((float) press_ticks) / 100 / 5;
-        if (Math.random() < chanceToBeJammed && CommonConfig.JAMMING.get()){
+        if (Math.random() < chanceToBeJammed && CommonConfig.JAMMING.get()) {
             return (float) 200 / press_ticks;
         }
         return 0;
@@ -233,8 +233,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
             tooltip.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
             tooltip.add(Component.translatable(TOOLTIP_SOUNDING));
 
-        }
-        else {
+        } else {
             tooltip.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
             tooltip.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }

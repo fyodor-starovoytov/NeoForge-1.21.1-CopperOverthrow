@@ -7,9 +7,10 @@ import net.minecraft.client.model.geom.builders.*;
 
 public class CopperExoskeletonModel extends ArmorModel {
 
-	public CopperExoskeletonModel(ModelPart root) {
+    public CopperExoskeletonModel(ModelPart root) {
         super(root);
-	}
+    }
+
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();

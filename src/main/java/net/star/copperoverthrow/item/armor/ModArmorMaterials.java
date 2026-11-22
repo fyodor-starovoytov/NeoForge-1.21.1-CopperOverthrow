@@ -13,23 +13,21 @@ import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
 
-        STEPPER("stepper", 15, new int[]{1, 4, 4, 1}, 12, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ()-> Ingredient.of(Tags.Items.INGOTS_COPPER)),
-        CRASH("crash", 25, new int[]{2, 5, 4, 2}, 7, SoundEvents.ARMOR_EQUIP_GENERIC, 2f, 0f, ()-> Ingredient.of(Tags.Items.INGOTS_COPPER));
+    STEPPER("stepper", 15, new int[]{1, 4, 4, 1}, 12, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(Tags.Items.INGOTS_COPPER)),
+    CRASH("crash", 25, new int[]{2, 5, 4, 2}, 7, SoundEvents.ARMOR_EQUIP_GENERIC, 2f, 0f, () -> Ingredient.of(Tags.Items.INGOTS_COPPER));
 
 
-
+    private static final int[] BASE_DURABILITY = {11, 16, 16, 13};
     private final String name;
-        private final int durabilityMultiplier;
-        private final int[] protectionAmounts;
-        private final int enchantmentValue;
-        private final SoundEvent equipSound;
-        private final float toughness;
-        private final float knockbackResistance;
-        private final Supplier<Ingredient> ingredientSupplier;
+    private final int durabilityMultiplier;
+    private final int[] protectionAmounts;
+    private final int enchantmentValue;
+    private final SoundEvent equipSound;
+    private final float toughness;
+    private final float knockbackResistance;
+    private final Supplier<Ingredient> ingredientSupplier;
 
-        private static final int[] BASE_DURABILITY = {11, 16, 16, 13};
-
-        ModArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> ingredientSupplier) {
+    ModArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> ingredientSupplier) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;
