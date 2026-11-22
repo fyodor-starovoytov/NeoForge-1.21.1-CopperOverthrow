@@ -112,6 +112,8 @@
 
   "copperoverthrow.attribute.head_impact_resistance": "Сопротивление ударам по голове",
   "copperoverthrow.attribute.night_vision": "Ночное зрение",
+  "copperoverthrow.attribute.break_speed": "Скорость разрушения блоков",
+  "copperoverthrow.attribute.safe_fall_distance": "Безопасная высота падения",
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7При размещении:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7При использовании на блоке:§r",

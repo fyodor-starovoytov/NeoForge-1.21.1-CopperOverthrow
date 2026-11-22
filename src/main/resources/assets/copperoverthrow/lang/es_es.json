@@ -112,6 +112,8 @@
 
   "copperoverthrow.attribute.head_impact_resistance": "Resistencia a impactos en la cabeza",
   "copperoverthrow.attribute.night_vision": "Visión nocturna",
+  "copperoverthrow.attribute.break_speed": "Velocidad de minado",
+  "copperoverthrow.attribute.safe_fall_distance": "Distancia de caída segura",
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7Al colocar:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7Al usar en un bloque:§r",

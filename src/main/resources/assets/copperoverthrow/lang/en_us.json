@@ -115,6 +115,8 @@
 
   "copperoverthrow.attribute.head_impact_resistance": "Head Impact Resistance",
   "copperoverthrow.attribute.night_vision": "Night Vision",
+  "copperoverthrow.attribute.break_speed":  "Block Breaking Speed",
+  "copperoverthrow.attribute.safe_fall_distance": "Safe Fall Distance",
 
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7When placed:§r",

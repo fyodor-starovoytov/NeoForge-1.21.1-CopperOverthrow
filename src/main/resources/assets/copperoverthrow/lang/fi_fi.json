@@ -112,6 +112,8 @@
 
   "copperoverthrow.attribute.head_impact_resistance": "Pään iskunkestävyys",
   "copperoverthrow.attribute.night_vision": "Pimeänäkö",
+  "copperoverthrow.attribute.break_speed": "Kuutioiden rikkomisnopeus",
+  "copperoverthrow.attribute.safe_fall_distance": "Turvallinen pudotusmatka",
 
   "tooltip.copperoverthrow.when_placed.tooltip": "§7Asetettaessa:§r",
   "tooltip.copperoverthrow.when_used_on_block.tooltip": "§7Käytettäessä kuutioon:§r",
