@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#minecraft:needs_stone_tool",
+    "#minecraft:stone_bricks",
+    "#minecraft:mineable/shovel",
+    "#minecraft:stone_ore_replaceables",
+    "#minecraft:deepslate_ore_replaceables"
+  ]
+}

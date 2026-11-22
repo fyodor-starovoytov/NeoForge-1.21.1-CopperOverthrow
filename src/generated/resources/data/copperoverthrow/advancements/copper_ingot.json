@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:story/upgrade_tools",
+  "criteria": {
+    "has_copper_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:copper_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.copperoverthrow.copper_ingot.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:copper_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.copperoverthrow.copper_ingot.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

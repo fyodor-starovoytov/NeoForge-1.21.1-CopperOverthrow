@@ -1,0 +1,12 @@
+{
+  "values": [
+    "copperoverthrow:log_stripper",
+    "copperoverthrow:exposed_log_stripper",
+    "copperoverthrow:weathered_log_stripper",
+    "copperoverthrow:oxidized_log_stripper",
+    "copperoverthrow:waxed_log_stripper",
+    "copperoverthrow:waxed_exposed_log_stripper",
+    "copperoverthrow:waxed_weathered_log_stripper",
+    "copperoverthrow:waxed_oxidized_log_stripper"
+  ]
+}

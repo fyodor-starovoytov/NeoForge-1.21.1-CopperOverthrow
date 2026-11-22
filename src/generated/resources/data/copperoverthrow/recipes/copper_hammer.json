@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:copper_block"
+    },
+    "C": {
+      "tag": "forge:rods/blaze"
+    }
+  },
+  "pattern": [
+    "B",
+    "C"
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_hammer"
+  },
+  "show_notification": true
+}

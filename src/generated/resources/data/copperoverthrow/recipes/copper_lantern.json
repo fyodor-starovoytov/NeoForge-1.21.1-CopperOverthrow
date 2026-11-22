@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:nuggets/copper"
+    },
+    "B": {
+      "item": "minecraft:torch"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_lantern"
+  },
+  "show_notification": true
+}

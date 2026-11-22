@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "copperoverthrow:waxed_weathered_kitchen_bell"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_weathered_kitchen_bell": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "copperoverthrow:weathered_kitchen_bell"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_weathered_kitchen_bell",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "copperoverthrow:waxed_weathered_kitchen_bell"
+    ]
+  },
+  "sends_telemetry_event": false
+}

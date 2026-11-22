@@ -1,0 +1,53 @@
+{
+  "parent": "copperoverthrow:copper_ingot",
+  "criteria": {
+    "has_musical": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "copperoverthrow:medium_note_rain_drum"
+            ]
+          },
+          {
+            "items": [
+              "copperoverthrow:high_note_rain_drum"
+            ]
+          },
+          {
+            "items": [
+              "copperoverthrow:low_note_rain_drum"
+            ]
+          },
+          {
+            "items": [
+              "copperoverthrow:tamtam"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.copperoverthrow.musical.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "copperoverthrow:low_note_rain_drum"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.copperoverthrow.musical.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_musical"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

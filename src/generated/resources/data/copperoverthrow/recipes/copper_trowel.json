@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/copper"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "AB ",
+    "AAB"
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_trowel"
+  },
+  "show_notification": true
+}

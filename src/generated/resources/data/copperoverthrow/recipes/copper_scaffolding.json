@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/copper"
+    },
+    "B": {
+      "item": "minecraft:cut_copper_slab"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "A A",
+    "A A"
+  ],
+  "result": {
+    "count": 6,
+    "item": "copperoverthrow:copper_scaffolding"
+  },
+  "show_notification": true
+}

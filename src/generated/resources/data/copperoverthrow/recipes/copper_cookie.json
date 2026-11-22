@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/copper"
+    },
+    "B": {
+      "item": "minecraft:cookie"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_cookie"
+  },
+  "show_notification": true
+}

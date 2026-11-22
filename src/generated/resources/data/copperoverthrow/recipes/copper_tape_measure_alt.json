@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "minecraft:spyglass"
+    },
+    "B": {
+      "tag": "forge:ingots/copper"
+    },
+    "C": {
+      "tag": "forge:gems/amethyst"
+    },
+    "D": {
+      "item": "copperoverthrow:hologram_block"
+    }
+  },
+  "pattern": [
+    " BA",
+    "BDB",
+    "CCC"
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_sextant"
+  },
+  "show_notification": true
+}

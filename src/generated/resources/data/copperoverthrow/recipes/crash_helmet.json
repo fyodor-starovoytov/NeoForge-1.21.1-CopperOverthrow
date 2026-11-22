@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/copper"
+    },
+    "B": {
+      "tag": "forge:storage_blocks/copper"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "A A"
+  ],
+  "result": {
+    "item": "copperoverthrow:crash_helmet"
+  },
+  "show_notification": true
+}

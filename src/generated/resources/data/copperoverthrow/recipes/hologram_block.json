@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:cut_copper_slab"
+    },
+    {
+      "tag": "forge:dyes/black"
+    },
+    {
+      "tag": "forge:dyes/yellow"
+    }
+  ],
+  "result": {
+    "count": 24,
+    "item": "copperoverthrow:hologram_block"
+  }
+}

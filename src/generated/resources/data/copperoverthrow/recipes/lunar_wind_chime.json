@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/iron"
+    },
+    "B": {
+      "tag": "forge:gems/amethyst"
+    }
+  },
+  "pattern": [
+    " B ",
+    "AAA",
+    " A "
+  ],
+  "result": {
+    "count": 2,
+    "item": "copperoverthrow:lunar_wind_chime"
+  },
+  "show_notification": true
+}

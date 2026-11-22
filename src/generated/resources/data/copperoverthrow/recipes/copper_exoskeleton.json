@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:storage_blocks/copper"
+    },
+    "B": {
+      "item": "minecraft:sticky_piston"
+    },
+    "C": {
+      "tag": "forge:storage_blocks/redstone"
+    },
+    "D": {
+      "tag": "forge:gems/quartz"
+    },
+    "E": {
+      "tag": "forge:storage_blocks/iron"
+    }
+  },
+  "pattern": [
+    "A A",
+    "ECE",
+    "BDB"
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_exoskeleton"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/copper"
+    },
+    "B": {
+      "item": "minecraft:piston"
+    },
+    "C": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "BCB",
+    "A A",
+    "A A"
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_stepper_leggings"
+  },
+  "show_notification": true
+}

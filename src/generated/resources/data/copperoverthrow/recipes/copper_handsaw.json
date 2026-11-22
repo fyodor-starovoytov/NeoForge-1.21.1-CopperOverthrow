@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "forge:nuggets/copper"
+    },
+    "B": {
+      "tag": "forge:ingots/copper"
+    },
+    "C": {
+      "tag": "forge:rods/blaze"
+    }
+  },
+  "pattern": [
+    "  B",
+    " BA",
+    "CA "
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_handsaw"
+  },
+  "show_notification": true
+}

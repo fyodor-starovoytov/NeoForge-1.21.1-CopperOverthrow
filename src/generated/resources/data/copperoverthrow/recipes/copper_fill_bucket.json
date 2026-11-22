@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "tag": "forge:ingots/copper"
+    },
+    "C": {
+      "tag": "forge:gems/amethyst"
+    },
+    "D": {
+      "tag": "forge:string"
+    }
+  },
+  "pattern": [
+    "D",
+    "B",
+    "C"
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_fill_bucket"
+  },
+  "show_notification": true
+}

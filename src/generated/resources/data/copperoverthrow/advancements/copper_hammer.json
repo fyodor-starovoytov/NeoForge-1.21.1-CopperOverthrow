@@ -1,0 +1,39 @@
+{
+  "parent": "copperoverthrow:mining_set",
+  "criteria": {
+    "has_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "copperoverthrow:copper_hammer"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.copperoverthrow.copper_hammer.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "copperoverthrow:copper_hammer",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.copperoverthrow.copper_hammer.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_hammer"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

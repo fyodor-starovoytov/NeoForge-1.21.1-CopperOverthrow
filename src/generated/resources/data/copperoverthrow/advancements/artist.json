@@ -1,0 +1,49 @@
+{
+  "parent": "copperoverthrow:copper_scaffolding",
+  "criteria": {
+    "has_artist": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "copperoverthrow:copper_fill_bucket"
+            ]
+          },
+          {
+            "items": [
+              "copperoverthrow:copper_sextant"
+            ]
+          },
+          {
+            "items": [
+              "copperoverthrow:copper_long_ruler"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.copperoverthrow.artist.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "copperoverthrow:copper_fill_bucket",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.copperoverthrow.artist.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_artist"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

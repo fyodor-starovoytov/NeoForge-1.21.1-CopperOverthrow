@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:note_block",
+    "minecraft:jukebox",
+    "#forge:musical_blocks/bells",
+    "#forge:musical_blocks/plates",
+    "#forge:musical_blocks/wind_chimes",
+    "#forge:musical_blocks/rain_drums"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:copper_block"
+    },
+    "B": {
+      "tag": "forge:stone"
+    },
+    "C": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "BCB",
+    "AAA"
+  ],
+  "result": {
+    "item": "copperoverthrow:log_stripper"
+  },
+  "show_notification": true
+}
