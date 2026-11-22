@@ -297,10 +297,10 @@ public class ModBlocks {
 
     public static final RegistryObject<HologramBlock> HOLOGRAM_BLOCK = registerBlock("hologram_block",
             () -> new HologramBlock(BlockBehaviour.Properties.of()
-                    .replaceable().noCollission().noOcclusion().instabreak().noParticlesOnBreak()));
+                    .replaceable().noCollission().noOcclusion().instabreak().noParticlesOnBreak().dynamicShape()));
     public static final RegistryObject<HologramBlock> INVERTED_HOLOGRAM_BLOCK = registerBlock("inverted_hologram_block",
             () -> new HologramBlock(BlockBehaviour.Properties.of()
-                    .replaceable().noOcclusion().instabreak().noParticlesOnBreak()));
+                    .replaceable().noOcclusion().instabreak().noParticlesOnBreak().dynamicShape()));
 
     public static final RegistryObject<Block> RAIN_DRUM = registerBlock("medium_note_rain_drum",
             () -> new RainDrumBlockTall(BlockBehaviour.Properties.of()
@@ -940,6 +940,8 @@ public class ModBlocks {
         if (name.equals("copper_scaffolding") || name.equals("exposed_copper_scaffolding") || name.equals("weathered_copper_scaffolding") || name.equals("oxidized_copper_scaffolding")
                 || name.equals("waxed_copper_scaffolding") || name.equals("waxed_exposed_copper_scaffolding") || name.equals("waxed_weathered_copper_scaffolding") || name.equals("waxed_oxidized_copper_scaffolding")) {
             ModItems.ITEMS.register(name, () -> new ScaffoldingBlockItem(block.get(), new Item.Properties()));
+        } else if (name.equals("hologram_block") || name.equals("inverted_hologram_block")) {
+            ModItems.ITEMS.register(name, () -> new HologramScaffoldingBlockItem(block.get(), new Item.Properties()));
         } else {
             ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
         }
