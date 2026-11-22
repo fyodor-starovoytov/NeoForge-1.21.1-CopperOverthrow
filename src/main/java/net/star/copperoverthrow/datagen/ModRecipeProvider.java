@@ -387,6 +387,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         addWaxingRecipe(writer, ModBlocks.WEATHERED_KITCHEN_BELL.get(), ModBlocks.WAXED_WEATHERED_KITCHEN_BELL.get(), "weathered_kitchen_bell");
         addWaxingRecipe(writer, ModBlocks.OXIDIZED_KITCHEN_BELL.get(), ModBlocks.WAXED_OXIDIZED_KITCHEN_BELL.get(), "oxidized_kitchen_bell");
 
+        addWaxingRecipe(writer, ModBlocks.LOG_STRIPPER.get(), ModBlocks.WAXED_LOG_STRIPPER.get(), "log_stripper");
+        addWaxingRecipe(writer, ModBlocks.EXPOSED_LOG_STRIPPER.get(), ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get(), "exposed_log_stripper");
+        addWaxingRecipe(writer, ModBlocks.WEATHERED_LOG_STRIPPER.get(), ModBlocks.WAXED_WEATHERED_LOG_STRIPPER.get(), "weathered_log_stripper");
+        addWaxingRecipe(writer, ModBlocks.OXIDIZED_LOG_STRIPPER.get(), ModBlocks.WAXED_OXIDIZED_LOG_STRIPPER.get(), "oxidized_log_stripper");
     }
 
     protected void addWaxingRecipe(Consumer<FinishedRecipe> writer, ItemLike unwaxed, ItemLike waxed, String unwaxedName) {

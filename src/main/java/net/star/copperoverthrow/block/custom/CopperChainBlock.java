@@ -22,7 +22,7 @@ public class CopperChainBlock extends ChainBlock implements WeatheringCopper {
 
     @Override
     public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        this.randomTick(state, level, pos, random);
+        this.applyChangeOverTime(state, level, pos, random);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CopperChainBlock extends ChainBlock implements WeatheringCopper {
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return WeatheringCopper.getNext(state.getBlock()).isPresent();
+        return WeatheringCopper.getNext(state.getBlock()).isPresent() || this.getNext(state).isPresent();
     }
 
     @Override

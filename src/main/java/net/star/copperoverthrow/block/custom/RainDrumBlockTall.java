@@ -245,12 +245,12 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
 
     @Override
     public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        this.randomTick(state, level, pos, random);
+        this.applyChangeOverTime(state, level, pos, random);
     }
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return WeatheringCopper.getNext(state.getBlock()).isPresent();
+        return WeatheringCopper.getNext(state.getBlock()).isPresent() || this.getNext(state).isPresent();
     }
 
     private void soundToBePlayedRaining(Level level, BlockPos pos, float finalVolume, float finalPitch) {

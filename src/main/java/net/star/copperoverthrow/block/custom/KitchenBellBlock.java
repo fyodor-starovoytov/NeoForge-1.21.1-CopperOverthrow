@@ -211,7 +211,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
 
     @Override
     public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        this.randomTick(state, level, pos, random);
+        this.applyChangeOverTime(state, level, pos, random);
     }
 
     @Override
@@ -221,7 +221,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return WeatheringCopper.getNext(state.getBlock()).isPresent();
+        return WeatheringCopper.getNext(state.getBlock()).isPresent() || this.getNext(state).isPresent();
     }
 
     @Override

@@ -10,16 +10,18 @@ import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.block.ModBlocks;
 import net.star.copperoverthrow.item.ModItems;
 
 import java.util.function.Consumer;
 
-public class ModAdvancementSubProvider implements AdvancementSubProvider {
+public class ModAdvancementSubProvider implements ForgeAdvancementProvider.AdvancementGenerator{
 
     @Override
-    public void generate(HolderLookup.Provider provider, Consumer<Advancement> consumer) {
+    public void generate(HolderLookup.Provider registries, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper) {
         Advancement copperIngotAdv = Advancement.Builder.advancement()
                 .parent(new ResourceLocation("story/upgrade_tools"))
                 .display(
@@ -33,7 +35,7 @@ public class ModAdvancementSubProvider implements AdvancementSubProvider {
                         false
                 )
                 .addCriterion("has_copper_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_ingot").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_ingot").toString());
 
 
         Advancement copperScaffolding = Advancement.Builder.advancement()
@@ -48,7 +50,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_scaffolding", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.COPPER_SCAFFOLDING.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_scaffolding").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_scaffolding").toString());
 
         Advancement copperChisel = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
@@ -62,7 +64,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_chisel", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_CHISEL.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_chisel").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_chisel").toString());
 
         Advancement artist = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
@@ -77,7 +79,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_artist", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_FILL_BUCKET.get(), ModItems.COPPER_SEXTANT.get(), ModItems.COPPER_LONG_RULER.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "artist").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "artist").toString());
 
 
         Advancement copperTrowel = Advancement.Builder.advancement()
@@ -92,7 +94,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_trowel", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_TROWEL.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_trowel").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_trowel").toString());
 
         Advancement logStripper = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
@@ -106,7 +108,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_stripper", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.LOG_STRIPPER.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "log_stripper").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "log_stripper").toString());
 
         Advancement copperHandsaw = Advancement.Builder.advancement()
                 .parent(logStripper)
@@ -121,7 +123,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_handsaw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_HANDSAW.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_handsaw").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_handsaw").toString());
 
         Advancement stepperSet = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
@@ -136,7 +138,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_stepper", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_STEPPER_BOOTS.get(), ModItems.COPPER_STEPPER_LEGGINGS.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "stepper_set").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "stepper_set").toString());
 
         Advancement miningSet = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
@@ -150,7 +152,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_mining", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_GLOWING_GOGGLES.get(), ModItems.COPPER_EXOSKELETON.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "mining_set").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "mining_set").toString());
 
 
         Advancement crashHelmet = Advancement.Builder.advancement()
@@ -165,7 +167,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_crash", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CRASH_HELMET.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "crash_helmet").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "crash_helmet").toString());
 
 
         Advancement copperHammer = Advancement.Builder.advancement()
@@ -181,7 +183,7 @@ FrameType.TASK,                        true,
                         false
                 )
                 .addCriterion("has_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_HAMMER.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_hammer").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_hammer").toString());
 
         Advancement musical = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
@@ -200,7 +202,7 @@ FrameType.TASK,                        true,
                         ModBlocks.TINY_RAIN_DRUM.get(),
                         ModBlocks.LARGE_RAIN_DRUM.get(),
                         ModBlocks.TAMTAM.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "musical").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "musical").toString());
 
         Advancement avatar = Advancement.Builder.advancement()
                 .parent(musical)
@@ -218,7 +220,7 @@ FrameType.TASK,                        true,
                         ModBlocks.BAMBOO_WIND_CHIME.get(),
                         ModBlocks.LUNAR_WIND_CHIME.get(),
                         ModBlocks.RED_WIND_CHIME.get()))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "avatar").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "avatar").toString());
 
         Advancement orchestra = Advancement.Builder.advancement()
                 .parent(musical)
@@ -272,7 +274,7 @@ FrameType.TASK,                        true,
                 ))
                 .rewards(AdvancementRewards.Builder.recipe(new ResourceLocation(CopperOverthrow.MOD_ID, "experience"))
                         .addExperience(300))
-                .save(consumer, new ResourceLocation(CopperOverthrow.MOD_ID, "orchestra").toString());
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "orchestra").toString());
     }
 
 }

@@ -296,7 +296,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
     @Override
     public void randomTick( BlockState state,  ServerLevel level,  BlockPos pos,  RandomSource random) {
-        this.randomTick(state, level, pos, random);
+        this.applyChangeOverTime(state, level, pos, random);
     }
 
     @Override
@@ -306,7 +306,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return WeatheringCopper.getNext(state.getBlock()).isPresent();
+        return WeatheringCopper.getNext(state.getBlock()).isPresent() || this.getNext(state).isPresent();
     }
 
     @Override

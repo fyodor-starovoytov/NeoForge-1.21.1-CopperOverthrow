@@ -46,7 +46,7 @@ public class ModAttributes{
     public static final RegistryObject<Attribute> SAFE_FALL_DISTANCE = ATTRIBUTES.register(
             "safe_fall_distance",
             () -> new RangedAttribute(
-                    "copperoverthrow.attribute.break_speed",
+                    "copperoverthrow.attribute.safe_fall_distance",
                     0.0,
                     0.0,
                     99

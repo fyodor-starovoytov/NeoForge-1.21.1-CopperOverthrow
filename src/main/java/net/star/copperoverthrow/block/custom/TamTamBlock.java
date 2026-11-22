@@ -245,7 +245,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
         if (Math.random()< CommonConfig.TAMTAM_FULL_MOON_VOLUME_CHANCE.get() && level.getMoonPhase() == 0 && level.isNight()){
             level.playSound(null, pos, ModSounds.TAM_TAM_PLAYING_MOON.get(), SoundSource.RECORDS, CommonConfig.TAMTAM_FULL_MOON_VOLUME_RADIUS.get(), 1F);
         }
-        this.randomTick(state, level, pos, random);
+        this.applyChangeOverTime(state, level, pos, random);
     }
 
     @Override
@@ -255,7 +255,7 @@ public class TamTamBlock extends BaseEntityBlock implements WeatheringCopper {
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return WeatheringCopper.getNext(state.getBlock()).isPresent();
+        return WeatheringCopper.getNext(state.getBlock()).isPresent() || this.getNext(state).isPresent();
     }
 
     @Override

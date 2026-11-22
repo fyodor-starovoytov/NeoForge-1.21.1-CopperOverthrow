@@ -34,7 +34,7 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
 
     @Override
     public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        this.randomTick(state, level, pos, random);
+        this.applyChangeOverTime(state, level, pos, random);
     }
 
     @Override
@@ -108,5 +108,11 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
     public Optional<BlockState> getNext(BlockState state) {
         return java.util.Optional.ofNullable(ModBlockModifiers.OXIDIZABLES.get(state.getBlock()))
                 .map(block -> block.withPropertiesOf(state));
+    }
+
+
+    @Override
+    public boolean isRandomlyTicking(BlockState state) {
+        return WeatheringCopper.getNext(state.getBlock()).isPresent() || this.getNext(state).isPresent();
     }
 }

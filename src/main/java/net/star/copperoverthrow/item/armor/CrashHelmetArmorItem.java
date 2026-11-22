@@ -38,7 +38,7 @@ public class CrashHelmetArmorItem extends AbstractExtendedArmorItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
-        if (slot == EquipmentSlot.LEGS) {
+        if (slot == EquipmentSlot.HEAD) {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 
             builder.putAll(super.getDefaultAttributeModifiers(slot));

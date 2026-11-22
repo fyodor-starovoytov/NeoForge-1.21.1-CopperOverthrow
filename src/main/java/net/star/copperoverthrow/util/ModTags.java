@@ -14,15 +14,15 @@ public class ModTags {
         public static final TagKey<Block> NEEDS_COPPER_TOOL = createTag(CopperOverthrow.MOD_ID ,"needs_copper_tool");
         public static final TagKey<Block> MINEABLE_WITH_HAMMER = createTag(CopperOverthrow.MOD_ID ,"mineable_with_hammer");
 
-        public static final TagKey<Block> RAIN_DRUMS = createTag("c", "musical_blocks/rain_drums");
-        public static final TagKey<Block> PLATES = createTag("c", "musical_blocks/plates");
-        public static final TagKey<Block> WIND_CHIMES = createTag("c", "musical_blocks/wind_chimes");
-        public static final TagKey<Block> KITCHEN_BELLS = createTag("c", "musical_blocks/bells/kitchen_bells");
-        public static final TagKey<Block> BELLS = createTag("c", "musical_blocks/bells");
-        public static final TagKey<Block> MUSICAL_BLOCKS = createTag("c", "musical_blocks");
+        public static final TagKey<Block> RAIN_DRUMS = createTag("forge", "musical_blocks/rain_drums");
+        public static final TagKey<Block> PLATES = createTag("forge", "musical_blocks/plates");
+        public static final TagKey<Block> WIND_CHIMES = createTag("forge", "musical_blocks/wind_chimes");
+        public static final TagKey<Block> KITCHEN_BELLS = createTag("forge", "musical_blocks/bells/kitchen_bells");
+        public static final TagKey<Block> BELLS = createTag("forge", "musical_blocks/bells");
+        public static final TagKey<Block> MUSICAL_BLOCKS = createTag("forge", "musical_blocks");
 
-        public static final TagKey<Block> COPPER_LANTERNS = createTag("c", "lights/copper_lanterns");
-        public static final TagKey<Block> LIGHTS = createTag("c", "lights");
+        public static final TagKey<Block> COPPER_LANTERNS = createTag("forge", "lights/copper_lanterns");
+        public static final TagKey<Block> LIGHTS = createTag("forge", "lights");
 
         public static final TagKey<Block> LOG_STRIPPING_STATION = createTag(CopperOverthrow.MOD_ID, "log_stripping_stations");
 
@@ -32,14 +32,14 @@ public class ModTags {
     }
 
     public static class Items{
-        public static final TagKey<Item> C_TOOLS_HAMMERS = createTag("c", "tools/hammers");
-        public static final TagKey<Item> C_TOOLS_SAWS = createTag("c", "tools/saws");
-        public static final TagKey<Item> C_TOOLS_CATCHERS = createTag("c", "tools/catchers");
-        public static final TagKey<Item> C_TOOLS_BUILDERS = createTag("c", "tools/builders");
+        public static final TagKey<Item> C_TOOLS_HAMMERS = createTag("forge", "tools/hammers");
+        public static final TagKey<Item> C_TOOLS_SAWS = createTag("forge", "tools/saws");
+        public static final TagKey<Item> C_TOOLS_CATCHERS = createTag("forge", "tools/catchers");
+        public static final TagKey<Item> C_TOOLS_BUILDERS = createTag("forge", "tools/builders");
 
-        public static final TagKey<Item> C_COPPER_NUGGETS = createTag("c", "nuggets/copper");
+        public static final TagKey<Item> C_COPPER_NUGGETS = createTag("forge", "nuggets/copper");
 
-        public static final TagKey<Item> HAMMER_ENCHANTABLE = createTag("c", "hammer/enchantable");
+        public static final TagKey<Item> HAMMER_ENCHANTABLE = createTag("forge", "hammer/enchantable");
 
 
         private static TagKey<Item> createTag(String namespace, String path){
