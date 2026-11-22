@@ -19,7 +19,7 @@ import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
 
-public class CopperScaffoldingBlock extends ScaffoldingBlock implements WeatheringCopper, SimpleWaterloggedBlock{
+public class CopperScaffoldingBlock extends ScaffoldingBlock implements WeatheringCopper, SimpleWaterloggedBlock {
 
     private final WeatherState weatherState;
 
@@ -28,6 +28,28 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
         this.weatherState = weatherState;
     }
 
+    public static int getDistance(BlockGetter level, BlockPos pos) {
+        BlockPos.MutableBlockPos blockpos$mutableblockpos = pos.mutable().move(Direction.DOWN);
+        BlockState blockstate = level.getBlockState(blockpos$mutableblockpos);
+        int i = 7;
+        if (blockstate.getBlock() instanceof ScaffoldingBlock) {
+            i = blockstate.getValue(DISTANCE);
+        } else if (blockstate.isFaceSturdy(level, blockpos$mutableblockpos, Direction.UP)) {
+            return 0;
+        }
+
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            BlockState blockstate1 = level.getBlockState(blockpos$mutableblockpos.setWithOffset(pos, direction));
+            if (blockstate1.getBlock() instanceof ScaffoldingBlock) {
+                i = Math.min(i, blockstate1.getValue(DISTANCE) + 1);
+                if (i == 1) {
+                    break;
+                }
+            }
+        }
+
+        return i;
+    }
 
     @Override
     protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
@@ -77,29 +99,6 @@ public class CopperScaffoldingBlock extends ScaffoldingBlock implements Weatheri
 
     private boolean isBottom(BlockGetter level, BlockPos pos, int distance) {
         return distance > 0 && !level.getBlockState(pos.below()).is(this);
-    }
-
-    public static int getDistance(BlockGetter level, BlockPos pos) {
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = pos.mutable().move(Direction.DOWN);
-        BlockState blockstate = level.getBlockState(blockpos$mutableblockpos);
-        int i = 7;
-        if (blockstate.getBlock() instanceof  ScaffoldingBlock) {
-            i = blockstate.getValue(DISTANCE);
-        } else if (blockstate.isFaceSturdy(level, blockpos$mutableblockpos, Direction.UP)) {
-            return 0;
-        }
-
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            BlockState blockstate1 = level.getBlockState(blockpos$mutableblockpos.setWithOffset(pos, direction));
-            if (blockstate1.getBlock() instanceof  ScaffoldingBlock) {
-                i = Math.min(i, blockstate1.getValue(DISTANCE) + 1);
-                if (i == 1) {
-                    break;
-                }
-            }
-        }
-
-        return i;
     }
 
 }

@@ -38,7 +38,7 @@ public class BambooWindChimeBlock extends AbstractWindChimeBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return state.getValue(UPPER) ?  new BambooWindChimeBlockEntity(pos, state) : null;
+        return state.getValue(UPPER) ? new BambooWindChimeBlockEntity(pos, state) : null;
     }
 
     @Override
@@ -80,16 +80,16 @@ public class BambooWindChimeBlock extends AbstractWindChimeBlock {
 
         if (level.getBlockEntity(targetPos) instanceof BambooWindChimeBlockEntity blockEntity) {
             if (!blockEntity.swinging) {
-                blockEntity.startSwing(explosion.radius()/10, explosion.radius()/10);
+                blockEntity.startSwing(explosion.radius() / 10, explosion.radius() / 10);
                 int chimeCount = level.random.nextInt(3, 6);
-                blockEntity.triggerChimeSequence(chimeCount, explosion.radius()/3);
+                blockEntity.triggerChimeSequence(chimeCount, explosion.radius() / 3);
             }
 
             blockEntity.onOpenAir(isBlockObstructed(pos, level));
         }
     }
 
-    private boolean isBlockObstructed(BlockPos pos, Level level){
+    private boolean isBlockObstructed(BlockPos pos, Level level) {
 
         Vec3 vec = Vec3.atCenterOf(pos);
         Vec3 vecEast = Vec3.atCenterOf(pos.east(ServerConfig.CHIME_CHECK_RANGE.get()));
@@ -139,8 +139,7 @@ public class BambooWindChimeBlock extends AbstractWindChimeBlock {
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.lower_resonance_sounding.tooltip"));
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.medium_pitch.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }

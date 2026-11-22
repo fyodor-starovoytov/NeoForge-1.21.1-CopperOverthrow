@@ -68,6 +68,7 @@ public class MultiBlockTallDecoration extends Block {
             level.setBlock(pos.above(2), state.setValue(PART, TripleBlockPart.TOP), 3);
         }
     }
+
     @Override
     protected boolean canSurvive(BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
         TripleBlockPart part = state.getValue(PART);
@@ -201,6 +202,10 @@ public class MultiBlockTallDecoration extends Block {
         return super.getDrops(state, builder);
     }
 
+    private boolean isSameStructure(BlockState state) {
+        return state.getBlock() instanceof MultiBlockTallDecoration;
+    }
+
     public enum TripleBlockPart implements StringRepresentable {
         BOTTOM("bottom"),
         MIDDLE("middle"),
@@ -216,9 +221,5 @@ public class MultiBlockTallDecoration extends Block {
         public @NotNull String getSerializedName() {
             return this.name;
         }
-    }
-
-    private boolean isSameStructure(BlockState state) {
-        return state.getBlock() instanceof MultiBlockTallDecoration;
     }
 }

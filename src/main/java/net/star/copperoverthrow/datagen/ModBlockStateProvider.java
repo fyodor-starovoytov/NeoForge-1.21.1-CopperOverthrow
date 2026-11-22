@@ -8,7 +8,7 @@ import net.star.copperoverthrow.CopperOverthrow;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, CopperOverthrow.MOD_ID  , exFileHelper);
+        super(output, CopperOverthrow.MOD_ID, exFileHelper);
     }
 
     @Override

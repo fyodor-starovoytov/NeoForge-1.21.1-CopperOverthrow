@@ -40,19 +40,19 @@ public class BeeCatcherItem extends Item {
 
             if (!isClient) {
 
-            CompoundTag tag = new CompoundTag();
-            bee.saveWithoutId(tag);
-            tag.remove("Pos");
-            tag.remove("Motion");
-            tag.remove("Rotation");
+                CompoundTag tag = new CompoundTag();
+                bee.saveWithoutId(tag);
+                tag.remove("Pos");
+                tag.remove("Motion");
+                tag.remove("Rotation");
 
-            List<CustomData> bees = new ArrayList<>(getBees(stack));
-            bees.add(CustomData.of(tag));
+                List<CustomData> bees = new ArrayList<>(getBees(stack));
+                bees.add(CustomData.of(tag));
 
-            //DOESNT SAVE THE DATA IN CREATIVE
-            stack.set(ModDataComponents.CAUGHT_BEES, bees);
-            entity.level().playSound(null, pos, SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL);
-            entity.discard();
+                //DOESNT SAVE THE DATA IN CREATIVE
+                stack.set(ModDataComponents.CAUGHT_BEES, bees);
+                entity.level().playSound(null, pos, SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL);
+                entity.discard();
 
             }
             return InteractionResult.SUCCESS;
@@ -68,7 +68,7 @@ public class BeeCatcherItem extends Item {
         List<CustomData> bees = getBees(stack);
         List<CustomData> remaining = new ArrayList<>(bees);
 
-        if (level.getBlockState(context.getClickedPos()).getBlock() instanceof CopperBeeosphereBlock){
+        if (level.getBlockState(context.getClickedPos()).getBlock() instanceof CopperBeeosphereBlock) {
             return InteractionResult.SUCCESS;
         }
 
@@ -77,30 +77,31 @@ public class BeeCatcherItem extends Item {
             while (!remaining.isEmpty()) {
                 CompoundTag tag = remaining.removeLast().copyTag();
 
-            Bee bee = EntityType.BEE.create(
-                    (ServerLevel) level,
-                    b -> b.load(tag),
-                    context.getClickedPos(),
-                    MobSpawnType.BUCKET,
-                    true,
-                    false
-            );
-
-            if (bee != null) {
-
-                BlockPos spawnPos = context.getClickedPos().relative(context.getClickedFace());
-                bee.moveTo(
-                        spawnPos.getX() + Math.random(),
-                        spawnPos.getY(),
-                        spawnPos.getZ() + Math.random(),
-                        bee.getYRot(),
-                        bee.getXRot()
+                Bee bee = EntityType.BEE.create(
+                        (ServerLevel) level,
+                        b -> b.load(tag),
+                        context.getClickedPos(),
+                        MobSpawnType.BUCKET,
+                        true,
+                        false
                 );
-                level.addFreshEntity(bee);
-            }}
-                stack.set(ModDataComponents.CAUGHT_BEES, null);
-                level.playSound(null, context.getClickedPos(), SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL);
-                return InteractionResult.SUCCESS;
+
+                if (bee != null) {
+
+                    BlockPos spawnPos = context.getClickedPos().relative(context.getClickedFace());
+                    bee.moveTo(
+                            spawnPos.getX() + Math.random(),
+                            spawnPos.getY(),
+                            spawnPos.getZ() + Math.random(),
+                            bee.getYRot(),
+                            bee.getXRot()
+                    );
+                    level.addFreshEntity(bee);
+                }
+            }
+            stack.set(ModDataComponents.CAUGHT_BEES, null);
+            level.playSound(null, context.getClickedPos(), SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL);
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
@@ -115,8 +116,7 @@ public class BeeCatcherItem extends Item {
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.bee_catcher_free_item.tooltip"));
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);

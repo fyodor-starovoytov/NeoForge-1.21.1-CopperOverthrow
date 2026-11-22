@@ -29,14 +29,14 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-public class LunarWindChimeBlock extends AbstractWindChimeBlock{
+public class LunarWindChimeBlock extends AbstractWindChimeBlock {
     public LunarWindChimeBlock(Properties properties, Supplier<SoundEvent> chimeSound) {
         super(properties, chimeSound);
     }
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return state.getValue(UPPER) ?  new LunarWindChimeBlockEntity(pos, state) : null;
+        return state.getValue(UPPER) ? new LunarWindChimeBlockEntity(pos, state) : null;
     }
 
 
@@ -78,16 +78,16 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
 
         if (level.getBlockEntity(targetPos) instanceof LunarWindChimeBlockEntity blockEntity) {
             if (!blockEntity.swinging) {
-                blockEntity.startSwing(explosion.radius()/10, explosion.radius()/10);
+                blockEntity.startSwing(explosion.radius() / 10, explosion.radius() / 10);
                 int chimeCount = level.random.nextInt(3, 6);
-                blockEntity.triggerChimeSequence(chimeCount, explosion.radius()/4);
+                blockEntity.triggerChimeSequence(chimeCount, explosion.radius() / 4);
             }
 
             blockEntity.onOpenAir(isBlockObstructed(pos, level));
         }
     }
 
-    private boolean isBlockObstructed(BlockPos pos, Level level){
+    private boolean isBlockObstructed(BlockPos pos, Level level) {
 
         Vec3 vec = Vec3.atCenterOf(pos);
         Vec3 vecEast = Vec3.atCenterOf(pos.east(ServerConfig.CHIME_CHECK_RANGE.get()));
@@ -137,8 +137,7 @@ public class LunarWindChimeBlock extends AbstractWindChimeBlock{
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.eerie_lunar_rumble.tooltip"));
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.low_pitch.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }

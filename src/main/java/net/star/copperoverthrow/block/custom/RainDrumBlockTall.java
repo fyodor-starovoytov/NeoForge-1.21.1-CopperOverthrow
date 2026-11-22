@@ -53,7 +53,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     private final String TOOLTIP_SOUNDING;
 
 
-    public RainDrumBlockTall(Properties properties,  WeatherState weatherState,
+    public RainDrumBlockTall(Properties properties, WeatherState weatherState,
                              float pitch, float volume,
                              double x1_z1, double x2_z2, int blockHeight,
                              String tooltip_pitch, String tooltip_sounding) {
@@ -79,14 +79,14 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
 
             float finalSoundProbability = SOUND_PROBABILITY;
             float finalVolume = VOLUME;
-            if (level.isThundering()){
+            if (level.isThundering()) {
                 finalSoundProbability = SOUND_PROBABILITY + THUNDER_SOUND_PROBABILITY_ADDITION;
                 finalVolume = VOLUME + THUNDER_VOLUME_ADDITION;
             }
 
             if (random.nextFloat() < finalSoundProbability) {
                 float finalPitch = Math.clamp(random.nextFloat() * randomFloat() + PITCH, 0.85f, 10);
-                  soundToBePlayedRaining(level, pos, finalVolume, finalPitch);
+                soundToBePlayedRaining(level, pos, finalVolume, finalPitch);
                 if (random.nextFloat() < PARTICLE_PROBABILITY && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()) {
                     ParticleUtils.spawnParticleInBlock(
                             level, pos.above(), 1, ParticleTypes.NOTE
@@ -195,19 +195,19 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
     @Override
     protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
 
-        if (!level.isClientSide){
+        if (!level.isClientSide) {
             soundToBePlayedPlaying(level, pos, VOLUME, PITCH, false);
         }
-        if (level.isClientSide && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()){
-        ParticleUtils.spawnParticleInBlock(
-                level, pos.above(), 1, ParticleTypes.NOTE
-        );
+        if (level.isClientSide && ClientConfig.RAIN_DRUMS_NOTE_PARTICLES.get()) {
+            ParticleUtils.spawnParticleInBlock(
+                    level, pos.above(), 1, ParticleTypes.NOTE
+            );
         }
         return InteractionResult.SUCCESS;
     }
 
-    private float randomFloat(){
-        if (Math.random() < 0.51){
+    private float randomFloat() {
+        if (Math.random() < 0.51) {
             return -0.5f;
         }
         return 0.5f;
@@ -215,15 +215,15 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
 
     @Override
     protected void onRemove(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean movedByPiston) {
-        if (!level.isClientSide){
+        if (!level.isClientSide) {
             soundToBePlayedPlaying(level, pos, VOLUME - 0.5f, PITCH, false);
         }
     }
 
     @Override
     protected void onPlace(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean movedByPiston) {
-        if (!level.isClientSide){
-            soundToBePlayedPlaying(level, pos, VOLUME  - 0.5f, PITCH, false);
+        if (!level.isClientSide) {
+            soundToBePlayedPlaying(level, pos, VOLUME - 0.5f, PITCH, false);
         }
     }
 
@@ -282,8 +282,7 @@ public class RainDrumBlockTall extends MultiBlockTallDecoration implements Weath
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.rain_drum_block.tooltip"));
 
 
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable(TOOLTIP));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }

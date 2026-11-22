@@ -72,7 +72,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.RAIN_DRUMS)
                 .addTag(ModTags.Blocks.COPPER_LANTERNS)
                 .addTag(ModTags.Blocks.KITCHEN_BELLS)
-                 .addTag(ModTags.Blocks.LOG_STRIPPING_STATION)
+                .addTag(ModTags.Blocks.LOG_STRIPPING_STATION)
         ;
 
         tag(BlockTags.CLIMBABLE)

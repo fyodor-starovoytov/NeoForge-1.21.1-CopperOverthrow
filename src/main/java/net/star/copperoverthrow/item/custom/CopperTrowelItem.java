@@ -24,40 +24,52 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
         super(properties);
     }
 
+    private static List<ItemStack> getHotbarBlockItems(Player player) {
+        List<ItemStack> list = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
+                list.add(stack);
+            }
+        }
+        return list;
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         Player player = context.getPlayer();
 
         if (!level.isClientSide) {
-        if (player == null) {
-            return InteractionResult.PASS;
-        }
+            if (player == null) {
+                return InteractionResult.PASS;
+            }
 
-        List<ItemStack> validBlocks = getHotbarBlockItems(player);
-        if (validBlocks.isEmpty()) {
-            return InteractionResult.PASS;
-        }
-        ItemStack placableStack = validBlocks.get(level.random.nextInt(validBlocks.size()));
-        BlockItem blockItem = (BlockItem) placableStack.getItem();
+            List<ItemStack> validBlocks = getHotbarBlockItems(player);
+            if (validBlocks.isEmpty()) {
+                return InteractionResult.PASS;
+            }
+            ItemStack placableStack = validBlocks.get(level.random.nextInt(validBlocks.size()));
+            BlockItem blockItem = (BlockItem) placableStack.getItem();
 
-        BlockHitResult hitResult = new BlockHitResult(
-                context.getClickLocation(),
-                context.getClickedFace(),
-                context.getClickedPos(),
-                context.isInside()
-        );
+            BlockHitResult hitResult = new BlockHitResult(
+                    context.getClickLocation(),
+                    context.getClickedFace(),
+                    context.getClickedPos(),
+                    context.isInside()
+            );
 
-        BlockPlaceContext placeContext = new BlockPlaceContext(
-                level,
-                player,
-                context.getHand(),
-                placableStack,
-                hitResult
-        );
+            BlockPlaceContext placeContext = new BlockPlaceContext(
+                    level,
+                    player,
+                    context.getHand(),
+                    placableStack,
+                    hitResult
+            );
 
-        if (!placeContext.canPlace()) {
-            return InteractionResult.FAIL;}
+            if (!placeContext.canPlace()) {
+                return InteractionResult.FAIL;
+            }
             InteractionResult result = blockItem.place(placeContext);
 
             if (result.consumesAction()) {
@@ -72,17 +84,6 @@ public class CopperTrowelItem extends AbstractRepairableCopperItem {
         }
 
         return InteractionResult.PASS;
-    }
-
-    private static List<ItemStack> getHotbarBlockItems(Player player) {
-        List<ItemStack> list = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            ItemStack stack = player.getInventory().getItem(i);
-            if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
-                list.add(stack);
-            }
-        }
-        return list;
     }
 
     @Override

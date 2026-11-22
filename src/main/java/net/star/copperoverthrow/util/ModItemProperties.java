@@ -9,7 +9,7 @@ import net.star.copperoverthrow.item.ModItems;
 import java.util.List;
 
 public class ModItemProperties {
-    public static void addCustomItemProperties(){
+    public static void addCustomItemProperties() {
 
         ItemProperties.register(ModItems.BEE_CATCHER.get(), ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "1bee"),
                 (stack, level, entity, seed) -> stack.getOrDefault(ModDataComponents.CAUGHT_BEES, List.of()).size() == 1 ? 1f : 0f);

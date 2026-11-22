@@ -38,16 +38,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class LogStripperBlock extends BaseEntityBlock implements WeatheringCopper{
-    private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
-
+public class LogStripperBlock extends BaseEntityBlock implements WeatheringCopper {
     public static final MapCodec<LogStripperBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     propertiesCodec(),
                     WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(LogStripperBlock::getAge)
             ).apply(instance, LogStripperBlock::new)
     );
-
+    private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
     private final WeatherState weatherState;
 
     public LogStripperBlock(Properties properties, WeatherState weatherState) {
@@ -78,8 +76,8 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
     @Override
     protected void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (state.getBlock() != newState.getBlock()){
-            if (level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity){
+        if (state.getBlock() != newState.getBlock()) {
+            if (level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity) {
                 Containers.dropContents(level, pos, logStripperBlockEntity);
                 level.updateNeighbourForOutputSignal(pos, this);
             }
@@ -87,6 +85,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
 
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
+
     @Override
     protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
         if (!(level.getBlockEntity(pos) instanceof LogStripperBlockEntity logStripperBlockEntity)) {
@@ -317,8 +316,7 @@ public class LogStripperBlock extends BaseEntityBlock implements WeatheringCoppe
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_placed.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.log_stripper_block.tooltip"));
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);

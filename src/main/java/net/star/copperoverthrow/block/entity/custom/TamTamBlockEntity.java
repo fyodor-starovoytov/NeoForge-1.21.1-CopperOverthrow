@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,6 +16,17 @@ public class TamTamBlockEntity extends BlockEntity {
 
     public TamTamBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.TAMTAM_BE.get(), pos, state);
+    }
+
+    public static void tick(Level level, BlockPos pos, BlockState state, TamTamBlockEntity blockEntity) {
+        if (blockEntity.swinging) {
+            blockEntity.ticks++;
+        }
+
+        if (blockEntity.ticks >= 400) { //Duration in Ticks
+            blockEntity.swinging = false;
+            blockEntity.ticks = 0;
+        }
     }
 
     public void startSwing(Direction direction) {
@@ -38,17 +48,6 @@ public class TamTamBlockEntity extends BlockEntity {
             return true;
         }
         return super.triggerEvent(id, type);
-    }
-
-    public static void tick(Level level, BlockPos pos, BlockState state, TamTamBlockEntity blockEntity) {
-        if (blockEntity.swinging) {
-            blockEntity.ticks++;
-        }
-
-        if (blockEntity.ticks >= 400) { //Duration in Ticks
-            blockEntity.swinging = false;
-            blockEntity.ticks = 0;
-        }
     }
 
     @Override

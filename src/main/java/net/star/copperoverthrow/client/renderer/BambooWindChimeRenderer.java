@@ -31,6 +31,7 @@ public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindCh
     private final ModelPart tube6;
     private final ModelPart tube7;
     private final ModelPart tube8;
+
     public BambooWindChimeRenderer(BlockEntityRendererProvider.Context context) {
         ModelPart bakedRoot = context.bakeLayer(BambooWindChimeModel.LAYER_LOCATION);
         this.root = bakedRoot.getChild("root");
@@ -63,13 +64,12 @@ public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindCh
         this.root.yRot = Mth.sin(time * idleSpeed) * idleDegree;
         this.root.y = 0.0F + Mth.cos(time * idleSpeed * 2.0F) * 0.1F;
 
-        this.cup.xRot = -Mth.sin(time * idleSpeed/2) * idleDegree/2;
-        this.cup.zRot = -Mth.cos(time * idleSpeed/2) * idleDegree/2;
-        this.cup.yRot = -Mth.sin(time * idleSpeed/2) * idleDegree/2;
+        this.cup.xRot = -Mth.sin(time * idleSpeed / 2) * idleDegree / 2;
+        this.cup.zRot = -Mth.cos(time * idleSpeed / 2) * idleDegree / 2;
+        this.cup.yRot = -Mth.sin(time * idleSpeed / 2) * idleDegree / 2;
         this.cup.y = 0.0F + Mth.cos(time * idleSpeed * 2.0F) * 0.05F;
 
         rotateTubesIdle(time, idleSpeed, idleDegree);
-
 
 
         if (blockEntity.swinging) {
@@ -92,7 +92,7 @@ public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindCh
         poseStack.popPose();
     }
 
-    private void rotateTubesIdle(float time, float idleSpeed, float idleDegree){
+    private void rotateTubesIdle(float time, float idleSpeed, float idleDegree) {
         this.tube0.xRot = -Mth.sin(time * idleSpeed + 0.45f * 3) * idleDegree / 1.15f;
         this.tube0.zRot = -Mth.cos(time * idleSpeed - 0.31f * 3) * idleDegree / 1.25f;
         this.tube0.yRot = Mth.sin(time * idleSpeed + 0.2f) * idleDegree * 1.35f;
@@ -101,15 +101,15 @@ public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindCh
         this.tube1.zRot = -Mth.cos(time * idleSpeed + 0.38f * 3) * idleDegree / 1.18f;
         this.tube1.yRot = -Mth.cos(time * idleSpeed - 0.1f) * idleDegree * 1.45f;
 
-        this.tube2.xRot = -Mth.sin(time * idleSpeed - 0.28f*3) * idleDegree / 1.24f;
-        this.tube2.zRot = -Mth.cos(time * idleSpeed + 0.12f*3) * idleDegree / 1.12f;
+        this.tube2.xRot = -Mth.sin(time * idleSpeed - 0.28f * 3) * idleDegree / 1.24f;
+        this.tube2.zRot = -Mth.cos(time * idleSpeed + 0.12f * 3) * idleDegree / 1.12f;
         this.tube2.yRot = -Mth.sin(time * idleSpeed) * idleDegree * 1.25f;
 
         this.tube3.xRot = -Mth.sin(time * idleSpeed + 0.52f * 3) * idleDegree / 1.19f;
         this.tube3.zRot = -Mth.cos(time * idleSpeed - 0.18f * 3) * idleDegree / 1.28f;
         this.tube3.yRot = Mth.sin(time * idleSpeed + 0.4f) * idleDegree * 1.55f;
 
-        this.tube4.xRot = -Mth.sin(time * idleSpeed + 0.17f*3) * idleDegree / 1.17f;
+        this.tube4.xRot = -Mth.sin(time * idleSpeed + 0.17f * 3) * idleDegree / 1.17f;
         this.tube4.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.22f;
         this.tube4.yRot = -Mth.cos(time * idleSpeed) * idleDegree * 1.6f;
 
@@ -118,22 +118,23 @@ public class BambooWindChimeRenderer implements BlockEntityRenderer<BambooWindCh
         this.tube6.yRot = Mth.cos(time * idleSpeed) * idleDegree * 1.4f;
 
         this.tube7.xRot = -Mth.sin(time * idleSpeed) * idleDegree / 1.25f;
-        this.tube7.zRot = -Mth.cos(time * idleSpeed - 0.22f*3) * idleDegree / 1.12f;
+        this.tube7.zRot = -Mth.cos(time * idleSpeed - 0.22f * 3) * idleDegree / 1.12f;
         this.tube7.yRot = Mth.sin(time * idleSpeed) * idleDegree * 1.8f;
 
         this.tube8.xRot = -Mth.sin(time * idleSpeed - 0.41f * 3) * idleDegree / 1.28f;
         this.tube8.zRot = -Mth.cos(time * idleSpeed + 0.29f * 3) * idleDegree / 1.15f;
         this.tube8.yRot = -Mth.sin(time * idleSpeed + 0.5f) * idleDegree * 1.7f;
     }
-    private void rotateTubesActive(float time, float zMotion, float xMotion, float rX, float rZ, float rX2, float rZ2, float rX3, float rZ3){
+
+    private void rotateTubesActive(float time, float zMotion, float xMotion, float rX, float rZ, float rX2, float rZ2, float rX3, float rZ3) {
         float swing = (1.5f * Mth.sin(time / (1.5f * (float) Math.PI))) / (6.0f + time / 4.0F);
         float xRotAngle = swing * (-zMotion);
         float zRotAngle = swing * (-xMotion);
 
-        this.root.xRot = xRotAngle/2 * rZ;
-        this.root.zRot = zRotAngle/2 * rX;
+        this.root.xRot = xRotAngle / 2 * rZ;
+        this.root.zRot = zRotAngle / 2 * rX;
 
-        this.cup.y = zRotAngle/2 * rX;
+        this.cup.y = zRotAngle / 2 * rX;
 
         float t0 = time + 0.5f;
         float t1 = time + 1.2f;

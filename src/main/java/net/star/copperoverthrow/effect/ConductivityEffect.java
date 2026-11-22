@@ -15,12 +15,17 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.star.copperoverthrow.block.ModBlocks;
 
-public class ConductivityEffect extends MobEffect{
+public class ConductivityEffect extends MobEffect {
 
     public static int CHANCE = 10000;
 
     public ConductivityEffect(MobEffectCategory category) {
         super(category, 0);
+    }
+
+    public static int CHANCE_FOR_LIGHTNING_HIT() {
+        int random = (int) (Math.random() * (CHANCE - 1 + 1)) + 1;
+        return random;
     }
 
     @Override
@@ -47,7 +52,7 @@ public class ConductivityEffect extends MobEffect{
 
         if (level.isThundering() && !level.isClientSide && pos.getY() == level.getHeight(Heightmap.Types.WORLD_SURFACE, pos.getX(), pos.getZ()) - 1) {
 
-            if (CHANCE_FOR_LIGHTNING_HIT() < 90){
+            if (CHANCE_FOR_LIGHTNING_HIT() < 90) {
                 hitLightning(level, pos);
             }
 
@@ -62,16 +67,11 @@ public class ConductivityEffect extends MobEffect{
     }
 
     private void hitLightning(Level level, BlockPos pos) {
-        ServerLevel serverLevel = (ServerLevel)level;
+        ServerLevel serverLevel = (ServerLevel) level;
         LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverLevel);
-        if (lightningBolt != null){
+        if (lightningBolt != null) {
             lightningBolt.moveTo(Vec3.atBottomCenterOf(pos));
             serverLevel.addFreshEntity(lightningBolt);
         }
-    }
-
-    public static int CHANCE_FOR_LIGHTNING_HIT() {
-        int random = (int) (Math.random() * (CHANCE - 1 + 1)) + 1;
-        return random;
     }
 }

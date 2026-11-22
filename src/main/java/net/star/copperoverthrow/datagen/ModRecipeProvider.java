@@ -358,9 +358,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
 
-
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.COPPER_NUGGET.get(), 9)
-                        .requires(Tags.Items.INGOTS_COPPER)
+                .requires(Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.HOLOGRAM_BLOCK.get(), 24)

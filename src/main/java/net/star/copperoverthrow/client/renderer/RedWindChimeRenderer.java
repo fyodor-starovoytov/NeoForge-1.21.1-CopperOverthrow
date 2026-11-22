@@ -27,6 +27,7 @@ public class RedWindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlo
     private final ModelPart tube6;
     private final ModelPart tube7;
     private final ModelPart tube4;
+
     public RedWindChimeRenderer(BlockEntityRendererProvider.Context context) {
         ModelPart bakedRoot = context.bakeLayer(RedWindChimeModel.LAYER_LOCATION);
         this.root = bakedRoot.getChild("root");
@@ -55,13 +56,12 @@ public class RedWindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlo
         this.root.yRot = Mth.sin(time * idleSpeed) * idleDegree;
         this.root.y = 0.0F + Mth.cos(time * idleSpeed * 2.0F) * 0.1F;
 
-        this.cup.xRot = -Mth.sin(time * idleSpeed/2) * idleDegree/2;
-        this.cup.zRot = -Mth.cos(time * idleSpeed/2) * idleDegree/2;
-        this.cup.yRot = -Mth.sin(time * idleSpeed/2) * idleDegree/2;
+        this.cup.xRot = -Mth.sin(time * idleSpeed / 2) * idleDegree / 2;
+        this.cup.zRot = -Mth.cos(time * idleSpeed / 2) * idleDegree / 2;
+        this.cup.yRot = -Mth.sin(time * idleSpeed / 2) * idleDegree / 2;
         this.cup.y = 0.0F + Mth.cos(time * idleSpeed * 2.0F) * 0.05F;
 
         rotateTubesIdle(time, idleSpeed, idleDegree);
-
 
 
         if (blockEntity.swinging) {
@@ -84,32 +84,33 @@ public class RedWindChimeRenderer implements BlockEntityRenderer<RedWindChimeBlo
         poseStack.popPose();
     }
 
-    private void rotateTubesIdle(float time, float idleSpeed, float idleDegree){
-        this.tube2.xRot = -Mth.sin(time * idleSpeed - 0.28f*3) * idleDegree / 1.24f;
-        this.tube2.zRot = -Mth.cos(time * idleSpeed + 0.12f*3) * idleDegree / 1.12f;
-        this.tube2.yRot = -Mth.sin(time * idleSpeed) * idleDegree * 1.25f ;
+    private void rotateTubesIdle(float time, float idleSpeed, float idleDegree) {
+        this.tube2.xRot = -Mth.sin(time * idleSpeed - 0.28f * 3) * idleDegree / 1.24f;
+        this.tube2.zRot = -Mth.cos(time * idleSpeed + 0.12f * 3) * idleDegree / 1.12f;
+        this.tube2.yRot = -Mth.sin(time * idleSpeed) * idleDegree * 1.25f;
 
         this.tube6.xRot = -Mth.sin(time * idleSpeed) * idleDegree / 1.14f;
-        this.tube6.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.21f ;
+        this.tube6.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.21f;
         this.tube6.yRot = Mth.cos(time * idleSpeed) * idleDegree * 1.4f;
 
         this.tube7.xRot = -Mth.sin(time * idleSpeed) * idleDegree / 1.25f;
-        this.tube7.zRot = -Mth.cos(time * idleSpeed - 0.22f*3) * idleDegree / 1.12f;
-        this.tube7.yRot = Mth.sin(time * idleSpeed) * idleDegree* 1.8f;
+        this.tube7.zRot = -Mth.cos(time * idleSpeed - 0.22f * 3) * idleDegree / 1.12f;
+        this.tube7.yRot = Mth.sin(time * idleSpeed) * idleDegree * 1.8f;
 
-        this.tube4.xRot = -Mth.sin(time * idleSpeed + 0.17f*3) * idleDegree / 1.17f;
+        this.tube4.xRot = -Mth.sin(time * idleSpeed + 0.17f * 3) * idleDegree / 1.17f;
         this.tube4.zRot = -Mth.cos(time * idleSpeed) * idleDegree / 1.22f;
         this.tube4.yRot = -Mth.cos(time * idleSpeed) * idleDegree * 1.6f;
     }
-    private void rotateTubesActive(float time, float zMotion, float xMotion, float rX, float rZ, float rX2, float rZ2, float rX3, float rZ3){
+
+    private void rotateTubesActive(float time, float zMotion, float xMotion, float rX, float rZ, float rX2, float rZ2, float rX3, float rZ3) {
         float swing = (1.5f * Mth.sin(time / (1.5f * (float) Math.PI))) / (6.0f + time / 4.0F);
         float xRotAngle = swing * (-zMotion);
         float zRotAngle = swing * (-xMotion);
 
-        this.root.xRot = xRotAngle/2 * rZ;
-        this.root.zRot = zRotAngle/2 * rX;
+        this.root.xRot = xRotAngle / 2 * rZ;
+        this.root.zRot = zRotAngle / 2 * rX;
 
-        this.cup.y = zRotAngle/2 * rX;
+        this.cup.y = zRotAngle / 2 * rX;
 
         this.tube2.xRot = xRotAngle * rX;
         this.tube2.zRot = zRotAngle * rZ;

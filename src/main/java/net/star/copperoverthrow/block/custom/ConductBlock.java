@@ -25,6 +25,10 @@ public class ConductBlock extends PoweredBlock {
         super(properties);
     }
 
+    public static int RANDOM_LIFESPAN_TICKS() {
+        return (int) (Math.random() * (MAX_LIFESPAN_TICKS - MIN_LIFESPAN_TICKS + 1)) + MIN_LIFESPAN_TICKS;
+    }
+
     @Override
     protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.INVISIBLE;
@@ -45,10 +49,6 @@ public class ConductBlock extends PoweredBlock {
     @Override
     protected void tick(@NotNull BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-    }
-
-    public static int RANDOM_LIFESPAN_TICKS() {
-        return (int) (Math.random() * (MAX_LIFESPAN_TICKS - MIN_LIFESPAN_TICKS + 1)) + MIN_LIFESPAN_TICKS;
     }
 
     @Override

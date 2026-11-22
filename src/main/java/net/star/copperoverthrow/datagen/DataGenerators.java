@@ -19,9 +19,9 @@ import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = CopperOverthrow.MOD_ID)
 public class DataGenerators {
-//MAKE SURE NO CLIENT SIDE MODS INSTALLED WHEN RUNNING DATAGEN LIKE MOUSE TWEAKS
+    //MAKE SURE NO CLIENT SIDE MODS INSTALLED WHEN RUNNING DATAGEN LIKE MOUSE TWEAKS
     @SubscribeEvent
-     public static void gatherData(GatherDataEvent event){
+    public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();

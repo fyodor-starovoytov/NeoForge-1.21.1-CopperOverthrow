@@ -47,6 +47,9 @@ import java.util.List;
 @EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
 public class CopperOverthrowClient {
 
+    private static final ResourceLocation OVERLAY_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/gui/waxed_overlay.png");
+
     public CopperOverthrowClient(ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
@@ -75,9 +78,6 @@ public class CopperOverthrowClient {
         event.registerLayerDefinition(LunarWindChimeModel.LAYER_LOCATION, LunarWindChimeModel::createBodyLayer);
         event.registerLayerDefinition(BambooWindChimeModel.LAYER_LOCATION, BambooWindChimeModel::createBodyLayer);
     }
-
-            private static final ResourceLocation OVERLAY_TEXTURE =
-                    ResourceLocation.fromNamespaceAndPath(CopperOverthrow.MOD_ID, "textures/gui/waxed_overlay.png");
 
     @SubscribeEvent
     public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
@@ -120,6 +120,7 @@ public class CopperOverthrowClient {
         }
 
     }
+
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_ENTITIES) return;
@@ -187,13 +188,13 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0, pushPull,0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }
@@ -203,13 +204,13 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0, pushPull,0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case WEST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }
@@ -219,12 +220,12 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(180));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case NORTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }
@@ -234,12 +235,12 @@ public class CopperOverthrowClient {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-180));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }
@@ -247,22 +248,22 @@ public class CopperOverthrowClient {
                 switch (playerFace) {
                     case NORTH -> {
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case WEST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }
@@ -271,25 +272,25 @@ public class CopperOverthrowClient {
                     case NORTH -> {
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case SOUTH -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case WEST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                     case EAST -> {
                         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(-180.0F));
                         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                        poseStack.translate(0,  pushPull, 0.161);
+                        poseStack.translate(0, pushPull, 0.161);
                     }
                 }
             }

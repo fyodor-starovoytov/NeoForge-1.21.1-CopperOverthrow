@@ -30,7 +30,12 @@ import java.util.List;
 
 public class CopperChiselItem extends AbstractRepairableCopperItem {
 
-    public CopperChiselItem(Properties properties) {super(properties);
+    public CopperChiselItem(Properties properties) {
+        super(properties);
+    }
+
+    public static int randomIntGenerator(int MIN, int MAX) {
+        return (int) (Math.random() * (MAX - MIN + 1)) + MIN;
     }
 
     @Override
@@ -43,88 +48,88 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
         Player player = context.getPlayer();
         if (player != null && clickedBlock instanceof Block) {
 
-                    BlockPos blockpos = context.getClickedPos();
-                    BlockState blockstate = level.getBlockState(blockpos);
-                    ItemStack stack = context.getItemInHand();
+            BlockPos blockpos = context.getClickedPos();
+            BlockState blockstate = level.getBlockState(blockpos);
+            ItemStack stack = context.getItemInHand();
 
-                    SoundEvent soundevent;
-                    if (doesResultExist(level, blockstate)) {
-                        soundevent = SoundEvents.COPPER_BREAK;
-                    } else {
-                        soundevent = SoundEvents.COPPER_BULB_PLACE;
-                    }
-                    level.playSound(player, blockpos, soundevent, SoundSource.BLOCKS);
+            SoundEvent soundevent;
+            if (doesResultExist(level, blockstate)) {
+                soundevent = SoundEvents.COPPER_BREAK;
+            } else {
+                soundevent = SoundEvents.COPPER_BULB_PLACE;
+            }
+            level.playSound(player, blockpos, soundevent, SoundSource.BLOCKS);
 
-                    if ((!level.isClientSide()) && doesResultExist(level, blockstate)) {
+            if ((!level.isClientSide()) && doesResultExist(level, blockstate)) {
 
-                        while (true) {
-                            Block block = getBlockToPlace(level, blockstate);
+                while (true) {
+                    Block block = getBlockToPlace(level, blockstate);
 
-                            if (blockstate.getBlock() instanceof StairBlock){
-                                if (NoAvailableStairBlock(level, blockstate)){
-                                    break;
-                                }
+                    if (blockstate.getBlock() instanceof StairBlock) {
+                        if (NoAvailableStairBlock(level, blockstate)) {
+                            break;
+                        }
 
-                                if (!(block instanceof StairBlock)) {
-                                    getBlockToPlace(level, blockstate);
-                                    continue;
-                                }
-                            }
-
-                            if (blockstate.getBlock() instanceof WallBlock){
-                                if (NoAvailableWallBlock(level, blockstate)){
-                                    break;
-                                }
-
-                                if (!(block instanceof WallBlock)) {
-                                    getBlockToPlace(level, blockstate);
-                                    continue;
-                                }
-                            }
-
-                            if (blockstate.getBlock() instanceof SlabBlock){
-                                if (NoAvailableSlabBlock(level, blockstate)){
-                                    break;
-                                }
-
-                                if (!(block instanceof SlabBlock)) {
-                                    getBlockToPlace(level, blockstate);
-                                    continue;
-                                }
-                            }
-
-                            if (!(blockstate.getBlock() instanceof SlabBlock || blockstate.getBlock() instanceof WallBlock || blockstate.getBlock() instanceof StairBlock)){
-                                if (NoAvailableFullBlock(level, blockstate)){
-                                    break;
-                                }
-
-                                if (block instanceof StairBlock || block instanceof SlabBlock || block instanceof WallBlock) {
-                                    getBlockToPlace(level, blockstate);
-                                    continue;
-                                }
-                            }
-
-                            if (setBlock(level, blockpos, block, blockstate)) {
-                                EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
-                                        ? EquipmentSlot.OFFHAND
-                                        : EquipmentSlot.MAINHAND;
-                                stack.hurtAndBreak(1, player, equipmentslot);
-
-                                return InteractionResult.SUCCESS;
-                            }
+                        if (!(block instanceof StairBlock)) {
+                            getBlockToPlace(level, blockstate);
+                            continue;
                         }
                     }
+
+                    if (blockstate.getBlock() instanceof WallBlock) {
+                        if (NoAvailableWallBlock(level, blockstate)) {
+                            break;
+                        }
+
+                        if (!(block instanceof WallBlock)) {
+                            getBlockToPlace(level, blockstate);
+                            continue;
+                        }
+                    }
+
+                    if (blockstate.getBlock() instanceof SlabBlock) {
+                        if (NoAvailableSlabBlock(level, blockstate)) {
+                            break;
+                        }
+
+                        if (!(block instanceof SlabBlock)) {
+                            getBlockToPlace(level, blockstate);
+                            continue;
+                        }
+                    }
+
+                    if (!(blockstate.getBlock() instanceof SlabBlock || blockstate.getBlock() instanceof WallBlock || blockstate.getBlock() instanceof StairBlock)) {
+                        if (NoAvailableFullBlock(level, blockstate)) {
+                            break;
+                        }
+
+                        if (block instanceof StairBlock || block instanceof SlabBlock || block instanceof WallBlock) {
+                            getBlockToPlace(level, blockstate);
+                            continue;
+                        }
+                    }
+
+                    if (setBlock(level, blockpos, block, blockstate)) {
+                        EquipmentSlot equipmentslot = stack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND))
+                                ? EquipmentSlot.OFFHAND
+                                : EquipmentSlot.MAINHAND;
+                        stack.hurtAndBreak(1, player, equipmentslot);
+
+                        return InteractionResult.SUCCESS;
+                    }
+                }
             }
+        }
         return InteractionResult.CONSUME;
     }
 
-    private boolean setBlock(Level level, BlockPos blockpos, Block block, BlockState blockstate){
+    private boolean setBlock(Level level, BlockPos blockpos, Block block, BlockState blockstate) {
         level.setBlockAndUpdate(blockpos, block.withPropertiesOf(blockstate));
         return true;
     }
 
     private SingleRecipeInput getSingleRecipeInput(Block block) {
-      return new SingleRecipeInput (new ItemStack (block.asItem()));
+        return new SingleRecipeInput(new ItemStack(block.asItem()));
     }
 
     private HitResult calculateHitResult(Player player) {
@@ -133,13 +138,13 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
         );
     }
 
-    private Block getBlockToPlace(Level level, BlockState blockstate){
+    private Block getBlockToPlace(Level level, BlockState blockstate) {
 
-    List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
+        List<RecipeHolder<StonecutterRecipe>> recipeList = (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
 
-    int recipeListLength = recipeList.size();
+        int recipeListLength = recipeList.size();
 
-    return (((BlockItem)(recipeList.get(randomIntGenerator(0, recipeListLength-1)).value().getResultItem(level.registryAccess()).getItem())).getBlock());
+        return (((BlockItem) (recipeList.get(randomIntGenerator(0, recipeListLength - 1)).value().getResultItem(level.registryAccess()).getItem())).getBlock());
     }
 
     private Boolean NoAvailableFullBlock(Level level, BlockState blockstate) {
@@ -218,17 +223,12 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
         return blocks == 0;
     }
 
-
-    private Boolean doesResultExist (Level level, BlockState blockstate){
+    private Boolean doesResultExist(Level level, BlockState blockstate) {
         List<RecipeHolder<StonecutterRecipe>> recipeList =
-                (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING,  getSingleRecipeInput(blockstate.getBlock()), level));
+                (level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, getSingleRecipeInput(blockstate.getBlock()), level));
 
         //Returns false or true
         return !recipeList.isEmpty();
-    }
-
-    public static int randomIntGenerator(int MIN, int MAX) {
-        return (int) (Math.random() * (MAX - MIN + 1)) + MIN;
     }
 
     @Override
@@ -238,8 +238,7 @@ public class CopperChiselItem extends AbstractRepairableCopperItem {
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_chisel_item.tooltip"));
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);

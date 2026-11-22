@@ -1,15 +1,12 @@
 package net.star.copperoverthrow.block.custom;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
-import net.minecraft.world.level.block.PoweredBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -24,6 +21,10 @@ public class TemporalLightBlock extends LightBlock {
 
     public TemporalLightBlock(Properties properties) {
         super(properties);
+    }
+
+    public static int RANDOM_LIFESPAN_TICKS() {
+        return (int) (Math.random() * (MAX_LIFESPAN_TICKS - MIN_LIFESPAN_TICKS + 1)) + MIN_LIFESPAN_TICKS;
     }
 
     @Override
@@ -46,9 +47,5 @@ public class TemporalLightBlock extends LightBlock {
     @Override
     protected void tick(@NotNull BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-    }
-
-    public static int RANDOM_LIFESPAN_TICKS() {
-        return (int) (Math.random() * (MAX_LIFESPAN_TICKS - MIN_LIFESPAN_TICKS + 1)) + MIN_LIFESPAN_TICKS;
     }
 }

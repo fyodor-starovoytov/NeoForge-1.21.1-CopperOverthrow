@@ -17,9 +17,14 @@ public class CopperBeeosphereBlockEntity extends BeehiveBlockEntity {
 
     private final List<CopperBeeosphereBlockEntity.BeeData> stored = Lists.newArrayList();
 
-    public CopperBeeosphereBlockEntity(BlockPos pos, BlockState state) {super(pos, state);}
+    public CopperBeeosphereBlockEntity(BlockPos pos, BlockState state) {
+        super(pos, state);
+    }
+
     @Override
-    public BlockEntityType<?> getType() {return ModBlockEntities.COPPER_BEEOSPHERE_BE.get();}
+    public BlockEntityType<?> getType() {
+        return ModBlockEntities.COPPER_BEEOSPHERE_BE.get();
+    }
 
     @Override
     public void addOccupant(Entity occupant) {
@@ -30,9 +35,9 @@ public class CopperBeeosphereBlockEntity extends BeehiveBlockEntity {
                 this.level
                         .playSound(
                                 null,
-                                (double)blockpos.getX(),
-                                (double)blockpos.getY(),
-                                (double)blockpos.getZ(),
+                                blockpos.getX(),
+                                blockpos.getY(),
+                                blockpos.getZ(),
                                 SoundEvents.BEEHIVE_ENTER,
                                 SoundSource.BLOCKS,
                                 1.0F,

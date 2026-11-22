@@ -25,10 +25,6 @@ public abstract class AbstractExtendedArmorItem extends ArmorItem {
         super(pMaterial, pType, pProperties);
     }
 
-    public boolean isFullSetActive(LivingEntity living) {
-        return isFullSetActive(living, this.getMaterial());
-    }
-
     public static boolean isFullSetActive(LivingEntity living, Holder<ArmorMaterial> materials) {
         if (living == null) {
             return false;
@@ -46,10 +42,6 @@ public abstract class AbstractExtendedArmorItem extends ArmorItem {
         return (head != null && legs != null && feet != null) && (head.getMaterial() == materials && chest.getMaterial() == materials && legs.getMaterial() == materials && feet.getMaterial() == materials);
     }
 
-    public Multimap<Attribute, AttributeModifier> getAttributeMods(EquipmentSlot slot) {return null;}
-
-    //region display / model
-
     /**
      * creates a custom texture for your armor in
      * <br>{@code <nameSpace>:textures/models/armor/custom/<id>.png}
@@ -59,19 +51,30 @@ public abstract class AbstractExtendedArmorItem extends ArmorItem {
         return ResourceLocation.fromNamespaceAndPath(nameSpace, "textures/models/armor/" + id + ".png");
     }
 
-    //endregion
-
     /**
      * @param registry the Register to add to
      * @param baseName the base name of the armor
-     * @param creator a lambda function to create an instance of the armor, mostly a method reference to the constructor
+     * @param creator  a lambda function to create an instance of the armor, mostly a method reference to the constructor
      * @return a Map mapping the ArmorType to the RegObj for the slot
      */
     public static <T extends AbstractExtendedArmorItem> Map<Type, DeferredItem<T>> createRegistry(DeferredRegister.Items registry, String baseName, Function<Type, T> creator) {
         return Util.make(new EnumMap<>(Type.class), map -> {
             for (Type type : Type.values()) {
-                if (type != Type.BODY) map.put(type, registry.register(baseName + "_" + type.getName(), () -> creator.apply(type)));
+                if (type != Type.BODY)
+                    map.put(type, registry.register(baseName + "_" + type.getName(), () -> creator.apply(type)));
             }
         });
+    }
+
+    //region display / model
+
+    public boolean isFullSetActive(LivingEntity living) {
+        return isFullSetActive(living, this.getMaterial());
+    }
+
+    //endregion
+
+    public Multimap<Attribute, AttributeModifier> getAttributeMods(EquipmentSlot slot) {
+        return null;
     }
 }

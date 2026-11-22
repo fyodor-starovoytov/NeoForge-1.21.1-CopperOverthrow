@@ -17,7 +17,6 @@ public class ModEnchantmentTagProvider extends EnchantmentTagsProvider {
     }
 
 
-
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(EnchantmentTags.MINING_EXCLUSIVE)

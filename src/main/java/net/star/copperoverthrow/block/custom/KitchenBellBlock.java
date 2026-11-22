@@ -48,13 +48,6 @@ import java.util.function.Supplier;
 public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, WeatheringCopper {
 
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-    protected static final VoxelShape SHAPE_BASE = Block.box(3.0, 0.0, 3.0, 13.0, 3.0, 13.0);
-    protected static final VoxelShape SHAPE_HAT = Block.box(4.0, 3.0, 4.0, 12.0, 9.0, 12.0);
-    private final int TICKS_TO_STAY_PRESSED;
-    private final Supplier<SoundEvent> PRESS_SOUND;
-    private final String TOOLTIP_SOUNDING;
-    private final WeatherState weatherState;
-
     public static final MapCodec<KitchenBellBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Codec.INT.fieldOf("ticks_to_stay_pressed").forGetter(block -> block.TICKS_TO_STAY_PRESSED),
@@ -64,6 +57,13 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
                     WeatheringCopper.WeatherState.CODEC.fieldOf("weather_state").forGetter(KitchenBellBlock::getAge)
             ).apply(instance, (ticks, props, tip, sound, weather) -> new KitchenBellBlock(BlockSetType.COPPER, ticks, props, tip, () -> sound, weather))
     );
+    protected static final VoxelShape SHAPE_BASE = Block.box(3.0, 0.0, 3.0, 13.0, 3.0, 13.0);
+    protected static final VoxelShape SHAPE_HAT = Block.box(4.0, 3.0, 4.0, 12.0, 9.0, 12.0);
+    private final int TICKS_TO_STAY_PRESSED;
+    private final Supplier<SoundEvent> PRESS_SOUND;
+    private final String TOOLTIP_SOUNDING;
+    private final WeatherState weatherState;
+
     public KitchenBellBlock(BlockSetType type, int ticksToStayPressed, BlockBehaviour.Properties properties, String tooltip_sounding, Supplier<SoundEvent> pressSound, WeatherState weatherState) {
         super(properties.sound(type.soundType()));
         this.registerDefaultState(
@@ -149,9 +149,9 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
         level.gameEvent(player, GameEvent.BLOCK_ACTIVATE, pos);
     }
 
-    private float jammed(int press_ticks){
+    private float jammed(int press_ticks) {
         float chanceToBeJammed = ((float) press_ticks) / 100 / 5;
-        if (Math.random() < chanceToBeJammed && ServerConfig.JAMMING.get()){
+        if (Math.random() < chanceToBeJammed && ServerConfig.JAMMING.get()) {
             return (float) 200 / press_ticks;
         }
         return 0;
@@ -254,8 +254,7 @@ public class KitchenBellBlock extends BaseEntityBlock implements SimpleWaterlogg
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.sounding.tooltip"));
             tooltipComponents.add(Component.translatable(TOOLTIP_SOUNDING));
 
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.high_pitch.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }

@@ -30,14 +30,14 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.COPPER_NUGGET.get());
 
         tag(ModTags.Items.CONNECTIBLE_CHAINS_HANGABLE_ITEMS)
-                 .add(ModBlocks.COPPER_LANTERN.get().asItem())
-                 .add(ModBlocks.EXPOSED_COPPER_LANTERN.get().asItem())
-                 .add(ModBlocks.WEATHERED_COPPER_LANTERN.get().asItem())
-                 .add(ModBlocks.OXIDIZED_COPPER_LANTERN.get().asItem())
-                 .add(ModBlocks.WAXED_COPPER_LANTERN.get().asItem())
-                 .add(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get().asItem())
-                 .add(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get().asItem())
-                 .add(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get().asItem());
+                .add(ModBlocks.COPPER_LANTERN.get().asItem())
+                .add(ModBlocks.EXPOSED_COPPER_LANTERN.get().asItem())
+                .add(ModBlocks.WEATHERED_COPPER_LANTERN.get().asItem())
+                .add(ModBlocks.OXIDIZED_COPPER_LANTERN.get().asItem())
+                .add(ModBlocks.WAXED_COPPER_LANTERN.get().asItem())
+                .add(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get().asItem())
+                .add(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get().asItem())
+                .add(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get().asItem());
 
         tag(Tags.Items.CHAINS)
                 .add(ModBlocks.COPPER_CHAIN.get().asItem())
@@ -128,7 +128,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTags.TRIMMABLE_ARMOR)
                 .add(ModItems.COPPER_STEPPER_BOOTS.get())
                 .add(ModItems.COPPER_STEPPER_LEGGINGS.get());
-
 
 
     }

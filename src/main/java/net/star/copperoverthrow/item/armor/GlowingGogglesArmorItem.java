@@ -21,9 +21,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
     private static final ResourceLocation TEXTURE = makeCustomTextureLocation(CopperOverthrow.MOD_ID, "copper_glowing_goggles");
+
     public GlowingGogglesArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
         super(material, type, properties);
     }
+
     @Override
     public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
         return TEXTURE;
@@ -53,7 +55,7 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
             return;
         }
 
-        if (entity instanceof LivingEntity livingEntity ) {
+        if (entity instanceof LivingEntity livingEntity) {
             ItemStack headItem = livingEntity.getItemBySlot(EquipmentSlot.HEAD);
             if (ItemStack.matches(headItem, stack)) {
 

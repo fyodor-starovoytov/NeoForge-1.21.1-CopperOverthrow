@@ -47,7 +47,7 @@ public class HologramScaffoldingBlockItem extends ScaffoldingBlockItem {
                     Player player = context.getPlayer();
                     int j = level.getMaxBuildHeight();
                     if (player instanceof ServerPlayer && blockpos$mutableblockpos.getY() >= j) {
-                        ((ServerPlayer)player).sendSystemMessage(Component.translatable("build.tooHigh", j - 1).withStyle(ChatFormatting.RED), true);
+                        ((ServerPlayer) player).sendSystemMessage(Component.translatable("build.tooHigh", j - 1).withStyle(ChatFormatting.RED), true);
                     }
                     break;
                 }

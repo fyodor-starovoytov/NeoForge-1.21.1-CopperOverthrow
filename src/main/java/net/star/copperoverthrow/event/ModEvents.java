@@ -40,14 +40,13 @@ import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.item.custom.HammerItem;
 import net.star.copperoverthrow.sound.ModSounds;
 
-import java.awt.dnd.DropTargetEvent;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @EventBusSubscriber(modid = CopperOverthrow.MOD_ID)
 public class ModEvents {
     private static final Set<BlockPos> HARVESTED_BLOCKS = ConcurrentHashMap.newKeySet();
+    private static boolean swingOffhandNext = false;
 
     @SubscribeEvent
     public static void onHammerUsage(BlockEvent.BreakEvent event) {
@@ -106,8 +105,6 @@ public class ModEvents {
         return event.getLevel().getBlockState(pos).is(Tags.Blocks.ORES);
     }
 
-    private static boolean swingOffhandNext = false;
-
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
@@ -130,43 +127,43 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-            Level level = event.getLevel();
-            BlockPos pos = event.getPos();
-            BlockState state = level.getBlockState(pos);
+        Level level = event.getLevel();
+        BlockPos pos = event.getPos();
+        BlockState state = level.getBlockState(pos);
 
-            if (state.getBlock() instanceof MultiBlockTallDecoration drum) {
-                ItemStack stack = event.getItemStack();
+        if (state.getBlock() instanceof MultiBlockTallDecoration drum) {
+            ItemStack stack = event.getItemStack();
 
-                if (stack.is(Items.HONEYCOMB)) {
-                    Waxable waxable = state.getBlockHolder().getData(NeoForgeDataMaps.WAXABLES);
+            if (stack.is(Items.HONEYCOMB)) {
+                Waxable waxable = state.getBlockHolder().getData(NeoForgeDataMaps.WAXABLES);
 
-                    if (waxable != null) {
-                        Player player = event.getEntity();
+                if (waxable != null) {
+                    Player player = event.getEntity();
 
-                        if (!level.isClientSide) {
-                            Block waxedBlock = waxable.waxed();
+                    if (!level.isClientSide) {
+                        Block waxedBlock = waxable.waxed();
 
-                            if (player instanceof ServerPlayer serverPlayer) {
-                                CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
-                            }
-
-                            if (!player.isCreative()) {
-                                stack.shrink(1);
-                            }
-
-                            level.setBlock(pos, waxedBlock.defaultBlockState().setValue(MultiBlockTallDecoration.PART, state.getValue(MultiBlockTallDecoration.PART)), 3);
-                            drum.propagateBlockChange(level, pos, state, waxedBlock);
-
-                            level.levelEvent(null, 3003, pos, 0);
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
                         }
 
-                        player.swing(event.getHand());
+                        if (!player.isCreative()) {
+                            stack.shrink(1);
+                        }
 
-                        event.setCanceled(true);
-                        event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide).result());
+                        level.setBlock(pos, waxedBlock.defaultBlockState().setValue(MultiBlockTallDecoration.PART, state.getValue(MultiBlockTallDecoration.PART)), 3);
+                        drum.propagateBlockChange(level, pos, state, waxedBlock);
+
+                        level.levelEvent(null, 3003, pos, 0);
                     }
+
+                    player.swing(event.getHand());
+
+                    event.setCanceled(true);
+                    event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide).result());
                 }
             }
+        }
 
         if (state.getBlock() instanceof TamTamBlock plate) {
             ItemStack stack = event.getItemStack();
@@ -204,12 +201,12 @@ public class ModEvents {
     }
 
     @SubscribeEvent
-    public static void onDoublePickaxeLeftDrop(EntityJoinLevelEvent event){
+    public static void onDoublePickaxeLeftDrop(EntityJoinLevelEvent event) {
         if (event.getLevel().isClientSide() || !(event.getEntity() instanceof ItemEntity itemEntity)) {
             return;
         }
 
-        if (itemEntity.getItem().is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get())){
+        if (itemEntity.getItem().is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get())) {
             event.setCanceled(true);
             itemEntity.discard();
         }
@@ -240,9 +237,9 @@ public class ModEvents {
 
                     if (isFallingBlockDamage || isMaceSmashFromAbove || isElytraCrash) {
                         event.setNewDamage((float) (originalDamage * (1.0F - deductible)));
-                        if (isMaceSmashFromAbove){
+                        if (isMaceSmashFromAbove) {
                             Level level = victim.level();
-                            if (!level.isClientSide){
+                            if (!level.isClientSide) {
                                 level.playSound(null, victim.getOnPos(), ModSounds.CRASH_HELMET_BONK.get(), SoundSource.PLAYERS);
                             }
                         }

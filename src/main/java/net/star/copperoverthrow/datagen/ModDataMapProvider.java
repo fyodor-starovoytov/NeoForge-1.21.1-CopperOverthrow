@@ -59,7 +59,6 @@ public class ModDataMapProvider extends DataMapProvider {
         ;
 
 
-
         this.builder(NeoForgeDataMaps.WAXABLES)
                 .add(ModBlocks.LOG_STRIPPER.getId(), new Waxable(ModBlocks.WAXED_LOG_STRIPPER.get()), false)
                 .add(ModBlocks.EXPOSED_LOG_STRIPPER.getId(), new Waxable(ModBlocks.WAXED_EXPOSED_LOG_STRIPPER.get()), false)

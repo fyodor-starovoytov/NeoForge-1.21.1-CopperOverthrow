@@ -75,11 +75,9 @@ public class CopperBeeosphereBlock extends BeehiveBlock {
 
                             stack.set(ModDataComponents.CAUGHT_BEES, null);
                         }
-                }
+                    } else {
 
-                else {
-
-                }
+                    }
                 }
             }
         }

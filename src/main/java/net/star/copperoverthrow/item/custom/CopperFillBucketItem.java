@@ -35,85 +35,6 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         super(properties);
     }
 
-    @Override
-    public InteractionResult useOn(UseOnContext context) {
-        Level level = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        BlockState clickedBlock = level.getBlockState(pos);
-        Player player = context.getPlayer();
-
-        if (player == null) {
-            return InteractionResult.FAIL;
-        }
-
-        ItemStack consumableStack = player.getOffhandItem();
-        if (context.getHand() == InteractionHand.OFF_HAND) {
-            consumableStack = player.getMainHandItem();
-        }
-
-        if (!(consumableStack.getItem() instanceof BlockItem blockItem)) {
-            return InteractionResult.FAIL;
-        }
-
-        if (level.isClientSide) {
-            level.playLocalSound(pos, SoundEvents.BRUSH_GENERIC, SoundSource.PLAYERS, 1, 1, false);
-            level.playLocalSound(pos, SoundEvents.WOOL_PLACE, SoundSource.PLAYERS, 1, 1, false);
-            return InteractionResult.SUCCESS;
-        }
-
-        List<BlockPos> blocksToBeFilled = new ArrayList<>();
-        if (!(clickedBlock.getBlock() instanceof HologramBlock)){
-            Direction dir = context.getClickedFace();
-            BlockPos newPos = pos.relative(dir);
-            blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(newPos, level, false));
-        }
-
-        if (clickedBlock.getBlock() instanceof HologramBlock){
-        blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(pos, level, true));
-        }
-
-        ServerLevel serverLevel = (ServerLevel) level;
-
-        for (BlockPos fillPos : blocksToBeFilled) {
-            if (consumableStack.isEmpty()) {
-                break;
-            }
-
-            BlockHitResult hitResult = new BlockHitResult(
-                    context.getClickLocation(),
-                    context.getClickedFace(),
-                    fillPos,
-                    context.isInside()
-            );
-
-            BlockPlaceContext placeContext = new BlockPlaceContext(
-                    level,
-                    player,
-                    context.getHand(),
-                    consumableStack,
-                    hitResult
-            );
-
-            if (!placeContext.canPlace()) {
-                continue;
-            }
-
-            InteractionResult result = blockItem.place(placeContext);
-            if (result.consumesAction()) {
-                //Particles from server to client
-                serverLevel.sendParticles(
-                        new BlockParticleOption(ParticleTypes.BLOCK, blockItem.getBlock().defaultBlockState()),
-                        fillPos.getX() + 0.5, fillPos.getY() + 0.5, fillPos.getZ() + 0.5,
-                        4, 0.2, 0.2, 0.2, 0.05
-                );
-
-                EquipmentSlot slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-                context.getItemInHand().hurtAndBreak(1, serverLevel, player, tool -> player.onEquippedItemBroken(tool, slot));
-            }
-        }
-        return InteractionResult.SUCCESS;
-    }
-
     public static List<BlockPos> getBlocksToBeFilled(BlockPos initalBlockPos, Level level, boolean isHologramBlock) {
         List<BlockPos> toBeChecked = new ArrayList<>();
         List<BlockPos> toBeDestroyed = new ArrayList<>();
@@ -176,6 +97,84 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
         return toBeDestroyed;
     }
 
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        Level level = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        BlockState clickedBlock = level.getBlockState(pos);
+        Player player = context.getPlayer();
+
+        if (player == null) {
+            return InteractionResult.FAIL;
+        }
+
+        ItemStack consumableStack = player.getOffhandItem();
+        if (context.getHand() == InteractionHand.OFF_HAND) {
+            consumableStack = player.getMainHandItem();
+        }
+
+        if (!(consumableStack.getItem() instanceof BlockItem blockItem)) {
+            return InteractionResult.FAIL;
+        }
+
+        if (level.isClientSide) {
+            level.playLocalSound(pos, SoundEvents.BRUSH_GENERIC, SoundSource.PLAYERS, 1, 1, false);
+            level.playLocalSound(pos, SoundEvents.WOOL_PLACE, SoundSource.PLAYERS, 1, 1, false);
+            return InteractionResult.SUCCESS;
+        }
+
+        List<BlockPos> blocksToBeFilled = new ArrayList<>();
+        if (!(clickedBlock.getBlock() instanceof HologramBlock)) {
+            Direction dir = context.getClickedFace();
+            BlockPos newPos = pos.relative(dir);
+            blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(newPos, level, false));
+        }
+
+        if (clickedBlock.getBlock() instanceof HologramBlock) {
+            blocksToBeFilled = new ArrayList<>(getBlocksToBeFilled(pos, level, true));
+        }
+
+        ServerLevel serverLevel = (ServerLevel) level;
+
+        for (BlockPos fillPos : blocksToBeFilled) {
+            if (consumableStack.isEmpty()) {
+                break;
+            }
+
+            BlockHitResult hitResult = new BlockHitResult(
+                    context.getClickLocation(),
+                    context.getClickedFace(),
+                    fillPos,
+                    context.isInside()
+            );
+
+            BlockPlaceContext placeContext = new BlockPlaceContext(
+                    level,
+                    player,
+                    context.getHand(),
+                    consumableStack,
+                    hitResult
+            );
+
+            if (!placeContext.canPlace()) {
+                continue;
+            }
+
+            InteractionResult result = blockItem.place(placeContext);
+            if (result.consumesAction()) {
+                //Particles from server to client
+                serverLevel.sendParticles(
+                        new BlockParticleOption(ParticleTypes.BLOCK, blockItem.getBlock().defaultBlockState()),
+                        fillPos.getX() + 0.5, fillPos.getY() + 0.5, fillPos.getZ() + 0.5,
+                        4, 0.2, 0.2, 0.2, 0.05
+                );
+
+                EquipmentSlot slot = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+                context.getItemInHand().hurtAndBreak(1, serverLevel, player, tool -> player.onEquippedItemBroken(tool, slot));
+            }
+        }
+        return InteractionResult.SUCCESS;
+    }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
@@ -184,8 +183,7 @@ public class CopperFillBucketItem extends AbstractRepairableCopperItem {
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_fill_bucket.tooltip"));
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);

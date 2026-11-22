@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class BeeosphereBlockEntity extends BlockEntity {
-    private List<CustomData> inventory = NonNullList.withSize(3, CustomData.EMPTY);
+    private final List<CustomData> inventory = NonNullList.withSize(3, CustomData.EMPTY);
 
     public BeeosphereBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.COPPER_BEEOSPHERE_BE.get(), pos, blockState);
@@ -41,11 +41,12 @@ public class BeeosphereBlockEntity extends BlockEntity {
             }
         }
     }
-    public int getAmountOfFreeSlots(){
+
+    public int getAmountOfFreeSlots() {
         int freeSlots = 0;
 
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).isEmpty()){
+            if (inventory.get(i).isEmpty()) {
                 freeSlots++;
             }
         }

@@ -4,10 +4,12 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ScaffoldingBlockItem;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -177,19 +179,19 @@ public class ModBlocks {
                     WeatheringCopper.WeatherState.OXIDIZED));
 
     public static final DeferredBlock<CopperScaffoldingBlock> COPPER_SCAFFOLDING = registerBlock("copper_scaffolding",
-        () -> new CopperScaffoldingBlock(
-                BlockBehaviour.Properties.of()
-                .strength(3f)
-                .noCollission()
-                .noOcclusion()
-                .requiresCorrectToolForDrops()
-                .destroyTime(0.10f)
-                .isValidSpawn(Blocks::never)
-                .mapColor(DyeColor.ORANGE)
-                .pushReaction(PushReaction.DESTROY)
-                .sound(SoundType.COPPER)
-                .dynamicShape()
-                .randomTicks(), WeatheringCopper.WeatherState.UNAFFECTED));
+            () -> new CopperScaffoldingBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(3f)
+                            .noCollission()
+                            .noOcclusion()
+                            .requiresCorrectToolForDrops()
+                            .destroyTime(0.10f)
+                            .isValidSpawn(Blocks::never)
+                            .mapColor(DyeColor.ORANGE)
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.COPPER)
+                            .dynamicShape()
+                            .randomTicks(), WeatheringCopper.WeatherState.UNAFFECTED));
     public static final DeferredBlock<CopperScaffoldingBlock> EXPOSED_COPPER_SCAFFOLDING = registerBlock("exposed_copper_scaffolding",
             () -> new CopperScaffoldingBlock(BlockBehaviour.Properties.of()
                     .strength(3f)
@@ -319,10 +321,10 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED,
-                    1.6f, 1f, 5, 11,3,
+                    1.6f, 1f, 5, 11, 3,
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
@@ -336,7 +338,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.EXPOSED,
-                    1.6f, 1f, 5, 11,3,
+                    1.6f, 1f, 5, 11, 3,
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
@@ -350,7 +352,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.WEATHERED,
-                    1.6f, 1f, 5, 11,3,
+                    1.6f, 1f, 5, 11, 3,
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
@@ -364,7 +366,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.OXIDIZED,
-                    1.6f, 1f, 5, 11,3,
+                    1.6f, 1f, 5, 11, 3,
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
@@ -375,10 +377,10 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED,
-                    1.6f, 1f, 5, 11,3,
+                    1.6f, 1f, 5, 11, 3,
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.clean_sounding.tooltip"
             ));
@@ -392,7 +394,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.EXPOSED,
-                    1.6f, 1f, 5, 11,3,
+                    1.6f, 1f, 5, 11, 3,
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.low_resonance_sounding.tooltip"
             ));
@@ -406,7 +408,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.WEATHERED,
-                    1.6f, 1f, 5, 11,3,
+                    1.6f, 1f, 5, 11, 3,
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.lower_resonance_sounding.tooltip"
             ));
@@ -420,7 +422,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.OXIDIZED,
-                    1.6f, 1f, 5, 11,3,
+                    1.6f, 1f, 5, 11, 3,
                     "tooltip.copperoverthrow.medium_pitch.tooltip",
                     "tooltip.copperoverthrow.lowest_resonance_sounding.tooltip"
             ));
@@ -432,7 +434,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED,
                     1f, 1.8f, 3, 13, 2,
@@ -488,7 +490,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED,
                     1f, 1.8f, 3, 13, 2,
@@ -545,7 +547,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED,
                     9f, 1.2f, 6, 10, 3,
@@ -601,7 +603,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .isValidSpawn(Blocks::never)
                     .mapColor(DyeColor.ORANGE)
-                    .pushReaction(PushReaction.IGNORE       )
+                    .pushReaction(PushReaction.IGNORE)
                     .sound(SoundType.COPPER),
                     WeatheringCopper.WeatherState.UNAFFECTED,
                     9f, 1.2f, 6, 10, 3,
@@ -941,23 +943,19 @@ public class ModBlocks {
                     ModSounds.OXIDIZED_KITCHEN_BELL_PLAYING,
                     WeatheringCopper.WeatherState.OXIDIZED));
 
-    private static <T extends Block> DeferredBlock<T> registerBlock (String name, Supplier<T> block) {
+    private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
         return toReturn;
     }
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
-        if (name.equals("copper_scaffolding") || name.equals("exposed_copper_scaffolding") || name.equals("weathered_copper_scaffolding")|| name.equals("oxidized_copper_scaffolding")
-        || name.equals("waxed_copper_scaffolding") || name.equals("waxed_exposed_copper_scaffolding") || name.equals("waxed_weathered_copper_scaffolding")|| name.equals("waxed_oxidized_copper_scaffolding")) {
+        if (name.equals("copper_scaffolding") || name.equals("exposed_copper_scaffolding") || name.equals("weathered_copper_scaffolding") || name.equals("oxidized_copper_scaffolding")
+                || name.equals("waxed_copper_scaffolding") || name.equals("waxed_exposed_copper_scaffolding") || name.equals("waxed_weathered_copper_scaffolding") || name.equals("waxed_oxidized_copper_scaffolding")) {
             ModItems.ITEMS.register(name, () -> new ScaffoldingBlockItem(block.get(), new Item.Properties()));
-        }
-
-        else if (name.equals("hologram_block") || name.equals("inverted_hologram_block")){
+        } else if (name.equals("hologram_block") || name.equals("inverted_hologram_block")) {
             ModItems.ITEMS.register(name, () -> new HologramScaffoldingBlockItem(block.get(), new Item.Properties()));
-        }
-
-        else {
+        } else {
             ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
         }
     }

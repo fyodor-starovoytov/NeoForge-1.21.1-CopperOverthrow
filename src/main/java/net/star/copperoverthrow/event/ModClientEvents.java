@@ -1,17 +1,8 @@
 package net.star.copperoverthrow.event;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.item.ModItems;
@@ -24,13 +15,13 @@ import net.star.copperoverthrow.item.armor.client.provider.SimpleModelProvider;
 @EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
 public class ModClientEvents {
 
-        @SubscribeEvent
-        public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
-            event.registerItem(new ArmorClientExtension(new SimpleModelProvider(CrashHelmetModel::createBodyLayer, CrashHelmetModel::new)), ModItems.CRASH_HELMET);
-            event.registerItem(new ArmorClientExtension(new SimpleModelProvider(GlowingGogglesModel::createBodyLayer, GlowingGogglesModel::new)), ModItems.COPPER_GLOWING_GOGGLES);
-            event.registerItem(new ArmorClientExtension(new SimpleModelProvider(CopperExoskeletonModel::createBodyLayer, CopperExoskeletonModel::new)), ModItems.COPPER_EXOSKELETON);
+    @SubscribeEvent
+    public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerItem(new ArmorClientExtension(new SimpleModelProvider(CrashHelmetModel::createBodyLayer, CrashHelmetModel::new)), ModItems.CRASH_HELMET);
+        event.registerItem(new ArmorClientExtension(new SimpleModelProvider(GlowingGogglesModel::createBodyLayer, GlowingGogglesModel::new)), ModItems.COPPER_GLOWING_GOGGLES);
+        event.registerItem(new ArmorClientExtension(new SimpleModelProvider(CopperExoskeletonModel::createBodyLayer, CopperExoskeletonModel::new)), ModItems.COPPER_EXOSKELETON);
 
-            event.registerItem(CustomSpyglassArmposeExtension.INSTANCE, ModItems.COPPER_SEXTANT.get());
-            event.registerItem(CustomSpyglassArmposeExtension.INSTANCE, ModItems.COPPER_LONG_RULER.get());
-        }
+        event.registerItem(CustomSpyglassArmposeExtension.INSTANCE, ModItems.COPPER_SEXTANT.get());
+        event.registerItem(CustomSpyglassArmposeExtension.INSTANCE, ModItems.COPPER_LONG_RULER.get());
+    }
 }

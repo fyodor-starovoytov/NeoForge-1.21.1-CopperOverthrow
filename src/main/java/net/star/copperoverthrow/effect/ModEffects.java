@@ -15,9 +15,9 @@ public class ModEffects {
 
 
     public static final Holder<MobEffect> CONDUCTIVITY_EFFECT = MOB_EFFECTS.register("conductivity",
-            ()-> new ConductivityEffect(MobEffectCategory.NEUTRAL));
+            () -> new ConductivityEffect(MobEffectCategory.NEUTRAL));
 
-    public static void register(IEventBus eventBus){
+    public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);
     }
 }

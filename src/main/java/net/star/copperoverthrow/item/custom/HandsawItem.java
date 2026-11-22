@@ -35,8 +35,38 @@ import java.util.Set;
 
 public class HandsawItem extends ShearsItem {
     public static final int ANIMATION_DURATION = 5;
+
     public HandsawItem(Properties properties) {
         super(properties);
+    }
+
+    public static List<BlockPos> getBlocksToBeDestroyed(BlockPos initalBlockPos, Level level) {
+        List<BlockPos> toBeChecked = new ArrayList<>();
+        List<BlockPos> toBeDestroyed = new ArrayList<>();
+        Set<BlockPos> visited = new HashSet<>();
+        int r = 1;
+
+        Block targetBlock = level.getBlockState(initalBlockPos).getBlock();
+
+        BlockPos initialImmutable = initalBlockPos.immutable();
+        toBeChecked.addFirst(initialImmutable);
+        toBeDestroyed.addFirst(initialImmutable);
+        visited.add(initialImmutable);
+
+        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.HANDSAW_MAX_DESTROYED_BLOCKS.get()) {
+            BlockPos comparable = toBeChecked.removeLast();
+            for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, 0, -r), comparable.offset(r, r, r))) {
+                BlockState state = level.getBlockState(pos);
+                BlockPos immutablePos = pos.immutable();
+
+                if (state.is(targetBlock) && !visited.contains(immutablePos)) {
+                    toBeChecked.add(immutablePos);
+                    toBeDestroyed.add(immutablePos);
+                    visited.add(immutablePos);
+                }
+            }
+        }
+        return toBeDestroyed;
     }
 
     @Override
@@ -88,7 +118,7 @@ public class HandsawItem extends ShearsItem {
                 if (flag && level.isClientSide) {
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, true);
                     this.spawnParticles(level, blockhitresult, state, livingEntity.getViewVector(0.0F), ServerConfig.HANDSAW_USE_TIME.get() - remainingUseDuration, false);
-                    level.playLocalSound(player, ModSounds.HANDSAW_USE.get(), SoundSource.PLAYERS, 0.1F, (float) ServerConfig.HANDSAW_USE_TIME.get() / remainingUseDuration*2.2F + 0.1f);
+                    level.playLocalSound(player, ModSounds.HANDSAW_USE.get(), SoundSource.PLAYERS, 0.1F, (float) ServerConfig.HANDSAW_USE_TIME.get() / remainingUseDuration * 2.2F + 0.1f);
                     livingEntity.swing(player.getUsedItemHand(), false);
                 }
                 return;
@@ -98,7 +128,6 @@ public class HandsawItem extends ShearsItem {
             livingEntity.releaseUsingItem();
         }
     }
-
 
     private void spawnParticles(Level level, BlockHitResult hitResult, BlockState state, Vec3 pos, int amount, boolean side) {
         double d0 = 3.0;
@@ -112,33 +141,15 @@ public class HandsawItem extends ShearsItem {
         for (int k = 0; k < j; k++) {
             level.addParticle(
                     blockparticleoption,
-                    vec3.x - (double)(direction == Direction.WEST ? 1.0E-6F : 0.0F),
+                    vec3.x - (double) (direction == Direction.WEST ? 1.0E-6F : 0.0F),
                     vec3.y,
-                    vec3.z - (double)(direction == Direction.NORTH ? 1.0E-6F : 0.0F),
-                    brushitem$dustparticlesdelta.xd() * (double)i * 3.0 * level.getRandom().nextDouble(),
+                    vec3.z - (double) (direction == Direction.NORTH ? 1.0E-6F : 0.0F),
+                    brushitem$dustparticlesdelta.xd() * (double) i * 3.0 * level.getRandom().nextDouble(),
                     0.0,
-                    brushitem$dustparticlesdelta.zd() * (double)i * 3.0 * level.getRandom().nextDouble()
+                    brushitem$dustparticlesdelta.zd() * (double) i * 3.0 * level.getRandom().nextDouble()
             );
         }
     }
-
-    static record DustParticlesDelta(double xd, double yd, double zd) {
-        private static final double ALONG_SIDE_DELTA = 1.0;
-        private static final double OUT_FROM_SIDE_DELTA = 0.1;
-
-        public static HandsawItem.DustParticlesDelta fromDirection(Vec3 pos, Direction direction) {
-            double d0 = 0.0;
-
-            return switch (direction) {
-                case DOWN, UP -> new HandsawItem.DustParticlesDelta(pos.z(), 0.0, -pos.x());
-                case NORTH -> new HandsawItem.DustParticlesDelta(1.0, 0.0, -0.1);
-                case SOUTH -> new HandsawItem.DustParticlesDelta(-1.0, 0.0, 0.1);
-                case WEST -> new HandsawItem.DustParticlesDelta(-0.1, 0.0, -1.0);
-                case EAST -> new HandsawItem.DustParticlesDelta(0.1, 0.0, 1.0);
-            };
-        }
-    }
-
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
@@ -168,36 +179,6 @@ public class HandsawItem extends ShearsItem {
         );
     }
 
-    public static List<BlockPos> getBlocksToBeDestroyed(BlockPos initalBlockPos, Level level) {
-        List<BlockPos> toBeChecked = new ArrayList<>();
-        List<BlockPos> toBeDestroyed = new ArrayList<>();
-        Set<BlockPos> visited = new HashSet<>();
-        int r = 1;
-
-        Block targetBlock = level.getBlockState(initalBlockPos).getBlock();
-
-        BlockPos initialImmutable = initalBlockPos.immutable();
-        toBeChecked.addFirst(initialImmutable);
-        toBeDestroyed.addFirst(initialImmutable);
-        visited.add(initialImmutable);
-
-        while (!toBeChecked.isEmpty() && toBeDestroyed.size() < ServerConfig.HANDSAW_MAX_DESTROYED_BLOCKS.get()){
-            BlockPos comparable = toBeChecked.removeLast();
-            for (BlockPos pos : BlockPos.betweenClosed(comparable.offset(-r, 0, -r), comparable.offset(r, r, r))) {
-                BlockState state = level.getBlockState(pos);
-                BlockPos immutablePos = pos.immutable();
-
-                if (state.is(targetBlock) && !visited.contains(immutablePos)) {
-                    toBeChecked.add(immutablePos);
-                    toBeDestroyed.add(immutablePos);
-                    visited.add(immutablePos);
-                }
-            }
-        }
-        return toBeDestroyed;
-    }
-
-
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
@@ -205,8 +186,7 @@ public class HandsawItem extends ShearsItem {
             tooltipComponents.add(Component.empty());
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.when_used_on_block.tooltip"));
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.copper_handsaw_item.tooltip"));
-        }
-        else {
+        } else {
             tooltipComponents.add(Component.translatable("tooltip.copperoverthrow.press_shift.tooltip"));
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
@@ -220,6 +200,23 @@ public class HandsawItem extends ShearsItem {
     @Override
     public boolean canPerformAction(ItemStack stack, net.neoforged.neoforge.common.ItemAbility itemAbility) {
         return false;
+    }
+
+    record DustParticlesDelta(double xd, double yd, double zd) {
+        private static final double ALONG_SIDE_DELTA = 1.0;
+        private static final double OUT_FROM_SIDE_DELTA = 0.1;
+
+        public static HandsawItem.DustParticlesDelta fromDirection(Vec3 pos, Direction direction) {
+            double d0 = 0.0;
+
+            return switch (direction) {
+                case DOWN, UP -> new HandsawItem.DustParticlesDelta(pos.z(), 0.0, -pos.x());
+                case NORTH -> new HandsawItem.DustParticlesDelta(1.0, 0.0, -0.1);
+                case SOUTH -> new HandsawItem.DustParticlesDelta(-1.0, 0.0, 0.1);
+                case WEST -> new HandsawItem.DustParticlesDelta(-0.1, 0.0, -1.0);
+                case EAST -> new HandsawItem.DustParticlesDelta(0.1, 0.0, 1.0);
+            };
+        }
     }
 
 }
