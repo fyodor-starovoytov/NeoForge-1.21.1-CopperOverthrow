@@ -50,20 +50,20 @@ public class ModAdvancementSubProvider implements ForgeAdvancementProvider.Advan
                 .addCriterion("has_scaffolding", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.COPPER_SCAFFOLDING.get()))
                 .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_scaffolding").toString());
 
-        Advancement copperChisel = Advancement.Builder.advancement()
+        Advancement builderReady = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
                 .display(
-                        ModItems.COPPER_CHISEL.get(),
-                        Component.translatable("advancements.copperoverthrow.copper_chisel.title"),
-                        Component.translatable("advancements.copperoverthrow.copper_chisel.description"),
+                        ModItems.COPPER_CROWBAR.get(),
+                        Component.translatable("advancements.copperoverthrow.builder_ready.title"),
+                        Component.translatable("advancements.copperoverthrow.builder_ready.description"),
                         null,
-                        FrameType.TASK,
+                        FrameType.GOAL,
                         true,
                         true,
                         false
                 )
-                .addCriterion("has_chisel", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_CHISEL.get()))
-                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_chisel").toString());
+                .addCriterion("has_builder", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_TROWEL.get(), ModItems.COPPER_CHISEL.get(), ModItems.COPPER_CROWBAR.get()))
+                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "builder").toString());
 
         Advancement artist = Advancement.Builder.advancement()
                 .parent(copperScaffolding)
@@ -79,21 +79,6 @@ public class ModAdvancementSubProvider implements ForgeAdvancementProvider.Advan
                 )
                 .addCriterion("has_artist", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_FILL_BUCKET.get(), ModItems.COPPER_SEXTANT.get(), ModItems.COPPER_LONG_RULER.get()))
                 .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "artist").toString());
-
-
-        Advancement copperTrowel = Advancement.Builder.advancement()
-                .parent(copperScaffolding)
-                .display(
-                        ModItems.COPPER_TROWEL.get(),
-                        Component.translatable("advancements.copperoverthrow.copper_trowel.title"),
-                        Component.translatable("advancements.copperoverthrow.copper_trowel.description"),
-                        null,
-                        FrameType.TASK, true,
-                        true,
-                        false
-                )
-                .addCriterion("has_trowel", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.COPPER_TROWEL.get()))
-                .save(saver, new ResourceLocation(CopperOverthrow.MOD_ID, "copper_trowel").toString());
 
         Advancement logStripper = Advancement.Builder.advancement()
                 .parent(copperIngotAdv)
