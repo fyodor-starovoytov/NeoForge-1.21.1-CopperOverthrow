@@ -76,17 +76,9 @@ legacyForge {
 
         // applies to all the run configs above
         configureEach {
-            // Recommended logging data for a userdev environment
-            // The markers can be added/remove as needed separated by commas.
-            // "SCAN": For mods scan.
-            // "REGISTRIES": For firing of registry events.
-            // "REGISTRYDUMP": For getting the contents of all registries.
             systemProperty 'forge.logging.markers', 'REGISTRIES'
-
-            // Recommended logging level for the console
-            // You can set various levels here.
-            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             logLevel = org.slf4j.event.Level.DEBUG
+            programArgument '--mixin.config=copperoverthrow.mixins.json'
         }
     }
 
@@ -143,7 +135,7 @@ dependencies {
 }
 
 // Uncomment the lines below if you wish to configure mixin. The mixin file should be named modid.mixins.json.
-/*
+
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
     config "${mod_id}.mixins.json"
@@ -158,7 +150,7 @@ jar {
             "MixinConfigs": "${mod_id}.mixins.json"
     ])
 }
-*/
+
 
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.

@@ -1,8 +1,15 @@
 {
   "required": true,
+  "minVersion": "0.8",
   "package": "net.star.copperoverthrow.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "copperoverthrow.refmap.json",
+  "mixins": [
+    "PlayerDropMixin"
+  ],
   "client": [],
-  "server": []
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
