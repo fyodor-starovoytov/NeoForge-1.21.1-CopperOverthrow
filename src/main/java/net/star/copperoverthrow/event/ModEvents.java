@@ -2,10 +2,12 @@ package net.star.copperoverthrow.event;
 
 import com.google.common.collect.Multimap;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -43,6 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Mod.EventBusSubscriber(modid = CopperOverthrow.MOD_ID)
 public class ModEvents {
     private static final Set<BlockPos> HARVESTED_BLOCKS = ConcurrentHashMap.newKeySet();
+    private static boolean swingOffhandNext = false;
 
     @SubscribeEvent
     public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
@@ -116,6 +120,27 @@ public class ModEvents {
 
     private static boolean hasOreTag(BlockEvent.BreakEvent event, BlockPos pos) {
         return event.getLevel().getBlockState(pos).is(Tags.Blocks.ORES);
+    }
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+
+        Player player = event.player;
+        if (!player.level().isClientSide() || player != Minecraft.getInstance().player) return;
+
+        if (!player.getMainHandItem().is(ModItems.COPPER_DOUBLE_PICKAXES.get()) || !player.getOffhandItem().is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get())) {
+            swingOffhandNext = false;
+            return;
+        }
+
+        if (player.swinging && player.swingTime == 0 && player.swingingArm == InteractionHand.MAIN_HAND) {
+            if (swingOffhandNext) {
+                swingOffhandNext = false;
+                player.swingingArm = InteractionHand.OFF_HAND;
+            } else {
+                swingOffhandNext = true;
+            }
+        }
     }
 
     @SubscribeEvent
