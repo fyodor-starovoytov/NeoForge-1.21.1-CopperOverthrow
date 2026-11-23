@@ -74,17 +74,16 @@ public class ModItems {
 
 
     public static final RegistryObject<Item> COPPER_HAMMER = ITEMS.register("copper_hammer",
-            () -> new HammerItem(5f, -3.2f, ModToolTiers.COPPER_WEAK, new Item.Properties()));
+            () -> new HammerItem(5f, -3.2f, ModToolTiers.COPPER_REINFORCED, new Item.Properties()));
 
     public static final RegistryObject<Item> COPPER_CROWBAR = ITEMS.register("copper_crowbar",
-            () -> new CrowbarItem(0f, -2.8f, ModToolTiers.COPPER_MEDIUM, new Item.Properties()));
+            () -> new CrowbarItem(0f, -2.8f, ModToolTiers.COPPER_WEAK, new Item.Properties()));
 
     public static final RegistryObject<DoublePickaxesItem> COPPER_DOUBLE_PICKAXES = ITEMS.register("copper_double_pickaxes",
             () -> new DoublePickaxesItem(0f, -2.8f, ModToolTiers.COPPER_MEDIUM, new Item.Properties()));
 
     public static final RegistryObject<Item> COPPER_DOUBLE_PICKAXES_LEFT = ITEMS.register("copper_double_pickaxes_left",
-            () -> new DoublePickaxesLeftItem(0f, -2.8f, ModToolTiers.COPPER_REINFORCED, new Item.Properties()));
-
+            () -> new DoublePickaxesLeftItem(0f, -2.8f, ModToolTiers.COPPER_MEDIUM, new Item.Properties()));
 
     public static final RegistryObject<Item> COPPER_HANDSAW = ITEMS.register("copper_handsaw",
             () -> new HandsawItem(new Properties().durability(727)));
