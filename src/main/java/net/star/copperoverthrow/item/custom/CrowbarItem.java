@@ -28,16 +28,6 @@ public class CrowbarItem extends DiggerItem {
         return state.is(ModTags.Blocks.MINEABLE_WITH_CROWBAR) ? Math.max(1.0F, speed - 0.3F) : speed;
     }
 
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
-        if (!state.is(ModTags.Blocks.MINEABLE_WITH_CROWBAR)) {
-            return false;
-        }
-        if (state.is(BlockTags.NEEDS_IRON_TOOL) || state.is(BlockTags.NEEDS_DIAMOND_TOOL) || state.is(Tags.Blocks.NEEDS_NETHERITE_TOOL)) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         if (Screen.hasShiftDown()) {

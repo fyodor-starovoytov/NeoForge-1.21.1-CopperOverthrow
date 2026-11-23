@@ -21,19 +21,13 @@ public class ModToolTiers {
             List.of(Tiers.IRON)
     );
 
-    public static final Tier COPPER_MEDIUM = TierSortingRegistry.registerTier(
-            new ForgeTier(1, 727, 4f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
-                    () -> Ingredient.of(Items.COPPER_INGOT)),
-            new ResourceLocation(CopperOverthrow.MOD_ID, "copper_medium"),
-            List.of(COPPER_WEAK),
-            List.of(Tiers.IRON)
+    public static final Tier COPPER_MEDIUM = new ForgeTier(
+            1, 727, 4f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
+            () -> Ingredient.of(Items.COPPER_INGOT)
     );
 
-    public static final Tier COPPER_REINFORCED = TierSortingRegistry.registerTier(
-            new ForgeTier(1, 999, 4f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
-                    () -> Ingredient.of(Items.COPPER_INGOT)),
-            new ResourceLocation(CopperOverthrow.MOD_ID, "copper_reinforced"),
-            List.of(COPPER_MEDIUM),
-            List.of(Tiers.IRON)
+    public static final Tier COPPER_REINFORCED = new ForgeTier(
+            1, 999, 4f, 3f, 14, ModTags.Blocks.NEEDS_COPPER_TOOL,
+            () -> Ingredient.of(Items.COPPER_INGOT)
     );
 }

@@ -34,6 +34,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COPPER_FILL_BUCKET.get());
 
                         output.accept(ModItems.COPPER_CROWBAR.get());
+                        output.accept(ModItems.COPPER_DOUBLE_PICKAXES.get());
                         output.accept(ModItems.COPPER_HAMMER.get());
                         output.accept(ModItems.COPPER_HANDSAW.get());
 
