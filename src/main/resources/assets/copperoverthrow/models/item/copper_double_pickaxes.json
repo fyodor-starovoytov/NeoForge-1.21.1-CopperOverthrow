@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+
+  "base": {
+    "parent": "copperoverthrow:item/copper_double_pickaxes_right_3d"
+  },
+
+  "perspectives": {
+    "gui": {
+      "parent": "copperoverthrow:item/copper_double_pickaxes_2d"
+    },
+    "ground": {
+      "parent": "copperoverthrow:item/copper_double_pickaxes_2d"
+    },
+    "fixed": {
+      "parent": "copperoverthrow:item/copper_double_pickaxes_2d"
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "copperoverthrow:using_double_pickaxe": 1
+      },
+      "model": "copperoverthrow:item/copper_double_pickaxes_using"
+    }
+  ]
+}
