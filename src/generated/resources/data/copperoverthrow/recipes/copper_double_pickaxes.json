@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/copper"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "tag": "forge:storage_blocks/copper"
+    }
+  },
+  "pattern": [
+    "ACA",
+    " B ",
+    " B "
+  ],
+  "result": {
+    "item": "copperoverthrow:copper_double_pickaxes"
+  },
+  "show_notification": true
+}

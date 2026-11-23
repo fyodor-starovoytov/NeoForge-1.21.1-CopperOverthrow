@@ -283,6 +283,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('D', Tags.Items.NUGGETS_IRON)
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_DOUBLE_PICKAXES.get())
+                .pattern("ACA")
+                .pattern(" B ")
+                .pattern(" B ")
+                .define('B', Items.STICK)
+                .define('A', Tags.Items.INGOTS_COPPER)
+                .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_COOKIE.get(), 1)
                 .pattern("AAA")
                 .pattern("ABA")
