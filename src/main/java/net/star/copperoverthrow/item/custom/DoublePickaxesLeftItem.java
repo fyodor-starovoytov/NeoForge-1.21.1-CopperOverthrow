@@ -24,19 +24,19 @@ public class DoublePickaxesLeftItem extends DiggerItem {
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (entity instanceof LivingEntity livingEntity) {
-            if (livingEntity instanceof Player player) {
-                boolean isOffhand = (slotId == Inventory.SLOT_OFFHAND);
-                ItemStack mainHandStack = player.getItemInHand(InteractionHand.MAIN_HAND);
+        if (level.isClientSide || !(entity instanceof Player player)) {
+            return;
+        }
 
-                if (!mainHandStack.is(ModItems.COPPER_DOUBLE_PICKAXES.get()) || player.getMainHandItem().get(ModDataComponents.IS_USED) == null) {
-                    stack.setCount(0);
-                }
+        ItemStack mainHandStack = player.getMainHandItem();
+        ItemStack offhandStack = player.getOffhandItem();
 
-                if (!isOffhand) {
-                    stack.setCount(0);
-                }
-            }
+        boolean isInOffhand = (offhandStack == stack);
+        boolean mainHandValid = mainHandStack.is(ModItems.COPPER_DOUBLE_PICKAXES.get())
+                && mainHandStack.get(ModDataComponents.IS_USED) != null;
+
+        if (!isInOffhand || !mainHandValid) {
+            stack.setCount(0);
         }
     }
 

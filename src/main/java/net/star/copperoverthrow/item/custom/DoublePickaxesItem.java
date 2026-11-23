@@ -34,23 +34,27 @@ public class DoublePickaxesItem extends DiggerItem {
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (entity instanceof Player player) {
-            ItemStack offhandStack = player.getItemInHand(InteractionHand.OFF_HAND);
-            ItemStack mainHandStack = player.getItemInHand(InteractionHand.MAIN_HAND);
+        if (level.isClientSide || !(entity instanceof Player player)) {
+            return;
+        }
 
+        ItemStack mainHandStack = player.getMainHandItem();
+        ItemStack offhandStack = player.getOffhandItem();
+        boolean isHeldInMainHand = isSelected && mainHandStack == stack;
 
-            if (!isSelected) {
-                stack.set(ModDataComponents.IS_USED, null);
+        if (!isHeldInMainHand) {
+            if (stack.has(ModDataComponents.IS_USED.get())) {
+                stack.remove(ModDataComponents.IS_USED.get());
             }
+            return;
+        }
 
-            if (isSelected && offhandStack.is(ItemStack.EMPTY.getItem())) {
-                player.getInventory().setItem(Inventory.SLOT_OFFHAND, new ItemStack(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get()));
-                stack.set(ModDataComponents.IS_USED, 1);
-            }
+        if (!stack.has(ModDataComponents.IS_USED.get())) {
+            stack.set(ModDataComponents.IS_USED.get(), 1);
+        }
 
-            if (mainHandStack.is(ModItems.COPPER_DOUBLE_PICKAXES.get())) {
-
-            }
+        if (offhandStack.isEmpty()) {
+            player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get()));
         }
     }
 
