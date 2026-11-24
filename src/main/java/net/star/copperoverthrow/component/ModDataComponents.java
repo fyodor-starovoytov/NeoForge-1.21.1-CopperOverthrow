@@ -37,6 +37,9 @@ public class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> IS_USED =
             register("is_used", builder -> builder.persistent(Codec.INT));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> LIGHT_LEVEL =
+            register("light_level", builder -> builder.persistent(Codec.INT));
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> LAST_RIGHT_SWUNG =
             register("last_right_swung", builder -> builder.persistent(Codec.BOOL));
 

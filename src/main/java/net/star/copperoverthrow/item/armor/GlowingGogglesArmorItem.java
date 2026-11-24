@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.attribute.ModAttributes;
+import net.star.copperoverthrow.component.ModDataComponents;
 import org.jetbrains.annotations.Nullable;
 
 public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
@@ -61,6 +62,8 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
 
                 int currentLight = getLight(livingEntity);
 
+                stack.set(ModDataComponents.LIGHT_LEVEL, currentLight);
+
                 if (currentLight >= 13) {
                     MobEffectInstance blindness = new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, false);
                     livingEntity.addEffect(blindness);
@@ -72,7 +75,7 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
         }
     }
 
-    public int getLight(Entity entity) {
+    public static int getLight(Entity entity) {
         Level level = entity.level();
         BlockPos pos = entity.blockPosition();
 
