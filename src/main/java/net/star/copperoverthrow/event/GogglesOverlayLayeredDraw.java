@@ -39,8 +39,6 @@ public class GogglesOverlayLayeredDraw implements LayeredDraw.Layer {
         int height = guiGraphics.guiHeight();
         guiGraphics.fillGradient(0, 0, width, height, 0x4D067d00, 0x3A067d00);
 
-        int lightStrength = GlowingGogglesArmorItem.getLight(mc.player);
-
         if (helmetStack.has(ModDataComponents.LIGHT_LEVEL) && ServerConfig.GOGGLES_BLINDING.getAsBoolean()){
             if (helmetStack.get(ModDataComponents.LIGHT_LEVEL) == 12) {
                 guiGraphics.fill(0, 0, width, height, 0x70FFFFFF);
