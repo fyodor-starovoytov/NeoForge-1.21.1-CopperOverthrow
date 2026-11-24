@@ -12,10 +12,11 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.star.copperoverthrow.ClientConfig;
+import net.star.copperoverthrow.CopperOverthrow;
 import net.star.copperoverthrow.item.ModItems;
 
-@EventBusSubscriber(modid = "copperoverthrow", value = Dist.CLIENT)
-public class GogglesOverlay implements LayeredDraw.Layer {
+@EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
+public class GogglesOverlayLayeredDraw implements LayeredDraw.Layer {
 
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
@@ -39,7 +40,7 @@ public class GogglesOverlay implements LayeredDraw.Layer {
         event.registerAbove(
                 VanillaGuiLayers.CAMERA_OVERLAYS,
                 ResourceLocation.fromNamespaceAndPath("copperoverthrow", "goggles_overlay"),
-                new GogglesOverlay()
+                new GogglesOverlayLayeredDraw()
         );
     }
 }
