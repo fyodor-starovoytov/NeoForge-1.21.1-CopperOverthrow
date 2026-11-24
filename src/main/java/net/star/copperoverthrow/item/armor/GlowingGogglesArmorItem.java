@@ -16,6 +16,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.attribute.ModAttributes;
 import net.star.copperoverthrow.component.ModDataComponents;
 import org.jetbrains.annotations.Nullable;
@@ -52,6 +53,10 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!ServerConfig.GOGGLES_BLINDING.getAsBoolean()){
+            return;
+        }
+
         if (level.isClientSide()) {
             return;
         }

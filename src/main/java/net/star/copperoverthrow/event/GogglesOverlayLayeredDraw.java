@@ -14,9 +14,11 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.star.copperoverthrow.ClientConfig;
 import net.star.copperoverthrow.CopperOverthrow;
+import net.star.copperoverthrow.ServerConfig;
 import net.star.copperoverthrow.component.ModDataComponents;
 import net.star.copperoverthrow.item.ModItems;
 import net.star.copperoverthrow.item.armor.GlowingGogglesArmorItem;
+import org.apache.logging.log4j.core.jmx.Server;
 
 @EventBusSubscriber(modid = CopperOverthrow.MOD_ID, value = Dist.CLIENT)
 public class GogglesOverlayLayeredDraw implements LayeredDraw.Layer {
@@ -39,7 +41,7 @@ public class GogglesOverlayLayeredDraw implements LayeredDraw.Layer {
 
         int lightStrength = GlowingGogglesArmorItem.getLight(mc.player);
 
-        if (helmetStack.has(ModDataComponents.LIGHT_LEVEL)){
+        if (helmetStack.has(ModDataComponents.LIGHT_LEVEL) && ServerConfig.GOGGLES_BLINDING.getAsBoolean()){
             if (helmetStack.get(ModDataComponents.LIGHT_LEVEL) == 12) {
                 guiGraphics.fill(0, 0, width, height, 0x70FFFFFF);
             }
