@@ -50,6 +50,11 @@ public class HologramBlock extends ScaffoldingBlock {
     }
 
     @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return Shapes.block();
+    }
+
+    @Override
     protected boolean canBeReplaced(BlockState state, Fluid fluid) {
         return true;
     }
