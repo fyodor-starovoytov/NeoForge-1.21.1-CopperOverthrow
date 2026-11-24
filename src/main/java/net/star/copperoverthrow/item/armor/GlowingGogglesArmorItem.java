@@ -69,13 +69,9 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
 
                 stack.set(ModDataComponents.LIGHT_LEVEL, currentLight);
 
-                if (currentLight >= 13) {
-                    MobEffectInstance blindness = new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, false);
-                    livingEntity.addEffect(blindness);
-                } else {
-                    MobEffectInstance nightVision = new MobEffectInstance(MobEffects.NIGHT_VISION, 220, 0, false, false, false);
-                    livingEntity.addEffect(nightVision);
-                }
+                MobEffectInstance nightVision = new MobEffectInstance(MobEffects.NIGHT_VISION, 220, 0, false, false, false);
+                livingEntity.addEffect(nightVision);
+
             }
         }
     }
