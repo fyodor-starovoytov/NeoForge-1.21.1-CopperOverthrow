@@ -5,13 +5,13 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.star.copperoverthrow.ClientConfig;
 import net.star.copperoverthrow.item.ModItems;
 
 @EventBusSubscriber(modid = "copperoverthrow", value = Dist.CLIENT)
@@ -19,6 +19,8 @@ public class GogglesOverlay implements LayeredDraw.Layer {
 
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+        if (!ClientConfig.GOGGLES_GREEN_OVERLAY.getAsBoolean()){return;}
+
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return;
 
