@@ -32,8 +32,7 @@ public class DoublePickaxesLeftItem extends DiggerItem {
         ItemStack offhandStack = player.getOffhandItem();
 
         boolean isInOffhand = (offhandStack == stack);
-        boolean mainHandValid = mainHandStack.is(ModItems.COPPER_DOUBLE_PICKAXES.get())
-                && mainHandStack.get(ModDataComponents.IS_USED) != null;
+        boolean mainHandValid = mainHandStack.is(ModItems.COPPER_DOUBLE_PICKAXES.get());
 
         if (!isInOffhand || !mainHandValid) {
             stack.setCount(0);

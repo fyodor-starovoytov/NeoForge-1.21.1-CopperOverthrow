@@ -19,7 +19,6 @@ public class ServerConfig {
             .translation("copperoverthrow.config.measure_max_distance")
             .defineInRange("MeasureMaxDistance", 100, 1, 999);
 
-
     public static final ModConfigSpec.DoubleValue CRASH_HELMET_HEAD_IMPACT_RESISTANCE = BUILDER
             .comment("Crash Helmets' Head Impact Resistance Percentage")
             .translation("copperoverthrow.config.crash_helmet_head_impact_resistance")
@@ -34,7 +33,6 @@ public class ServerConfig {
             .comment("Copper Exoskeleton's added block reach amount")
             .translation("copperoverthrow.config.exoskeleton_reach")
             .defineInRange("ExoskeletonReach", 3, 0, 10);
-
 
     public static final ModConfigSpec.DoubleValue STEPPER_BOOTS_STEP_HEIGHT = BUILDER
             .comment("Stepper Boots' added Step Height amount. 0.6 is vanilla Step Height (0.6 + x)")

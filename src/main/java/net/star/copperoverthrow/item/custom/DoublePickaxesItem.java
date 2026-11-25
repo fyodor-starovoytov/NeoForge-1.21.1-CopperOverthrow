@@ -49,7 +49,7 @@ public class DoublePickaxesItem extends DiggerItem {
             return;
         }
 
-        if (!stack.has(ModDataComponents.IS_USED.get())) {
+        if (!stack.has(ModDataComponents.IS_USED.get()) && offhandStack.is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get())) {
             stack.set(ModDataComponents.IS_USED.get(), 1);
         }
 

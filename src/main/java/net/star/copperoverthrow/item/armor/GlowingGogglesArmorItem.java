@@ -67,7 +67,7 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
 
                 int currentLight = getLight(livingEntity);
 
-                stack.set(ModDataComponents.LIGHT_LEVEL, currentLight);
+                headItem.set(ModDataComponents.LIGHT_LEVEL, currentLight);
 
                 MobEffectInstance nightVision = new MobEffectInstance(MobEffects.NIGHT_VISION, 220, 0, false, false, false);
                 livingEntity.addEffect(nightVision);
