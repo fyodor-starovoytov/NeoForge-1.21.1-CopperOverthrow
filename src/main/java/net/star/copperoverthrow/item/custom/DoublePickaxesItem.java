@@ -53,7 +53,7 @@ public class DoublePickaxesItem extends DiggerItem {
         }
 
         CompoundTag tag = stack.getOrCreateTag();
-        if (!tag.getBoolean(TAG_IS_USED)) {
+        if (!tag.getBoolean(TAG_IS_USED) && offhandStack.is(ModItems.COPPER_DOUBLE_PICKAXES_LEFT.get())) {
             tag.putBoolean(TAG_IS_USED, true);
         }
 
