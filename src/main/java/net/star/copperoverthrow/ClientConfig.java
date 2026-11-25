@@ -21,6 +21,13 @@ public class ClientConfig {
             .translation("copperoverthrow.config.rain_drum_enable_sparks")
             .define("sparkleParticlesBoolean", true);
 
+
+    public static final ForgeConfigSpec.BooleanValue GOGGLES_GREEN_OVERLAY = BUILDER
+            .comment("Whether copper glowing goggles will apply green overlay when equipped. Default: TRUE")
+            .translation("copperoverthrow.config.goggles_green_overlay")
+            .define("gogglesOverlayBoolean", true);
+
+
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static boolean rainDrumsNoteParticles;

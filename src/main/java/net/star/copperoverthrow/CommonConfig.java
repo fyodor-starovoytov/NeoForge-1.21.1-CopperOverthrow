@@ -96,5 +96,10 @@ public class CommonConfig {
             .translation("copperoverthrow.config.wind_chime_idle_range")
             .defineInRange("windChimeIdleRange", 12, 0, 20);
 
+    public static final ForgeConfigSpec.BooleanValue GOGGLES_BLINDING = BUILDER
+            .comment("Whether Glowing Goggles should blind the wearer in the light. Default: TRUE")
+            .translation("copperoverthrow.config.blinding")
+            .define("gogglesBlinding", true);
+
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 }

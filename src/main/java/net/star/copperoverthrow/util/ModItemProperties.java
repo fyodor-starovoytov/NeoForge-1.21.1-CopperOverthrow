@@ -23,6 +23,11 @@ public class ModItemProperties {
 
         ItemProperties.register(ModItems.COPPER_SEXTANT.get(), new ResourceLocation(CopperOverthrow.MOD_ID, "using_tape"),
                 (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("temporal_initial_blockpos") ? 1f : 0f);
+        
+        ItemProperties.register(ModItems.COPPER_DOUBLE_PICKAXES.get(), new ResourceLocation(CopperOverthrow.MOD_ID, "using_double_pickaxe"),
+                (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("is_used") ? 1f : 0f);
+
+
 
         ItemProperties.register(ModItems.COPPER_LONG_RULER.get(), new ResourceLocation(CopperOverthrow.MOD_ID, "using_ruler"),
                 (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("temporal_initial_blockpos") ? 1f : 0f);

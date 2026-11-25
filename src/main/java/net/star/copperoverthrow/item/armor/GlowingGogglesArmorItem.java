@@ -3,6 +3,7 @@ package net.star.copperoverthrow.item.armor;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -70,14 +71,12 @@ public class GlowingGogglesArmorItem extends AbstractExtendedArmorItem {
             if (ItemStack.matches(headItem, stack)) {
 
                 int currentLight = getLight(livingEntity);
+                CompoundTag tag = headItem.getOrCreateTag();
 
-                if (currentLight >= 13) {
-                    MobEffectInstance blindness = new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, false);
-                    livingEntity.addEffect(blindness);
-                } else {
-                    MobEffectInstance nightVision = new MobEffectInstance(MobEffects.NIGHT_VISION, 220, 0, false, false, false);
-                    livingEntity.addEffect(nightVision);
-                }
+                tag.putInt("light_level", currentLight);
+
+                MobEffectInstance nightVision = new MobEffectInstance(MobEffects.NIGHT_VISION, 220, 0, false, false, false);
+                livingEntity.addEffect(nightVision);
             }
         }
     }
